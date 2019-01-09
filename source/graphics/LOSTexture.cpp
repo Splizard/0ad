@@ -384,8 +384,6 @@ void CLOSTexture::GenerateBitmap(ICmpRangeManager::CLosQuerier los, u8* losData,
 		{
 			if (los.IsVisible_UncheckedRange(i, j))
 				*dataPtr++ = 255;
-			else if (los.IsExplored_UncheckedRange(i, j))
-				*dataPtr++ = 127;
 			else
 				*dataPtr++ = 0;
 		}

@@ -1587,15 +1587,15 @@ public:
 	{
 		// Entities not with positions in the world are never visible
 		if (ent.GetId() == INVALID_ENTITY)
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 		CmpPtr<ICmpPosition> cmpPosition(ent);
 		if (!cmpPosition || !cmpPosition->IsInWorld())
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 
 		// Mirage entities, whatever the situation, are visible for one specific player
 		CmpPtr<ICmpMirage> cmpMirage(ent);
 		if (cmpMirage && cmpMirage->GetPlayer() != player)
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 
 		CFixedVector2D pos = cmpPosition->GetPosition2D();
 		int i = (pos.X / (int)TERRAIN_TILE_SIZE).ToInt_RoundToNearest();
@@ -1605,7 +1605,7 @@ public:
 		if (GetLosRevealAll(player))
 		{
 			if (LosIsOffWorld(i, j) || cmpMirage)
-				return VIS_HIDDEN;
+				return VIS_FOGGED;
 			else
 				return VIS_VISIBLE;
 		}
@@ -1633,25 +1633,25 @@ public:
 		if (los.IsVisible(i, j))
 		{
 			if (cmpMirage)
-				return VIS_HIDDEN;
+				return VIS_FOGGED;
 
 			return VIS_VISIBLE;
 		}
 
 		if (!los.IsExplored(i, j))
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 
 		// Invisible if the 'retain in fog' flag is not set, and in a non-visible explored region
 		// Try using the 'retainInFog' flag in m_EntityData to save a script call
 		if (it != m_EntityData.end())
 		{
 			if (!it->second.HasFlag<FlagMasks::RetainInFog>())
-				return VIS_HIDDEN;
+				return VIS_FOGGED;
 		}
 		else
 		{
 			if (!(cmpVisibility && cmpVisibility->GetRetainInFog()))
-				return VIS_HIDDEN;
+				return VIS_FOGGED;
 		}
 
 		if (cmpMirage)
@@ -1667,7 +1667,7 @@ public:
 			if (!(cmpFogging && cmpFogging->IsMiraged(player)))
 				return VIS_FOGGED;
 
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 		}
 
 		// Fogged entities are hidden in two cases:
@@ -1676,7 +1676,7 @@ public:
 		CmpPtr<ICmpFogging> cmpFogging(ent);
 		if (cmpFogging && cmpFogging->IsActivated() &&
 			(!cmpFogging->WasSeen(player) || cmpFogging->IsMiraged(player)))
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 
 		return VIS_FOGGED;
 	}
@@ -1693,11 +1693,11 @@ public:
 
 		// Entities not with positions in the world are never visible
 		if (entId == INVALID_ENTITY)
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 
 		CmpPtr<ICmpPosition> cmpPosition(ent);
 		if (!cmpPosition || !cmpPosition->IsInWorld())
-			return VIS_HIDDEN;
+			return VIS_FOGGED;
 
 		// Gaia and observers do not have a visibility cache
 		if (player <= 0)
@@ -2095,7 +2095,7 @@ public:
 			if (counts[idx] == 0)
 			{
 				// (If LosIsOffWorld then this is a no-op, so don't bother doing the check)
-				m_LosState[idx] &= ~(LOS_VISIBLE << (2*(owner-1)));
+				m_LosState[idx] = 0;
 
 				i32 i = i0 + idx - idx0;
 				MarkVisibilityDirtyAroundTile(owner, i, j);
