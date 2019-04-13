@@ -897,7 +897,7 @@ var g_Checkboxes = Object.assign(
 		},
 		"disableTreasures": {
 			"title": () => translate("Disable Treasures"),
-			"tooltip": () => translate("Disable all treasures on the map."),
+			"tooltip": () => translate("Do not add treasures to the map."),
 			"default": () => false,
 			"defined": () => g_GameAttributes.settings.DisableTreasures !== undefined,
 			"get": () => g_GameAttributes.settings.DisableTreasures,
@@ -997,7 +997,7 @@ var g_MiscControls = {
 		},
 	},
 	"chatInput": {
-		"tooltip": () => colorizeAutocompleteHotkey(translate("Press %(hotkey)s to autocomplete playernames or settings.")),
+		"tooltip": () => colorizeAutocompleteHotkey(translate("Press %(hotkey)s to autocomplete player names or settings.")),
 	},
 	"cheatWarningText": {
 		"hidden": () => !g_IsNetworked || !g_GameAttributes.settings.CheatsEnabled,
@@ -1616,6 +1616,9 @@ function onClientJoin(newGUID, newAssignments)
 		"guid": newGUID,
 		"username": playername
 	});
+
+	if (newGUID != Engine.GetPlayerGUID() && Object.keys(g_PlayerAssignments).length)
+		soundNotification("gamesetup.join");
 
 	let isRejoiningPlayer = newAssignments[newGUID].player != -1;
 

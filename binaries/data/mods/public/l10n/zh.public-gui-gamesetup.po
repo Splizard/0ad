@@ -1,5 +1,5 @@
 # Translation template for 0 A.D. — Empires Ascendant.
-# Copyright (C) 2018 Wildfire Games
+# Copyright (C) 2019 Wildfire Games
 # This file is distributed under the same license as the 0 A.D. — Empires Ascendant project.
 # 
 # Translators:
@@ -28,7 +28,7 @@
 # Vince Luo <vinceluo11@gmail.com>, 2017
 # xiaolong dai <1091198228@qq.com>, 2018
 # xingtong, 2013
-# liulitchi <xingzuo88@qq.com>, 2014,2017-2018
+# liulitchi <xingzuo88@qq.com>, 2014,2017-2019
 # yukisola <yolandaapply@gmail.com>, 2014
 # hiahoo lee (leaber) <zodiac8765@gmail.com>, 2014
 # 吴善俊 <sjwuny@126.com>, 2014
@@ -37,6 +37,7 @@
 # 星臣 <yuronglong1996@gmail.com>, 2017
 # 星臣 <yuronglong1996@gmail.com>, 2017
 # 武军 李 <lwj7863439@gmail.com>, 2016-2017
+# 杜茂森 <dumaosen_main01@outlook.com>, 2019
 # Feng Chang <chang_196700@hotmail.com>, 2018
 # 潘 恩民 <568014904@qq.com>, 2018
 # 玉堂白鹤 <yjwork@qq.com>, 2015
@@ -44,9 +45,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2018-12-31 09:44+0100\n"
-"PO-Revision-Date: 2018-12-31 16:05+0000\n"
-"Last-Translator: rentt777 <35974380@qq.com>\n"
+"POT-Creation-Date: 2019-03-29 09:45+0100\n"
+"PO-Revision-Date: 2019-04-06 06:41+0000\n"
+"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/wildfire-games/0ad/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +62,7 @@ msgstr "无"
 
 #: gui/aiconfig/aiconfig.js:12
 msgid "AI will be disabled for this player."
-msgstr "这个玩家禁用AI。"
+msgstr "此玩家禁用AI。"
 
 #: gui/gamesetup/gamesetup.js:65
 msgctxt "team"
@@ -344,7 +345,7 @@ msgstr "选择这一场景的难度。"
 
 #: gui/gamesetup/gamesetup.js:772
 msgid "Choose the civilization for this player"
-msgstr ""
+msgstr "为此玩家选择文明"
 
 #: gui/gamesetup/gamesetup.js:839
 msgid "Hero Garrison"
@@ -356,7 +357,7 @@ msgstr "触发英雄是否可以驻守。"
 
 #: gui/gamesetup/gamesetup.js:852
 msgid "Nomad"
-msgstr "诺曼底"
+msgstr "游牧"
 
 #: gui/gamesetup/gamesetup.js:853
 msgid ""
@@ -393,8 +394,8 @@ msgid "Disable Treasures"
 msgstr "取消宝藏系统"
 
 #: gui/gamesetup/gamesetup.js:900
-msgid "Disable all treasures on the map."
-msgstr "停用在地图上的所有宝藏。"
+msgid "Do not add treasures to the map."
+msgstr "不要在地图上添加宝藏。"
 
 #: gui/gamesetup/gamesetup.js:911
 msgid "Disable Spies"
@@ -440,8 +441,8 @@ msgstr "切换本比赛是否算入排位。"
 
 #: gui/gamesetup/gamesetup.js:1000
 #, javascript-format
-msgid "Press %(hotkey)s to autocomplete playernames or settings."
-msgstr "按 %(hotkey)s 自动输入玩家名字或设置"
+msgid "Press %(hotkey)s to autocomplete player names or settings."
+msgstr "按下%(hotkey)s后，自动完成昵称或设置。"
 
 #: gui/gamesetup/gamesetup.js:1008
 msgid "Return to the lobby."
@@ -470,7 +471,7 @@ msgstr "使用当前的设置开始一局新游戏。(禁用直到所有玩家�
 msgid ""
 "%(hotkey_civinfo)s / %(hotkey_structree)s: View History / Structure Tree\n"
 "Last opened will be reopened on click."
-msgstr "%(hotkey_civinfo)s / %(hotkey_structree)s: 查看历史/建造树\n单击重新打开上次打开的。"
+msgstr "%(hotkey_civinfo)s / %(hotkey_structree)s: 查看历史/建筑树\n单击重新打开上次打开的。"
 
 #: gui/gamesetup/gamesetup.js:1107
 #, javascript-format
@@ -492,82 +493,82 @@ msgstr "使用%(hotkey)s向下移动设置选项卡。"
 msgid "Use %(hotkey)s to move a settings tab up."
 msgstr "使用%(hotkey)s向上移动设置选项卡。"
 
-#: gui/gamesetup/gamesetup.js:1748
+#: gui/gamesetup/gamesetup.js:1751
 msgctxt "map selection"
 msgid "Random"
 msgstr "随机"
 
-#: gui/gamesetup/gamesetup.js:1750
+#: gui/gamesetup/gamesetup.js:1753
 msgid "Pick any of the given maps at random."
 msgstr "随机选择地图"
 
-#: gui/gamesetup/gamesetup.js:1782
+#: gui/gamesetup/gamesetup.js:1785
 msgctxt "biome"
 msgid "Random"
 msgstr "随机"
 
-#: gui/gamesetup/gamesetup.js:1783
+#: gui/gamesetup/gamesetup.js:1786
 msgid "Pick a biome at random."
 msgstr "随机选择生物群落。"
 
-#: gui/gamesetup/gamesetup.js:2121
+#: gui/gamesetup/gamesetup.js:2124
 #, javascript-format
 msgctxt "Title for specific setting"
 msgid "%(setting)s:"
 msgstr "%(setting)s："
 
-#: gui/gamesetup/gamesetup.js:2126
+#: gui/gamesetup/gamesetup.js:2129
 msgctxt "settings value"
 msgid "Unknown"
 msgstr "未知"
 
-#: gui/gamesetup/gamesetup.js:2156
+#: gui/gamesetup/gamesetup.js:2159
 msgid "Yes"
 msgstr "是"
 
-#: gui/gamesetup/gamesetup.js:2156
+#: gui/gamesetup/gamesetup.js:2159
 msgid "No"
 msgstr "否"
 
-#: gui/gamesetup/gamesetup.js:2163
+#: gui/gamesetup/gamesetup.js:2166
 #, javascript-format
 msgid "%(setting)s:"
 msgstr "%(setting)s："
 
-#: gui/gamesetup/gamesetup.js:2251
+#: gui/gamesetup/gamesetup.js:2254
 #, javascript-format
 msgid "%(playerName)s %(romanNumber)s"
 msgstr "%(playerName)s %(romanNumber)s"
 
-#: gui/gamesetup/gamesetup.js:2456
+#: gui/gamesetup/gamesetup.js:2459
 #, javascript-format
 msgid "AI: %(ai)s"
 msgstr "电脑: %(ai)s"
 
-#: gui/gamesetup/gamesetup.js:2464
+#: gui/gamesetup/gamesetup.js:2467
 msgid "Unassigned"
 msgstr "未指定"
 
-#: gui/gamesetup/gamesetup.js:2540
+#: gui/gamesetup/gamesetup.js:2543
 #, javascript-format
 msgid "== %(message)s"
 msgstr "== %(message)s"
 
-#: gui/gamesetup/gamesetup.js:2547
+#: gui/gamesetup/gamesetup.js:2550
 msgid "Unknown Player"
 msgstr "未知玩家"
 
-#: gui/gamesetup/gamesetup.js:2586
+#: gui/gamesetup/gamesetup.js:2589
 #, javascript-format
 msgid "%(time)s %(message)s"
 msgstr "%(time)s %(message)s"
 
-#: gui/gamesetup/gamesetup.js:2587
+#: gui/gamesetup/gamesetup.js:2590
 #, javascript-format
 msgid "\\[%(time)s]"
 msgstr "\\[%(time)s]"
 
-#: gui/gamesetup/gamesetup.js:2588
+#: gui/gamesetup/gamesetup.js:2591
 msgid "HH:mm"
 msgstr "HH:mm"
 
@@ -578,12 +579,12 @@ msgstr "%(name)s的游戏"
 
 #: gui/gamesetup_mp/gamesetup_mp.js:114
 msgid "Please enter a valid server name."
-msgstr ""
+msgstr "请输入一个可用的服务器名称。"
 
 #: gui/gamesetup_mp/gamesetup_mp.js:121
 #, javascript-format
 msgid "Server port number must be between %(min)s and %(max)s."
-msgstr ""
+msgstr "服务器端口必须在%(min)s和%(max)s之间。"
 
 #: gui/gamesetup_mp/gamesetup_mp.js:138
 msgid "Connecting to server..."
@@ -608,7 +609,7 @@ msgstr "游戏名称现正被使用中。"
 
 #: gui/gamesetup_mp/gamesetup_mp.js:308
 msgid "Failed to host via STUN."
-msgstr ""
+msgstr "STUN主机失败"
 
 #: gui/gamesetup_mp/gamesetup_mp.js:322
 #, javascript-format
@@ -629,12 +630,19 @@ msgstr "无法加入游戏 : %(message)s。"
 msgid "%(playername)s's game"
 msgstr "%(playername)s 的游戏"
 
-#: gui/loading/loading.js:48
+#. Translation: A bullet point used before every item of list of tips
+#. displayed on loading screen
+#: gui/loading/loading.js:33
+#, javascript-format
+msgid "• %(tiptext)s"
+msgstr ""
+
+#: gui/loading/loading.js:51
 #, javascript-format
 msgid "Loading “%(map)s”"
 msgstr "正在载入 「%(map)s」"
 
-#: gui/loading/loading.js:52
+#: gui/loading/loading.js:55
 #, javascript-format
 msgid "Generating “%(map)s”"
 msgstr "正在产生「%(map)s」"
@@ -748,7 +756,7 @@ msgstr "加入游戏."
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):28
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):70
 msgid "Player Name:"
-msgstr ""
+msgstr "玩家昵称："
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):38
 msgid "Server Hostname or IP:"
@@ -765,11 +773,11 @@ msgstr "设成主机"
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):83
 msgid "Server Name:"
-msgstr ""
+msgstr "服务器名称："
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):114
 msgid "Use STUN to work around firewalls"
-msgstr ""
+msgstr "使用STUN解决防火墙问题"
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):122
 msgid "Continue"
@@ -1098,7 +1106,7 @@ msgid ""
 "\"He has not acquired a fortune; the fortune has acquired him.\" - Bion of "
 "Borysthenes, referring to a wealthy miser (Diogenes Laertius, \"The Lives "
 "and Opinions of Eminent Philosophers\", Bion, sec. 50)"
-msgstr ""
+msgstr "你们应当慎重选择所选择的道路。但你们既行了，就要恒心忍耐。——《普里尼的偏见》(第欧根尼·拉尔修，《杰出哲学家的生活和观点》，第5卷)"
 
 #: gui/text/quotes.txt:49
 msgid ""
@@ -1119,39 +1127,39 @@ msgstr ""
 
 #: gui/text/quotes.txt:51
 msgid "\"Set a thief to catch a thief.\" - Callimachus (\"Epigrams\", 44)"
-msgstr ""
+msgstr "以盗治盗。——卡利马科斯"
 
 #: gui/text/quotes.txt:52
 msgid ""
 "\"All mankind rules its women, and we rule all mankind, but our women rule "
 "us.\" - Cato the Elder (Plutarch, \"Moralia\", III. \"Sayings of Romans\", "
 "198e)"
-msgstr ""
+msgstr "所有男人控制着他们的女人，我们统治所有的男人，但我们的女人统治着我们。 ——老加图"
 
 #: gui/text/quotes.txt:53
 msgid ""
 "\"The worst ruler is one who cannot rule himself.\" - Cato the Elder "
 "(Plutarch, \"Moralia\", III. \"Sayings of Romans\", 198f)"
-msgstr ""
+msgstr "最坏的统治者就是无法管好自己的人。——老加图"
 
 #: gui/text/quotes.txt:54
 msgid ""
 "\"Wise men learn more from fools than fools from the wise.\" - Cato the "
 "Elder (Plutarch, \"Parallel Lives\", \"Cato the Elder\", sec. 9)"
-msgstr ""
+msgstr "智者从愚者处学到的比愚者从智者处学到的多。——老加图"
 
 #: gui/text/quotes.txt:55
 msgid ""
 "\"Moreover, I consider that Carthage should be destroyed.\" - Cato the "
 "Elder, who ended all speeches in his later life with this statement "
 "(Plutarch, \"Parallel Lives\", \"Cato the Elder\", sec. 27)"
-msgstr ""
+msgstr "迦太基必须毁灭 ——老加图。"
 
 #: gui/text/quotes.txt:56
 msgid ""
 "\"If a king is energetic, his subjects will be equally energetic.\" - "
 "Chanakya (\"Arthashastra\", I. \"Concerning Discipline\", chapter 19)"
-msgstr ""
+msgstr "如果国王充满活力，则他的臣民也将充满活力。——考底利耶"
 
 #: gui/text/quotes.txt:57
 msgid ""
@@ -1159,14 +1167,14 @@ msgid ""
 "he who awards mild punishment becomes contemptible. But whoever imposes "
 "punishment as deserved becomes respectable.\" - Chanakya (\"Arthashastra\", "
 "I. \"Concerning Discipline\", chapter 4)"
-msgstr ""
+msgstr "给予过于严厉的惩罚令人感到厌恶；给予过轻的惩罚则近乎碑鄙。但能给予轻重适中的惩罚则令人尊敬。——考底利耶"
 
 #: gui/text/quotes.txt:58
 msgid ""
 "\"We did not flinch but gave our lives to save Greece when her fate hung on "
 "a razor's edge.\" - Corinthian epitaph to their fallen of the Persian Wars "
 "(Plutarch, \"Moralia\", XI. \"On the Malice of Herodotus\", 870e)"
-msgstr ""
+msgstr "当希腊在刀刃边缘时,我们没有退缩,但保全了生命拯救她。——西莫尼德斯"
 
 #: gui/text/quotes.txt:59
 msgid ""
@@ -1182,14 +1190,14 @@ msgid ""
 "\"I am Cyrus, who won for the Persians their empire. Therefore do not "
 "begrudge me this bit of earth that covers my bones.\" - Cyrus the Great's "
 "epitaph (Plutarch, \"Parallel Lives\", \"Alexander\", sec. 69)"
-msgstr ""
+msgstr "朕即是波斯皇帝，居鲁士。灵柩安放于此，过往的行人，请莫要吝啬一点尘土，洒在我身。——居鲁士大帝之墓志铭。"
 
 #: gui/text/quotes.txt:61
 msgid ""
 "\"I am Darius, the great king, king of kings, the king of Persia, the king "
 "of countries, \\[…] 23 lands in total.\" - Darius I. (Behistun inscription, "
 "column I, 1-6)"
-msgstr ""
+msgstr "朕为波斯国王大流士，万王之王，统领诸国，二十三片土地尽在手中。——大流士一世。"
 
 #: gui/text/quotes.txt:62
 msgid ""
@@ -1222,13 +1230,13 @@ msgid ""
 "\"It is not possible to found a lasting power upon injustice, perjury, and "
 "treachery.\" - Demosthenes, in one of his many speeches against the rising "
 "Phillip II of Macedon (\"Olynthiac II\", 10)"
-msgstr ""
+msgstr "不公正的行为、背信忘义、以及背叛,是不可能找到持久的动力的。 ——狄摩西尼"
 
 #: gui/text/quotes.txt:67
 msgid ""
 "\"Delivery, delivery, delivery.\" - Demosthenes, when asked what were the "
 "three most important elements of rhetoric (Cicero, \"De Oratore\", 3.213)"
-msgstr ""
+msgstr "姿态、姿态、姿态。——狄摩西尼,当被问及什么是修辞学最重要的三个因素"
 
 #: gui/text/quotes.txt:68
 msgid ""
@@ -1262,20 +1270,20 @@ msgstr ""
 msgid ""
 "\"I am a citizen of the world.\" - Diogenes of Sinope (Diogenes Laertius, "
 "\"The Lives and Opinions of Eminent Philosophers\", \"Diogenes\", sec. 63)"
-msgstr ""
+msgstr "我是世界公民。——锡诺普的第欧根尼"
 
 #: gui/text/quotes.txt:72
 msgid ""
 "\"It is not that I am mad, it is only that my head is different from "
 "yours.\" - Diogenes of Sinope (Stobaeus, \"Florilegium\", 51)"
-msgstr ""
+msgstr "并不是我疯了，只是我的脑袋和你（们）的不一样罢了。——锡诺普的第欧根尼"
 
 #: gui/text/quotes.txt:73
 msgid ""
 "\"Yes, stand a little out of my sunshine.\" - Diogenes of Sinope to "
 "Alexander the Great, who asked if he could help in in any way (Plutarch, "
 "\"Parallel Lives\", \"Alexander\", sec. 14)"
-msgstr ""
+msgstr "我希望你闪到一边去，不要遮住我的阳光。——第欧根尼这样回答道。此时第欧根尼正在晒太阳，亚历山大大帝前来拜访他，问他需要什么，并保证会兑现他的愿望。"
 
 #: gui/text/quotes.txt:74
 msgid ""
@@ -1288,56 +1296,56 @@ msgid ""
 "\"Stranger, go tell the Spartans that we lie here, obedient to their laws.\""
 " - Epitaph at Thermopylae for Leonidas and his men (Herodotus, \"The "
 "Histories\", VII. 228)"
-msgstr ""
+msgstr "流浪人，你若到斯巴达，请报告那里的公民们，我们阵亡此地，至死犹恪守他们的命令。——斯巴达300勇士战死后，为了纪念他们的英勇战绩，人们在一尊狮子状纪念碑上刻下由古希腊诗人西蒙尼德所做的警句。"
 
 #: gui/text/quotes.txt:76
 msgid ""
 "\"A coward turns away, but a brave man's choice is danger.\" - Euripides "
 "(\"Iphigenia in Tauris\")"
-msgstr ""
+msgstr "懦夫转身离开,但勇敢之人的抉择是危险的。——欧里庇得斯"
 
 #: gui/text/quotes.txt:77
 msgid ""
 "\"Brave men are made bolder by ordeals, but cowards achieve nothing.\" - "
 "Euripides (\"Iphigenia in Tauris\")"
-msgstr ""
+msgstr "勇敢的人在苦难中变得更勇敢，但懦夫却一无所获。——欧里庇得斯 "
 
 #: gui/text/quotes.txt:78
 msgid ""
 "\"Cowards do not count in battle; they are there, but not in it.\" - "
 "Euripides (\"Meleager\")"
-msgstr ""
+msgstr "懦夫在战斗里不算数;他们在那里,但心不在。——欧里庇得斯"
 
 #: gui/text/quotes.txt:79
 msgid "\"Chance fights ever on the side of the prudent.\" - Euripides (\"Pirithous\")"
-msgstr ""
+msgstr "机会永远与谨慎战斗。 ——欧里庇得斯"
 
 #: gui/text/quotes.txt:80
 msgid ""
 "\"Return with your shield, or on it.\" - Farewell of Spartan women to their "
 "warriors, implying that cowards would throw away their shield in battle to "
 "flee (Plutarch, \"Moralia\", XVIII. \"Sayings of Spartan Women\", 241f)"
-msgstr ""
+msgstr "“带着你的盾牌回来，或者戴上它。”——斯巴达妇女向他们的战士告别，暗示懦夫会在逃跑的战斗中丢掉他们的盾牌（普鲁塔克，“莫拉里亚”，十八。《斯巴达妇女的格言》，241F）"
 
 #: gui/text/quotes.txt:81
 msgid ""
 "\"I came, I saw, I conquered.\" - Gaius Julius Caesar, after routing "
 "Pharnaces II of Pontus in the first assault (Plutarch, \"Parallel Lives\", "
 "\"Caesar\", sec. 50)"
-msgstr ""
+msgstr "我来了，我看见了，我征服了。 ——凯撒"
 
 #: gui/text/quotes.txt:82
 msgid ""
 "\"Men willingly believe what they wish.\" - Gaius Julius Caesar (\"De Bello "
 "Gallico\", III. 18)"
-msgstr ""
+msgstr "人们心甘情愿的相信他们所希望的。——盖乌斯·儒略·凯撒"
 
 #: gui/text/quotes.txt:83
 msgid ""
 "\"It is not the well-fed long-haired man I fear, but the pale and the hungry"
 " looking.\" - Gaius Julius Caesar (Plutarch, \"Parallel Lives\", \"Antony\","
 " sec. 11)"
-msgstr ""
+msgstr "我不怕吃饱的长发男人，但怕见到面黄肌瘦之人。——盖乌斯·儒略·凯撒"
 
 #: gui/text/quotes.txt:84
 msgid ""
@@ -1346,7 +1354,7 @@ msgid ""
 "back; and, when they were put to flight, the archers were surrounded and cut"
 " to pieces.\" - Gaius Julius Caesar about the Battle of Alesia (\"De Bello "
 "Gallico\", VII. 80)"
-msgstr ""
+msgstr "战斗从中午一直拖到日落，胜利还不知谁属。于是，我军中的日尔曼人在战场的一边，把骑兵密集在一起，向敌人进攻，击溃了他们。当他们被驱散时，那些弓箭手也被包围歼灭。——凯撒 （《高卢战记》第七卷80）"
 
 #: gui/text/quotes.txt:85
 msgid ""
@@ -1357,7 +1365,7 @@ msgid ""
 "exhausted by many and severe wounds, that he was already unable to support "
 "himself.\" - Gaius Julius Caesar about the Battle of the Sabis (\"De Bello "
 "Gallico\", II. 25)"
-msgstr ""
+msgstr "“第四队的百夫长都被杀了，旗手也被杀了，旗子也丢了，其他队的百夫长几乎全都受伤或被杀了，其中军团的首席百夫长，普布留斯·塞卡斯修斯·巴库鲁斯，就是一个非常勇敢的人，受了许多重伤，精疲力竭，已经无法支撑自己了。”—盖尤斯·朱利叶斯·凯撒关于萨比斯战役的描述（“德贝洛·加利科”，第二章。25）"
 
 #: gui/text/quotes.txt:86
 msgid ""
@@ -1387,19 +1395,19 @@ msgstr ""
 msgid ""
 "\"Stop quoting laws, we carry weapons!\" - Gnaeus Pompeius Magnus (Plutarch,"
 " \"Parallel Lives\", \"Pompey\", sec. 10)"
-msgstr ""
+msgstr "别再引述法律,我们有武器! ——格奈乌斯·庞培"
 
 #: gui/text/quotes.txt:90
 msgid ""
 "\"If a man put out the eye of another man, his eye shall be put out.\" - "
 "Hammurabi (Hammurabi's Code, sec. 196)"
-msgstr ""
+msgstr "如果一个人挖出了另一个人的眼睛,他的眼睛也该被挖出来。——汉谟拉比"
 
 #: gui/text/quotes.txt:91
 msgid ""
 "\"I have come not to make war on the Italians, but to aid the Italians "
 "against Rome.\" - Hannibal Barca (Polybius, \"Histories\", III. 85)"
-msgstr ""
+msgstr "我不是要让意大利人捲入战争,而是要帮助意大利人对抗罗马。——汉尼拔·巴卡"
 
 #: gui/text/quotes.txt:92
 msgid ""
@@ -1436,38 +1444,38 @@ msgstr ""
 msgid ""
 "\"You could not step twice into the same river.\" - Herakleitos (Plato, "
 "\"Cratylos\", 402a)"
-msgstr ""
+msgstr "人不能两次踏入同一条河流，因为无论是这条河还是这个人都已经不同。 ——赫拉克利特"
 
 #: gui/text/quotes.txt:97
 msgid ""
 "\"It is better to be envied than to be pitied.\" - Herodotus (\"The "
 "Histories\", III. 52)"
-msgstr ""
+msgstr "被人羡慕要好过被人怜悯。——希罗多德（《历史》第三卷52节）"
 
 #: gui/text/quotes.txt:98
 msgid ""
 "\"In soft regions are born soft men.\" - Herodotus (\"The Histories\", IX. "
 "122)"
-msgstr ""
+msgstr "在安稳的区域只会生出软弱的人。——希罗多德"
 
 #: gui/text/quotes.txt:99
 msgid ""
 "\"This is the bitterest pain among men, to have much knowledge but no "
 "power.\" - Herodotus (\"The Histories\", IX. 16)"
-msgstr ""
+msgstr "这是人们最剧烈的痛苦,有很多知识,但没有权力。——希罗多德"
 
 #: gui/text/quotes.txt:100
 msgid ""
 "\"Although he \\[Xerces] had plenty of troops he had few men.\" - Herodotus "
 "(\"The Histories\", VII. 210)"
-msgstr ""
+msgstr "他们（薛西斯）的人数虽多，可是其中顶事儿的人却很少。——希罗多德（《历史》第七卷210节）"
 
 #: gui/text/quotes.txt:101
 msgid ""
 "\"The Lacedaemonians \\[Spartans] fought a memorable battle; they made it "
 "quite clear that they were the experts, and that they were fighting against "
 "amateurs.\" - Herodotus (\"The Histories\", VII. 211)"
-msgstr ""
+msgstr "拉科尼亚人[斯巴达人]打了一场令人难忘的战斗;他们看起来就像是,他们是专家,而与业余选手对抗。——希罗多德"
 
 #: gui/text/quotes.txt:102
 msgid ""
@@ -1486,7 +1494,7 @@ msgid ""
 "Thebes] was the same: If he sent an army against the Persians, he would "
 "destroy a great empire.\" - Herodotus, later mentioning that the empire "
 "Kroisos destroyed was his own (\"The Histories\", I. 53)"
-msgstr ""
+msgstr "两地（德尔斐和底比斯）的神谕是相同的：如果克洛伊索斯进攻波斯，他就可以灭掉一个大帝国。——希罗多德。不久，他自己的帝国被波斯摧毁了。（《历史》第一卷53节）"
 
 #: gui/text/quotes.txt:104
 msgid ""
@@ -1510,7 +1518,7 @@ msgstr ""
 msgid ""
 "\"Conquered Greece took captive her savage conqueror and brought her arts "
 "into rustic Latium.\" - Horace (\"Epistles\", epistle I., 156-157)"
-msgstr ""
+msgstr "被征服的希腊让她的征服者深深的著迷,并把她的艺术带到了质朴的拉齐奥。 ——贺拉斯"
 
 #: gui/text/quotes.txt:107
 msgid ""
@@ -1522,37 +1530,37 @@ msgstr ""
 msgid ""
 "\"It is your concern when your neighbour's wall is on fire.\" - Horace "
 "(\"Epistles\", epistle XVIII., 84)"
-msgstr ""
+msgstr "邻居失火时，你也须在意。（唇亡齿寒）——贺拉斯"
 
 #: gui/text/quotes.txt:109
 msgid ""
 "\"It is sweet and honorable to die for one's country.\" - Horace (\"Odes\", "
 "III., ode II., 13)"
-msgstr ""
+msgstr "为自己的国家而死是愉快且光荣的。——贺拉斯"
 
 #: gui/text/quotes.txt:110
 msgid "\"I am Cyrus, king of the world…\" - Inscription (Cyrus Cylinder)"
-msgstr ""
+msgstr "“吾为居鲁士,世界之王......”——居鲁士大帝"
 
 #: gui/text/quotes.txt:111
 msgid ""
 "\"In peace the sons bury their fathers, but in war the fathers bury their "
 "sons.\" - Kroisos, king of Lydia (Herodotus, \"The Histories\", I. 87)"
-msgstr ""
+msgstr "和平时，儿子埋葬父亲;战争时，父亲埋葬儿子。 —— 克罗伊斯（吕底亚王国末代君主）"
 
 #: gui/text/quotes.txt:112
 msgid ""
 "\"Marry a good man, and bear good children.\" - Leonidas, to his wife who "
 "asked what to do if he died, before he left for Thermopylae (Plutarch, "
 "\"Moralia\", XVI. \"Sayings of Spartans\", 225a)"
-msgstr ""
+msgstr "“嫁个好男人,然后生出勇猛的小孩。” ——列奥尼达一世,在他要前往温泉关前对他的妻子说"
 
 #: gui/text/quotes.txt:113
 msgid ""
 "\"Come and get them!\" - Leonidas, to the Persian messenger who demanded "
 "that he and his men lay down their arms (Plutarch, \"Moralia\", XVI. "
 "\"Sayings of Spartans\", 225c)"
-msgstr ""
+msgstr "“杀光他们！” ——列奥尼达一世,于波斯的使者要求他们放下武器时"
 
 #: gui/text/quotes.txt:114
 msgid ""
@@ -1578,7 +1586,7 @@ msgstr ""
 msgid ""
 "\"A city is well-fortified which has a wall of men instead of brick.\" - "
 "Lycurgus of Sparta (Plutarch, \"Parallel Lives\", \"Lycurgus\", sec. 19)"
-msgstr ""
+msgstr "设施完善的城市，有一堵众志成城的人墙，而非砖墙。——斯巴达的吕枯耳戈斯（吕库古）"
 
 #: gui/text/quotes.txt:117
 msgid ""
@@ -1597,37 +1605,37 @@ msgstr ""
 msgid ""
 "\"A war is never undertaken by the ideal State, except in defense of its "
 "honor or its safety.\" - Marcus Tullius Cicero (\"De Re Publica\", III., 23)"
-msgstr ""
+msgstr "除了捍卫其荣誉或保证安全，理想国家绝不会发动战争。——马库斯·图利乌斯·西塞罗"
 
 #: gui/text/quotes.txt:120
 msgid ""
 "\"The first duty of a man is the seeking after and the investigation of "
 "truth.\" - Marcus Tullius Cicero (\"On Duties\", I., 13)"
-msgstr ""
+msgstr "一个人的首要责任就是追寻并研究真理。——马库斯·图利乌斯·西塞罗"
 
 #: gui/text/quotes.txt:121
 msgid ""
 "\"No one is so old as to think that he cannot live one more year.\" - Marcus"
 " Tullius Cicero (\"On Old Age\", sec. 24)"
-msgstr ""
+msgstr "没有人会老到认为他不能再多活一年。——马库斯·图利乌斯·西塞罗"
 
 #: gui/text/quotes.txt:122
 msgid ""
 "\"Let the welfare of the people be the ultimate law.\" - Marcus Tullius "
 "Cicero (\"On the Laws\", III., sec. 3)"
-msgstr ""
+msgstr "让人民的福祉成为最终的法律。——马库斯·图利乌斯·西塞罗"
 
 #: gui/text/quotes.txt:123
 msgid ""
 "\"Endless money forms the sinews of war.\" - Marcus Tullius Cicero "
 "(\"Philippics\", Philippica V., sec. 5)"
-msgstr ""
+msgstr "无尽的钱构成了万恶的根源。 ——马库斯·图利乌斯·西塞罗"
 
 #: gui/text/quotes.txt:124
 msgid ""
 "\"Laws are silent in time of war.\" - Marcus Tullius Cicero (\"Pro Milone\","
 " IV., sec. 11)"
-msgstr ""
+msgstr "在战时，法律是沉默的。——马库斯·图利乌斯·西塞罗"
 
 #: gui/text/quotes.txt:125
 msgid ""
@@ -1635,7 +1643,7 @@ msgid ""
 "murdering someone; then they boast that they have spared him!\" - Marcus "
 "Tullius Cicero, condemning Mark Anthony who had not killed him (yet) "
 "(\"Philippics\", Philippica II, sec. 5)"
-msgstr ""
+msgstr "也就是说,元老会议员同样也只会同流合污。他们克制住谋杀某人的冲动;却又吹嘘着他们放过了他！——马库斯·图利乌斯·西塞罗"
 
 #: gui/text/quotes.txt:126
 msgid ""
@@ -1654,7 +1662,7 @@ msgstr ""
 
 #: gui/text/quotes.txt:128
 msgid "\"The man who runs may fight again.\" - Menander (\"Monosticha\")"
-msgstr ""
+msgstr "逃跑的人可能会反戈一击（狗急也会跳墙） ——米南德（古希腊剧作家）"
 
 #: gui/text/quotes.txt:129
 msgid ""
@@ -1664,7 +1672,7 @@ msgstr ""
 
 #: gui/text/quotes.txt:130
 msgid "\"I call a fig a fig, a spade a spade.\" - Menander (fragment 545 K)"
-msgstr ""
+msgstr "我这人说话，一是一，二是二。 ——米南德（古希腊剧作家）"
 
 #: gui/text/quotes.txt:131
 msgid ""
@@ -1748,13 +1756,13 @@ msgid ""
 "is certainly dangerous to let it go.\" - Pericles, addressing the Athenian "
 "assembly after a plague had weakened the city (Thucydides, \"History of the "
 "Peloponnesian War\", II. 63.3)"
-msgstr ""
+msgstr "你的帝国现在就像是暴政横行,连假想如此都是错的;让它就这麼发展更是危险。 ——伯里克利"
 
 #: gui/text/quotes.txt:141
 msgid ""
 "\"War is sweet to those who have no experience of it, but the experienced "
 "man fears its approach in his heart.\" - Pindar (fragment 110)"
-msgstr ""
+msgstr "战争对于那些没有经历过它的人来说是甜蜜的，但对於经历过的人来说则会打从心底颤抖不已。——品达"
 
 #: gui/text/quotes.txt:142
 msgid ""
@@ -1768,7 +1776,7 @@ msgid ""
 "\"No guest is so welcome in a friend's house that he will not become a "
 "nuisance after three days.\" - Plautus (\"The Swaggering Soldier\", Act III,"
 " scene 1, 146)"
-msgstr ""
+msgstr "客人住久了就是麻烦。——普劳图斯"
 
 #: gui/text/quotes.txt:144
 msgid ""
@@ -1890,25 +1898,25 @@ msgstr ""
 msgid ""
 "\"None can be free who is a slave to, and ruled by, his passions.\" - "
 "Pythagoras (Stobaeus, \"Florilegium\", 18)"
-msgstr ""
+msgstr "为激情所役使的人永无宁静。——毕达哥拉斯"
 
 #: gui/text/quotes.txt:158
 msgid ""
 "\"Do not say few things in many words, but many things in few words.\" - "
 "Pythagoras (Stobaeus, \"Florilegium\", 24)"
-msgstr ""
+msgstr "与其夸夸奇谈，不如微言大义。——毕达哥拉斯"
 
 #: gui/text/quotes.txt:159
 msgid ""
 "\"Let your speech be better than silence, or be silent.\" - Pythagoras "
 "(Stobaeus, \"Florilegium\", 24)"
-msgstr ""
+msgstr "让你的言语胜过沉默,否则就闭嘴。 ——毕达哥拉斯"
 
 #: gui/text/quotes.txt:160
 msgid ""
 "\"Unity strengthens even small states, while discord undermines the "
 "mightiest empires.\" - Sallust (\"The Jugurthine War\", 10.6)"
-msgstr ""
+msgstr "和谐使小国壮大,而不和谐则使最强盛的帝国毁灭。 ——撒路斯提乌斯"
 
 #: gui/text/quotes.txt:161
 msgid ""
@@ -2025,20 +2033,20 @@ msgid ""
 "\"The growth of the power of Athens, and the alarm which this caused in "
 "Sparta, made war inevitable.\" - Thucydides (\"History of the Peloponnesian "
 "War\", I. 23.6)"
-msgstr ""
+msgstr "雅典势力的日益增长，由此而引起斯巴达的恐惧，使战争成为不可避免的了。——修昔底德（《伯罗奔尼撒战争史》第一卷，23段第6句）"
 
 #: gui/text/quotes.txt:177
 msgid ""
 "\"War is a matter not so much of arms as of money.\" - Thucydides (\"History"
 " of the Peloponnesian War\", I. 83.2)"
-msgstr ""
+msgstr "在战争中，需要金钱甚于需要军备。——修昔底德（《伯罗奔尼撒战争史》第一卷83段第2句）"
 
 #: gui/text/quotes.txt:178
 msgid ""
 "\"It is a general rule of human nature that people despise those who treat "
 "them well, and look up to those who make no concessions.\" - Thucydides "
 "(\"History of the Peloponnesian War\", III. 39.5)"
-msgstr ""
+msgstr "人们鄙视那些善待他们的人，并且尊重那些不作出任何让步的人，这是人性的一般规律。——修昔底德（《伯罗奔尼撒战争史》第三卷39段第5句）"
 
 #: gui/text/quotes.txt:179
 msgid ""
@@ -2049,7 +2057,7 @@ msgid ""
 " they ever had perished, nothing was saved and few of so many ever returned "
 "home. Thus ended the Sicilian expedition.\" - Thucydides (\"History of the "
 "Peloponnesian War\", VII. 87.6-7)"
-msgstr ""
+msgstr "这是这场战争中希腊人最大的一次军事行动，照我看来，也是希腊历史上最大的军事行动—对于胜利者来说，是最大的光荣，对于失败者来说，是最大的灾难。雅典人被彻底打败，全军覆灭，他们遭受了巨大的痛苦；他们被毁灭了，正像谚语所说，一切都灰飞烟灭了，他们的舰队，他们的陆军，全部都被毁灭了，庞大的远征军中只有极少数人重返故乡。这就是在西西里发生的事件。——修昔底德（《伯罗奔尼撒战争史》第七卷87段）"
 
 #: gui/text/quotes.txt:180
 msgid ""
@@ -2057,7 +2065,7 @@ msgid ""
 "strong do what they can and the weak suffer what they must.\" - Thucydides, "
 "describing Athenians addressing the defeated Melians who are unwilling to "
 "surrender (\"History of the Peloponnesian War\", V. 89.1)"
-msgstr ""
+msgstr "同时我们也知道，强者可以做他们能够做的一切，而弱者只能忍受他们必须忍受的一切。——修昔底德，描述了雅典人对不愿投降的梅利亚人的讲话。（《伯罗奔尼撒战争史》第五卷89段）"
 
 #: gui/text/quotes.txt:181
 msgid ""
@@ -2066,7 +2074,7 @@ msgid ""
 "darts to the closest man at hand.\" - Thucydides, describing the Spartan "
 "disaster at the Battle of Sphacteria (\"History of the Peloponnesian War\", "
 "IV. 34.2)"
-msgstr ""
+msgstr "拉栖代梦人对这种作战方式不习惯，随着攻击而来的高呼声使他们惊慌失措。新近被烧毁的树木炭灰飞扬起来，遮天蔽日，许多战士投射的石块、弩箭在尘雾中飞舞，敌人看不清眼前的东西了。——修昔底德，描述了Sphacteria战役中的斯巴达惨败（《伯罗奔尼撒战争史》第四卷34.2）"
 
 #: gui/text/quotes.txt:182
 msgid ""
@@ -2207,4 +2215,4 @@ msgstr ""
 msgid ""
 "\"For a thinking man is where Wisdom is at home.\" - Zoroaster, founder of "
 "the Zoroastrian religion (\"Ahunuvaiti Gatha\", yasna 30.9)"
-msgstr ""
+msgstr "对于一个有思想的人来说,智慧是无所不在的。——琐罗亚斯德"

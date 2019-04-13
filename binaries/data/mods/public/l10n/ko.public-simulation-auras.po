@@ -1,16 +1,24 @@
 # Translation template for 0 A.D. — Empires Ascendant.
-# Copyright (C) 2018 Wildfire Games
+# Copyright (C) 2019 Wildfire Games
 # This file is distributed under the same license as the 0 A.D. — Empires Ascendant project.
 # 
 # Translators:
+# Asakura, 2017
+# 이정희 <daemul72@gmail.com>, 2019
+# karubabu <karubabu@protonmail.com>, 2018
+# karubabu <karubabu@protonmail.com>, 2018
+# ks k, 2019
+# ks k, 2019
 # Libert Sin <majesticer13@gmail.com>, 2018
 # Muk Myung-Hee MyungHee <exploration@ponp.be>, 2018
+# red hare <www3@hotmail.co.jp>, 2017
+# Takaki IEKURA <tacostea@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2018-12-31 09:45+0100\n"
-"PO-Revision-Date: 2018-12-31 18:40+0000\n"
-"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"POT-Creation-Date: 2019-04-01 10:10+0200\n"
+"PO-Revision-Date: 2019-04-04 03:41+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/wildfire-games/0ad/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +32,7 @@ msgstr "조선소 수리"
 
 #: simulation/data/auras/structures/cart_super_dock_repair.jsonauraDescription
 msgid "Repairs garrisoned ship at 10 HP per second."
-msgstr "수비 상태의 선박을 초당 10 HP씩 수리합니다"
+msgstr "주둔지 배를 초당 10 HP 씩 수리합니다"
 
 #: simulation/data/auras/structures/epic_temple_heal.jsonauraName
 msgid "Blessing of the Gods"
@@ -32,15 +40,15 @@ msgstr "신의 축복"
 
 #: simulation/data/auras/structures/epic_temple_heal.jsonauraDescription
 msgid "Heals units at 3 HP per second."
-msgstr "유닛의 내구력이 초당 3 회복합니다."
+msgstr "유닛을 초당 3 HP 씩 치료합니다."
 
 #: simulation/data/auras/structures/iber_monument.jsonauraName
 msgid "Religious Fervor"
-msgstr "종교 열"
+msgstr "종교적 열정"
 
 #: simulation/data/auras/structures/iber_monument.jsonauraDescription
 msgid "+20% attack damage for soldiers."
-msgstr "+20%의 공격 데미지를 입힙니다."
+msgstr "병사의 공격피해가 +20% 증가 합니다."
 
 #: simulation/data/auras/structures/kush_pyramids_economic.jsonauraName
 msgid "Patriotism"
@@ -52,7 +60,7 @@ msgstr "피라미드 근처의 노동자의 작업효율이 +15% 증가합니다
 
 #: simulation/data/auras/structures/kush_pyramids_military.jsonauraName
 msgid "Exhortative Presence"
-msgstr "현혹적인 존재"
+msgstr "권고적인 주둔군 or?? 현혹적인 존재"
 
 #: simulation/data/auras/structures/kush_pyramids_military.jsonauraDescription
 msgid "Soldiers near Large Pyramids +10% attack."
@@ -60,12 +68,12 @@ msgstr "대형 피라미드 근처의 군인의 공격력이 +10% 증가합니�
 
 #: simulation/data/auras/structures/kush_pyramids_territory.jsonauraName
 msgid "Meroitic Pyramids"
-msgstr "메로이틱 피라미드"
+msgstr "메로에의 피라미드"
 
 #: simulation/data/auras/structures/kush_pyramids_territory.jsonauraDescription
 msgid ""
 "Civic Centers +10% territory influence as long as a Pyramid stands built."
-msgstr "피라미드가 세워져있는 한 시민 센터의 영토 영향력이 +10% 증가합니다."
+msgstr "피라미드가 세워져있는 한 시민 회관의 영토 영향력이 +10% 증가합니다."
 
 #: simulation/data/auras/structures/kush_temple_amun.jsonauraName
 msgid "Powerful Priesthood"
@@ -75,7 +83,7 @@ msgstr "강력한 신권"
 msgid ""
 "Strengthen the Priesthood of Amun and undermine your monarch's influence.\n"
 "-5% health for heroes per temple built."
-msgstr ""
+msgstr "아문의 신권을 강화하고 군주의 영향력을 약화시킵니다.\n사원을 지을때마다 영웅들의 건강이 -5% 감소합니다."
 
 #: simulation/data/auras/structures/library.jsonauraName
 msgid "Power of Knowledge"
@@ -84,19 +92,19 @@ msgstr "지식의 힘"
 #: simulation/data/auras/structures/library.jsonauraDescription
 msgid ""
 "Reduce the cost and research time of technologies by 10% per library owned."
-msgstr "소유하는 도서관마다 10%씩 비용 및 기술 연구 시간을 줄일 수 있습니다."
+msgstr "소유하는 도서관마다 기술의 비용과 연구 시간을 10%까지 줄일 수 있습니다."
 
 #: simulation/data/auras/structures/loyalty_regen.jsonauraName
 msgid "Loyalty"
-msgstr "충성"
+msgstr "충성심"
 
 #: simulation/data/auras/structures/loyalty_regen.jsonauraDescription
 msgid "+50% garrisoned loyalty regeneration rate for structures."
-msgstr ""
+msgstr "주둔 유닛의 건축물에 대한 충성도 회복률이 +50% 됩니다."
 
 #: simulation/data/auras/structures/maur_pillar.jsonauraName
 msgid "Edict of Ashoka"
-msgstr "아소카의 칙서"
+msgstr "아소카의 칙령"
 
 #: simulation/data/auras/structures/maur_pillar.jsonauraDescription
 msgid "+20% movement speed for traders."
@@ -104,11 +112,11 @@ msgstr "상인의 이동 속도가 20% 증가합니다."
 
 #: simulation/data/auras/structures/rotary_mill.jsonauraName
 msgid "Farming bonus"
-msgstr "농경 보너스"
+msgstr "농업 보너스"
 
 #: simulation/data/auras/structures/rotary_mill.jsonauraDescription
 msgid "+25% gather rate for workers in the grainfields."
-msgstr "노동자의 논밭에서 채집 율이 25 % 증가합니다."
+msgstr "노동자의 논밭에서 채집률이 +25% 됩니다."
 
 #: simulation/data/auras/structures/temple_heal.jsonauraName
 msgid "Medical Treatment"
@@ -116,7 +124,7 @@ msgstr "의료"
 
 #: simulation/data/auras/structures/temple_heal.jsonauraDescription
 msgid "Heals nearby units at 1 HP per second."
-msgstr "근처의 유닛을 초당 1씩 치유합니다."
+msgstr "근처의 유닛을 초당 1 HP 씩 치료합니다."
 
 #: simulation/data/auras/structures/theatron.jsonauraName
 msgid "Hellenization"
@@ -124,7 +132,7 @@ msgstr "헬레니즘(그리스)화"
 
 #: simulation/data/auras/structures/theatron.jsonauraDescription
 msgid "Increase territory influence by 20% per theatron owned."
-msgstr "테아토론 마다 20%의 영토 효과가 확장합니다."
+msgstr "소유하고 있는 그리스식 극장마다 영토 영향력을 +20% 증가합니다."
 
 #: simulation/data/auras/structures/wall_garrisoned.jsonauraName
 msgid "Wall Protection"
@@ -132,7 +140,7 @@ msgstr "성벽 보호"
 
 #: simulation/data/auras/structures/wall_garrisoned.jsonauraDescription
 msgid "Soldiers on walls have +3 armor and higher vision."
-msgstr "벽에서 군인 무장 수준과 시야가 3 상승합니다."
+msgstr "성벽에서 군인은 +3의 무장 수준과 높은 시야를 가집니다."
 
 #: simulation/data/auras/structures/wonder_pop_1.jsonauraName
 msgid "Symbol of Greatness"
@@ -140,17 +148,17 @@ msgstr "위대함의 상징"
 
 #: simulation/data/auras/structures/wonder_pop_1.jsonauraDescription
 msgid "Increase the population limit by 10 per wonder owned."
-msgstr "상징을 하나 확보 할 때마다 인구 상한이 10 증가합니다."
+msgstr "불가사의를 소유할 때마다 인구 한도가 10 증가합니다."
 
 #: simulation/data/auras/structures/wonder_pop_2.jsonauraName
 msgid "Glorious Expansion"
-msgstr "명성 전파"
+msgstr "영광스러운 확장"
 
 #: simulation/data/auras/structures/wonder_pop_2.jsonauraDescription
 msgid ""
 "Further increase the population limit by 40 per wonder owned (requires "
 "\"Glorious Expansion\" tech)."
-msgstr ""
+msgstr "블가사의를 1개 확보할 때마다 인구 한도가 40씩 증가합니다(\"영광스러운 확장\"기술 필요)."
 
 #: simulation/data/auras/structures/workshop_repair.jsonauraName
 msgid "Workshop Repairs"
@@ -158,67 +166,63 @@ msgstr "작업장 수리"
 
 #: simulation/data/auras/structures/workshop_repair.jsonauraDescription
 msgid "Repairs garrisoned siege units at 3 HP per second."
-msgstr ""
+msgstr "주둔하고 있는 공성 유닛을 초당 3 HP로 회복합니다."
 
 #: simulation/data/auras/teambonuses/athen_player_teambonus.jsonauraName
 msgid "Delian League"
 msgstr "델로스 동맹"
 
 #: simulation/data/auras/teambonuses/athen_player_teambonus.jsonauraDescription
-msgid "Ships construct 25% faster."
-msgstr "선박 제조가 25% 빨라집니다."
+msgid "Allied warships −25% construction time."
+msgstr "동맹의 전함 건조 시간이 -25% 단축됩니다."
 
 #: simulation/data/auras/teambonuses/brit_player_teambonus.jsonauraName
 msgid "Druids"
-msgstr "드루이드교"
+msgstr "드루이드"
 
 #: simulation/data/auras/teambonuses/brit_player_teambonus.jsonauraDescription
-msgid "Allies get -20% resource cost to train healers."
-msgstr "동맹국은 치료사 훈련 비용이 -20% 감소합니다."
+msgid "Allied healers −20% resource costs."
+msgstr "동맹의 치료사 훈련 자원 소모가 -20% 감소합니다."
 
 #: simulation/data/auras/teambonuses/cart_player_teambonus.jsonauraName
 msgid "Trademasters"
 msgstr "거상"
 
 #: simulation/data/auras/teambonuses/cart_player_teambonus.jsonauraDescription
-msgid "10% bonus of trade profit for ally's international routes."
-msgstr ""
+msgid "Allied markets +10% international trade bonus."
+msgstr "동맹 시장의 국제 교역 보너스가 -10% 증가합니다."
 
 #: simulation/data/auras/teambonuses/gaul_player_teambonus.jsonauraName
 msgid "Druidic Wisdom"
-msgstr "드루이드교의 지혜"
+msgstr "드루이드의 지혜"
 
 #: simulation/data/auras/teambonuses/gaul_player_teambonus.jsonauraDescription
-msgid "-20% research time for technologies of allies."
-msgstr ""
+msgid "Allied structures −20% technology research time."
+msgstr "동맹 건축물의 기술 연구 시간이 -20% 감소합니다."
 
 #: simulation/data/auras/teambonuses/iber_player_teambonus.jsonauraName
 msgid "Saripeko"
 msgstr "사리페코"
 
 #: simulation/data/auras/teambonuses/iber_player_teambonus.jsonauraDescription
-msgid ""
-"Reduces the cost for citizen-soldier skirmishers with 20% for allies of "
-"Iberian players"
-msgstr ""
+msgid "Allied citizen-soldier javelinists −20% resource costs."
+msgstr "동맹의 시민군 투창병 양성 자원 비용이 -20% 감소합니다. "
 
-#: simulation/data/auras/teambonuses/kush_player_team_bonus.jsonauraName
+#: simulation/data/auras/teambonuses/kush_player_teambonus.jsonauraName
 msgid "Elephant Suppliers"
-msgstr ""
+msgstr "코끼리 공급자"
 
-#: simulation/data/auras/teambonuses/kush_player_team_bonus.jsonauraDescription
-msgid ""
-"Reduces the cost and train time for elephants with 20% for allies of Kushite"
-" players."
-msgstr ""
+#: simulation/data/auras/teambonuses/kush_player_teambonus.jsonauraDescription
+msgid "Allied elephants −20% resource costs and training time."
+msgstr "동맹의 코끼리 양성 자원 비용과 훈련 시간이 -20% 감소합니다."
 
 #: simulation/data/auras/teambonuses/mace_player_teambonus.jsonauraName
 msgid "Standardized Currency"
-msgstr "통화 표준화"
+msgstr "통화 표준화 or 표준화된 통화"
 
 #: simulation/data/auras/teambonuses/mace_player_teambonus.jsonauraDescription
-msgid "+20% sell prices at market."
-msgstr "시장 판매 가격이 20% 상승합니다."
+msgid "Allies +20% barter sell prices."
+msgstr "동맹의 판매가격이 +20% 증가합니다."
 
 #: simulation/data/auras/teambonuses/maur_player_teambonus.jsonauraName
 msgid "Ashoka's Religious Support"
@@ -226,51 +230,49 @@ msgstr "아소카의 종교적 지원"
 
 #: simulation/data/auras/teambonuses/maur_player_teambonus.jsonauraDescription
 msgid ""
-"Allied temples and temple technologies -50% cost, in resources and time."
-msgstr ""
+"Allied temples −50% resource costs and building time; temple technologies "
+"−50% resource costs and research time."
+msgstr "동맹의 사원 짓는 자원비용과 건설 시간을 -50% 감소시킵니다; 사원 기술의 자원 비용과 연구시간을 -50% 감소시킵니다."
 
 #: simulation/data/auras/teambonuses/pers_player_teambonus.jsonauraName
 msgid "The Royal Road"
 msgstr "왕도"
 
 #: simulation/data/auras/teambonuses/pers_player_teambonus.jsonauraDescription
-msgid "Higher income (+15%) from land trade routes for ally's traders."
-msgstr "동맹국 간의 육로 교역 수입이 증가 (+15%)합니다."
+msgid "Allied land traders +15% trade gain."
+msgstr "동맹의 육로 상인의 교역 수입을 +15% 증가시킵니다."
 
 #: simulation/data/auras/teambonuses/ptol_player_teambonus.jsonauraName
 msgid "Breadbasket of the Mediterranean"
-msgstr "지중해의 빵상자"
+msgstr "지중해의 곡창 지대"
 
 #: simulation/data/auras/teambonuses/ptol_player_teambonus.jsonauraDescription
-msgid "All allies automatically gain a slow trickle of food income."
-msgstr ""
+msgid "Allies +1.0 food trickle rate."
+msgstr "동맹의 식량 공급률을 +1.0 증가시킵니다."
 
 #: simulation/data/auras/teambonuses/rome_player_teambonus.jsonauraName
 msgid "Conscription"
 msgstr "징병"
 
 #: simulation/data/auras/teambonuses/rome_player_teambonus.jsonauraDescription
-msgid "-20% training time for allied citizen-soldier infantry."
-msgstr ""
+msgid "Allied citizen-soldier infantry −20% training time."
+msgstr "동맹 시민군 보병 훈련 시간이 -20% 감소합니다."
 
 #: simulation/data/auras/teambonuses/sele_player_teambonus.jsonauraName
 msgid "Syrian Tetrapolis"
 msgstr "시리아 테트라폴리스"
 
 #: simulation/data/auras/teambonuses/sele_player_teambonus.jsonauraDescription
-msgid ""
-"Reduces the cost for civil centers with 20% for allies of Seleucid players"
-msgstr ""
+msgid "Allied civil centers −20% resource costs."
+msgstr "동맹 시민회관의 자원 소비가 -20% 감소됩니다"
 
 #: simulation/data/auras/teambonuses/spart_player_teambonus.jsonauraName
 msgid "Peloponnesian League"
 msgstr "펠로폰네소스 동맹"
 
 #: simulation/data/auras/teambonuses/spart_player_teambonus.jsonauraDescription
-msgid ""
-"Increases the health for citizen-soldier infantry spearmen by 10% for allies"
-" of Spartan players."
-msgstr "스파르타 플레이어의 동맹국에 대해 시민 창병의 체력을 10% 증가시킵니다."
+msgid "Allied citizen-soldier infantry spearmen +10% health."
+msgstr "동맹 시민군 창 보병의 체력이 +10% 빨라집니다."
 
 #: simulation/data/auras/units/female_inspiration.jsonauraName
 msgid "Inspiration"
@@ -278,7 +280,7 @@ msgstr "영감"
 
 #: simulation/data/auras/units/female_inspiration.jsonauraDescription
 msgid "+10% build rate and gather rate for citizen soldiers."
-msgstr ""
+msgstr "건설 속도와 시민군에 대한 모집속도가 +10% 증가합니다."
 
 #: simulation/data/auras/units/catafalques/athen_catafalque_1.jsonauraName
 msgid "Economic Reforms"
@@ -292,13 +294,13 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/athen_catafalque_2.jsonauraName
 msgid "Economic Fortune"
-msgstr "경제 운"
+msgstr "경제 재산"
 
 #: simulation/data/auras/units/catafalques/athen_catafalque_2.jsonauraDescription
 msgid ""
 "Solon brought in a new system of weights and measures, fathers were encouraged to find trades for their sons.\n"
 "-10% cost for economic technologies."
-msgstr ""
+msgstr "솔론은 새로운 무게와 측정 시스템을 도입했고, 아버지들은 그들의 아들을 위한 거래를 찾도록 격려 받았습니다.\n경제 기술에 대한 비용이 -10% 감소합니다."
 
 #: simulation/data/auras/units/catafalques/brit_catafalque_1.jsonauraName
 #: simulation/data/auras/units/heroes/iber_hero_viriato_1.jsonauraName
@@ -313,7 +315,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/brit_catafalque_2.jsonauraName
 msgid "Skirmisher Harassment"
-msgstr "척후병의 괴롭힘??"
+msgstr "척후병의 고민거리"
 
 #: simulation/data/auras/units/catafalques/brit_catafalque_2.jsonauraDescription
 msgid ""
@@ -333,7 +335,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_1.jsonauraName
 msgid "Ambush Slaughter"
-msgstr "매복 도살"
+msgstr "매복 학살"
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_1.jsonauraDescription
 msgid ""
@@ -343,7 +345,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_2.jsonauraName
 msgid "Tribute to Rome"
-msgstr "로마에 공물"
+msgstr "로마에 조공"
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_2.jsonauraDescription
 msgid ""
@@ -363,7 +365,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/iber_catafalque_2.jsonauraName
 msgid "Saver of Lives"
-msgstr ""
+msgstr "생명의 은인"
 
 #: simulation/data/auras/units/catafalques/iber_catafalque_2.jsonauraDescription
 msgid ""
@@ -373,17 +375,17 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_1.jsonauraName
 msgid "Earliest Nubian Queen"
-msgstr ""
+msgstr "최초의 누비아 여왕"
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_1.jsonauraDescription
 msgid ""
 "Ruling with full power in the Meroë Empire and also playing a significant role in the Meroitic religion, Shanakdakheto represented the might of Kush, something not to be taken lightly.\n"
 "Awe: All enemy female citizens -15% gather rate."
-msgstr ""
+msgstr "메로에 제국에서 전권을 행사하고 또한 메로아 종교에서 중요한 역할을 하는 샤낙다케토는 가볍게 여겨서는 안 될 쿠쉬의 힘을 대변했습니다.\n두려움 : 모든 적의 여성 시민의 모집 속도가 -15% 감소합니다.."
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_2.jsonauraName
 msgid "Temple at Naqa"
-msgstr ""
+msgstr "나카의 사원"
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_2.jsonauraDescription
 msgid ""
@@ -393,17 +395,17 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/mace_catafalque.jsonauraName
 msgid "Sacker of Cities"
-msgstr "도시의 해적"
+msgstr "도시의 약탈자"
 
 #: simulation/data/auras/units/catafalques/mace_catafalque.jsonauraDescription
 msgid ""
-"During the First Macedonian War, Philip and his troops sacked Thermum, the religious and political centre of Aetolia.\n"
+"During the First Macedonian War, Philip and his troops sacked Thermum, the religious and political center of Aetolia.\n"
 "+5 food and wood for every enemy unit killed or structure destroyed."
 msgstr ""
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_1.jsonauraName
 msgid "Consolidator of the Empire"
-msgstr ""
+msgstr "제국의 통합자"
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_1.jsonauraDescription
 msgid ""
@@ -413,7 +415,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_2.jsonauraName
 msgid "Vamba Moriyar"
-msgstr ""
+msgstr "바바 모리야르"
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_2.jsonauraDescription
 msgid ""
@@ -423,7 +425,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/pers_catafalque.jsonauraName
 msgid "Great Builder"
-msgstr ""
+msgstr "훌륭한 건축가"
 
 #: simulation/data/auras/units/catafalques/pers_catafalque.jsonauraDescription
 msgid ""
@@ -433,7 +435,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/ptol_catafalque.jsonauraName
 msgid "Great Librarian"
-msgstr "위대한 도서관"
+msgstr "위대한 사서"
 
 #: simulation/data/auras/units/catafalques/ptol_catafalque.jsonauraDescription
 msgid ""
@@ -453,7 +455,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/rome_catafalque_2.jsonauraName
 msgid "Founder and Defender of the Republic"
-msgstr ""
+msgstr "공화국의 창립자이자 수호자"
 
 #: simulation/data/auras/units/catafalques/rome_catafalque_2.jsonauraDescription
 msgid ""
@@ -463,7 +465,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_1.jsonauraName
 msgid "Founder of the Ezida Temple"
-msgstr ""
+msgstr "에지다 사원의 창립자"
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_1.jsonauraDescription
 msgid ""
@@ -483,7 +485,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_3.jsonauraName
 msgid "Basileus Megas"
-msgstr "대?? 바실리우스"
+msgstr "훌륭한 사령관"
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_3.jsonauraDescription
 msgid ""
@@ -494,7 +496,7 @@ msgstr ""
 #: simulation/data/auras/units/catafalques/spart_catafalque_1.jsonauraName
 #: simulation/data/auras/units/catafalques/spart_catafalque_2.jsonauraName
 msgid "Lycurgan Military Reforms"
-msgstr "라이크르간 군사 개혁"
+msgstr "심각한 군사 개혁"
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_1.jsonauraDescription
 msgid ""
@@ -508,7 +510,7 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_3.jsonauraName
 msgid "Iron Pelanors"
-msgstr ""
+msgstr "철제 펠라 노스"
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_3.jsonauraDescription
 msgid ""
@@ -518,7 +520,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/athen_hero_iphicrates_1.jsonauraName
 msgid "Formation Reforms"
-msgstr "진형 개혁"
+msgstr "진형 개편"
 
 #: simulation/data/auras/units/heroes/athen_hero_iphicrates_1.jsonauraDescription
 msgid "All soldiers in his formation +15% speed and +3 armor."
@@ -526,7 +528,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/athen_hero_iphicrates_2.jsonauraName
 msgid "Peltast Reforms"
-msgstr "투창 병사 개혁"
+msgstr "투창 병사 개편"
 
 #: simulation/data/auras/units/heroes/athen_hero_iphicrates_2.jsonauraDescription
 msgid "All javelin infantry +15% speed."
@@ -534,7 +536,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/athen_hero_pericles_1.jsonauraName
 msgid "Periclean Building Program"
-msgstr "페리클레스의 건설 계획"
+msgstr "페리클레안 or 페라클린 or 페라클란 건설 계획"
 
 #: simulation/data/auras/units/heroes/athen_hero_pericles_1.jsonauraDescription
 msgid "+15% build and repair rate for workers."
@@ -560,15 +562,15 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/athen_hero_themistocles_2.jsonauraName
 msgid "Naval Architect"
-msgstr "조선 기사"
+msgstr "군함 설계자"
 
 #: simulation/data/auras/units/heroes/athen_hero_themistocles_2.jsonauraDescription
 msgid "-20% build time and -50% metal cost for ships during his lifespan."
-msgstr ""
+msgstr "선박 수명이 다할 때까지 건조 시간이 -20% 줄어들고, 금속 소모가 -50% 감소합니다.."
 
 #: simulation/data/auras/units/heroes/brit_hero_boudicca.jsonauraName
 msgid "Champion Army"
-msgstr "챔피언 육군"
+msgstr "대표전사 육군"
 
 #: simulation/data/auras/units/heroes/brit_hero_boudicca.jsonauraDescription
 msgid "+20% attack, +2 capture and +10% speed for champion units."
@@ -576,7 +578,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/brit_hero_caratacos.jsonauraName
 msgid "Guerrilla Chief"
-msgstr "게릴라 지도자"
+msgstr "게릴라 우두머리"
 
 #: simulation/data/auras/units/heroes/brit_hero_caratacos.jsonauraDescription
 msgid "All soldiers and siege engines +15% speed and +1 armor."
@@ -584,7 +586,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/brit_hero_cunobelin.jsonauraName
 msgid "Britannorum Rex"
-msgstr "브리탄노룸 렉스(브리탄 왕)"
+msgstr "브리타니아 국왕or 브리탄노룸 렉스(브리탄 왕)"
 
 #: simulation/data/auras/units/heroes/brit_hero_cunobelin.jsonauraDescription
 #: simulation/data/auras/units/heroes/maur_hero_chanakya_2.jsonauraDescription
@@ -597,11 +599,11 @@ msgstr "번개 장군"
 
 #: simulation/data/auras/units/heroes/cart_hero_hamilcar_1.jsonauraDescription
 msgid "Nearby soldiers and siege engines +15% speed."
-msgstr ""
+msgstr "인근의 병시 및 공성 무기의 속도가 +15% 증가합니다.."
 
 #: simulation/data/auras/units/heroes/cart_hero_hamilcar_2.jsonauraName
 msgid "Subduer of Mercenaries"
-msgstr ""
+msgstr "용병 정복자"
 
 #: simulation/data/auras/units/heroes/cart_hero_hamilcar_2.jsonauraDescription
 msgid "-20% attack for enemy mercenaries."
@@ -614,7 +616,7 @@ msgstr "전술가"
 #: simulation/data/auras/units/heroes/cart_hero_hannibal.jsonauraDescription
 msgid ""
 "+20% attack and +1 capture for nearby allied soldiers and siege engines."
-msgstr ""
+msgstr "인근의 동맹국과 공성 무기에 대한 공격력이 +20% 증가하고 점령이 +1 증가합니다."
 
 #: simulation/data/auras/units/heroes/cart_hero_maharbal.jsonauraName
 msgid "Cavalry Commander"
@@ -638,7 +640,7 @@ msgstr "켈트 군 지도자"
 
 #: simulation/data/auras/units/heroes/gaul_hero_vercingetorix.jsonauraDescription
 msgid "+20% attack and +1 capture for soldiers and siege engines."
-msgstr ""
+msgstr "병사와 공성 무기의 공격력이 +20% 증가하고, 점령이 +1 증가합니다."
 
 #: simulation/data/auras/units/heroes/gaul_hero_viridomarus.jsonauraName
 msgid "Preparation for War"
@@ -646,7 +648,7 @@ msgstr "전쟁 준비"
 
 #: simulation/data/auras/units/heroes/gaul_hero_viridomarus.jsonauraDescription
 msgid "Gathering rates increased with +15% during his lifetime."
-msgstr "그의 생전 채집 효율이 15 %입니다."
+msgstr "그의 생애 동안 채집 비율이 +15% 증가했습니다.(과거형??)"
 
 #: simulation/data/auras/units/heroes/hero_garrison.jsonauraName
 msgid "Inspired Defense"
@@ -690,7 +692,7 @@ msgstr "군인의 이동속도가 20% 증가합니다."
 
 #: simulation/data/auras/units/heroes/iber_hero_viriato_2.jsonauraName
 msgid "Swag"
-msgstr "장물"
+msgstr "약탈품"
 
 #: simulation/data/auras/units/heroes/iber_hero_viriato_2.jsonauraDescription
 msgid ""
@@ -700,7 +702,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/kush_hero_amanirenas.jsonauraName
 msgid "Warrior Queen"
-msgstr ""
+msgstr "전사 여왕"
 
 #: simulation/data/auras/units/heroes/kush_hero_amanirenas.jsonauraDescription
 #: simulation/data/auras/units/heroes/mace_hero_philip.jsonauraDescription
@@ -709,7 +711,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/kush_hero_arakamani_1.jsonauraName
 msgid "Defier of Tradition"
-msgstr ""
+msgstr "전승의 도전자"
 
 #: simulation/data/auras/units/heroes/kush_hero_arakamani_1.jsonauraDescription
 msgid "Temple of Amun and its Napatan Temple Guards +20% cost and build time."
@@ -717,7 +719,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/kush_hero_arakamani_2.jsonauraName
 msgid "Follower of Apedemak"
-msgstr ""
+msgstr "사자 머리의 전사 신 추종자"
 
 #: simulation/data/auras/units/heroes/kush_hero_arakamani_2.jsonauraDescription
 msgid "Apedemak temples and its Meroe Temple Guard -20% cost and build time."
@@ -733,7 +735,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/kush_hero_nastasen_1.jsonauraName
 msgid "Savior of Kush"
-msgstr ""
+msgstr "쿠시의 구세주"
 
 #: simulation/data/auras/units/heroes/kush_hero_nastasen_1.jsonauraDescription
 msgid ""
@@ -743,7 +745,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/kush_hero_nastasen_2.jsonauraName
 msgid "Gift of Warships"
-msgstr ""
+msgstr "군함의 재주"
 
 #: simulation/data/auras/units/heroes/kush_hero_nastasen_2.jsonauraDescription
 msgid ""
@@ -769,7 +771,7 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/mace_hero_craterus.jsonauraName
 msgid "Taxiarchès"
-msgstr ""
+msgstr "타시아르체스or장교??"
 
 #: simulation/data/auras/units/heroes/mace_hero_craterus.jsonauraDescription
 msgid "+20% attack and +20% capture for pikemen."
@@ -781,7 +783,7 @@ msgstr "포위군"
 
 #: simulation/data/auras/units/heroes/mace_hero_demetrius.jsonauraDescription
 msgid "+20% attack, +10% range and +1 armor for siege engines."
-msgstr ""
+msgstr "공성 무기의 공격력이 +20%, 범위가 +10%, 방어력이 +1 증가합니다."
 
 #: simulation/data/auras/units/heroes/mace_hero_philip.jsonauraName
 msgid "Rise of Macedon"
@@ -789,7 +791,7 @@ msgstr "마케도니아의 부활"
 
 #: simulation/data/auras/units/heroes/mace_hero_pyrrhus.jsonauraName
 msgid "Pyrrhic Victory"
-msgstr "피로스왕의 승리"
+msgstr "피로스의 승리or 희생을 많이 치른 숭리??"
 
 #: simulation/data/auras/units/heroes/mace_hero_pyrrhus.jsonauraDescription
 msgid ""
@@ -802,11 +804,11 @@ msgstr "불교"
 
 #: simulation/data/auras/units/heroes/maur_hero_ashoka.jsonauraDescription
 msgid "Temples and temple technologies -50% cost, in resources and time."
-msgstr ""
+msgstr "사원과 사원 기술 비용이 자원과 시간에서 -50% 감소합니다."
 
 #: simulation/data/auras/units/heroes/maur_hero_chanakya_1.jsonauraName
 msgid "Teacher"
-msgstr "선생"
+msgstr "스승"
 
 #: simulation/data/auras/units/heroes/maur_hero_chanakya_1.jsonauraDescription
 msgid ""
@@ -816,19 +818,19 @@ msgstr ""
 
 #: simulation/data/auras/units/heroes/maur_hero_chanakya_2.jsonauraName
 msgid "Regeneration"
-msgstr "회생"
+msgstr "재건"
 
 #: simulation/data/auras/units/heroes/pers_hero_cyrus.jsonauraName
 msgid "Forefront Leader"
-msgstr "선두 지도자"
+msgstr "선두 지도자or 주자"
 
 #: simulation/data/auras/units/heroes/pers_hero_cyrus.jsonauraDescription
 msgid "+20% attack and +1 capture for cavalry soldiers."
-msgstr ""
+msgstr "기병 병사들의 공격력이 +20% 증가하고, 점령력이 +1 증가합니다."
 
 #: simulation/data/auras/units/heroes/pers_hero_darius.jsonauraName
 msgid "Leadership"
-msgstr "지도력"
+msgstr "통솔력"
 
 #: simulation/data/auras/units/heroes/pers_hero_darius.jsonauraDescription
 msgid "+15% movement speed for all soldiers, siege engines and traders."
@@ -848,12 +850,12 @@ msgstr "애국자"
 
 #: simulation/data/auras/units/heroes/ptol_hero_cleopatra_1.jsonauraDescription
 msgid "-20% attack repeat time for soldiers and siege engines."
-msgstr ""
+msgstr "병사 및 공성 무기의 공격 반복 시간이 -20% 감소합니다."
 
 #: simulation/data/auras/units/heroes/ptol_hero_cleopatra_2.jsonauraName
 #: simulation/data/auras/units/heroes/ptol_hero_cleopatra_3.jsonauraName
 msgid "Consort"
-msgstr "배우자"
+msgstr "배우자or연합??"
 
 #: simulation/data/auras/units/heroes/ptol_hero_cleopatra_2.jsonauraDescription
 msgid "+10% health for allied heroes."
@@ -865,15 +867,15 @@ msgstr "적 영웅에게 체력을 10% 감소시킵니다."
 
 #: simulation/data/auras/units/heroes/ptol_hero_ptolemy_IV.jsonauraName
 msgid "Raphia"
-msgstr ""
+msgstr "라피아"
 
 #: simulation/data/auras/units/heroes/ptol_hero_ptolemy_IV.jsonauraDescription
 msgid "Pikemen have 40% greater health during his lifetime."
-msgstr ""
+msgstr "창병은 그의 일생 동안 40% 더 큰 체력을 가집니다."
 
 #: simulation/data/auras/units/heroes/ptol_hero_ptolemy_I_1.jsonauraName
 msgid "Patron of Construction"
-msgstr ""
+msgstr "건축의 후원자"
 
 #: simulation/data/auras/units/heroes/ptol_hero_ptolemy_I_1.jsonauraDescription
 msgid "+10% build and repair rate for workers."
@@ -881,11 +883,11 @@ msgstr "노동자의 건설과 수리 속도가 +10% 증가합니다."
 
 #: simulation/data/auras/units/heroes/ptol_hero_ptolemy_I_2.jsonauraName
 msgid "Mercenary Patron"
-msgstr "용병 수호"
+msgstr "용병 수호or후원자"
 
 #: simulation/data/auras/units/heroes/ptol_hero_ptolemy_I_2.jsonauraDescription
 msgid "Mercenaries cost -35% resources during his lifetime."
-msgstr ""
+msgstr "용병은 그의 일생 동안 -자원을 35% 소비합니다."
 
 #: simulation/data/auras/units/heroes/rome_hero_marcellus_1.jsonauraName
 #: simulation/data/auras/units/heroes/rome_hero_marcellus_2.jsonauraName
@@ -894,7 +896,7 @@ msgstr "로마의 검"
 
 #: simulation/data/auras/units/heroes/rome_hero_marcellus_1.jsonauraDescription
 msgid "+15% attack for cavalry."
-msgstr "기병의 공격력을 +15% 증가"
+msgstr "기병의 공격력이 +15% 증가합니다."
 
 #: simulation/data/auras/units/heroes/rome_hero_marcellus_2.jsonauraDescription
 msgid "-10% attack for enemy infantry."
@@ -910,19 +912,19 @@ msgstr "모든 유닛과 건물의 방어력을 +1 증가시킵니다."
 
 #: simulation/data/auras/units/heroes/rome_hero_scipio.jsonauraName
 msgid "Triumph"
-msgstr "대성공"
+msgstr "대성공or환희"
 
 #: simulation/data/auras/units/heroes/rome_hero_scipio.jsonauraDescription
 msgid "+20% attack and +2 capture for soldiers and siege engines."
-msgstr ""
+msgstr "병사 및 공성 무기의 공격력이 +20%, 점령이 +2 증가합니다."
 
 #: simulation/data/auras/units/heroes/sele_hero_antiochus_great.jsonauraName
 msgid "Ilarchès"
-msgstr ""
+msgstr "이라르체스or기병 장교"
 
 #: simulation/data/auras/units/heroes/sele_hero_antiochus_great.jsonauraDescription
 msgid "Nearby cavalry gains +2 levels of all armor types."
-msgstr ""
+msgstr "인근 기병 부대는 모든 갑옷 종류가 +2 레벨 증가합니다."
 
 #: simulation/data/auras/units/heroes/sele_hero_antiochus_righteous.jsonauraName
 msgid "Renowned Conqueror"
@@ -930,19 +932,19 @@ msgstr "유명한 정복자"
 
 #: simulation/data/auras/units/heroes/sele_hero_antiochus_righteous.jsonauraDescription
 msgid "-20% health for enemy buildings, siege engines and ships."
-msgstr ""
+msgstr "적의 건물, 공성 무기, 함선의 체력이 -20%가 감소합니다."
 
 #: simulation/data/auras/units/heroes/sele_hero_seleucus_victor.jsonauraName
 msgid "Zooiarchos"
-msgstr ""
+msgstr "주이아르초스-코끼리 사령관"
 
 #: simulation/data/auras/units/heroes/sele_hero_seleucus_victor.jsonauraDescription
 msgid "+20% attack and movement speed for war elephants."
-msgstr ""
+msgstr "전쟁 코끼리의 공격력과 이동 속도가 +20% 증가합니다."
 
 #: simulation/data/auras/units/heroes/spart_hero_brasidas.jsonauraName
 msgid "Helot Reforms"
-msgstr "헤이로타이 개혁"
+msgstr "헤이로타이or 헤롯or 노예 개혁"
 
 #: simulation/data/auras/units/heroes/spart_hero_brasidas.jsonauraDescription
 msgid "+25% attack and +1 armor for javelin infantry citizen-soldiers."
@@ -950,8 +952,8 @@ msgstr "자블린 보병시민의 공격력이 +25, 방어력이 +1 증가합니
 
 #: simulation/data/auras/units/heroes/spart_hero_leonidas.jsonauraName
 msgid "Last Stand"
-msgstr "최후의 항전"
+msgstr "최후의 항전or보루"
 
 #: simulation/data/auras/units/heroes/spart_hero_leonidas.jsonauraDescription
 msgid "+25% attack and +1 capture for spear soldiers."
-msgstr ""
+msgstr "창병들에게 공격력이 +25% 증가하고, 점령이 +1 증가합니다."

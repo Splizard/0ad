@@ -7,14 +7,15 @@
 # Catalanoic <catalanoic@gmail.com>, 2015-2016,2018
 # Guillem Poy <guplem@gmail.com>, 2015
 # Klan Ruiz Martin <rodamit@gmail.com>, 2017
+# Marc Masip Compte <marcmc421@gmail.com>, 2019
 # Marc Miró <mmirosanchez@gmail.com>, 2017
 # Haommin <tfs.msimangu@gmail.com>, 2014-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-01-04 09:44+0100\n"
-"PO-Revision-Date: 2019-01-04 14:32+0000\n"
-"Last-Translator: Haommin <tfs.msimangu@gmail.com>\n"
+"POT-Creation-Date: 2019-04-01 10:10+0200\n"
+"PO-Revision-Date: 2019-04-01 15:23+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/wildfire-games/0ad/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,9 +23,18 @@ msgstr ""
 "Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: simulation/templates/template_gaia.xml:6
+#: simulation/templates/template_gaia.xml:7
 msgid "Gaia"
 msgstr "Natura"
+
+#: simulation/templates/template_gaia_fish.xml:8
+#: simulation/templates/gaia/fauna_fish.xml:4
+msgid "Fish"
+msgstr "peix"
+
+#: simulation/templates/template_gaia_fish.xml:10
+msgid "Gather food from this bountiful oceanic resource."
+msgstr "Recol·lecteu menjar d'aquest abundant recurs oceànic."
 
 #: simulation/templates/template_gaia_flora_bush.xml:8
 msgid "Bush"
@@ -106,13 +116,21 @@ msgstr "tresor"
 msgid "A treasure that can be quickly gathered."
 msgstr "Un tresor que es pot recollir ràpidament."
 
-#: simulation/templates/template_structure.xml:60
+#: simulation/templates/template_structure.xml:61
 msgid "Structure"
 msgstr "Estructura"
 
-#: simulation/templates/template_unit.xml:41
+#: simulation/templates/template_unit.xml:42
 msgid "Unit"
 msgstr "Unitat"
+
+#: simulation/templates/template_wallset.xml:11
+msgid "City Wall"
+msgstr "Muralla de la ciutat"
+
+#: simulation/templates/template_wallset.xml:12
+msgid "Wall off your town for a stout defense."
+msgstr "Emmuralleu la ciutat per defensar-la."
 
 #: simulation/templates/campaigns/army_mace_hero_alexander.xml:27
 msgid "Army of Alexander the Great."
@@ -185,15 +203,15 @@ msgstr "Llop àrtic"
 #: simulation/templates/gaia/fauna_arctic_wolf.xml:5
 #: simulation/templates/gaia/fauna_wolf.xml:5
 msgid "Canis lupus"
-msgstr ""
+msgstr "Llop"
 
 #: simulation/templates/gaia/fauna_bear.xml:17
 msgid "Brown Bear"
-msgstr ""
+msgstr "Ós Bru"
 
 #: simulation/templates/gaia/fauna_bear.xml:18
 msgid "Ursus arctos"
-msgstr ""
+msgstr "Ós bru"
 
 #: simulation/templates/gaia/fauna_boar.xml:17
 msgid "Wild Boar"
@@ -205,7 +223,7 @@ msgstr "Porc senglar"
 
 #: simulation/templates/gaia/fauna_camel.xml:8
 msgid "Dromedary"
-msgstr ""
+msgstr "Dromedari"
 
 #: simulation/templates/gaia/fauna_camel.xml:9
 msgid "Camelus dromedarius"
@@ -229,7 +247,7 @@ msgstr "Crocodylus niloticus"
 
 #: simulation/templates/gaia/fauna_deer.xml:8
 msgid "Red Deer"
-msgstr ""
+msgstr "Cérvol"
 
 #: simulation/templates/gaia/fauna_deer.xml:9
 msgid "Cervus elaphus"
@@ -237,7 +255,7 @@ msgstr ""
 
 #: simulation/templates/gaia/fauna_donkey.xml:4
 msgid "Donkey"
-msgstr ""
+msgstr "Ruc"
 
 #: simulation/templates/gaia/fauna_donkey.xml:5
 msgid "Equus africanus asinus"
@@ -277,13 +295,6 @@ msgstr ""
 msgid "Loxodonta cyclotis"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_fish.xml:4
-#: simulation/templates/gaia/fauna_fish.xml:5
-#: simulation/templates/gaia/fauna_fish_tilapia.xml:5
-#: simulation/templates/gaia/fauna_fish_tuna.xml:5
-msgid "Fish"
-msgstr "peix"
-
 #: simulation/templates/gaia/fauna_fish_tilapia.xml:4
 msgid "Tilapia"
 msgstr ""
@@ -318,7 +329,7 @@ msgstr ""
 
 #: simulation/templates/gaia/fauna_giraffe.xml:11
 msgid "Giraffe"
-msgstr ""
+msgstr "Girafa"
 
 #: simulation/templates/gaia/fauna_giraffe.xml:12
 #: simulation/templates/gaia/fauna_giraffe_infant.xml:9
@@ -394,6 +405,10 @@ msgstr ""
 msgid "Flaming Pig"
 msgstr "Porcs incendiaris"
 
+#: simulation/templates/gaia/fauna_piglet.xml:8
+msgid "Piglet"
+msgstr "Garrí"
+
 #: simulation/templates/gaia/fauna_pony.xml:4
 msgid "Pony"
 msgstr "Poni"
@@ -408,7 +423,7 @@ msgstr ""
 
 #: simulation/templates/gaia/fauna_rhino.xml:17
 msgid "White Rhinoceros"
-msgstr ""
+msgstr "Rinoceront Blanc"
 
 #: simulation/templates/gaia/fauna_rhino.xml:18
 msgid "Ceratotherium simum"
@@ -416,7 +431,7 @@ msgstr ""
 
 #: simulation/templates/gaia/fauna_shark.xml:12
 msgid "Great White Shark"
-msgstr ""
+msgstr "Gran Tauró Blanc "
 
 #: simulation/templates/gaia/fauna_shark.xml:13
 msgid "Carcharodon carcharias"
@@ -480,7 +495,7 @@ msgstr "Gos llop"
 
 #: simulation/templates/gaia/fauna_zebra.xml:8
 msgid "Common Zebra"
-msgstr ""
+msgstr "Zebra Comuna"
 
 #: simulation/templates/gaia/fauna_zebra.xml:9
 msgid "Equus quagga"
@@ -530,13 +545,48 @@ msgstr "Pi blanc"
 msgid "Apple Tree"
 msgstr "Pomera"
 
+#: simulation/templates/gaia/flora_tree_bamboo.xml:4
+#: simulation/templates/gaia/flora_tree_bamboo_single.xml:4
+msgid "Bamboo"
+msgstr "Bambú"
+
+#: simulation/templates/gaia/flora_tree_banyan.xml:8
+msgid "Banyan"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_baobab.xml:8
+#: simulation/templates/gaia/flora_tree_baobab_3_mature.xml:8
 msgid "Baobab"
 msgstr "Baobab"
+
+#: simulation/templates/gaia/flora_tree_baobab_1_sapling.xml:4
+msgid "Baobab Sapling"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_baobab_2_young.xml:4
+msgid "Young Baobab"
+msgstr "Baobab jove"
+
+#: simulation/templates/gaia/flora_tree_baobab_4_dead.xml:8
+msgid "Dead Baobab"
+msgstr "Baobab mort"
 
 #: simulation/templates/gaia/flora_tree_carob.xml:4
 msgid "Carob Tree"
 msgstr "Garrofer"
+
+#: simulation/templates/gaia/flora_tree_cedar_atlas_1_sapling.xml:4
+msgid "Atlas Cedar Sapling"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_cedar_atlas_2_young.xml:4
+#: simulation/templates/gaia/flora_tree_cedar_atlas_3_mature.xml:4
+msgid "Atlas Cedar"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_cedar_atlas_4_dead.xml:4
+msgid "Dead Atlas Cedar"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_cretan_date_palm_patch.xml:8
 #: simulation/templates/gaia/flora_tree_cretan_date_palm_short.xml:4
@@ -551,6 +601,10 @@ msgstr "Xiprer"
 #: simulation/templates/gaia/flora_tree_date_palm.xml:4
 msgid "Date Palm"
 msgstr "Palmera datilera"
+
+#: simulation/templates/gaia/flora_tree_date_palm_fruit.xml:4
+msgid "Fruiting Date Palm"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_dead.xml:4
 msgid "Dead Tree"
@@ -568,6 +622,14 @@ msgstr "Figuera"
 #: simulation/templates/gaia/flora_tree_fig.xml:8
 msgid "Gather figs for Food."
 msgstr "S'hi poden collir figues per menjar."
+
+#: simulation/templates/gaia/flora_tree_fir_sapling.xml:4
+msgid "Fir Sapling"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_mangrove.xml:4
+msgid "Mangrove"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_medit_fan_palm.xml:4
 msgid "Mediterranean Fan Palm"
@@ -589,6 +651,14 @@ msgstr "Roure gran"
 msgid "Olive Tree"
 msgstr "Olivera"
 
+#: simulation/templates/gaia/flora_tree_palm_doum.xml:4
+msgid "Doum Palm"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_palm_palmyra.xml:4
+msgid "Palmyra Palm"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_palm_tropic.xml:4
 msgid "Palm"
 msgstr "Palmera"
@@ -601,6 +671,11 @@ msgstr "Palmera tropical"
 #: simulation/templates/gaia/flora_tree_pine_w.xml:4
 msgid "Pine Tree"
 msgstr "Pi"
+
+#: simulation/templates/gaia/flora_tree_pine_black.xml:4
+#: simulation/templates/gaia/flora_tree_pine_black_dead.xml:4
+msgid "Black Pine"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_poplar.xml:4
 msgid "Poplar Tree"
@@ -756,231 +831,231 @@ msgstr "Tresor de pedra"
 msgid "Wood Treasure"
 msgstr "Tresor de fusta"
 
-#: simulation/templates/other/bench.xml:20
+#: simulation/templates/other/bench.xml:19
 msgid "Bench"
 msgstr "Banc"
 
-#: simulation/templates/other/bench.xml:21
+#: simulation/templates/other/bench.xml:20
 msgid "Wooden Bench"
 msgstr "Banc de fusta"
 
+#: simulation/templates/other/bridge_hele.xml:15
 #: simulation/templates/other/bridge_hele.xml:16
-#: simulation/templates/other/bridge_hele.xml:17
 msgid "Bridge"
 msgstr "Pont"
 
+#: simulation/templates/other/bridge_wooden.xml:15
 #: simulation/templates/other/bridge_wooden.xml:16
-#: simulation/templates/other/bridge_wooden.xml:17
 msgid "Wooden Bridge"
 msgstr "Pont de fusta"
 
-#: simulation/templates/other/celt_hut.xml:22
+#: simulation/templates/other/celt_hut.xml:21
 msgid "Hut"
 msgstr "Barraca"
 
-#: simulation/templates/other/celt_longhouse.xml:22
+#: simulation/templates/other/celt_longhouse.xml:21
 msgid "Longhouse"
 msgstr "Casa comunal"
 
-#: simulation/templates/other/column_doric.xml:20
-#: simulation/templates/other/column_doric_fallen.xml:20
-#: simulation/templates/other/column_doric_fallen_b.xml:20
+#: simulation/templates/other/column_doric.xml:19
+#: simulation/templates/other/column_doric_fallen.xml:19
+#: simulation/templates/other/column_doric_fallen_b.xml:19
 msgid "Column"
 msgstr "Columna"
 
-#: simulation/templates/other/column_doric.xml:21
+#: simulation/templates/other/column_doric.xml:20
 msgid "Doric Column"
 msgstr "Columna dòrica"
 
-#: simulation/templates/other/column_doric_fallen.xml:21
-#: simulation/templates/other/column_doric_fallen_b.xml:21
+#: simulation/templates/other/column_doric_fallen.xml:20
+#: simulation/templates/other/column_doric_fallen_b.xml:20
 msgid "Fallen Doric Column"
 msgstr "Columna dòrica caiguda"
 
-#: simulation/templates/other/desert_trading_post.xml:15
+#: simulation/templates/other/desert_trading_post.xml:14
 msgid "Desert Trading Post"
 msgstr "Àrea Comercial del Desert"
 
-#: simulation/templates/other/desert_trading_post.xml:16
+#: simulation/templates/other/desert_trading_post.xml:15
 msgid "Ardatašta"
 msgstr "Ardatašta"
 
-#: simulation/templates/other/fence_long.xml:21
-#: simulation/templates/other/fence_short.xml:21
+#: simulation/templates/other/fence_long.xml:20
+#: simulation/templates/other/fence_short.xml:20
 msgid "Fence"
 msgstr "Tanca"
 
-#: simulation/templates/other/fence_long.xml:22
+#: simulation/templates/other/fence_long.xml:21
 msgid "Long Wooden Fence"
 msgstr "Tanca llarga de fusta"
 
-#: simulation/templates/other/fence_short.xml:22
+#: simulation/templates/other/fence_short.xml:21
 msgid "Short Wooden Fence"
 msgstr "Tanca curta de fusta"
 
+#: simulation/templates/other/fence_stone.xml:20
 #: simulation/templates/other/fence_stone.xml:21
-#: simulation/templates/other/fence_stone.xml:22
 msgid "Stone Fence"
 msgstr "Tanca de pedra"
 
-#: simulation/templates/other/generic_field.xml:9
+#: simulation/templates/other/generic_field.xml:8
 msgid "Wheat Field"
 msgstr "Camp de blat"
 
-#: simulation/templates/other/hellenic_epic_temple.xml:24
+#: simulation/templates/other/hellenic_epic_temple.xml:23
 msgid "Epic Temple"
 msgstr "Temple èpic"
 
-#: simulation/templates/other/hellenic_epic_temple.xml:25
+#: simulation/templates/other/hellenic_epic_temple.xml:24
 msgid "Naos Parthenos"
 msgstr "Naos Parthenos"
 
-#: simulation/templates/other/hellenic_epic_temple.xml:26
+#: simulation/templates/other/hellenic_epic_temple.xml:25
 msgid "Garrison units to heal them at a quick rate."
 msgstr "Refugieu-hi unitats per curar-les ràpidament."
 
-#: simulation/templates/other/hellenic_propylaea.xml:25
+#: simulation/templates/other/hellenic_propylaea.xml:24
 msgid "Portico"
 msgstr "Pòrtic"
 
-#: simulation/templates/other/hellenic_propylaea.xml:26
+#: simulation/templates/other/hellenic_propylaea.xml:25
 msgid "Propylaea"
 msgstr "Propileu"
 
-#: simulation/templates/other/hellenic_stoa.xml:25
+#: simulation/templates/other/hellenic_stoa.xml:24
 msgid "Stoa"
 msgstr "Stoà"
 
-#: simulation/templates/other/hellenic_stoa.xml:26
+#: simulation/templates/other/hellenic_stoa.xml:25
 msgid "Hellenic Stoa"
 msgstr "Stoà hel·lènica"
 
-#: simulation/templates/other/obelisk.xml:20
+#: simulation/templates/other/obelisk.xml:19
 msgid "Obelisk"
 msgstr "Obelisc"
 
-#: simulation/templates/other/obelisk.xml:21
+#: simulation/templates/other/obelisk.xml:20
 msgid "Egyptian Obelisk"
 msgstr "Obelisc egipci"
 
-#: simulation/templates/other/palisades_angle_spike.xml:15
+#: simulation/templates/other/palisades_angle_spike.xml:14
 msgid "Palisade Angle Spike"
 msgstr "Punxa de l'angle de l'estacada"
 
-#: simulation/templates/other/palisades_angle_spike.xml:16
+#: simulation/templates/other/palisades_angle_spike.xml:15
 msgid "Big Spike"
 msgstr "Gran punxa"
 
-#: simulation/templates/other/palisades_rocks_curve.xml:15
+#: simulation/templates/other/palisades_rocks_curve.xml:14
 msgid "Palisade Curve"
 msgstr "Estacada corba"
 
-#: simulation/templates/other/palisades_rocks_curve.xml:16
+#: simulation/templates/other/palisades_rocks_curve.xml:15
 msgid "Wooden Wall Corner"
 msgstr "Cantonada de muralla de fusta"
 
-#: simulation/templates/other/palisades_rocks_end.xml:15
+#: simulation/templates/other/palisades_rocks_end.xml:14
 msgid "Palisade End"
 msgstr "Final d'estacada"
 
-#: simulation/templates/other/palisades_rocks_end.xml:16
+#: simulation/templates/other/palisades_rocks_end.xml:15
 msgid "Wooden Wall End"
 msgstr "Final de tanca de fusta"
 
-#: simulation/templates/other/palisades_rocks_fort.xml:6
+#: simulation/templates/other/palisades_rocks_fort.xml:5
 msgid "Palisade Fort"
 msgstr "Fort d'estacada"
 
-#: simulation/templates/other/palisades_rocks_fort.xml:7
+#: simulation/templates/other/palisades_rocks_fort.xml:6
 msgid "Wooden Tower"
 msgstr "Torre de fusta"
 
-#: simulation/templates/other/palisades_rocks_gate.xml:18
+#: simulation/templates/other/palisades_rocks_gate.xml:17
 msgid "Palisade Gate"
 msgstr "Porta d'estacada"
 
-#: simulation/templates/other/palisades_rocks_gate.xml:19
+#: simulation/templates/other/palisades_rocks_gate.xml:18
 msgid "Wooden Gate"
 msgstr "Porta de fusta"
+
+#: simulation/templates/other/palisades_rocks_long.xml:26
+#: simulation/templates/other/palisades_rocks_medium.xml:26
+#: simulation/templates/other/palisades_rocks_short.xml:25
+#: simulation/templates/other/palisades_rocks_straight.xml:14
+#: simulation/templates/other/palisades_rocks_tower.xml:24
+#: simulation/templates/other/wallset_palisade.xml:5
+msgid "Palisade"
+msgstr "Estacada"
 
 #: simulation/templates/other/palisades_rocks_long.xml:27
 #: simulation/templates/other/palisades_rocks_medium.xml:27
 #: simulation/templates/other/palisades_rocks_short.xml:26
 #: simulation/templates/other/palisades_rocks_straight.xml:15
 #: simulation/templates/other/palisades_rocks_tower.xml:25
-#: simulation/templates/other/wallset_palisade.xml:6
-msgid "Palisade"
-msgstr "Estacada"
-
-#: simulation/templates/other/palisades_rocks_long.xml:28
-#: simulation/templates/other/palisades_rocks_medium.xml:28
-#: simulation/templates/other/palisades_rocks_short.xml:27
-#: simulation/templates/other/palisades_rocks_straight.xml:16
-#: simulation/templates/other/palisades_rocks_tower.xml:26
-#: simulation/templates/other/wallset_palisade.xml:5
+#: simulation/templates/other/wallset_palisade.xml:4
 msgid "Wooden Wall"
 msgstr "Muralla de fusta"
 
-#: simulation/templates/other/palisades_rocks_outpost.xml:15
+#: simulation/templates/other/palisades_rocks_outpost.xml:14
 msgid "Outpost"
 msgstr "Destacament"
 
-#: simulation/templates/other/palisades_rocks_outpost.xml:16
-#: simulation/templates/other/palisades_rocks_watchtower.xml:16
+#: simulation/templates/other/palisades_rocks_outpost.xml:15
+#: simulation/templates/other/palisades_rocks_watchtower.xml:15
 msgid "Wooden Watch Tower"
 msgstr "Talaia de fusta"
 
-#: simulation/templates/other/palisades_rocks_watchtower.xml:15
+#: simulation/templates/other/palisades_rocks_watchtower.xml:14
 msgid "Watchtower"
 msgstr "Talaia"
 
-#: simulation/templates/other/palisades_small_spikes.xml:15
+#: simulation/templates/other/palisades_small_spikes.xml:14
 msgid "Spikes Small"
 msgstr "Punxes petites"
 
-#: simulation/templates/other/palisades_small_spikes.xml:16
+#: simulation/templates/other/palisades_small_spikes.xml:15
 msgid "Small Spikes"
 msgstr "Punxes petites"
 
-#: simulation/templates/other/palisades_tall_spikes.xml:15
+#: simulation/templates/other/palisades_tall_spikes.xml:14
 msgid "Spikes Tall"
 msgstr "Punxes altes"
 
-#: simulation/templates/other/palisades_tall_spikes.xml:16
+#: simulation/templates/other/palisades_tall_spikes.xml:15
 msgid "Tall Spikes"
 msgstr "Punxes altes"
 
-#: simulation/templates/other/sele_colonnade.xml:20
+#: simulation/templates/other/sele_colonnade.xml:19
 msgid "Colonnade"
 msgstr "Columnata"
 
-#: simulation/templates/other/sele_colonnade.xml:21
+#: simulation/templates/other/sele_colonnade.xml:20
 msgid "Corinthian Colonnade"
 msgstr "Columnata coríntia"
 
-#: simulation/templates/other/stall_big.xml:12
+#: simulation/templates/other/stall_big.xml:11
 msgid "Big stall"
 msgstr "Parada gran"
 
-#: simulation/templates/other/stall_med.xml:12
+#: simulation/templates/other/stall_med.xml:11
 msgid "Medium stall"
 msgstr "Parada mitjana"
 
-#: simulation/templates/other/stall_small_a.xml:12
-#: simulation/templates/other/stall_small_b.xml:12
+#: simulation/templates/other/stall_small_a.xml:11
+#: simulation/templates/other/stall_small_b.xml:11
 msgid "Small stall"
 msgstr "Parada petita"
 
-#: simulation/templates/other/table_rectangle.xml:20
-#: simulation/templates/other/table_square.xml:20
+#: simulation/templates/other/table_rectangle.xml:19
+#: simulation/templates/other/table_square.xml:19
 msgid "Table"
 msgstr "Taula"
 
-#: simulation/templates/other/table_rectangle.xml:21
+#: simulation/templates/other/table_rectangle.xml:20
 msgid "Rectangle Table"
 msgstr "Taula rectangular"
 
-#: simulation/templates/other/table_square.xml:21
+#: simulation/templates/other/table_square.xml:20
 msgid "Square Table"
 msgstr "Taula quadrada"
 
@@ -1000,13 +1075,22 @@ msgstr "Es converteix en una casa de +5 de límit de població en les civilitzac
 msgid "Spy"
 msgstr "Espia"
 
+#: simulation/templates/special/formations/anti_cavalry.xml:6
+#: simulation/templates/special/formations/testudo.xml:6
+msgid "At least 16 melee infantry units required."
+msgstr "Es requereixen almenys 16 unitats d'infanteria cos a cos."
+
+#: simulation/templates/special/formations/anti_cavalry.xml:7
+msgid "Anti Cavalry"
+msgstr "Anti Cavalleria"
+
 #: simulation/templates/special/formations/battle_line.xml:5
 msgid "Battle Line"
 msgstr "En línia"
 
 #: simulation/templates/special/formations/box.xml:6
-msgid "4 units required"
-msgstr "Calen 4 unitats"
+msgid "At least 4 units required."
+msgstr "Es requereixen almenys 4 unitats."
 
 #: simulation/templates/special/formations/box.xml:7
 msgid "Box"
@@ -1021,8 +1105,8 @@ msgid "Column Open"
 msgstr "Columna oberta"
 
 #: simulation/templates/special/formations/flank.xml:6
-msgid "8 units required"
-msgstr "Calen 8 unitats"
+msgid "At least 8 units required."
+msgstr "Es requereixen almenys 8 unitats."
 
 #: simulation/templates/special/formations/flank.xml:7
 msgid "Flank"
@@ -1041,8 +1125,8 @@ msgid "None"
 msgstr "Cap"
 
 #: simulation/templates/special/formations/phalanx.xml:6
-msgid "10 hoplite infantry required"
-msgstr "Es necessiten 10 unitats d'hoplites"
+msgid "At least 10 hoplite infantry required."
+msgstr "Es requereixen almenys 10 infanteria hoplita."
 
 #: simulation/templates/special/formations/phalanx.xml:7
 msgid "Phalanx"
@@ -1053,7 +1137,7 @@ msgid "Scatter"
 msgstr "Dispersa"
 
 #: simulation/templates/special/formations/skirmish.xml:5
-msgid "Only ranged units allowed"
+msgid "Only ranged units allowed."
 msgstr "Només es permeten unitats a distància"
 
 #: simulation/templates/special/formations/skirmish.xml:6
@@ -1061,24 +1145,20 @@ msgid "Skirmish"
 msgstr "Formació oberta"
 
 #: simulation/templates/special/formations/syntagma.xml:6
-msgid "16 pike infantry units required"
-msgstr "Es necessiten 16 unitats de piquers"
+msgid "At least 16 pike infantry units required."
+msgstr "Es requereixen almenys 16 unitats d'infanteria piquera."
 
 #: simulation/templates/special/formations/syntagma.xml:8
 msgid "Syntagma"
 msgstr "Syntagma"
 
-#: simulation/templates/special/formations/testudo.xml:6
-msgid "9 melee infantry units required"
-msgstr "Calen 9 unitats d'infanteria cos a cos"
-
-#: simulation/templates/special/formations/testudo.xml:7
+#: simulation/templates/special/formations/testudo.xml:8
 msgid "Testudo"
 msgstr "Testudo"
 
 #: simulation/templates/special/formations/wedge.xml:6
-msgid "6 cavalry units required"
-msgstr "Es necessiten 6 unitats de cavalleria"
+msgid "At least 6 cavalry units required."
+msgstr "Es requereixen almenys 6 unitats de cavalleria."
 
 #: simulation/templates/special/formations/wedge.xml:7
 msgid "Wedge"

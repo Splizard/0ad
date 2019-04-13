@@ -1,16 +1,16 @@
 # Translation template for 0 A.D. — Empires Ascendant.
-# Copyright (C) 2018 Wildfire Games
+# Copyright (C) 2019 Wildfire Games
 # This file is distributed under the same license as the 0 A.D. — Empires Ascendant project.
 # 
 # Translators:
-# abuyop <abuyop@gmail.com>, 2014-2018
+# abuyop <abuyop@gmail.com>, 2014-2019
 # Mohd Shahril Bin Zainol Abidin <mohd_shahril_96@yahoo.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2018-12-31 09:44+0100\n"
-"PO-Revision-Date: 2018-12-31 16:05+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"POT-Creation-Date: 2019-03-29 09:45+0100\n"
+"PO-Revision-Date: 2019-03-29 14:23+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/wildfire-games/0ad/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -308,7 +308,7 @@ msgstr "Pilih kesukaran senario ini."
 
 #: gui/gamesetup/gamesetup.js:772
 msgid "Choose the civilization for this player"
-msgstr ""
+msgstr "Pilih tamadun untuk pemain ini"
 
 #: gui/gamesetup/gamesetup.js:839
 msgid "Hero Garrison"
@@ -357,8 +357,8 @@ msgid "Disable Treasures"
 msgstr "Lumpuhkan Khazanah"
 
 #: gui/gamesetup/gamesetup.js:900
-msgid "Disable all treasures on the map."
-msgstr "Sembunyikan semua khazanah di dalam peta."
+msgid "Do not add treasures to the map."
+msgstr ""
 
 #: gui/gamesetup/gamesetup.js:911
 msgid "Disable Spies"
@@ -404,8 +404,8 @@ msgstr "Togol jika permainan ini akan ditaraf untuk papan peneraju."
 
 #: gui/gamesetup/gamesetup.js:1000
 #, javascript-format
-msgid "Press %(hotkey)s to autocomplete playernames or settings."
-msgstr "Ketik %(hotkey)s untuk autolengkapkan nama pemain atau tetapan."
+msgid "Press %(hotkey)s to autocomplete player names or settings."
+msgstr ""
 
 #: gui/gamesetup/gamesetup.js:1008
 msgid "Return to the lobby."
@@ -456,82 +456,82 @@ msgstr "Guna %(hotkey)s untuk mengalih tab tetapan ke bawah."
 msgid "Use %(hotkey)s to move a settings tab up."
 msgstr "Guna %(hotkey)s untuk mengalih tab tetapan ke atas."
 
-#: gui/gamesetup/gamesetup.js:1748
+#: gui/gamesetup/gamesetup.js:1751
 msgctxt "map selection"
 msgid "Random"
 msgstr "Rawak"
 
-#: gui/gamesetup/gamesetup.js:1750
+#: gui/gamesetup/gamesetup.js:1753
 msgid "Pick any of the given maps at random."
 msgstr "Pilih mana-mana peta yang disediakan secara rawak."
 
-#: gui/gamesetup/gamesetup.js:1782
+#: gui/gamesetup/gamesetup.js:1785
 msgctxt "biome"
 msgid "Random"
 msgstr "Rawak"
 
-#: gui/gamesetup/gamesetup.js:1783
+#: gui/gamesetup/gamesetup.js:1786
 msgid "Pick a biome at random."
 msgstr "Pilih satu biome secara rawak."
 
-#: gui/gamesetup/gamesetup.js:2121
+#: gui/gamesetup/gamesetup.js:2124
 #, javascript-format
 msgctxt "Title for specific setting"
 msgid "%(setting)s:"
 msgstr "%(setting)s:"
 
-#: gui/gamesetup/gamesetup.js:2126
+#: gui/gamesetup/gamesetup.js:2129
 msgctxt "settings value"
 msgid "Unknown"
 msgstr "Tidak Diketahui"
 
-#: gui/gamesetup/gamesetup.js:2156
+#: gui/gamesetup/gamesetup.js:2159
 msgid "Yes"
 msgstr "Ya"
 
-#: gui/gamesetup/gamesetup.js:2156
+#: gui/gamesetup/gamesetup.js:2159
 msgid "No"
 msgstr "Tidak"
 
-#: gui/gamesetup/gamesetup.js:2163
+#: gui/gamesetup/gamesetup.js:2166
 #, javascript-format
 msgid "%(setting)s:"
 msgstr "%(setting)s:"
 
-#: gui/gamesetup/gamesetup.js:2251
+#: gui/gamesetup/gamesetup.js:2254
 #, javascript-format
 msgid "%(playerName)s %(romanNumber)s"
 msgstr "%(playerName)s %(romanNumber)s"
 
-#: gui/gamesetup/gamesetup.js:2456
+#: gui/gamesetup/gamesetup.js:2459
 #, javascript-format
 msgid "AI: %(ai)s"
 msgstr "AI: %(ai)s"
 
-#: gui/gamesetup/gamesetup.js:2464
+#: gui/gamesetup/gamesetup.js:2467
 msgid "Unassigned"
 msgstr "Tidak diumpuk"
 
-#: gui/gamesetup/gamesetup.js:2540
+#: gui/gamesetup/gamesetup.js:2543
 #, javascript-format
 msgid "== %(message)s"
 msgstr "== %(message)s"
 
-#: gui/gamesetup/gamesetup.js:2547
+#: gui/gamesetup/gamesetup.js:2550
 msgid "Unknown Player"
 msgstr "Pemain Tidak Diketahui"
 
-#: gui/gamesetup/gamesetup.js:2586
+#: gui/gamesetup/gamesetup.js:2589
 #, javascript-format
 msgid "%(time)s %(message)s"
 msgstr "%(time)s %(message)s"
 
-#: gui/gamesetup/gamesetup.js:2587
+#: gui/gamesetup/gamesetup.js:2590
 #, javascript-format
 msgid "\\[%(time)s]"
 msgstr "\\[%(time)s]"
 
-#: gui/gamesetup/gamesetup.js:2588
+#: gui/gamesetup/gamesetup.js:2591
 msgid "HH:mm"
 msgstr "HH:mm"
 
@@ -542,12 +542,12 @@ msgstr "Permainan %(name)s"
 
 #: gui/gamesetup_mp/gamesetup_mp.js:114
 msgid "Please enter a valid server name."
-msgstr ""
+msgstr "Sila masukkan nama pelayan yang sah."
 
 #: gui/gamesetup_mp/gamesetup_mp.js:121
 #, javascript-format
 msgid "Server port number must be between %(min)s and %(max)s."
-msgstr ""
+msgstr "Nombor port pelayan mesti diantara %(min)s hingga %(max)s."
 
 #: gui/gamesetup_mp/gamesetup_mp.js:138
 msgid "Connecting to server..."
@@ -572,12 +572,12 @@ msgstr "Nama permainan sudah digunakan."
 
 #: gui/gamesetup_mp/gamesetup_mp.js:308
 msgid "Failed to host via STUN."
-msgstr ""
+msgstr "Gagal mengehos melalui STUN."
 
 #: gui/gamesetup_mp/gamesetup_mp.js:322
 #, javascript-format
 msgid "Cannot host game: %(message)s."
-msgstr ""
+msgstr "Gagal mengehos permainan: %(message)s."
 
 #: gui/gamesetup_mp/gamesetup_mp.js:323 gui/gamesetup_mp/gamesetup_mp.js:352
 msgid "Error"
@@ -586,19 +586,26 @@ msgstr "Ralat"
 #: gui/gamesetup_mp/gamesetup_mp.js:351
 #, javascript-format
 msgid "Cannot join game: %(message)s."
-msgstr ""
+msgstr "Gagal menyertai permainan: %(message)s."
 
 #: gui/gamesetup_mp/gamesetup_mp.js:373
 #, javascript-format
 msgid "%(playername)s's game"
 msgstr "Permainan %(playername)s"
 
-#: gui/loading/loading.js:48
+#. Translation: A bullet point used before every item of list of tips
+#. displayed on loading screen
+#: gui/loading/loading.js:33
+#, javascript-format
+msgid "• %(tiptext)s"
+msgstr ""
+
+#: gui/loading/loading.js:51
 #, javascript-format
 msgid "Loading “%(map)s”"
 msgstr "Memuatkan “%(map)s”"
 
-#: gui/loading/loading.js:52
+#: gui/loading/loading.js:55
 #, javascript-format
 msgid "Generating “%(map)s”"
 msgstr "Menjana “%(map)s”"
@@ -712,7 +719,7 @@ msgstr "Sertai permainan sedia ada."
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):28
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):70
 msgid "Player Name:"
-msgstr ""
+msgstr "Nama Pemain:"
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):38
 msgid "Server Hostname or IP:"
@@ -721,7 +728,7 @@ msgstr "Nama Hos atau IP Pelayan:"
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):48
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):95
 msgid "Server Port:"
-msgstr ""
+msgstr "Port Pelayan:"
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):65
 msgid "Set up your server to host."
@@ -729,11 +736,11 @@ msgstr "Tetapkan pelayan anda ke hos."
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):83
 msgid "Server Name:"
-msgstr ""
+msgstr "Nama Pelayan:"
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):114
 msgid "Use STUN to work around firewalls"
-msgstr ""
+msgstr "Guna STUN untuk melepasi dinding api"
 
 #: gui/gamesetup_mp/gamesetup_mp.xml:(caption):122
 msgid "Continue"
@@ -742,7 +749,7 @@ msgstr "Teruskan"
 #: gui/gamesetup_mp/gamesetup_mp.xml:(tooltip):52
 #: gui/gamesetup_mp/gamesetup_mp.xml:(tooltip):99
 msgid "Leave blank to use the default port."
-msgstr ""
+msgstr "Biarkan kosong untuk guna port lalai."
 
 #: gui/text/quotes.txt:1
 msgid ""
@@ -1270,7 +1277,7 @@ msgstr ""
 msgid ""
 "\"Cowards do not count in battle; they are there, but not in it.\" - "
 "Euripides (\"Meleager\")"
-msgstr ""
+msgstr "\"Si penakut tidak memberi apa-apa kesan dalam pertempuran; mereka wujud, tetapi tidak bermakna.\" - Euripides (\"Meleager\")"
 
 #: gui/text/quotes.txt:79
 msgid "\"Chance fights ever on the side of the prudent.\" - Euripides (\"Pirithous\")"
@@ -1502,7 +1509,7 @@ msgstr "\"Saya Cyrus, raja seluruh dunia...\" - Inscription (Cyrus Cylinder)"
 msgid ""
 "\"In peace the sons bury their fathers, but in war the fathers bury their "
 "sons.\" - Kroisos, king of Lydia (Herodotus, \"The Histories\", I. 87)"
-msgstr ""
+msgstr "\"Ketika aman, anak-anak lelaki mengebumi ayah mereka, tetapi ketika perperangan ayah merekalah yang mengebumi anak-anak lelakinya.\" - Kroisos, raja Lydia (Herodotus, \"The Histories\", I. 87)"
 
 #: gui/text/quotes.txt:112
 msgid ""
@@ -1585,7 +1592,7 @@ msgstr "\"Jadikan kebajikan kepada orang ramai sebagai undang-undang utama.\" - 
 msgid ""
 "\"Endless money forms the sinews of war.\" - Marcus Tullius Cicero "
 "(\"Philippics\", Philippica V., sec. 5)"
-msgstr ""
+msgstr "\"Duit yang banyak dan tidak terhingga jumlahnya mengalir masuk dalam bentuk perbelanjaan perang.\" - Marcus Tullius Cicero (\"Philippics\", Philippica V., sec. 5)"
 
 #: gui/text/quotes.txt:124
 msgid ""
@@ -1614,17 +1621,17 @@ msgstr ""
 msgid ""
 "\"We live, not as we wish to, but as we can.\" - Menander (\"Lady of "
 "Andros\", fragment 50)"
-msgstr ""
+msgstr "\"Kami hidup, bukan atas kemahuan kami, tetapi atas kemampuan kami.\" - Menander (\"Wanita Andros\", cebisan ke-50)"
 
 #: gui/text/quotes.txt:128
 msgid "\"The man who runs may fight again.\" - Menander (\"Monosticha\")"
-msgstr ""
+msgstr "\"Orang yang melarikan diri akhirnya akan berjuang lagi.\" - Menander (\"Monosticha\")"
 
 #: gui/text/quotes.txt:129
 msgid ""
 "\"Whom the Gods love dies young.\" - Menander (\"The Double Deceiver\", "
 "fragment 4)"
-msgstr ""
+msgstr "\"Sesiapa sahaja yang Dewa-Dewi sayangi akan mati dalam usia muda.\" - Menander (\"The Double Deceiver\", cebisan ke-4)"
 
 #: gui/text/quotes.txt:130
 msgid "\"I call a fig a fig, a spade a spade.\" - Menander (fragment 545 K)"

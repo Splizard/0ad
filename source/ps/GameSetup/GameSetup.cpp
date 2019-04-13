@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -183,8 +183,8 @@ retry:
 // display progress / description in loading screen
 void GUI_DisplayLoadProgress(int percent, const wchar_t* pending_task)
 {
-	g_GUI->GetActiveGUI()->GetScriptInterface()->SetGlobal("g_Progress", percent, true);
-	g_GUI->GetActiveGUI()->GetScriptInterface()->SetGlobal("g_LoadDescription", pending_task, true);
+	g_GUI->GetActiveGUI()->GetScriptInterface()->SetGlobal("g_Progress", percent, true, false, true);
+	g_GUI->GetActiveGUI()->GetScriptInterface()->SetGlobal("g_LoadDescription", pending_task, true, false, true);
 	g_GUI->GetActiveGUI()->SendEventToAll("progress");
 }
 
@@ -1199,7 +1199,8 @@ CStr8 LoadSettingsOfScenarioMap(const VfsPath &mapPath)
  * -autostart-nonvisual            disable any graphics and sounds
  * -autostart-victory=SCRIPTNAME   sets the victory conditions with SCRIPTNAME
  *                                 located in simulation/data/settings/victory_conditions/
- *                                 (default conquest)
+ *                                 (default conquest). When the first given SCRIPTNAME is 
+ *                                 "endless", no victory conditions will apply.
  * -autostart-wonderduration=NUM   sets the victory duration NUM for wonder victory condition
  *                                 (default 10 minutes)
  * -autostart-relicduration=NUM    sets the victory duration NUM for relic victory condition

@@ -16,8 +16,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-01-04 09:44+0100\n"
-"PO-Revision-Date: 2019-01-04 19:20+0000\n"
+"POT-Creation-Date: 2019-03-22 09:44+0100\n"
+"PO-Revision-Date: 2019-03-23 00:31+0000\n"
 "Last-Translator: Микола Франчук <thekolian1996@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/wildfire-games/0ad/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -291,10 +291,6 @@ msgstr "Бойовий пес"
 #: simulation/templates/template_unit_dog.xml:41
 msgid "Cannot attack structures."
 msgstr "Не може атакувати будівлі."
-
-#: simulation/templates/template_unit_fauna_fish.xml:11
-msgid "Gather food from this bountiful oceanic resource."
-msgstr "Зберіть їжу з цього багатого океанічного ресурсу."
 
 #: simulation/templates/template_unit_fauna_hunt_whale.xml:9
 msgid "Kill, then gather food from this bountiful oceanic resource."
@@ -921,6 +917,8 @@ msgid "Ploîon Phortēgikón"
 msgstr "Плойон Фортегікон"
 
 #: simulation/templates/units/athen_ship_trireme.xml:5
+#: simulation/templates/units/mace_ship_trireme.xml:5
+#: simulation/templates/units/spart_ship_trireme.xml:5
 msgid "Triḗrēs Athēnaía"
 msgstr "Триєрес Афеная"
 
@@ -1277,8 +1275,6 @@ msgid "Ḥameš-Mašōt"
 msgstr "Хамеш-Машот"
 
 #: simulation/templates/units/cart_ship_trireme.xml:5
-#: simulation/templates/units/mace_ship_trireme.xml:5
-#: simulation/templates/units/spart_ship_trireme.xml:5
 msgid "Trireme"
 msgstr "Трирема"
 
@@ -1781,9 +1777,8 @@ msgid "Hemiolos"
 msgstr "Геміола"
 
 #: simulation/templates/units/mace_ship_trireme.xml:6
-#: simulation/templates/units/spart_ship_trireme.xml:6
-msgid "Triḗrēs"
-msgstr "Трієрес"
+msgid "Macedonian Trireme"
+msgstr "Македонська Трирема"
 
 #: simulation/templates/units/mace_support_female_citizen.xml:5
 msgid "Gýnē Makedonikḗ"
@@ -2769,6 +2764,10 @@ msgstr "Періокський гопліт"
 #: simulation/templates/units/spart_infantry_spearman_b.xml:16
 msgid "Hoplítēs Períoikos"
 msgstr "Гоплітес Періоїкос"
+
+#: simulation/templates/units/spart_ship_trireme.xml:6
+msgid "Spartan Trireme"
+msgstr "Спартанська Трирема"
 
 #: simulation/templates/units/spart_support_female_citizen.xml:21
 msgid "Spartan Woman"

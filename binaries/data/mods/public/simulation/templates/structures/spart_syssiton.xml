@@ -21,6 +21,7 @@
   </Health>
   <Identity>
     <Civ>spart</Civ>
+    <Classes datatype="tokens">ConquestCritical</Classes>
     <GenericName>Military Mess Hall</GenericName>
     <SpecificName>Syssítion</SpecificName>
     <Classes datatype="tokens">Syssiton</Classes>
@@ -51,7 +52,6 @@
     <SoundGroups>
       <select>interface/select/building/sel_gymnasium.xml</select>
       <constructed>interface/complete/building/complete_gymnasium.xml</constructed>
-      <death>attack/destruction/building_collapse_large.xml</death>
     </SoundGroups>
   </Sound>
   <VisualActor>

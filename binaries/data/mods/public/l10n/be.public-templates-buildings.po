@@ -1,13 +1,14 @@
 # Translation template for 0 A.D. — Empires Ascendant.
-# Copyright (C) 2018 Wildfire Games
+# Copyright (C) 2019 Wildfire Games
 # This file is distributed under the same license as the 0 A.D. — Empires Ascendant project.
 # 
 # Translators:
+# Kirill Ptukha <kirill.ptukha@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2018-12-31 09:45+0100\n"
-"PO-Revision-Date: 2018-12-31 14:31+0000\n"
+"POT-Creation-Date: 2019-03-22 09:44+0100\n"
+"PO-Revision-Date: 2019-03-22 14:40+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/wildfire-games/0ad/language/be/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +42,7 @@ msgstr ""
 #: simulation/templates/template_structure_civic_civil_centre_military_colony.xml:31
 #: simulation/templates/structures/ptol_military_colony.xml:9
 msgid "Military Colony"
-msgstr ""
+msgstr "Ваенная калонія"
 
 #: simulation/templates/template_structure_civic_civil_centre_military_colony.xml:32
 msgid "Klēroukhía"
@@ -49,7 +50,7 @@ msgstr ""
 
 #: simulation/templates/template_structure_civic_hellenic_royal_stoa.xml:33
 msgid "Stoa"
-msgstr ""
+msgstr "Стоа"
 
 #: simulation/templates/template_structure_civic_hellenic_royal_stoa.xml:34
 msgid "Hellenic Royal Stoa"
@@ -61,7 +62,7 @@ msgstr ""
 
 #: simulation/templates/template_structure_civic_hellenic_royal_stoa.xml:38
 #: simulation/templates/template_structure_civic_temple.xml:35
-#: simulation/templates/template_structure_defense_tower_stone.xml:32
+#: simulation/templates/template_structure_defensive_tower_stone.xml:32
 #: simulation/templates/template_structure_economic_market.xml:32
 #: simulation/templates/template_structure_military_blacksmith.xml:34
 #: simulation/templates/template_structure_military_embassy.xml:41
@@ -72,28 +73,28 @@ msgstr ""
 #: simulation/templates/structures/maur_elephant_stables.xml:7
 #: simulation/templates/structures/ptol_lighthouse.xml:20
 msgid "Town"
-msgstr ""
+msgstr "Невялiкi горад"
 
 #: simulation/templates/template_structure_civic_house.xml:35
 msgid "Increase the population limit."
 msgstr ""
 
 #: simulation/templates/template_structure_civic_house.xml:36
-#: simulation/templates/template_structure_defense_tower_outpost.xml:51
-#: simulation/templates/template_structure_defense_tower_sentry.xml:36
+#: simulation/templates/template_structure_defensive_tower_outpost.xml:51
+#: simulation/templates/template_structure_defensive_tower_sentry.xml:36
 #: simulation/templates/template_structure_economic_farmstead.xml:33
 #: simulation/templates/template_structure_economic_storehouse.xml:34
 #: simulation/templates/template_structure_military_barracks.xml:31
 #: simulation/templates/template_structure_military_dock.xml:27
 #: simulation/templates/template_structure_resource_corral.xml:20
 msgid "Village"
-msgstr ""
+msgstr "Вёска"
 
 #: simulation/templates/template_structure_civic_house.xml:36
 #: simulation/templates/template_structure_civic_house.xml:34
 #: simulation/templates/structures/pers_house_a.xml:12
 msgid "House"
-msgstr ""
+msgstr "Хата"
 
 #: simulation/templates/template_structure_civic_temple.xml:34
 msgid ""
@@ -104,103 +105,98 @@ msgstr ""
 #: simulation/templates/template_structure_civic_temple.xml:35
 #: simulation/templates/template_structure_civic_temple.xml:33
 msgid "Temple"
-msgstr ""
+msgstr "Храм"
 
-#: simulation/templates/template_structure_defense.xml:14
+#: simulation/templates/template_structure_defensive.xml:14
 msgid "Defensive Structure"
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower.xml:30
-#: simulation/templates/template_structure_defense_tower_sentry.xml:36
-#: simulation/templates/template_structure_defense_tower_stone.xml:32
+#: simulation/templates/template_structure_defensive_tower.xml:30
+#: simulation/templates/template_structure_defensive_tower_sentry.xml:36
+#: simulation/templates/template_structure_defensive_tower_stone.xml:32
 msgid "DefenseTower"
-msgstr ""
+msgstr "Абараняльная вежа"
 
-#: simulation/templates/template_structure_defense_tower_outpost.xml:50
+#: simulation/templates/template_structure_defensive_tower_outpost.xml:50
 msgid ""
 "Build in neutral and own territories to scout areas of the map. Slowly "
 "converts to Gaia while in neutral territory."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower_outpost.xml:51
-#: simulation/templates/template_structure_defense_tower_outpost.xml:27
-#: simulation/templates/template_structure_defense_tower_outpost.xml:49
+#: simulation/templates/template_structure_defensive_tower_outpost.xml:51
+#: simulation/templates/template_structure_defensive_tower_outpost.xml:27
+#: simulation/templates/template_structure_defensive_tower_outpost.xml:49
 msgid "Outpost"
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower_sentry.xml:33
+#: simulation/templates/template_structure_defensive_tower_sentry.xml:33
 msgid "Sentry Tower"
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower_sentry.xml:36
+#: simulation/templates/template_structure_defensive_tower_sentry.xml:36
 msgid "SentryTower"
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower_sentry.xml:37
+#: simulation/templates/template_structure_defensive_tower_sentry.xml:37
 msgid ""
 "Shoots arrows. Garrison to provide extra defence. Needs the murder holes "
 "tech to protect its foot. Upgradeable to stone tower."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower_sentry.xml:58
+#: simulation/templates/template_structure_defensive_tower_sentry.xml:58
 msgid "Reinforce with stone and upgrade to a defense tower."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower_stone.xml:29
+#: simulation/templates/template_structure_defensive_tower_stone.xml:29
 msgid "Defense Tower"
-msgstr ""
+msgstr "Абараняльная вежа"
 
-#: simulation/templates/template_structure_defense_tower_stone.xml:30
+#: simulation/templates/template_structure_defensive_tower_stone.xml:30
 msgid ""
 "Shoots arrows. Garrison to provide extra defence. Needs the murder holes "
 "tech to protect its foot."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_tower_stone.xml:32
+#: simulation/templates/template_structure_defensive_tower_stone.xml:32
 msgid "StoneTower"
-msgstr ""
+msgstr "Каменная вежа"
 
-#: simulation/templates/template_structure_defense_wall.xml:26
+#: simulation/templates/template_structure_defensive_wall.xml:26
 #: simulation/templates/structures/cart_s_wall_long.xml:7
 #: simulation/templates/structures/cart_s_wall_medium.xml:7
 #: simulation/templates/structures/cart_s_wall_short.xml:7
 #: simulation/templates/structures/cart_s_wall_tower.xml:7
 msgid "Stone Wall"
-msgstr ""
+msgstr "Каменная сцяна"
 
-#: simulation/templates/template_structure_defense_wall.xml:27
-#: simulation/templates/template_structure_defense_wallset.xml:11
+#: simulation/templates/template_structure_defensive_wall.xml:27
 msgid "Wall off your town for a stout defense."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_wall_gate.xml:14
+#: simulation/templates/template_structure_defensive_wall_gate.xml:14
 msgid "City Gate"
-msgstr ""
+msgstr "Гарадскiя вароты"
 
-#: simulation/templates/template_structure_defense_wall_gate.xml:16
+#: simulation/templates/template_structure_defensive_wall_gate.xml:16
 msgid ""
 "Allow units access through a city wall. Can be locked to prevent access."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_wall_long.xml:42
+#: simulation/templates/template_structure_defensive_wall_long.xml:42
 msgid "Long wall segments can be converted to gates."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_wall_long.xml:48
+#: simulation/templates/template_structure_defensive_wall_long.xml:48
 msgid ""
 "This will allow you to let units circulate through your fortifications."
 msgstr ""
 
-#: simulation/templates/template_structure_defense_wall_tower.xml:59
+#: simulation/templates/template_structure_defensive_wall_tower.xml:59
 msgid "Wall Turret"
 msgstr ""
 
-#: simulation/templates/template_structure_defense_wall_tower.xml:60
+#: simulation/templates/template_structure_defensive_wall_tower.xml:60
 msgid "Shoots arrows. Garrison to defend a city wall against attackers."
-msgstr ""
-
-#: simulation/templates/template_structure_defense_wallset.xml:10
-msgid "City Wall"
 msgstr ""
 
 #: simulation/templates/template_structure_economic.xml:15
@@ -210,7 +206,7 @@ msgstr ""
 #: simulation/templates/template_structure_economic.xml:16
 #: simulation/templates/template_structure_military_dock.xml:27
 msgid "Economic"
-msgstr ""
+msgstr "эканоміка"
 
 #: simulation/templates/template_structure_economic_farmstead.xml:32
 msgid "Dropsite for the food resource. Research food gathering improvements."
@@ -231,7 +227,7 @@ msgstr ""
 #: simulation/templates/template_structure_economic_market.xml:28
 #: simulation/templates/template_structure_military_dock.xml:27
 msgid "Market"
-msgstr ""
+msgstr "Рынак"
 
 #: simulation/templates/template_structure_economic_storehouse.xml:33
 msgid ""
@@ -242,7 +238,7 @@ msgstr ""
 #: simulation/templates/template_structure_economic_storehouse.xml:34
 #: simulation/templates/template_structure_economic_storehouse.xml:31
 msgid "Storehouse"
-msgstr ""
+msgstr "Склад"
 
 #: simulation/templates/template_structure_military.xml:14
 msgid "Military Structure"
@@ -304,7 +300,7 @@ msgstr ""
 
 #: simulation/templates/template_structure_military_elephant_stables.xml:35
 msgid "Train elephant units."
-msgstr ""
+msgstr "Трэнираваць слановаю едыніцу"
 
 #: simulation/templates/template_structure_military_elephant_stables.xml:36
 #: simulation/templates/template_structure_military_fortress.xml:72
@@ -313,7 +309,7 @@ msgstr ""
 #: simulation/templates/template_structure_wonder.xml:52
 #: simulation/templates/structures/kush_temple_amun.xml:33
 msgid "City"
-msgstr ""
+msgstr "Горад"
 
 #: simulation/templates/template_structure_military_elephant_stables.xml:36
 msgid "ElephantStables"
@@ -329,7 +325,7 @@ msgstr ""
 #: simulation/templates/template_structure_military_fortress.xml:36
 #: simulation/templates/template_structure_military_fortress.xml:69
 msgid "Fortress"
-msgstr ""
+msgstr "Крэпасць"
 
 #: simulation/templates/template_structure_military_fortress.xml:70
 msgid ""
@@ -338,13 +334,12 @@ msgid ""
 msgstr ""
 
 #: simulation/templates/template_structure_military_kennel.xml:41
-#: simulation/templates/structures/brit_kennel.xml:5
 msgid "Kennel"
 msgstr ""
 
 #: simulation/templates/template_structure_military_kennel.xml:44
 msgid "Train war dogs."
-msgstr ""
+msgstr "Трэнираваць баявых сабак"
 
 #: simulation/templates/template_structure_military_workshop.xml:32
 msgid "Siege Workshop"
@@ -382,7 +377,7 @@ msgstr ""
 #: simulation/templates/template_structure_resource_field.xml:27
 #: simulation/templates/template_structure_resource_field.xml:26
 msgid "Field"
-msgstr ""
+msgstr "Поле"
 
 #: simulation/templates/template_structure_resource_field.xml:28
 msgid "Harvest vegetables for food. Max gatherers: 5."
@@ -398,7 +393,7 @@ msgstr ""
 
 #: simulation/templates/template_structure_special_library.xml:17
 msgid "Library"
-msgstr ""
+msgstr "Бібліятэка"
 
 #: simulation/templates/template_structure_special_library.xml:19
 msgid "Research special technologies."
@@ -408,17 +403,13 @@ msgstr ""
 msgid "Rotary Mill"
 msgstr ""
 
-#: simulation/templates/template_structure_special_rotarymill.xml:25
-msgid "Melonas"
-msgstr ""
-
 #: simulation/templates/template_structure_special_theatron.xml:25
 msgid "Greek Theater"
-msgstr ""
+msgstr "Грэцкі тэатр"
 
 #: simulation/templates/template_structure_special_theatron.xml:26
 msgid "Théātron"
-msgstr ""
+msgstr "Тэатрон"
 
 #: simulation/templates/template_structure_wonder.xml:51
 msgid ""
@@ -451,7 +442,7 @@ msgstr ""
 #: simulation/templates/structures/mace_civil_centre.xml:8
 #: simulation/templates/structures/spart_civil_centre.xml:8
 msgid "Agorá"
-msgstr ""
+msgstr "Агора"
 
 #: simulation/templates/structures/athen_corral.xml:5
 #: simulation/templates/structures/mace_corral.xml:5
@@ -610,23 +601,21 @@ msgid "Pāyaud"
 msgstr ""
 
 #: simulation/templates/structures/brit_barracks.xml:15
-#: simulation/templates/structures/gaul_barracks.xml:15
-msgid "Gwersyllty"
+msgid "Coriosessa"
 msgstr ""
 
 #: simulation/templates/structures/brit_blacksmith.xml:8
 #: simulation/templates/structures/gaul_blacksmith.xml:8
-msgid "Amoridas"
+msgid "Gobanion"
 msgstr ""
 
 #: simulation/templates/structures/brit_civil_centre.xml:12
-#: simulation/templates/structures/gaul_civil_centre.xml:9
-msgid "Caer"
+msgid "Tigernotreba"
 msgstr ""
 
 #: simulation/templates/structures/brit_corral.xml:8
 #: simulation/templates/structures/gaul_corral.xml:8
-msgid "Cavalidos"
+msgid "Cagion"
 msgstr ""
 
 #: simulation/templates/structures/brit_crannog.xml:12
@@ -638,30 +627,36 @@ msgid "Increase population limit and defend waterways."
 msgstr ""
 
 #: simulation/templates/structures/brit_crannog.xml:17
-#: simulation/templates/structures/brit_dock.xml:15
-#: simulation/templates/structures/gaul_dock.xml:15
-msgid "Crannóc"
+msgid "Cranogion"
 msgstr ""
 
 #: simulation/templates/structures/brit_defense_tower.xml:9
+#: simulation/templates/structures/brit_sentry_tower.xml:5
 #: simulation/templates/structures/brit_wall_tower.xml:11
 #: simulation/templates/structures/gaul_defense_tower.xml:9
+#: simulation/templates/structures/gaul_sentry_tower.xml:5
 #: simulation/templates/structures/gaul_wall_tower.xml:11
-msgid "Tyrau"
+msgid "Uxelon"
+msgstr ""
+
+#: simulation/templates/structures/brit_dock.xml:15
+#: simulation/templates/structures/gaul_dock.xml:15
+msgid "Counos"
 msgstr ""
 
 #: simulation/templates/structures/brit_farmstead.xml:14
 #: simulation/templates/structures/gaul_farmstead.xml:11
-msgid "Ffermdy"
+msgid "Buta"
 msgstr ""
 
 #: simulation/templates/structures/brit_field.xml:5
 #: simulation/templates/structures/gaul_field.xml:5
-msgid "Varmo"
+msgid "Olca"
 msgstr ""
 
 #: simulation/templates/structures/brit_fortress.xml:15
-msgid "Brythonic Broch"
+#: simulation/templates/structures/gaul_fortress.xml:8
+msgid "Dunon"
 msgstr ""
 
 #: simulation/templates/structures/brit_fortress.xml:16
@@ -670,30 +665,50 @@ msgstr ""
 
 #: simulation/templates/structures/brit_house.xml:9
 #: simulation/templates/structures/gaul_house.xml:5
-msgid "Annedd"
+msgid "Tegia"
+msgstr ""
+
+#: simulation/templates/structures/brit_kennel.xml:5
+msgid "Cunattegia"
 msgstr ""
 
 #: simulation/templates/structures/brit_market.xml:15
 #: simulation/templates/structures/gaul_market.xml:15
-msgid "Marchnaty"
+msgid "Magos"
 msgstr ""
 
 #: simulation/templates/structures/brit_outpost.xml:5
-msgid "Brythonic Outpost"
+#: simulation/templates/structures/gaul_outpost.xml:5
+msgid "Antosolicon"
+msgstr ""
+
+#: simulation/templates/structures/brit_range.xml:12
+#: simulation/templates/structures/gaul_range.xml:12
+msgid "Budinadon"
+msgstr ""
+
+#: simulation/templates/structures/brit_rotarymill.xml:5
+msgid "Melonas"
+msgstr ""
+
+#: simulation/templates/structures/brit_stable.xml:12
+#: simulation/templates/structures/gaul_stable.xml:12
+msgid "Eposton"
 msgstr ""
 
 #: simulation/templates/structures/brit_storehouse.xml:11
 #: simulation/templates/structures/gaul_storehouse.xml:11
-msgid "Ystordy"
+msgid "Capanon"
 msgstr ""
 
 #: simulation/templates/structures/brit_temple.xml:18
 #: simulation/templates/structures/gaul_temple.xml:18
-msgid "Addoldy"
+msgid "Nemeton"
 msgstr ""
 
 #: simulation/templates/structures/brit_wall_gate.xml:9
-msgid "Dor"
+#: simulation/templates/structures/gaul_wall_gate.xml:9
+msgid "Duoricos"
 msgstr ""
 
 #: simulation/templates/structures/brit_wall_long.xml:29
@@ -704,7 +719,7 @@ msgstr ""
 #: simulation/templates/structures/gaul_wall_medium.xml:23
 #: simulation/templates/structures/gaul_wall_short.xml:10
 #: simulation/templates/structures/gaul_wallset_stone.xml:5
-msgid "Gwarchglawdd"
+msgid "Rate"
 msgstr ""
 
 #: simulation/templates/structures/brit_wall_tower.xml:12
@@ -715,6 +730,11 @@ msgstr ""
 #: simulation/templates/structures/brit_wonder.xml:9
 #: simulation/templates/structures/gaul_wonder.xml:9
 msgid "Stonehenge"
+msgstr ""
+
+#: simulation/templates/structures/brit_workshop.xml:8
+#: simulation/templates/structures/gaul_workshop.xml:5
+msgid "Miletucerdon"
 msgstr ""
 
 #: simulation/templates/structures/cart_apartment.xml:17
@@ -886,16 +906,20 @@ msgstr ""
 msgid "Temple of Ba'al Hammon"
 msgstr ""
 
-#: simulation/templates/structures/gaul_fortress.xml:8
-msgid "Gallic Dun"
+#: simulation/templates/structures/gaul_barracks.xml:15
+msgid "Coriosedlon"
+msgstr ""
+
+#: simulation/templates/structures/gaul_civil_centre.xml:9
+msgid "Lissos"
 msgstr ""
 
 #: simulation/templates/structures/gaul_fortress.xml:9
 msgid "Train Gallic heroes and champions. Construct siege rams."
 msgstr ""
 
-#: simulation/templates/structures/gaul_outpost.xml:5
-msgid "Gallic Outpost"
+#: simulation/templates/structures/gaul_rotarymill.xml:5
+msgid "Brauon"
 msgstr ""
 
 #: simulation/templates/structures/gaul_tavern.xml:23
@@ -910,8 +934,12 @@ msgstr ""
 msgid "Recruit Naked Fanatics."
 msgstr ""
 
-#: simulation/templates/structures/gaul_wall_gate.xml:9
-msgid "Duro"
+#: simulation/templates/structures/gaul_theatron.xml:6
+msgid "Assembly of princes"
+msgstr ""
+
+#: simulation/templates/structures/gaul_theatron.xml:7
+msgid "Remogantion"
 msgstr ""
 
 #: simulation/templates/structures/iber_barracks.xml:11
@@ -1038,7 +1066,7 @@ msgid "Mryt"
 msgstr ""
 
 #: simulation/templates/structures/kush_elephant_stables.xml:5
-msgid "Kushite Elephant Stables"
+msgid "Ỉ﻿ḥ Abu"
 msgstr ""
 
 #: simulation/templates/structures/kush_farmstead.xml:9
@@ -1087,22 +1115,22 @@ msgstr ""
 #: simulation/templates/structures/kush_pyramid_large.xml:31
 #: simulation/templates/structures/kush_pyramid_small.xml:29
 msgid "Pyramid"
-msgstr ""
+msgstr "Піраміда"
 
 #: simulation/templates/structures/kush_pyramid_large.xml:29
 msgid "Large Pyramid"
-msgstr ""
+msgstr "Вялікая піраміда"
 
 #: simulation/templates/structures/kush_pyramid_small.xml:27
 msgid "Small Pyramid"
-msgstr ""
+msgstr "Маленькая піраміда"
 
 #: simulation/templates/structures/kush_pyramid_small.xml:28
 msgid "mr"
 msgstr ""
 
 #: simulation/templates/structures/kush_range.xml:9
-msgid "Kushite Archery Range"
+msgid "Pr-Pdt"
 msgstr ""
 
 #: simulation/templates/structures/kush_sentry_tower.xml:5
@@ -1118,7 +1146,7 @@ msgid "ḥwt-nṯr"
 msgstr ""
 
 #: simulation/templates/structures/kush_stable.xml:9
-msgid "Kushite Cavalry Stable"
+msgid "Ỉḥ Ssmt"
 msgstr ""
 
 #: simulation/templates/structures/kush_storehouse.xml:5
@@ -1173,7 +1201,7 @@ msgid "Mnw nht"
 msgstr ""
 
 #: simulation/templates/structures/kush_workshop.xml:5
-msgid "Kushite Siege Workshop"
+msgid "Pr-ỉwn n ms﻿"
 msgstr ""
 
 #: simulation/templates/structures/mace_blacksmith.xml:5
@@ -1532,7 +1560,7 @@ msgstr ""
 
 #: simulation/templates/structures/ptol_lighthouse.xml:18
 msgid "Pháros"
-msgstr ""
+msgstr "Фарос"
 
 #: simulation/templates/structures/ptol_lighthouse.xml:21
 msgid ""
@@ -1632,7 +1660,7 @@ msgstr ""
 
 #: simulation/templates/structures/rome_civil_centre.xml:12
 msgid "Forum"
-msgstr ""
+msgstr "Форум"
 
 #: simulation/templates/structures/rome_corral.xml:8
 msgid "Saeptum"

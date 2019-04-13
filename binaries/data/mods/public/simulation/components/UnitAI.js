@@ -2812,7 +2812,7 @@ UnitAI.prototype.UnitFsmSpec = {
 				if (!oldData.autocontinue)
 					return;
 
-				// If this building was e.g. a farm of ours, the entities that recieved
+				// If this building was e.g. a farm of ours, the entities that received
 				// the build command should start gathering from it
 				if ((oldData.force || oldData.autoharvest) && this.CanGather(msg.data.newentity))
 				{
@@ -3536,7 +3536,6 @@ UnitAI.prototype.SetNextState = function(state)
 	this.UnitFsm.SetNextState(this, state);
 };
 
-
 UnitAI.prototype.DeferMessage = function(msg)
 {
 	this.UnitFsm.DeferMessage(this, msg);
@@ -3592,7 +3591,11 @@ UnitAI.prototype.FinishOrder = function()
 
 	this.orderQueue = [];
 	this.order = undefined;
-	this.SetNextState("IDLE");
+
+	// Switch to IDLE as a default state, but only if our current state is not IDLE
+	// as this can trigger infinite loops by entering IDLE repeatedly.
+	if (!this.GetCurrentState().endsWith(".IDLE"))
+		this.SetNextState("IDLE");
 
 	Engine.PostMessage(this.entity, MT_UnitAIOrderDataChanged, { "to": this.GetOrderData() });
 

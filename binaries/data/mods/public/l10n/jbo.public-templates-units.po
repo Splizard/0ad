@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-01-04 09:44+0100\n"
-"PO-Revision-Date: 2019-01-04 15:31+0000\n"
+"POT-Creation-Date: 2019-03-22 09:44+0100\n"
+"PO-Revision-Date: 2019-03-22 15:29+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Lojban (http://www.transifex.com/wildfire-games/0ad/language/jbo/)\n"
 "MIME-Version: 1.0\n"
@@ -280,10 +280,6 @@ msgstr "gersoi"
 
 #: simulation/templates/template_unit_dog.xml:41
 msgid "Cannot attack structures."
-msgstr ""
-
-#: simulation/templates/template_unit_fauna_fish.xml:11
-msgid "Gather food from this bountiful oceanic resource."
 msgstr ""
 
 #: simulation/templates/template_unit_fauna_hunt_whale.xml:9
@@ -911,6 +907,8 @@ msgid "Ploîon Phortēgikón"
 msgstr ""
 
 #: simulation/templates/units/athen_ship_trireme.xml:5
+#: simulation/templates/units/mace_ship_trireme.xml:5
+#: simulation/templates/units/spart_ship_trireme.xml:5
 msgid "Triḗrēs Athēnaía"
 msgstr ""
 
@@ -1267,8 +1265,6 @@ msgid "Ḥameš-Mašōt"
 msgstr ""
 
 #: simulation/templates/units/cart_ship_trireme.xml:5
-#: simulation/templates/units/mace_ship_trireme.xml:5
-#: simulation/templates/units/spart_ship_trireme.xml:5
 msgid "Trireme"
 msgstr ""
 
@@ -1771,8 +1767,7 @@ msgid "Hemiolos"
 msgstr ""
 
 #: simulation/templates/units/mace_ship_trireme.xml:6
-#: simulation/templates/units/spart_ship_trireme.xml:6
-msgid "Triḗrēs"
+msgid "Macedonian Trireme"
 msgstr ""
 
 #: simulation/templates/units/mace_support_female_citizen.xml:5
@@ -2758,6 +2753,10 @@ msgstr ""
 
 #: simulation/templates/units/spart_infantry_spearman_b.xml:16
 msgid "Hoplítēs Períoikos"
+msgstr ""
+
+#: simulation/templates/units/spart_ship_trireme.xml:6
+msgid "Spartan Trireme"
 msgstr ""
 
 #: simulation/templates/units/spart_support_female_citizen.xml:21
