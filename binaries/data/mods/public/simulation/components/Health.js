@@ -78,6 +78,14 @@ Health.prototype.GetMaxHitpoints = function()
 	return this.maxHitpoints;
 };
 
+/**
+ * @return {boolean} Whether the units are injured. Dead units are not considered injured.
+ */
+Health.prototype.IsInjured = function()
+{
+	return this.hitpoints > 0 && this.hitpoints < this.GetMaxHitpoints();
+};
+
 Health.prototype.SetHitpoints = function(value)
 {
 	// If we're already dead, don't allow resurrection
@@ -94,7 +102,7 @@ Health.prototype.SetHitpoints = function(value)
 
 	let cmpRangeManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_RangeManager);
 	if (cmpRangeManager)
-		cmpRangeManager.SetEntityFlag(this.entity, "injured", this.hitpoints < this.GetMaxHitpoints());
+		cmpRangeManager.SetEntityFlag(this.entity, "injured", this.IsInjured());
 
 	this.RegisterHealthChanged(old);
 };
@@ -107,8 +115,7 @@ Health.prototype.IsRepairable = function()
 Health.prototype.IsUnhealable = function()
 {
 	return this.template.Unhealable == "true" ||
-		this.GetHitpoints() <= 0 ||
-		this.GetHitpoints() >= this.GetMaxHitpoints();
+		this.hitpoints <= 0 || !this.IsInjured();
 };
 
 Health.prototype.GetIdleRegenRate = function()
@@ -144,8 +151,8 @@ Health.prototype.CheckRegenTimer = function()
 {
 	// check if we need a timer
 	if (this.GetRegenRate() == 0 && this.GetIdleRegenRate() == 0 ||
-	    this.GetHitpoints() == this.GetMaxHitpoints() && this.GetRegenRate() >= 0 && this.GetIdleRegenRate() >= 0 ||
-	    this.GetHitpoints() == 0)
+	    !this.IsInjured() && this.GetRegenRate() >= 0 && this.GetIdleRegenRate() >= 0 ||
+	    this.hitpoints == 0)
 	{
 		// we don't need a timer, disable if one exists
 		if (this.regenTimer)
@@ -171,77 +178,107 @@ Health.prototype.Kill = function()
 };
 
 /**
- * Reduces entity's health by amount HP.
- * Returns object of the form { "killed": false, "change": -12 }
+ * Take damage according to the entity's resistance.
+ * @param {Object} strengths - { "hack": number, "pierce": number, "crush": number } or something like that.
+ * @param {number} bonusMultiplier - the damage multiplier.
+ * Returns object of the form { "killed": false, "change": -12 }.
+ */
+Health.prototype.TakeDamage = function(effectData, attacker, attackerOwner, bonusMultiplier)
+{
+	let cmpResistance = Engine.QueryInterface(this.entity, IID_Resistance);
+
+	if (cmpResistance && cmpResistance.IsInvulnerable())
+		return { "killed": false };
+
+	let total = Attacking.GetTotalAttackEffects(effectData, "Damage", cmpResistance) * bonusMultiplier;
+
+	// Reduce health
+	let change = this.Reduce(total);
+
+	let cmpLoot = Engine.QueryInterface(this.entity, IID_Loot);
+	if (cmpLoot && cmpLoot.GetXp() > 0 && change.HPchange < 0)
+		change.xp = cmpLoot.GetXp() * -change.HPchange / this.GetMaxHitpoints();
+
+	return change;
+};
+
+/**
+ * @param {number} amount - The amount of hitpoints to substract. Kills the entity if required.
+ * @return {{killed:boolean, HPchange:number}} -  Number of health points lost and whether the entity was killed.
  */
 Health.prototype.Reduce = function(amount)
 {
+	// If we are dead, do not do anything
+	// (The entity will exist a little while after calling DestroyEntity so this
+	// might get called multiple times)
+	// Likewise if the amount is 0.
+	if (!amount || !this.hitpoints)
+		return { "killed": false, "HPchange": 0 };
+
 	// Before changing the value, activate Fogging if necessary to hide changes
 	let cmpFogging = Engine.QueryInterface(this.entity, IID_Fogging);
 	if (cmpFogging)
 		cmpFogging.Activate();
 
-	let state = { "killed": false };
-	if (amount >= 0 && this.hitpoints == this.GetMaxHitpoints())
+	let oldHitpoints = this.hitpoints;
+	// If we reached 0, then die.
+	if (amount >= this.hitpoints)
+	{
+		this.hitpoints = 0;
+		this.RegisterHealthChanged(oldHitpoints);
+		this.HandleDeath();
+		return { "killed": true, "HPchange": -oldHitpoints };
+	}
+
+	// If we are not marked as injured, do it now
+	if (!this.IsInjured())
 	{
 		let cmpRangeManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_RangeManager);
 		if (cmpRangeManager)
 			cmpRangeManager.SetEntityFlag(this.entity, "injured", true);
 	}
-	let oldHitpoints = this.hitpoints;
-	if (amount >= this.hitpoints)
+
+	this.hitpoints -= amount;
+	this.RegisterHealthChanged(oldHitpoints);
+	return { "killed": false, "HPchange": this.hitpoints - oldHitpoints };
+};
+
+/**
+ * Handle what happens when the entity dies.
+ */
+Health.prototype.HandleDeath = function()
+{
+	let cmpDeathDamage = Engine.QueryInterface(this.entity, IID_DeathDamage);
+	if (cmpDeathDamage)
+		cmpDeathDamage.CauseDeathDamage();
+	PlaySound("death", this.entity);
+
+	if (this.template.SpawnEntityOnDeath)
+		this.CreateDeathSpawnedEntity();
+
+	switch (this.template.DeathType)
 	{
-		// If this is the first time we reached 0, then die.
-		// (The entity will exist a little while after calling DestroyEntity so this
-		// might get called multiple times)
-		if (this.hitpoints)
-		{
-			this.hitpoints = 0;
-			this.RegisterHealthChanged(oldHitpoints);
-			state.killed = true;
+	case "corpse":
+		this.CreateCorpse();
+		break;
 
-			let cmpDeathDamage = Engine.QueryInterface(this.entity, IID_DeathDamage);
-			if (cmpDeathDamage)
-				cmpDeathDamage.CauseDeathDamage();
-
-			PlaySound("death", this.entity);
-
-			if (this.template.SpawnEntityOnDeath)
-				this.CreateDeathSpawnedEntity();
-
-			switch (this.template.DeathType)
-			{
-			case "corpse":
-				this.CreateCorpse();
-				break;
-
-			case "remain":
-			{
-				let resource = this.CreateCorpse(true);
-				if (resource != INVALID_ENTITY)
-					Engine.PostMessage(this.entity, MT_EntityRenamed, { "entity": this.entity, "newentity": resource });
-				break;
-			}
-
-			case "vanish":
-				break;
-
-			default:
-				error("Invalid template.DeathType: " + this.template.DeathType);
-				break;
-			}
-
-			Engine.DestroyEntity(this.entity);
-		}
-
-	}
-	else
+	case "remain":
 	{
-		this.hitpoints -= amount;
-		this.RegisterHealthChanged(oldHitpoints);
+		let resource = this.CreateCorpse(true);
+		if (resource != INVALID_ENTITY)
+			Engine.PostMessage(this.entity, MT_EntityRenamed, { "entity": this.entity, "newentity": resource });
+		break;
 	}
-	state.change = this.hitpoints - oldHitpoints;
-	return state;
+
+	case "vanish":
+		break;
+
+	default:
+		error("Invalid template.DeathType: " + this.template.DeathType);
+		break;
+	}
+
+	Engine.DestroyEntity(this.entity);
 };
 
 Health.prototype.Increase = function(amount)
@@ -251,7 +288,7 @@ Health.prototype.Increase = function(amount)
 	if (cmpFogging)
 		cmpFogging.Activate();
 
-	if (this.hitpoints == this.GetMaxHitpoints())
+	if (!this.IsInjured())
 		return { "old": this.hitpoints, "new": this.hitpoints };
 
 	// If we're already dead, don't allow resurrection
@@ -261,7 +298,7 @@ Health.prototype.Increase = function(amount)
 	let old = this.hitpoints;
 	this.hitpoints = Math.min(this.hitpoints + amount, this.GetMaxHitpoints());
 
-	if (this.hitpoints == this.GetMaxHitpoints())
+	if (!this.IsInjured())
 	{
 		let cmpRangeManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_RangeManager);
 		if (cmpRangeManager)
@@ -345,7 +382,7 @@ Health.prototype.UpdateActor = function()
 {
 	if (!this.template.DamageVariants)
 		return;
-	let ratio = this.GetHitpoints() / this.GetMaxHitpoints();
+	let ratio = this.hitpoints / this.GetMaxHitpoints();
 	let newDamageVariant = "alive";
 	if (ratio > 0)
 	{
@@ -381,7 +418,7 @@ Health.prototype.OnValueModification = function(msg)
 	let newMaxHitpoints = ApplyValueModificationsToEntity("Health/Max", +this.template.Max, this.entity);
 	if (oldMaxHitpoints != newMaxHitpoints)
 	{
-		let newHitpoints = this.GetHitpoints() * newMaxHitpoints/oldMaxHitpoints;
+		let newHitpoints = this.hitpoints * newMaxHitpoints/oldMaxHitpoints;
 		this.maxHitpoints = newMaxHitpoints;
 		this.SetHitpoints(newHitpoints);
 	}

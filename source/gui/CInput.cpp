@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,8 @@
 
 #include "CInput.h"
 
-#include "CGUIScrollBarVertical.h"
-#include "GUI.h"
-
+#include "gui/CGUIScrollBarVertical.h"
+#include "gui/GUI.h"
 #include "graphics/FontMetrics.h"
 #include "graphics/ShaderManager.h"
 #include "graphics/TextRenderer.h"
@@ -40,33 +39,34 @@
 
 extern int g_yres;
 
-CInput::CInput()
-	: m_iBufferPos(-1), m_iBufferPos_Tail(-1), m_SelectingText(false), m_HorizontalScroll(0.f),
+CInput::CInput(CGUI& pGUI)
+	: IGUIObject(pGUI), IGUIScrollBarOwner(pGUI),
+	m_iBufferPos(-1), m_iBufferPos_Tail(-1), m_SelectingText(false), m_HorizontalScroll(0.f),
 	m_PrevTime(0.0), m_CursorVisState(true), m_CursorBlinkRate(0.5), m_ComposingText(false),
 	m_iComposedLength(0), m_iComposedPos(0), m_iInsertPos(0), m_Readonly(false)
 {
-	AddSetting(GUIST_int,					"buffer_position");
-	AddSetting(GUIST_float,					"buffer_zone");
-	AddSetting(GUIST_CStrW,					"caption");
-	AddSetting(GUIST_int,					"cell_id");
-	AddSetting(GUIST_CStrW,					"font");
-	AddSetting(GUIST_CStrW,					"mask_char");
-	AddSetting(GUIST_bool,					"mask");
-	AddSetting(GUIST_int,					"max_length");
-	AddSetting(GUIST_bool,					"multiline");
-	AddSetting(GUIST_bool,					"readonly");
-	AddSetting(GUIST_bool,					"scrollbar");
-	AddSetting(GUIST_CStr,					"scrollbar_style");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite_selectarea");
-	AddSetting(GUIST_CColor,				"textcolor");
-	AddSetting(GUIST_CColor,				"textcolor_selected");
-	AddSetting(GUIST_CStrW,					"tooltip");
-	AddSetting(GUIST_CStr,					"tooltip_style");
+	AddSetting<i32>("buffer_position");
+	AddSetting<float>("buffer_zone");
+	AddSetting<CStrW>("caption");
+	AddSetting<i32>("cell_id");
+	AddSetting<CStrW>("font");
+	AddSetting<CStrW>("mask_char");
+	AddSetting<bool>("mask");
+	AddSetting<i32>("max_length");
+	AddSetting<bool>("multiline");
+	AddSetting<bool>("readonly");
+	AddSetting<bool>("scrollbar");
+	AddSetting<CStr>("scrollbar_style");
+	AddSetting<CGUISpriteInstance>("sprite");
+	AddSetting<CGUISpriteInstance>("sprite_selectarea");
+	AddSetting<CGUIColor>("textcolor");
+	AddSetting<CGUIColor>("textcolor_selected");
+	AddSetting<CStrW>("tooltip");
+	AddSetting<CStr>("tooltip_style");
 
 	CFG_GET_VAL("gui.cursorblinkrate", m_CursorBlinkRate);
 
-	CGUIScrollBarVertical* bar = new CGUIScrollBarVertical();
+	CGUIScrollBarVertical* bar = new CGUIScrollBarVertical(pGUI);
 	bar->SetRightAligned(true);
 	AddScrollBar(bar);
 }
@@ -77,14 +77,13 @@ CInput::~CInput()
 
 void CInput::UpdateBufferPositionSetting()
 {
-	int* bufferPos = (int*)m_Settings["buffer_position"].m_pSetting;
-	*bufferPos = m_iBufferPos;
+	SetSetting<i32>("buffer_position", m_iBufferPos, false);
 }
 
 void CInput::ClearComposedText()
 {
-	CStrW* pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
-	pCaption->erase(m_iInsertPos, m_iComposedLength);
+	CStrW& pCaption = GetSetting<CStrW>("caption");
+	pCaption.erase(m_iInsertPos, m_iComposedLength);
 	m_iBufferPos = m_iInsertPos;
 	UpdateBufferPositionSetting();
 	m_iComposedLength = 0;
@@ -112,7 +111,7 @@ InReaction CInput::ManuallyHandleEvent(const SDL_Event_* ev)
 			return IN_PASS;
 
 		// Text has been committed, either single key presses or through an IME
-		CStrW* pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
+		CStrW& pCaption = GetSetting<CStrW>("caption");
 		std::wstring text = wstring_from_utf8(ev->ev.text.text);
 
 		m_WantedX = 0.0f;
@@ -126,10 +125,10 @@ InReaction CInput::ManuallyHandleEvent(const SDL_Event_* ev)
 			m_ComposingText = false;
 		}
 
-		if (m_iBufferPos == (int)pCaption->length())
-			pCaption->append(text);
+		if (m_iBufferPos == static_cast<int>(pCaption.length()))
+			pCaption.append(text);
 		else
-			pCaption->insert(m_iBufferPos, text);
+			pCaption.insert(m_iBufferPos, text);
 
 		UpdateText(m_iBufferPos, m_iBufferPos, m_iBufferPos+1);
 
@@ -149,7 +148,7 @@ InReaction CInput::ManuallyHandleEvent(const SDL_Event_* ev)
 
 		// Text is being composed with an IME
 		// TODO: indicate this by e.g. underlining the uncommitted text
-		CStrW* pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
+		CStrW& pCaption = GetSetting<CStrW>("caption");
 		const char* rawText = ev->ev.edit.text;
 		int rawLength = strlen(rawText);
 		std::wstring wtext = wstring_from_utf8(rawText);
@@ -172,7 +171,7 @@ InReaction CInput::ManuallyHandleEvent(const SDL_Event_* ev)
 		m_ComposingText = ev->ev.edit.start != 0 || rawLength != 0;
 		if (m_ComposingText)
 		{
-			pCaption->insert(m_iInsertPos, wtext);
+			pCaption.insert(m_iInsertPos, wtext);
 
 			// The text buffer is limited to SDL_TEXTEDITINGEVENT_TEXT_SIZE bytes, yet start
 			// increases without limit, so don't let it advance beyond the composed text length
@@ -200,7 +199,7 @@ InReaction CInput::ManuallyHandleEvent(const SDL_Event_* ev)
 		// Since the GUI framework doesn't handle to set settings
 		//  in Unicode (CStrW), we'll simply retrieve the actual
 		//  pointer and edit that.
-		CStrW* pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
+		CStrW& pCaption = GetSetting<CStrW>("caption");
 		SDL_Keycode keyCode = ev->ev.key.keysym.sym;
 
 		ManuallyImmutableHandleKeyDownEvent(keyCode, pCaption);
@@ -216,7 +215,7 @@ InReaction CInput::ManuallyHandleEvent(const SDL_Event_* ev)
 	}
 }
 
-void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW* pCaption)
+void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW& pCaption)
 {
 	if (m_Readonly)
 		return;
@@ -242,14 +241,15 @@ void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW*
 		{
 			m_iBufferPos_Tail = -1;
 
-			if (pCaption->empty() || m_iBufferPos == 0)
+			if (pCaption.empty() || m_iBufferPos == 0)
 				break;
 
-			if (m_iBufferPos == (int)pCaption->length())
-				*pCaption = pCaption->Left((long)pCaption->length() - 1);
+			if (m_iBufferPos == static_cast<int>(pCaption.length()))
+				pCaption = pCaption.Left(static_cast<long>(pCaption.length()) - 1);
 			else
-				*pCaption = pCaption->Left(m_iBufferPos - 1) +
-				pCaption->Right((long)pCaption->length() - m_iBufferPos);
+				pCaption =
+					pCaption.Left(m_iBufferPos - 1) +
+					pCaption.Right(static_cast<long>(pCaption.length()) - m_iBufferPos);
 
 			--m_iBufferPos;
 
@@ -268,11 +268,12 @@ void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW*
 			DeleteCurSelection();
 		else
 		{
-			if (pCaption->empty() || m_iBufferPos == (int)pCaption->length())
+			if (pCaption.empty() || m_iBufferPos == static_cast<int>(pCaption.length()))
 				break;
 
-			*pCaption = pCaption->Left(m_iBufferPos) +
-				pCaption->Right((long)pCaption->length() - (m_iBufferPos + 1));
+			pCaption =
+				pCaption.Left(m_iBufferPos) +
+				pCaption.Right(static_cast<long>(pCaption.length()) - (m_iBufferPos + 1));
 
 			UpdateText(m_iBufferPos, m_iBufferPos + 1, m_iBufferPos);
 		}
@@ -286,9 +287,7 @@ void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW*
 	{
 		// 'Return' should do a Press event for single liners (e.g. submitting forms)
 		//  otherwise a '\n' character will be added.
-		bool multiline;
-		GUI<bool>::GetSetting(this, "multiline", multiline);
-		if (!multiline)
+		if (!GetSetting<bool>("multiline"))
 		{
 			SendEvent(GUIM_PRESSED, "press");
 			break;
@@ -305,9 +304,8 @@ void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW*
 			return;
 
 		// check max length
-		int max_length;
-		GUI<int>::GetSetting(this, "max_length", max_length);
-		if (max_length != 0 && (int)pCaption->length() >= max_length)
+		const int max_length = GetSetting<i32>("max_length");
+		if (max_length != 0 && static_cast<int>(pCaption.length()) >= max_length)
 			break;
 
 		m_WantedX = 0.0f;
@@ -316,11 +314,12 @@ void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW*
 			DeleteCurSelection();
 		m_iBufferPos_Tail = -1;
 
-		if (m_iBufferPos == (int)pCaption->length())
-			*pCaption += cooked;
+		if (m_iBufferPos == static_cast<int>(pCaption.length()))
+			pCaption += cooked;
 		else
-			*pCaption = pCaption->Left(m_iBufferPos) + cooked +
-			pCaption->Right((long)pCaption->length() - m_iBufferPos);
+			pCaption =
+				pCaption.Left(m_iBufferPos) + cooked +
+				pCaption.Right(static_cast<long>(pCaption.length()) - m_iBufferPos);
 
 		UpdateText(m_iBufferPos, m_iBufferPos, m_iBufferPos + 1);
 
@@ -333,7 +332,7 @@ void CInput::ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW*
 	}
 }
 
-void CInput::ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW* pCaption)
+void CInput::ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW& pCaption)
 {
 	bool shiftKeyPressed = g_keys[SDLK_RSHIFT] || g_keys[SDLK_LSHIFT];
 
@@ -373,7 +372,7 @@ void CInput::ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStr
 			m_iBufferPos_Tail = m_iBufferPos;
 		}
 
-		m_iBufferPos = (long)pCaption->length();
+		m_iBufferPos = static_cast<long>(pCaption.length());
 		m_WantedX = 0.0f;
 
 		UpdateAutoScroll();
@@ -436,7 +435,7 @@ void CInput::ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStr
 			else if (!SelectingText())
 				m_iBufferPos_Tail = m_iBufferPos;
 
-			if (m_iBufferPos < (int)pCaption->length())
+			if (m_iBufferPos < static_cast<int>(pCaption.length()))
 				++m_iBufferPos;
 		}
 		else
@@ -569,7 +568,8 @@ void CInput::ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStr
 
 InReaction CInput::ManuallyHandleHotkeyEvent(const SDL_Event_* ev)
 {
-	CStrW* pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
+	CStrW& pCaption = GetSetting<CStrW>("caption");
+
 	bool shiftKeyPressed = g_keys[SDLK_RSHIFT] || g_keys[SDLK_LSHIFT];
 
 	std::string hotkey = static_cast<const char*>(ev->ev.user.data1);
@@ -587,11 +587,12 @@ InReaction CInput::ManuallyHandleHotkeyEvent(const SDL_Event_* ev)
 			if (SelectingText())
 				DeleteCurSelection();
 
-			if (m_iBufferPos == (int)pCaption->length())
-				*pCaption += text;
+			if (m_iBufferPos == static_cast<int>(pCaption.length()))
+				pCaption += text;
 			else
-				*pCaption = pCaption->Left(m_iBufferPos) + text +
-				pCaption->Right((long) pCaption->length()-m_iBufferPos);
+				pCaption =
+					pCaption.Left(m_iBufferPos) + text +
+					pCaption.Right(static_cast<long>(pCaption.length()) - m_iBufferPos);
 
 			UpdateText(m_iBufferPos, m_iBufferPos, m_iBufferPos+1);
 
@@ -629,7 +630,7 @@ InReaction CInput::ManuallyHandleHotkeyEvent(const SDL_Event_* ev)
 				virtualTo = m_iBufferPos;
 			}
 
-			CStrW text = (pCaption->Left(virtualTo)).Right(virtualTo - virtualFrom);
+			CStrW text = (pCaption.Left(virtualTo)).Right(virtualTo - virtualFrom);
 
 			sys_clipboard_set(&text[0]);
 
@@ -653,10 +654,10 @@ InReaction CInput::ManuallyHandleHotkeyEvent(const SDL_Event_* ev)
 		if (SelectingText())
 			DeleteCurSelection();
 
-		if (!pCaption->empty() && m_iBufferPos != 0)
+		if (!pCaption.empty() && m_iBufferPos != 0)
 		{
 			m_iBufferPos_Tail = m_iBufferPos;
-			CStrW searchString = pCaption->Left(m_iBufferPos);
+			CStrW searchString = pCaption.Left(m_iBufferPos);
 
 			// If we are starting in whitespace, adjust position until we get a non whitespace
 			while (m_iBufferPos > 0)
@@ -699,22 +700,22 @@ InReaction CInput::ManuallyHandleHotkeyEvent(const SDL_Event_* ev)
 		if (SelectingText())
 			DeleteCurSelection();
 
-		if (!pCaption->empty() && m_iBufferPos < (int)pCaption->length())
+		if (!pCaption.empty() && m_iBufferPos < static_cast<int>(pCaption.length()))
 		{
 			// Delete the word to the right of the cursor
 			m_iBufferPos_Tail = m_iBufferPos;
 
 			// Delete chars to the right unit we hit whitespace
-			while (++m_iBufferPos < (int)pCaption->length())
+			while (++m_iBufferPos < static_cast<int>(pCaption.length()))
 			{
-				if (iswspace((*pCaption)[m_iBufferPos]) || iswpunct((*pCaption)[m_iBufferPos]))
+				if (iswspace(pCaption[m_iBufferPos]) || iswpunct(pCaption[m_iBufferPos]))
 					break;
 			}
 
 			// Eliminate any whitespace behind the word we just deleted
-			while (m_iBufferPos < (int)pCaption->length())
+			while (m_iBufferPos < static_cast<int>(pCaption.length()))
 			{
-				if (!iswspace((*pCaption)[m_iBufferPos]))
+				if (!iswspace(pCaption[m_iBufferPos]))
 					break;
 
 				++m_iBufferPos;
@@ -737,9 +738,9 @@ InReaction CInput::ManuallyHandleHotkeyEvent(const SDL_Event_* ev)
 			else if (!SelectingText())
 				m_iBufferPos_Tail = m_iBufferPos;
 
-			if (!pCaption->empty() && m_iBufferPos != 0)
+			if (!pCaption.empty() && m_iBufferPos != 0)
 			{
-				CStrW searchString = pCaption->Left(m_iBufferPos);
+				CStrW searchString = pCaption.Left(m_iBufferPos);
 
 				// If we are starting in whitespace, adjust position until we get a non whitespace
 				while (m_iBufferPos > 0)
@@ -790,19 +791,19 @@ InReaction CInput::ManuallyHandleHotkeyEvent(const SDL_Event_* ev)
 			else if (!SelectingText())
 				m_iBufferPos_Tail = m_iBufferPos;
 
-			if (!pCaption->empty() && m_iBufferPos < (int)pCaption->length())
+			if (!pCaption.empty() && m_iBufferPos < static_cast<int>(pCaption.length()))
 			{
 				// Select chars to the right until we hit whitespace
-				while (++m_iBufferPos < (int)pCaption->length())
+				while (++m_iBufferPos < static_cast<int>(pCaption.length()))
 				{
-					if (iswspace((*pCaption)[m_iBufferPos]) || iswpunct((*pCaption)[m_iBufferPos]))
+					if (iswspace(pCaption[m_iBufferPos]) || iswpunct(pCaption[m_iBufferPos]))
 						break;
 				}
 
 				// Also select any whitespace following the word we just selected
-				while (m_iBufferPos < (int)pCaption->length())
+				while (m_iBufferPos < static_cast<int>(pCaption.length()))
 				{
-					if (!iswspace((*pCaption)[m_iBufferPos]))
+					if (!iswspace(pCaption[m_iBufferPos]))
 						break;
 
 					++m_iBufferPos;
@@ -835,12 +836,9 @@ void CInput::HandleMessage(SGUIMessage& Message)
 	{
 	case GUIM_SETTINGS_UPDATED:
 	{
-		bool scrollbar;
-		GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-
 		// Update scroll-bar
 		// TODO Gee: (2004-09-01) Is this really updated each time it should?
-		if (scrollbar &&
+		if (GetSetting<bool>("scrollbar") &&
 			(Message.value == CStr("size") ||
 			 Message.value == CStr("z") ||
 			 Message.value == CStr("absolute")))
@@ -854,15 +852,12 @@ void CInput::HandleMessage(SGUIMessage& Message)
 		// Update scrollbar
 		if (Message.value == CStr("scrollbar_style"))
 		{
-			CStr scrollbar_style;
-			GUI<CStr>::GetSetting(this, Message.value, scrollbar_style);
-
-			GetScrollBar(0).SetScrollBarStyle(scrollbar_style);
+			GetScrollBar(0).SetScrollBarStyle(GetSetting<CStr>(Message.value));
 		}
 
 		if (Message.value == CStr("buffer_position"))
 		{
-			GUI<int>::GetSetting(this, Message.value, m_iBufferPos);
+			m_iBufferPos = GetSetting<i32>(Message.value);
 			m_iBufferPos_Tail = -1; // position change resets selection
 		}
 
@@ -879,10 +874,7 @@ void CInput::HandleMessage(SGUIMessage& Message)
 
 		if (Message.value == CStr("multiline"))
 		{
-			bool multiline;
-			GUI<bool>::GetSetting(this, "multiline", multiline);
-
-			if (!multiline)
+			if (!GetSetting<bool>("multiline"))
 				GetScrollBar(0).SetLength(0.f);
 			else
 				GetScrollBar(0).SetLength(m_CachedActualSize.bottom - m_CachedActualSize.top);
@@ -893,20 +885,18 @@ void CInput::HandleMessage(SGUIMessage& Message)
 		UpdateAutoScroll();
 
 		if (Message.value == CStr("readonly"))
-			GUI<bool>::GetSetting(this, "readonly", m_Readonly);
+			m_Readonly = GetSetting<bool>("readonly");
 
 		break;
 	}
 	case GUIM_MOUSE_PRESS_LEFT:
 	{
-		bool scrollbar, multiline;
-		GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-		GUI<bool>::GetSetting(this, "multiline", multiline);
-
 		// Check if we're selecting the scrollbar
-		if (GetScrollBar(0).GetStyle() && multiline)
+		if (GetSetting<bool>("scrollbar") &&
+		    GetSetting<bool>("multiline") &&
+		    GetScrollBar(0).GetStyle())
 		{
-			if (GetMousePos().x > m_CachedActualSize.right - GetScrollBar(0).GetStyle()->m_Width)
+			if (m_pGUI.GetMousePos().x > m_CachedActualSize.right - GetScrollBar(0).GetStyle()->m_Width)
 				break;
 		}
 
@@ -936,22 +926,22 @@ void CInput::HandleMessage(SGUIMessage& Message)
 		if (m_ComposingText)
 			break;
 
-		CStrW* pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
+		const CStrW& pCaption = GetSetting<CStrW>("caption");
 
-		if (pCaption->empty())
+		if (pCaption.empty())
 			break;
 
 		m_iBufferPos = m_iBufferPos_Tail = GetMouseHoveringTextPosition();
 
-		if (m_iBufferPos >= (int)pCaption->length())
-			m_iBufferPos = m_iBufferPos_Tail = pCaption->length() - 1;
+		if (m_iBufferPos >= (int)pCaption.length())
+			m_iBufferPos = m_iBufferPos_Tail = pCaption.length() - 1;
 
 		// See if we are clicking over whitespace
-		if (iswspace((*pCaption)[m_iBufferPos]))
+		if (iswspace(pCaption[m_iBufferPos]))
 		{
 			// see if we are in a section of whitespace greater than one character
-			if ((m_iBufferPos + 1 < (int) pCaption->length() && iswspace((*pCaption)[m_iBufferPos + 1])) ||
-				(m_iBufferPos - 1 > 0 && iswspace((*pCaption)[m_iBufferPos - 1])))
+			if ((m_iBufferPos + 1 < (int) pCaption.length() && iswspace(pCaption[m_iBufferPos + 1])) ||
+				(m_iBufferPos - 1 > 0 && iswspace(pCaption[m_iBufferPos - 1])))
 			{
 				//
 				// We are clicking in an area with more than one whitespace character
@@ -961,7 +951,7 @@ void CInput::HandleMessage(SGUIMessage& Message)
 				// skip the whitespace
 				while (m_iBufferPos > 0)
 				{
-					if (!iswspace((*pCaption)[m_iBufferPos - 1]))
+					if (!iswspace(pCaption[m_iBufferPos - 1]))
 						break;
 
 					m_iBufferPos--;
@@ -969,52 +959,52 @@ void CInput::HandleMessage(SGUIMessage& Message)
 				// now go until we hit white space or punctuation
 				while (m_iBufferPos > 0)
 				{
-					if (iswspace((*pCaption)[m_iBufferPos - 1]))
+					if (iswspace(pCaption[m_iBufferPos - 1]))
 						break;
 
 					m_iBufferPos--;
 
-					if (iswpunct((*pCaption)[m_iBufferPos]))
+					if (iswpunct(pCaption[m_iBufferPos]))
 						break;
 				}
 
 				// [2] Then the right
 				// go right until we are not in whitespace
-				while (++m_iBufferPos_Tail < (int)pCaption->length())
+				while (++m_iBufferPos_Tail < static_cast<int>(pCaption.length()))
 				{
-					if (!iswspace((*pCaption)[m_iBufferPos_Tail]))
+					if (!iswspace(pCaption[m_iBufferPos_Tail]))
 						break;
 				}
 
-				if (m_iBufferPos_Tail == (int)pCaption->length())
+				if (m_iBufferPos_Tail == static_cast<int>(pCaption.length()))
 					break;
 
 				// now go to the right until we hit whitespace or punctuation
-				while (++m_iBufferPos_Tail < (int)pCaption->length())
+				while (++m_iBufferPos_Tail < static_cast<int>(pCaption.length()))
 				{
-					if (iswspace((*pCaption)[m_iBufferPos_Tail]) || iswpunct((*pCaption)[m_iBufferPos_Tail]))
+					if (iswspace(pCaption[m_iBufferPos_Tail]) || iswpunct(pCaption[m_iBufferPos_Tail]))
 						break;
 				}
 			}
 			else
 			{
 				// single whitespace so select word to the right
-				while (++m_iBufferPos_Tail < (int)pCaption->length())
+				while (++m_iBufferPos_Tail < static_cast<int>(pCaption.length()))
 				{
-					if (!iswspace((*pCaption)[m_iBufferPos_Tail]))
+					if (!iswspace(pCaption[m_iBufferPos_Tail]))
 						break;
 				}
 
-				if (m_iBufferPos_Tail == (int)pCaption->length())
+				if (m_iBufferPos_Tail == static_cast<int>(pCaption.length()))
 					break;
 
 				// Don't include the leading whitespace
 				m_iBufferPos = m_iBufferPos_Tail;
 
 				// now go to the right until we hit whitespace or punctuation
-				while (++m_iBufferPos_Tail < (int)pCaption->length())
+				while (++m_iBufferPos_Tail < static_cast<int>(pCaption.length()))
 				{
-					if (iswspace((*pCaption)[m_iBufferPos_Tail]) || iswpunct((*pCaption)[m_iBufferPos_Tail]))
+					if (iswspace(pCaption[m_iBufferPos_Tail]) || iswpunct(pCaption[m_iBufferPos_Tail]))
 						break;
 				}
 			}
@@ -1025,17 +1015,17 @@ void CInput::HandleMessage(SGUIMessage& Message)
 			// go until we hit white space or punctuation
 			while (m_iBufferPos > 0)
 			{
-				if (iswspace((*pCaption)[m_iBufferPos - 1]))
+				if (iswspace(pCaption[m_iBufferPos - 1]))
 					break;
 
 				m_iBufferPos--;
 
-				if (iswpunct((*pCaption)[m_iBufferPos]))
+				if (iswpunct(pCaption[m_iBufferPos]))
 					break;
 			}
 			// go to the right until we hit whitespace or punctuation
-			while (++m_iBufferPos_Tail < (int)pCaption->length())
-				if (iswspace((*pCaption)[m_iBufferPos_Tail]) || iswpunct((*pCaption)[m_iBufferPos_Tail]))
+			while (++m_iBufferPos_Tail < static_cast<int>(pCaption.length()))
+				if (iswspace(pCaption[m_iBufferPos_Tail]) || iswpunct(pCaption[m_iBufferPos_Tail]))
 					break;
 		}
 		UpdateAutoScroll();
@@ -1069,15 +1059,12 @@ void CInput::HandleMessage(SGUIMessage& Message)
 		GetScrollBar(0).SetY(m_CachedActualSize.top);
 		GetScrollBar(0).SetZ(GetBufferedZ());
 		GetScrollBar(0).SetLength(m_CachedActualSize.bottom - m_CachedActualSize.top);
-
-		CStr scrollbar_style;
-		GUI<CStr>::GetSetting(this, "scrollbar_style", scrollbar_style);
-		GetScrollBar(0).SetScrollBarStyle(scrollbar_style);
+		GetScrollBar(0).SetScrollBarStyle(GetSetting<CStr>("scrollbar_style"));
 
 		UpdateText();
 		UpdateAutoScroll();
 
-		GUI<bool>::GetSetting(this, "readonly", m_Readonly);
+		m_Readonly = GetSetting<bool>("readonly");
 		break;
 	}
 	case GUIM_GOT_FOCUS:
@@ -1129,9 +1116,7 @@ void CInput::UpdateCachedSize()
 
 	IGUIObject::UpdateCachedSize();
 
-	bool scrollbar;
-	GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-	if (scrollbar)
+	if (GetSetting<bool>("scrollbar"))
 	{
 		GetScrollBar(0).SetX(m_CachedActualSize.right);
 		GetScrollBar(0).SetY(m_CachedActualSize.top);
@@ -1159,52 +1144,35 @@ void CInput::Draw()
 		m_CursorVisState = true;
 
 	// First call draw on ScrollBarOwner
-	bool scrollbar;
-	float buffer_zone;
-	bool multiline;
-	bool mask;
-	GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
-	GUI<bool>::GetSetting(this, "multiline", multiline);
-	GUI<bool>::GetSetting(this, "mask", mask);
+	const bool scrollbar = GetSetting<bool>("scrollbar");
+	const float buffer_zone = GetSetting<float>("buffer_zone");
+	const bool multiline = GetSetting<bool>("multiline");
+	const bool mask = GetSetting<bool>("mask");
 
 	if (scrollbar && multiline)
 		IGUIScrollBarOwner::Draw();
 
-	if (!GetGUI())
-		return;
+	const CGUIColor& color = GetSetting<CGUIColor>("textcolor");
+	const CGUIColor& color_selected = GetSetting<CGUIColor>("textcolor_selected");
 
-	CStrW font_name_w;
-	CColor color, color_selected;
-	GUI<CStrW>::GetSetting(this, "font", font_name_w);
-	GUI<CColor>::GetSetting(this, "textcolor", color);
-	GUI<CColor>::GetSetting(this, "textcolor_selected", color_selected);
-	CStrIntern font_name(font_name_w.ToUTF8());
+	CStrIntern font_name(GetSetting<CStrW>("font").ToUTF8());
 
-	// Get pointer of caption, it might be very large, and we don't
-	//  want to copy it continuously.
-	CStrW* pCaption = NULL;
+	const CStrW& pCaption = GetSetting<CStrW>("caption");
 	wchar_t mask_char = L'*';
 	if (mask)
 	{
-		CStrW maskStr;
-		GUI<CStrW>::GetSetting(this, "mask_char", maskStr);
+		const CStrW& maskStr = GetSetting<CStrW>("mask_char");
+
 		if (maskStr.length() > 0)
 			mask_char = maskStr[0];
 	}
-	else
-		pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
 
-	CGUISpriteInstance* sprite = NULL;
-	CGUISpriteInstance* sprite_selectarea = NULL;
-	int cell_id;
+	CGUISpriteInstance& sprite = GetSetting<CGUISpriteInstance>("sprite");
+	CGUISpriteInstance& sprite_selectarea = GetSetting<CGUISpriteInstance>("sprite_selectarea");
 
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite", sprite);
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite_selectarea", sprite_selectarea);
+	const int cell_id = GetSetting<i32>("cell_id");
 
-	GUI<int>::GetSetting(this, "cell_id", cell_id);
-
-	GetGUI()->DrawSprite(*sprite, cell_id, bz, m_CachedActualSize);
+	m_pGUI.DrawSprite(sprite, cell_id, bz, m_CachedActualSize);
 
 	float scroll = 0.f;
 	if (scrollbar && multiline)
@@ -1393,14 +1361,13 @@ void CInput::Draw()
 							rect.right = m_CachedActualSize.right;
 					}
 
-					if (sprite_selectarea)
-						GetGUI()->DrawSprite(*sprite_selectarea, cell_id, bz+0.05f, rect);
+					m_pGUI.DrawSprite(sprite_selectarea, cell_id, bz + 0.05f, rect);
 				}
 
 				if (i < (int)it->m_ListOfX.size())
 				{
 					if (!mask)
-						x_pointer += (float)font.GetCharacterWidth((*pCaption)[it->m_ListStart + i]);
+						x_pointer += (float)font.GetCharacterWidth(pCaption[it->m_ListStart + i]);
 					else
 						x_pointer += (float)font.GetCharacterWidth(mask_char);
 				}
@@ -1486,7 +1453,7 @@ void CInput::Draw()
 				if (i != (int)it->m_ListOfX.size())
 				{
 					if (!mask)
-						textRenderer.PrintfAdvance(L"%lc", (*pCaption)[it->m_ListStart + i]);
+						textRenderer.PrintfAdvance(L"%lc", pCaption[it->m_ListStart + i]);
 					else
 						textRenderer.PrintfAdvance(L"%lc", mask_char);
 				}
@@ -1523,23 +1490,16 @@ void CInput::Draw()
 
 void CInput::UpdateText(int from, int to_before, int to_after)
 {
-	CStrW caption;
-	CStrW font_name_w;
-	float buffer_zone;
-	bool multiline;
-	bool mask;
-	GUI<CStrW>::GetSetting(this, "font", font_name_w);
-	GUI<CStrW>::GetSetting(this, "caption", caption);
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
-	GUI<bool>::GetSetting(this, "multiline", multiline);
-	GUI<bool>::GetSetting(this, "mask", mask);
-	CStrIntern font_name(font_name_w.ToUTF8());
+	const CStrW& caption = GetSetting<CStrW>("caption");
+	const float buffer_zone = GetSetting<float>("buffer_zone");
+	const bool multiline = GetSetting<bool>("multiline");
+	const bool mask = GetSetting<bool>("mask");
+	CStrIntern font_name(GetSetting<CStrW>("font").ToUTF8());
 
 	wchar_t mask_char = L'*';
 	if (mask)
 	{
-		CStrW maskStr;
-		GUI<CStrW>::GetSetting(this, "mask_char", maskStr);
+		const CStrW& maskStr = GetSetting<CStrW>("mask_char");
 		if (maskStr.length() > 0)
 			mask_char = maskStr[0];
 	}
@@ -1876,9 +1836,7 @@ void CInput::UpdateText(int from, int to_before, int to_after)
 	// add the final row (even if empty)
 	m_CharacterPositions.insert(current_line, row);
 
-	bool scrollbar;
-	GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-	if (scrollbar)
+	if (GetSetting<bool>("scrollbar"))
 	{
 		GetScrollBar(0).SetScrollRange(m_CharacterPositions.size() * font.GetLineSpacing() + buffer_zone*2.f);
 		GetScrollBar(0).SetScrollSpace(m_CachedActualSize.GetHeight());
@@ -1890,33 +1848,25 @@ int CInput::GetMouseHoveringTextPosition() const
 	if (m_CharacterPositions.empty())
 		return 0;
 
+	const float buffer_zone = GetSetting<float>("buffer_zone");
+	const bool multiline = GetSetting<bool>("multiline");
+
 	// Return position
 	int retPosition;
 
-	float buffer_zone;
-	bool multiline;
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
-	GUI<bool>::GetSetting(this, "multiline", multiline);
-
 	std::list<SRow>::const_iterator current = m_CharacterPositions.begin();
 
-	CPos mouse = GetMousePos();
+	CPos mouse = m_pGUI.GetMousePos();
 
 	if (multiline)
 	{
-		CStrW font_name_w;
-		bool scrollbar;
-		GUI<CStrW>::GetSetting(this, "font", font_name_w);
-		GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-		CStrIntern font_name(font_name_w.ToUTF8());
-
 		float scroll = 0.f;
-		if (scrollbar)
+		if (GetSetting<bool>("scrollbar"))
 			scroll = GetScrollBarPos(0);
 
 		// Now get the height of the font.
 						// TODO: Get the real font
-		CFontMetrics font(font_name);
+		CFontMetrics font(CStrIntern(GetSetting<CStrW>("font").ToUTF8()));
 		float spacing = (float)font.GetLineSpacing();
 
 		// Change mouse position relative to text.
@@ -1993,7 +1943,7 @@ int CInput::GetXTextPosition(const std::list<SRow>::const_iterator& current, con
 
 void CInput::DeleteCurSelection()
 {
-	CStrW* pCaption = (CStrW*)m_Settings["caption"].m_pSetting;
+	CStrW& pCaption = GetSetting<CStrW>("caption");
 
 	int virtualFrom;
 	int virtualTo;
@@ -2009,8 +1959,9 @@ void CInput::DeleteCurSelection()
 		virtualTo = m_iBufferPos;
 	}
 
-	*pCaption = pCaption->Left(virtualFrom) +
-				pCaption->Right((long)pCaption->length() - virtualTo);
+	pCaption =
+		pCaption.Left(virtualFrom) +
+		pCaption.Right(static_cast<long>(pCaption.length()) - virtualTo);
 
 	UpdateText(virtualFrom, virtualTo, virtualFrom);
 
@@ -2028,12 +1979,9 @@ bool CInput::SelectingText() const
 
 float CInput::GetTextAreaWidth()
 {
-	bool scrollbar;
-	float buffer_zone;
-	GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
+	const float buffer_zone = GetSetting<float>("buffer_zone");
 
-	if (scrollbar && GetScrollBar(0).GetStyle())
+	if (GetSetting<bool>("scrollbar") && GetScrollBar(0).GetStyle())
 		return m_CachedActualSize.GetWidth() - buffer_zone*2.f - GetScrollBar(0).GetStyle()->m_Width;
 	else
 		return m_CachedActualSize.GetWidth() - buffer_zone*2.f;
@@ -2041,29 +1989,19 @@ float CInput::GetTextAreaWidth()
 
 void CInput::UpdateAutoScroll()
 {
-	float buffer_zone;
-	bool multiline;
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
-	GUI<bool>::GetSetting(this, "multiline", multiline);
+	const float buffer_zone = GetSetting<float>("buffer_zone");
 
 	// Autoscrolling up and down
-	if (multiline)
+	if (GetSetting<bool>("multiline"))
 	{
-		CStrW font_name_w;
-		bool scrollbar;
-		GUI<CStrW>::GetSetting(this, "font", font_name_w);
-		GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-		CStrIntern font_name(font_name_w.ToUTF8());
-
-		float scroll = 0.f;
-		if (!scrollbar)
+		if (!GetSetting<bool>("scrollbar"))
 			return;
 
-		scroll = GetScrollBar(0).GetPos();
+		const float scroll = GetScrollBar(0).GetPos();
 
 		// Now get the height of the font.
 						// TODO: Get the real font
-		CFontMetrics font(font_name);
+		CFontMetrics font(CStrIntern(GetSetting<CStrW>("font").ToUTF8()));
 		float spacing = (float)font.GetLineSpacing();
 		//float height = font.GetHeight();
 

@@ -12,7 +12,9 @@
   </Armour>
   <Attack>
     <Ranged>
-      <Pierce>16</Pierce>
+      <Damage>
+        <Pierce>16</Pierce>
+      </Damage>
       <MaxRange>55</MaxRange>
       <MinRange>13</MinRange>
       <ElevationBonus>0</ElevationBonus>
@@ -66,7 +68,4 @@
   <TerritoryDecay>
     <DecayRate>2</DecayRate>
   </TerritoryDecay>
-  <VisualActor>
-    <Actor>props/special/palisade_rocks_outpost.xml</Actor>
-  </VisualActor>
 </Entity>

@@ -6,9 +6,11 @@
   </Armour>
   <Attack>
     <Melee>
-      <Hack>12.0</Hack>
-      <Pierce>10.0</Pierce>
-      <Crush>0.0</Crush>
+      <Damage>
+        <Hack>12.0</Hack>
+        <Pierce>10.0</Pierce>
+        <Crush>0.0</Crush>
+      </Damage>
       <MaxRange>4.5</MaxRange>
       <PrepareTime>450</PrepareTime>
       <RepeatTime>900</RepeatTime>
@@ -22,17 +24,11 @@
     </Melee>
   </Attack>
   <Identity>
-    <VisibleClasses datatype="tokens">Melee Spear</VisibleClasses>
+    <VisibleClasses datatype="tokens">Melee Spearman</VisibleClasses>
     <GenericName>Hero Spearman</GenericName>
     <Tooltip>Counters: 3x vs. Cavalry.</Tooltip>
     <Formations datatype="tokens">
       special/formations/testudo
     </Formations>
   </Identity>
-  <UnitMotion>
-    <WalkSpeed op="mul">1.0</WalkSpeed>
-    <Run>
-      <Speed op="mul">1.0</Speed>
-    </Run>
-  </UnitMotion>
 </Entity>

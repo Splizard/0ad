@@ -5,13 +5,13 @@
 # Translators:
 # Gontzal M. Pujana <juchuf@gmail.com>, 2016
 # Mielanjel Iraeta <pospolos@gmail.com>, 2017-2019
-# Osoitz <oelkoro@gmail.com>, 2015
+# Osoitz <oelkoro@gmail.com>, 2015,2019
 # Gontzal M. Pujana <juchuf@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-03-22 16:01+0000\n"
+"POT-Creation-Date: 2019-08-23 07:09+0000\n"
+"PO-Revision-Date: 2019-08-23 15:28+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/wildfire-games/0ad/language/eu/)\n"
 "MIME-Version: 1.0\n"
@@ -309,16 +309,16 @@ msgstr "Sumendi Hila"
 
 #: maps/random/fields_of_meroe.jsonsettings.Description
 msgid ""
-"The \"Island of Meroe\", a vast peninsula flanked by the Nile and Atbarah "
+"The \"Island of Meroë\", a vast peninsula flanked by the Nile and Atbarah "
 "rivers, formed the heartland of ancient Kush. Where the harsh deserts start "
 "making way for the semi-arid savannahs and small acacia forests dot the "
 "landscape. The area is rich in resources and the ever-present Nile brings "
 "life, but grave threats loom on the opposite riverbank."
-msgstr "\"Meroe uhartea\", Nilo eta Atbarah ibaiek inguratutako penintsula zabala, Kush antzinako koroaren bihotza izan zen. Basamortu gogorrak sabana erdi elkortu bihurtu eta akazia baso txikiak tartekatzen dira. Baliabide aberatsak daude, eta Nilok bizitza ekartzen du, baina mehatxu larriak kontrako ibaiertzera inguratzen dira."
+msgstr "\"Meroë uhartea\", Nilo eta Atbarah ibaiek inguratutako penintsula zabala, Kush antzinako koroaren bihotza izan zen. Basamortu gogorrak sabana erdi elkortu bihurtu eta akazia baso txikiak tartekatzen dira. Baliabide aberatsak daude, eta Nilok bizitza ekartzen du, baina mehatxu larriak kontrako ibaiertzera inguratzen dira."
 
 #: maps/random/fields_of_meroe.jsonsettings.Name
-msgid "Fields of Meroe"
-msgstr "Meroe zelaiak"
+msgid "Fields of Meroë"
+msgstr "Meroé zelaiak"
 
 #: maps/random/flood.jsonsettings.Description
 msgid ""
@@ -1572,10 +1572,10 @@ msgstr "Mapa honek Napata antzinako hiria berreraikitzen erakusten du. [color=\"
 
 #: maps/scenarios/Necropolis.xml:Description:39
 msgid ""
-"4 players duke it out over the vast Nile Delta. Each city starts out nestled atop a large acropolis, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
+"Four players duke it out over the vast Nile Delta. Each city starts out nestled atop a large plateau, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
 "\n"
 "Scouts say the nearby branches of the Nile River are shallow and fordable in multiple locations, so should only serve as a minor barrier between enemy factions."
-msgstr "4 jokalari aurrez-aurre Niloren Delta zabalean. Hiri bakoitza akropoli handi batekin hasiko da, baino baliabideak urriak dira, jokalari bakoitza bere baliabide biltegia inguruko lurraldetara zabaltzera behartuz.\n\nEsploratzaileek Niloko adarren sakonera ez dela oso handia eta toki askoetatik gurutzatzeko erraza dela esaten digute, hori dela eta babes ahula eskainiko dute etsaien fakzioen aurrean."
+msgstr ""
 
 #: maps/scenarios/Necropolis.xml:Name:39
 msgid "Necropolis"
@@ -2041,7 +2041,7 @@ msgstr "Unitate bakoitza jokoan."
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27
+#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
 msgid "Give an interesting description of your map."
 msgstr "Zure mapari azalpen interesgarria ematen dio."
 
@@ -2066,6 +2066,7 @@ msgid "A quick battle demo map using Roman legionnaires."
 msgstr "Borroka azkarraren adibidea Erromatar legionarioekin."
 
 #: maps/scenarios/_default.xml:Name:28
+#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "Mapa izengabea"
 
@@ -2097,12 +2098,24 @@ msgstr "Itsas Adibidea"
 msgid "Base Temperate Map"
 msgstr "Oinarrizko Mapa Epela"
 
+#: maps/scenarios/unit_motion_integration_test.xml:Description:40
+msgid ""
+"This map is designed to test some basic unit movement cases. It will involve"
+" unitAI, unitMotion and the relevant pathfinders and thus acts as an "
+"integrated test map. Look for things such as stuck units, wrong animations, "
+"and weird pathing."
+msgstr "mapa hau unitateen mugimenduaren oinarrizko kaus batzuk probatzeko diseinatu da. unitAI, unitMotion eta dagozkien bide bilatze algoritmoak barne-hartzen ditu eta integratutako probarako mapa gisa balio du. Bilatu blokatutako unitateak, animazio okerrak, eta ibilbide bereziak."
+
+#: maps/scenarios/unit_motion_integration_test.xml:Name:40
+msgid "Unit Motion Integration Test"
+msgstr "Unitateen mugimenduaren integrazio proba"
+
 #: maps/skirmishes/Acropolis Bay (2).xml:Description:39
 msgid ""
-"Each player starts the match atop a large flat plateau, otherwise known as an acropolis.\n"
+"Each player starts the match atop a large flat plateau.\n"
 "\n"
-"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed acropolis commanding the valley below."
-msgstr "Jokalari bakoitza partida lautada baten gainetik hasiko da, akropoli bezala ere ezagutua.\n\nEkialdean arrantzarako aukera ematen duen badia bat dago. Mendebaldean inguru babestu malkartsu bat dago bertan jaberik gabeko akropoli bat duena, harana azpian hartzen duena. "
+"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed plateau commanding the valley below."
+msgstr ""
 
 #: maps/skirmishes/Acropolis Bay (2).xml:Name:39
 msgid "Acropolis Bay (2)"
@@ -2322,6 +2335,14 @@ msgid ""
 "- Western desert: Oasis Charga and Siwa, Qattara Depression\n"
 msgstr "Antzinako Egiptoko aztarnen alde borrokatu!\n\nJokalariak garaturik diren hiri eta armada txikiekin hasten dira, bakoitzak abantaila eta desabantaila desberdinak dituzte. Kontuz, badira 7 indartsu boteretsu eta lapur maltzurrak.\n\nHau 0 A.D. aurreko mendea da. Egipto zatiturik dago barnean helenístico (Alejandría,  seleuzidak ordezkaturik) eta barne influentzien (Memphis, Ptolomeok ordezkaturik) artean Tebas Kushek hartua izan da NIlo hegoaldeko kliman. Al-Dschabal al-Achdaren ipar-mendebaldean, Cirene mediterraneoko hiria aurkitzen den lekuan, erromatarrak inbasioa prestatzen ari dira. Tih basamortua eta Sinai menditik, etsaiak (persiarrak ordezkaturik) Siwa oasira aldera doaz. Chargak ere (Kartagok ordezkaturik) hego-mendebaldeko basamortuan, pastelaren zati bat bereganatu nahi du.\nTokiak:\n- Alejandria: Liburutegia, kaia\n- Memphis: Necropoli, piramide, Apis santutegia\n- Tebas: tenpluaren distritua, Erregeen harana\n- Cirene: Macchie mediterraneo, olibondoak\n- Fayyum: krokodiloen santutegia, Niloko aldaparoa\n- Ekialdeko basamortua: Sinaí mendia, Wadi sakona, Itsas Gorriaren labarrak\n- Mendebaldeko basamortua: Oasis Charga eta Siwa, Qattarako sakonunea\n"
 
+#: maps/skirmishes/Farmland (2).xml:Description:40
+msgid "Farmland in Eastern Europe."
+msgstr "Landa lurrak Europa Ekialdean"
+
+#: maps/skirmishes/Farmland (2).xml:Name:40
+msgid "Farmland (2)"
+msgstr "Landalurrak (2)"
+
 #: maps/skirmishes/Forest Battle (4).xml:Description:40
 msgid ""
 "A forest battle map where all players fight for supremacy and control over "
@@ -2359,8 +2380,8 @@ msgstr "Gambia Erreka (3)"
 #: maps/skirmishes/Golden Island (2).xml:Description:40
 msgid ""
 "A ring of land borders a resource-rich island in the Mediterranean. Players "
-"can access the center via a narrow strip of land or via boat."
-msgstr "Lur eraztun batek baliabidez aberats den uharte batekin muga egiten du Mediterraneoan. Jokalariak erdira iritsi daitezke lur pasabide estu batez edo itsasontziz."
+"can access the center via a narrow strip of shallow water or via boat."
+msgstr ""
 
 #: maps/skirmishes/Golden Island (2).xml:Name:40
 msgid "Golden Island (2)"
@@ -2380,10 +2401,10 @@ msgstr "Urrezko Oasia (2)"
 #: maps/skirmishes/Greek Acropolis (2).xml:Description:39
 #: maps/skirmishes/Greek Acropolis Night (2).xml:Description:39
 msgid ""
-"Two factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Two factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Bi talde lautada harritsu handi eta altuetan, edo akropoli, igota daude.\n\nLurrak esploratu altxorrak aurkitzeko eta baliabide iturri berriak ziurtatzeko."
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (2).xml:Name:39
 msgid "Greek Acropolis (2)"
@@ -2391,10 +2412,10 @@ msgstr "Akropoli Grekoa (2)"
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Description:39
 msgid ""
-"Three factions find themselves perched safely atop large rocky plateaus, or acropolises, whereas the fourth one is separated from their foes by a river branch.\n"
+"Three factions find themselves perched safely atop large rocky plateaus, whereas the fourth one is separated from their foes by a river branch.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources.."
-msgstr "Hiru talde lautada harritsu handi eta altuak, edo akropoli, ematen duten segurtasunean igota daude.\n\nBide batez laugarren talde bat errekako adar batez etsaitik banandurik dago.\n\nLurrak esploratu hobari altxorrak aurkitzeko eta baliabide gehigarriak eskuratzeko."
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Name:39
 msgid "Greek Acropolis (4)"
@@ -2506,6 +2527,14 @@ msgstr "Iparreko hotzaren handitasunean galdurik, 2 jokalarik uhartetxoaren kont
 msgid "Northern Island (2)"
 msgstr "Iparreko Uhartea (2)"
 
+#: maps/skirmishes/Oceanside (2).xml:Description:40
+msgid "A Lush temperate biome along an ocean. "
+msgstr "Bioma epel oparo bat ozeanoan zehar."
+
+#: maps/skirmishes/Oceanside (2).xml:Name:40
+msgid "Oceanside (2)"
+msgstr "Ozeanoaren aldea (2)"
+
 #: maps/skirmishes/Persian Highlands (4).xml:Description:39
 msgid ""
 "A dry central basin rich in minerals surrounded by rocky hills and "
@@ -2609,12 +2638,20 @@ msgstr "Mendiak eta basamortua inguratutako oasi bat. Uraren bazterreko landa ze
 msgid "Team Oasis (2v2)"
 msgstr "Taldekako Oasia (2v2)"
 
+#: maps/skirmishes/Temperate Roadway (2).xml:Description:40
+msgid "Temperate zone map with plentiful resources. Map Size: Small"
+msgstr "Baliabide ugariko gune epelen mapa. Maparen tamaina: txikia"
+
+#: maps/skirmishes/Temperate Roadway (2).xml:Name:40
+msgid "Temperate Roadway (2)"
+msgstr "Bide epela (2)"
+
 #: maps/skirmishes/Thessalian Plains (4).xml:Description:39
 msgid ""
 "The rolling Thessalian plain is traversed with narrow streams, easily "
 "forded. Wide-open spaces allow for massive expansion, while each player "
-"starts the match safe atop a large acropolis."
-msgstr "Tesaliako lautada ondulatua erraz pasa daitezkeen errekastoz beterik dago. Zabalguneek neurrigabeko esploratzea ahalbidetzen dute, bitartean jokalari bakoitzak partida akropoli handi baten ziurtasunetik hasiko du."
+"starts the match safe atop a large plateau."
+msgstr ""
 
 #: maps/skirmishes/Thessalian Plains (4).xml:Name:39
 msgid "Thessalian Plains (4)"
@@ -2622,10 +2659,10 @@ msgstr "Tesaliako Lautadak (4)"
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Description:40
 msgid ""
-"Four factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Four factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Lau talde lautada harritsu handi eta altuetan, edo akropoli, igota daude.\n\nLurrak esploratu altxorrak aurkitzeko eta baliabide iturri berriak ziurtatzeko."
+msgstr ""
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Name:40
 msgid "Tuscan Acropolis (4)"

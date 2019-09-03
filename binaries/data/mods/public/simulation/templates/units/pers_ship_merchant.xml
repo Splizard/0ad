@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Entity parent="template_unit_mechanical_ship_merchant">
+<Entity parent="template_unit_ship_merchant">
   <Footprint>
     <Square width="6.0" depth="25.0"/>
     <Height>8.0</Height>
@@ -8,7 +8,7 @@
     <Civ>pers</Civ>
     <Lang>persian</Lang>
     <GenericName>Ionian Trade Ship</GenericName>
-    <SpecificName>Yaunash Nav</SpecificName>
+    <SpecificName>Nauš Yauna</SpecificName>
     <Icon>units/pers_ship_merchant.png</Icon>
   </Identity>
   <VisualActor>

@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -30,26 +30,15 @@ void CGUISprite::AddImage(SGUIImage* image)
 	m_Images.push_back(image);
 }
 
-void CGUISpriteInstance::Draw(CRect Size, int CellID, std::map<CStr, CGUISprite*>& Sprites, float Z) const
+void CGUISpriteInstance::Draw(CGUI& pGUI, const CRect& Size, int CellID, std::map<CStr, const CGUISprite*>& Sprites, float Z) const
 {
 	if (m_CachedSize != Size || m_CachedCellID != CellID)
 	{
-		GUIRenderer::UpdateDrawCallCache(m_DrawCallCache, m_SpriteName, Size, CellID, Sprites);
+		GUIRenderer::UpdateDrawCallCache(pGUI, m_DrawCallCache, m_SpriteName, Size, CellID, Sprites);
 		m_CachedSize = Size;
 		m_CachedCellID = CellID;
 	}
 	GUIRenderer::Draw(m_DrawCallCache, Z);
-}
-
-void CGUISpriteInstance::Invalidate()
-{
-	m_CachedSize = CRect();
-	m_CachedCellID = -1;
-}
-
-bool CGUISpriteInstance::IsEmpty() const
-{
-	return m_SpriteName.empty();
 }
 
 // Plus a load of constructors / assignment operators, which don't copy the
@@ -66,16 +55,10 @@ CGUISpriteInstance::CGUISpriteInstance(const CStr& SpriteName)
 {
 }
 
-CGUISpriteInstance::CGUISpriteInstance(const CGUISpriteInstance& Sprite)
-	: m_SpriteName(Sprite.m_SpriteName), m_CachedCellID(-1)
-{
-}
-
-CGUISpriteInstance& CGUISpriteInstance::operator=(const CStr& SpriteName)
+void CGUISpriteInstance::SetName(const CStr& SpriteName)
 {
 	m_SpriteName = SpriteName;
+	m_CachedSize = CRect();
 	m_DrawCallCache.clear();
-	Invalidate();
-	return *this;
+	m_CachedCellID = -1;
 }
-

@@ -5,7 +5,6 @@
     <Height>12.0</Height>
   </Footprint>
   <Identity>
-    <GenericName>Stone Ruins</GenericName>
     <SpecificName>Ptolemaic Egyptian Statues</SpecificName>
     <Icon>structures/statue.png</Icon>
   </Identity>
@@ -14,7 +13,6 @@
   </Obstruction>
   <ResourceSupply>
     <Amount>300</Amount>
-    <Type>stone.ruins</Type>
   </ResourceSupply>
   <Sound>
     <SoundGroups>

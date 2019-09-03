@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -282,9 +282,17 @@ public:
 	SessionHandlerWrapper(glooxwrapper::Jingle::SessionHandler* wrapped, bool owned)
 		: m_Wrapped(wrapped), m_Owned(owned) {}
 
+	~SessionHandlerWrapper()
+	{
+		if (m_Owned)
+			delete m_Wrapped;
+	}
+
 	virtual void handleSessionAction(gloox::Jingle::Action action, gloox::Jingle::Session* session, const gloox::Jingle::Session::Jingle* jingle)
 	{
-		m_Wrapped->handleSessionAction(action, new glooxwrapper::Jingle::Session(session, false), new glooxwrapper::Jingle::Session::Jingle(jingle, false));
+		glooxwrapper::Jingle::Session sessionWrapper(session, false);
+		glooxwrapper::Jingle::Session::Jingle jingleWrapper(jingle, false);
+		m_Wrapped->handleSessionAction(action, sessionWrapper, jingleWrapper);
 	}
 
 	virtual void handleSessionActionError(gloox::Jingle::Action UNUSED(action), gloox::Jingle::Session* UNUSED(session), const gloox::Error* UNUSED(error))
@@ -374,8 +382,8 @@ void glooxwrapper::Client::disconnect()
 
 void glooxwrapper::Client::registerStanzaExtension(glooxwrapper::StanzaExtension* ext)
 {
-	gloox::StanzaExtension* stanza = new StanzaExtensionWrapper(ext, true);
-	m_Wrapped->registerStanzaExtension(stanza);
+	// ~StanzaExtensionFactory() deletes this new StanzaExtensionWrapper
+	m_Wrapped->registerStanzaExtension(new StanzaExtensionWrapper(ext, true));
 }
 
 void glooxwrapper::Client::registerConnectionListener(glooxwrapper::ConnectionListener* hnd)
@@ -788,32 +796,6 @@ const glooxwrapper::Jingle::Plugin glooxwrapper::Jingle::Plugin::findPlugin(int 
 	return glooxwrapper::Jingle::Plugin(m_Wrapped->findPlugin(type), false);
 }
 
-glooxwrapper::Jingle::Content::Content(const string& name, const PluginList& plugins)
-	: glooxwrapper::Jingle::Plugin(NULL, false)
-{
-	gloox::Jingle::PluginList glooxPluginList;
-	for (const glooxwrapper::Jingle::Plugin* const& plugin: plugins)
-		glooxPluginList.push_back(plugin->getWrapped());
-
-	m_Wrapped = new gloox::Jingle::Content(name.to_string(), glooxPluginList);
-	m_Owned = true;
-}
-
-glooxwrapper::Jingle::Content::Content()
-	: glooxwrapper::Jingle::Plugin(NULL, false)
-{
-	m_Wrapped = new gloox::Jingle::Content();
-	m_Owned = true;
-}
-
-const glooxwrapper::Jingle::PluginList glooxwrapper::Jingle::Session::Jingle::plugins() const
-{
-	glooxwrapper::Jingle::PluginList pluginListWrapper;
-	for (const gloox::Jingle::Plugin* const& plugin : m_Wrapped->plugins())
-		pluginListWrapper.push_back(new glooxwrapper::Jingle::Plugin(const_cast<gloox::Jingle::Plugin*>(plugin), false));
-	return pluginListWrapper;
-}
-
 glooxwrapper::Jingle::ICEUDP::Candidate glooxwrapper::Jingle::Session::Jingle::getCandidate() const
 {
 	const gloox::Jingle::Content* content = static_cast<const gloox::Jingle::Content*>(m_Wrapped->plugins().front());
@@ -828,11 +810,22 @@ glooxwrapper::Jingle::ICEUDP::Candidate glooxwrapper::Jingle::Session::Jingle::g
 	return glooxwrapper::Jingle::ICEUDP::Candidate{glooxCandidate.ip, glooxCandidate.port};
 }
 
+glooxwrapper::Jingle::Session::Session(gloox::Jingle::Session* wrapped, bool owned)
+	: m_Wrapped(wrapped), m_Owned(owned)
+{
+}
+
+glooxwrapper::Jingle::Session::~Session()
+{
+	if (m_Owned)
+		delete m_Wrapped;
+}
+
 bool glooxwrapper::Jingle::Session::sessionInitiate(char* ipStr, u16 port)
 {
-	gloox::Jingle::ICEUDP::CandidateList* candidateList = new gloox::Jingle::ICEUDP::CandidateList();
+	gloox::Jingle::ICEUDP::CandidateList candidateList;
 
-	candidateList->push_back(gloox::Jingle::ICEUDP::Candidate
+	candidateList.push_back(gloox::Jingle::ICEUDP::Candidate
 	{
 		"1", // component_id,
 		"1", // foundation
@@ -848,49 +841,13 @@ bool glooxwrapper::Jingle::Session::sessionInitiate(char* ipStr, u16 port)
 		gloox::Jingle::ICEUDP::ServerReflexive
 	});
 
-	gloox::Jingle::PluginList* pluginList = new gloox::Jingle::PluginList();
-	pluginList->push_back(new gloox::Jingle::ICEUDP(/*local_pwd*/"", /*local_ufrag*/"", *candidateList));
-	return m_Wrapped->sessionInitiate(new gloox::Jingle::Content(std::string("game-data"), *pluginList));
-}
+	// sessionInitiate deletes the new Content, and
+	// the Plugin destructor inherited by Content frees the ICEUDP plugin.
 
-glooxwrapper::Jingle::ICEUDP::ICEUDP(glooxwrapper::Jingle::ICEUDP::CandidateList& candidates)
-	: glooxwrapper::Jingle::Plugin(NULL, false)
-{
-	gloox::Jingle::ICEUDP::CandidateList glooxCandidates;
-	for (const glooxwrapper::Jingle::ICEUDP::Candidate& candidate : candidates)
-		glooxCandidates.push_back(gloox::Jingle::ICEUDP::Candidate
-			{
-				"1", // component_id,
-				"1", // foundation
-				"0", // candidate_generation
-				"1", // candidate_id
-				candidate.ip.to_string(),
-				"0", // network
-				candidate.port,
-				0, // priority
-				"udp",
-				"", // base_ip
-				0, // base_port
-				gloox::Jingle::ICEUDP::ServerReflexive
-			});
+	gloox::Jingle::PluginList pluginList;
+	pluginList.push_back(new gloox::Jingle::ICEUDP(/*local_pwd*/"", /*local_ufrag*/"", candidateList));
 
-	m_Wrapped = new gloox::Jingle::ICEUDP(/*local_pwd*/"", /*local_ufrag*/"", glooxCandidates);
-	m_Owned = true;
-}
-
-glooxwrapper::Jingle::ICEUDP::ICEUDP()
-	: glooxwrapper::Jingle::Plugin(NULL, false)
-{
-	m_Wrapped = new gloox::Jingle::ICEUDP();
-	m_Owned = true;
-}
-
-const glooxwrapper::Jingle::ICEUDP::CandidateList glooxwrapper::Jingle::ICEUDP::candidates() const
-{
-	glooxwrapper::Jingle::ICEUDP::CandidateList candidateListWrapper;
-	for (const gloox::Jingle::ICEUDP::Candidate& candidate : static_cast<const gloox::Jingle::ICEUDP*>(m_Wrapped)->candidates())
-		candidateListWrapper.push_back(glooxwrapper::Jingle::ICEUDP::Candidate{candidate.ip, candidate.port});
-	return candidateListWrapper;
+	return m_Wrapped->sessionInitiate(new gloox::Jingle::Content(std::string("game-data"), pluginList));
 }
 
 glooxwrapper::SessionManager::SessionManager(Client* parent, Jingle::SessionHandler* sh)
@@ -907,12 +864,17 @@ glooxwrapper::SessionManager::~SessionManager()
 
 void glooxwrapper::SessionManager::registerPlugins()
 {
+	// This calls m_factory.registerPlugin (see jinglesessionmanager.cpp), hence
+	// ~PluginFactory() will delete these new plugin templates.
 	m_Wrapped->registerPlugin(new gloox::Jingle::Content());
 	m_Wrapped->registerPlugin(new gloox::Jingle::ICEUDP());
 }
 
 glooxwrapper::Jingle::Session glooxwrapper::SessionManager::createSession(const JID& callee)
 {
+	// The wrapped gloox SessionManager keeps track of this session and deletes it on ~SessionManager().
 	gloox::Jingle::Session* glooxSession = m_Wrapped->createSession(callee.getWrapped(), m_HandlerWrapper);
+
+	// Hence the glooxwrapper::Jingle::Session may not own the gloox::Jingle::Session.
 	return glooxwrapper::Jingle::Session(glooxSession, false);
 }

@@ -23,7 +23,7 @@ function init(data)
 	let savedGames = Engine.GetSavedGames().sort(sortDecreasingDate);
 
 	let gameSelection = Engine.GetGUIObjectByName("gameSelection");
-	gameSelection.enabled = savedGames.length;
+	gameSelection.enabled = savedGames.length != 0;
 
 	if (!savedGames.length)
 	{
@@ -80,7 +80,7 @@ function reallySaveGame(name, desc, nameIsPrefix)
 
 function closeSave()
 {
-	Engine.PopGuiPageCB(0);
+	Engine.PopGuiPage();
 }
 
 // HACK: Engine.SaveGame* expects this function to be defined on the current page.

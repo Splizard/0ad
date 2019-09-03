@@ -24,15 +24,16 @@ DeathDamage.prototype.Schema =
 		"<Shape>Circular</Shape>" +
 		"<Range>20</Range>" +
 		"<FriendlyFire>false</FriendlyFire>" +
-		"<Hack>0.0</Hack>" +
-		"<Pierce>10.0</Pierce>" +
-		"<Crush>50.0</Crush>" +
+		"<Damage>" +
+			"<Hack>0.0</Hack>" +
+			"<Pierce>10.0</Pierce>" +
+			"<Crush>50.0</Crush>" +
+		"</Damage>" +
 	"</a:example>" +
 	"<element name='Shape' a:help='Shape of the splash damage, can be circular'><text/></element>" +
 	"<element name='Range' a:help='Size of the area affected by the splash'><ref name='nonNegativeDecimal'/></element>" +
 	"<element name='FriendlyFire' a:help='Whether the splash damage can hurt non enemy units'><data type='boolean'/></element>" +
-	DamageTypes.BuildSchema("damage strength") +
-	DeathDamage.prototype.bonusesSchema;
+	Attacking.BuildAttackEffectsSchema();
 
 DeathDamage.prototype.Init = function()
 {
@@ -40,22 +41,9 @@ DeathDamage.prototype.Init = function()
 
 DeathDamage.prototype.Serialize = null; // we have no dynamic state to save
 
-DeathDamage.prototype.GetDeathDamageStrengths = function()
+DeathDamage.prototype.GetDeathDamageEffects = function()
 {
-	// Work out the damage values with technology effects
-	let applyMods = damageType =>
-		ApplyValueModificationsToEntity("DeathDamage/" + damageType, +(this.template[damageType] || 0), this.entity);
-
-	let ret = {};
-	for (let damageType of DamageTypes.GetTypes())
-		ret[damageType] = applyMods(damageType);
-
-	return ret;
-};
-
-DeathDamage.prototype.GetBonusTemplate = function()
-{
-	return this.template.Bonuses || null;
+	return Attacking.GetAttackEffectsData("DeathDamage", this.template, this.entity);
 };
 
 DeathDamage.prototype.CauseDeathDamage = function()
@@ -70,21 +58,19 @@ DeathDamage.prototype.CauseDeathDamage = function()
 	if (owner == INVALID_PLAYER)
 		warn("Unit causing death damage does not have any owner.");
 
-	let cmpDamage = Engine.QueryInterface(SYSTEM_ENTITY, IID_Damage);
-	let playersToDamage = cmpDamage.GetPlayersToDamage(owner, this.template.FriendlyFire);
+	let playersToDamage = Attacking.GetPlayersToDamage(owner, this.template.FriendlyFire);
 
 	let radius = ApplyValueModificationsToEntity("DeathDamage/Range", +this.template.Range, this.entity);
 
-	cmpDamage.CauseSplashDamage({
+	Attacking.CauseDamageOverArea({
+		"type": "Death",
+		"attackData": this.GetDeathDamageEffects(),
 		"attacker": this.entity,
+		"attackerOwner": owner,
 		"origin": pos,
 		"radius": radius,
 		"shape": this.template.Shape,
-		"strengths": this.GetDeathDamageStrengths(),
-		"splashBonus": this.GetBonusTemplate(),
 		"playersToDamage": playersToDamage,
-		"type": "Death",
-		"attackerOwner": owner
 	});
 };
 

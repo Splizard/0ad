@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -37,6 +37,7 @@
 #include "maths/Matrix3D.h"
 #include "ps/GameSetup/Config.h"
 #include "ps/Profile.h"
+#include "renderer/RenderingOptions.h"
 #include "renderer/Scene.h"
 
 #include "tools/atlas/GameInterface/GameLoop.h"
@@ -311,7 +312,7 @@ public:
 				if (!aABBox.RayIntersect(origin, dir, tmin, tmax))
 					continue;
 
-				aABBox.GetCentre(center);
+				aABBox.GetCenter(center);
 			}
 			else
 			{
@@ -406,7 +407,7 @@ void CCmpUnitRenderer::RenderSubmit(SceneCollector& collector, const CFrustum& f
 		if (unit.visibility == ICmpRangeManager::VIS_HIDDEN)
 			continue;
 
-		if (!g_AtlasGameLoop->running && !g_RenderActors && (unit.flags & ACTOR_ONLY))
+		if (!g_AtlasGameLoop->running && !g_RenderingOptions.GetRenderActors() && (unit.flags & ACTOR_ONLY))
 			continue;
 
 		if (!g_AtlasGameLoop->running && (unit.flags & VISIBLE_IN_ATLAS_ONLY))

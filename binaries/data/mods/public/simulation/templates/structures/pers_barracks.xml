@@ -3,7 +3,7 @@
   <Identity>
     <Civ>pers</Civ>
     <SpecificName>Padgan</SpecificName>
-    <Tooltip>Levy citizen-infantry units.</Tooltip>
+    <Tooltip>Levy citizen-soldier infantry.</Tooltip>
     <Icon>structures/pers_barracks.png</Icon>
   </Identity>
   <ProductionQueue>
@@ -16,7 +16,6 @@
     <Technologies datatype="tokens">
       persians/training_levy_infantry
       persians/training_conscription_infantry
-      persians/special_archery_tradition
       -training_conscription
     </Technologies>
   </ProductionQueue>

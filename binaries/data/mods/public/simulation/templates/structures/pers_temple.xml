@@ -9,13 +9,13 @@
   </Health>
   <Identity>
     <Civ>pers</Civ>
-    <SpecificName>Ayadana</SpecificName>
+    <SpecificName>Āyadanam</SpecificName>
   </Identity>
   <Obstruction>
     <Static width="17.5" depth="17.5"/>
   </Obstruction>
   <VisualActor>
     <Actor>structures/persians/temple.xml</Actor>
-    <FoundationActor>structures/fndn_4x4.xml</FoundationActor>
+    <FoundationActor>structures/fndn_5x5.xml</FoundationActor>
   </VisualActor>
 </Entity>

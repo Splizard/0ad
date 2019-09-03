@@ -9,15 +9,6 @@ var g_SoundNotifications = {
 };
 
 /**
- * Save setting for current instance and write setting to the user config file.
- */
-function saveSettingAndWriteToUserConfig(setting, value)
-{
-	Engine.ConfigDB_CreateValue("user", setting, value);
-	Engine.ConfigDB_WriteValueToFile("user", setting, value, "config/user.cfg");
-}
-
-/**
  * Returns translated history and gameplay data of all civs, optionally including a mock gaia civ.
  */
 function loadCivData(selectableOnly, gaia)
@@ -84,7 +75,11 @@ function stringifiedTeamListToPlayerData(stringifiedTeamList)
 	{
 		teamList = JSON.parse(unescapeText(stringifiedTeamList));
 	}
-	catch (e) {}
+	catch (e)
+	{
+		// Ignore invalid input from remote users
+		return [];
+	}
 
 	let playerData = [];
 
@@ -150,7 +145,7 @@ function tryAutoComplete(text, autoCompleteList)
 	return text;
 }
 
-function autoCompleteNick(guiObject, playernames)
+function autoCompleteText(guiObject, words)
 {
 	let text = guiObject.caption;
 	if (!text.length)
@@ -158,24 +153,10 @@ function autoCompleteNick(guiObject, playernames)
 
 	let bufferPosition = guiObject.buffer_position;
 	let textTillBufferPosition = text.substring(0, bufferPosition);
-	let newText = tryAutoComplete(textTillBufferPosition, playernames);
+	let newText = tryAutoComplete(textTillBufferPosition, words);
 
 	guiObject.caption = newText + text.substring(bufferPosition);
 	guiObject.buffer_position = bufferPosition + (newText.length - textTillBufferPosition.length);
-}
-
-function clearChatMessages()
-{
-	g_ChatMessages.length = 0;
-	Engine.GetGUIObjectByName("chatText").caption = "";
-
-	try
-	{
-		for (let timer of g_ChatTimers)
-			clearTimeout(timer);
-		g_ChatTimers.length = 0;
-	}
-	catch (e) {}
 }
 
 /**

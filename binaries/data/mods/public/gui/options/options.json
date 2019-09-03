@@ -115,7 +115,7 @@
 				"label": "Post Processing",
 				"tooltip": "Use screen-space postprocessing filters (HDR, Bloom, DOF, etc).",
 				"config": "postproc",
-				"function": "Renderer_SetPostprocEnabled"
+				"function": "Renderer_SetPostProcEnabled"
 			},
 			{
 				"type": "slider",
@@ -489,6 +489,12 @@
 				"label": "Rank icon above status bar",
 				"tooltip": "Show rank icons above status bars.",
 				"config": "gui.session.rankabovestatusbar"
+			},
+			{
+				"type": "boolean",
+				"label": "Experience status bar",
+				"tooltip": "Show an experience status bar above each selected unit.",
+				"config": "gui.session.experiencestatusbar"
 			},
 			{
 				"type": "boolean",

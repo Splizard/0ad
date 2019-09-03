@@ -25,9 +25,10 @@
 #ifndef INCLUDED_IGUIOBJECT
 #define INCLUDED_IGUIOBJECT
 
-#include "GUIbase.h"
-#include "GUItext.h"
+#include "IGUIObject.h"
 
+#include "gui/CGUI.h"
+#include "gui/GUIbase.h"
 #include "gui/scripting/JSInterface_IGUIObject.h"
 #include "lib/input.h" // just for IN_PASS
 #include "ps/XML/Xeromyces.h"
@@ -35,42 +36,13 @@
 #include <string>
 #include <vector>
 
-struct SGUISetting;
 struct SGUIStyle;
-class CGUI;
-
 class JSObject;
+class IGUISetting;
+
+template <typename T> class GUI;
 
 ERROR_TYPE(GUI, UnableToParse);
-
-/**
- * Setting Type
- * @see SGUISetting
- *
- * For use of later macros, all names should be GUIST_ followed
- * by the code name (case sensitive!).
- */
-#define TYPE(T) GUIST_##T,
-enum EGUISettingType
-{
-	#include "GUItypes.h"
-};
-#undef TYPE
-
-/**
- * A GUI Setting is anything that can be inputted from XML as
- * \<object\>-attributes (with exceptions). For instance:
- * \<object style="null"\>
- *
- * "style" will be a SGUISetting.
- */
-struct SGUISetting
-{
-	SGUISetting() : m_pSetting(NULL) {}
-
-	void				*m_pSetting;
-	EGUISettingType		m_Type;
-};
 
 /**
  * GUI object such as a button or an input-box.
@@ -79,18 +51,18 @@ struct SGUISetting
 class IGUIObject
 {
 	friend class CGUI;
-	friend class CInternalCGUIAccessorBase;
 	friend class IGUIScrollBar;
 	friend class GUITooltip;
 
 	// Allow getProperty to access things like GetParent()
 	friend bool JSI_IGUIObject::getProperty(JSContext* cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp);
-	friend bool JSI_IGUIObject::setProperty(JSContext* cx, JS::HandleObject obj, JS::HandleId id, bool UNUSED(strict), JS::MutableHandleValue vp);
+	friend bool JSI_IGUIObject::setProperty(JSContext* cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp, JS::ObjectOpResult& result);
 	friend bool JSI_IGUIObject::getComputedSize(JSContext* cx, uint argc, JS::Value* vp);
-	friend bool JSI_IGUIObject::getTextSize(JSContext* cx, uint argc, JS::Value* vp);
 
 public:
-	IGUIObject();
+	NONCOPYABLE(IGUIObject);
+
+	IGUIObject(CGUI& pGUI);
 	virtual ~IGUIObject();
 
 	/**
@@ -105,7 +77,7 @@ public:
 	 *
 	 * @return true if mouse is hovering
 	 */
-	virtual bool MouseOver();
+	virtual bool IsMouseOver() const;
 
 	/**
 	 * Test if mouse position is over an icon
@@ -156,16 +128,10 @@ public:
 	 */
 	void AddChild(IGUIObject* pChild);
 
-	//@}
-	//--------------------------------------------------------
-	/** @name Iterate
-	 * Used to iterate over all children of this object.
+	/**
+	 * Return all child objects of the current object.
 	 */
-	//--------------------------------------------------------
-	//@{
-
-	vector_pObjects::iterator begin() { return m_Children.begin(); }
-	vector_pObjects::iterator end() { return m_Children.end(); }
+	const std::vector<IGUIObject*>& GetChildren() const { return m_Children; }
 
 	//@}
 	//--------------------------------------------------------
@@ -174,14 +140,56 @@ public:
 	//@{
 
 	/**
-	 * Checks if settings exists, only available for derived
-	 * classes that has this set up, that's why the base
-	 * class just returns false
+	 * Returns whether there is a setting with the given name registered.
 	 *
 	 * @param Setting setting name
 	 * @return True if settings exist.
 	 */
 	bool SettingExists(const CStr& Setting) const;
+
+	/**
+	 * Get a mutable reference to the setting.
+	 * If no such setting exists, an exception of type std::out_of_range is thrown.
+	 * If the value is modified, there is no GUIM_SETTINGS_UPDATED message sent.
+	 */
+	template <typename T>
+	T& GetSetting(const CStr& Setting);
+
+	template <typename T>
+	const T& GetSetting(const CStr& Setting) const;
+
+	/**
+	 * Set a setting by string, regardless of what type it is.
+	 * Used to parse setting values from XML files.
+	 * For example a CRect(10,10,20,20) is created from "10 10 20 20".
+	 * Returns false if the conversion fails, otherwise true.
+	 */
+	bool SetSettingFromString(const CStr& Setting, const CStrW& Value, const bool SendMessage);
+
+	/**
+	 * Assigns the given value to the setting identified by the given name.
+	 * Uses move semantics, so do not read from Value after this call.
+	 *
+	 * @param SendMessage If true, a GUIM_SETTINGS_UPDATED message will be broadcasted to all GUI objects.
+	 */
+	template <typename T>
+	void SetSetting(const CStr& Setting, T& Value, const bool SendMessage);
+
+	/**
+	 * This variant will copy the value.
+	 */
+	template <typename T>
+	void SetSetting(const CStr& Setting, const T& Value, const bool SendMessage);
+
+	/**
+	 * Returns whether this is object is set to be hidden.
+	 */
+	bool IsHidden() const;
+
+	/**
+	 * Returns whether this object is set to be hidden or ghost.
+	 */
+	bool IsHiddenOrGhost() const;
 
 	/**
 	 * All sizes are relative to resolution, and the calculation
@@ -191,26 +199,9 @@ public:
 	virtual void UpdateCachedSize();
 
 	/**
-	 * Set a setting by string, regardless of what type it is.
-	 *
-	 * example a CRect(10,10,20,20) would be "10 10 20 20"
-	 *
-	 * @param Setting Setting by name
-	 * @param Value Value to set to
-	 * @param SkipMessage Does not send a GUIM_SETTINGS_UPDATED if true
-	 *
-	 * @return PSRETURN (PSRETURN_OK if successful)
+	 * Reset internal state of this object.
 	 */
-	PSRETURN SetSetting(const CStr& Setting, const CStrW& Value, const bool& SkipMessage = false);
-
-	/**
-	 * Retrieves the type of a named setting.
-	 *
-	 * @param Setting Setting by name
-	 * @param Type Stores an EGUISettingType
-	 * @return PSRETURN (PSRETURN_OK if successful)
-	 */
-	PSRETURN GetSettingType(const CStr& Setting, EGUISettingType& Type) const;
+	virtual void ResetStates();
 
 	/**
 	 * Set the script handler for a particular object-specific action
@@ -219,7 +210,13 @@ public:
 	 * @param Code Javascript code to execute when the action occurs
 	 * @param pGUI GUI instance to associate the script with
 	 */
-	void RegisterScriptHandler(const CStr& Action, const CStr& Code, CGUI* pGUI);
+	void RegisterScriptHandler(const CStr& Action, const CStr& Code, CGUI& pGUI);
+
+	/**
+	 * Creates the JS Object representing this page upon first use.
+	 * Can be overridden by derived classes to extend it.
+	 */
+	virtual void CreateJSObject();
 
 	/**
 	 * Retrieves the JSObject representing this GUI object.
@@ -246,7 +243,7 @@ protected:
 	 * @param Type Setting type
 	 * @param Name Setting reference name
 	 */
-	void AddSetting(const EGUISettingType& Type, const CStr& Name);
+	template<typename T> void AddSetting(const CStr& Name);
 
 	/**
 	 * Calls Destroy on all children, and deallocates all memory.
@@ -262,6 +259,26 @@ public:
 	 * @param Message GUI Message
 	 */
 	virtual void HandleMessage(SGUIMessage& UNUSED(Message)) {}
+
+	/**
+	 * Calls an IGUIObject member function recursively on this object and its children.
+	 * Aborts recursion at IGUIObjects that have the isRestricted function return true.
+	 * The arguments of the callback function must be references.
+	*/
+	template<typename... Args>
+	void RecurseObject(bool(IGUIObject::*isRestricted)() const, void(IGUIObject::*callbackFunction)(Args... args), Args&&... args)
+	{
+		if (this != m_pGUI.GetBaseObject())
+		{
+			if (isRestricted && (this->*isRestricted)())
+				return;
+
+			(this->*callbackFunction)(args...);
+		}
+
+		for (IGUIObject* const& obj : m_Children)
+			obj->RecurseObject(isRestricted, callbackFunction, args...);
+	}
 
 protected:
 	/**
@@ -288,18 +305,8 @@ protected:
 
 	/**
 	 * Loads a style.
-	 *
-	 * @param GUIinstance Reference to the GUI
-	 * @param StyleName Style by name
 	 */
-	void LoadStyle(CGUI& GUIinstance, const CStr& StyleName);
-
-	/**
-	 * Loads a style.
-	 *
-	 * @param Style The style object.
-	 */
-	void LoadStyle(const SGUIStyle& Style);
+	void LoadStyle(const CStr& StyleName);
 
 	/**
 	 * Returns not the Z value, but the actual buffered Z value, i.e. if it's
@@ -310,30 +317,25 @@ protected:
 	 */
 	virtual float GetBufferedZ() const;
 
-	void SetGUI(CGUI* const& pGUI);
-
 	/**
 	 * Set parent of this object
 	 */
 	void SetParent(IGUIObject* pParent) { m_pParent = pParent; }
 
-	/**
-	 * Reset internal state of this object
-	 */
-	virtual void ResetStates()
-	{
-		// Notify the gui that we aren't hovered anymore
-		UpdateMouseOver(NULL);
-	}
-
 public:
-	CGUI* GetGUI() { return m_pGUI; }
-	const CGUI* GetGUI() const { return m_pGUI; }
+
+	CGUI& GetGUI() { return m_pGUI; }
+	const CGUI& GetGUI() const { return m_pGUI; }
 
 	/**
 	 * Take focus!
 	 */
 	void SetFocus();
+
+	/**
+	 * Workaround to avoid a dynamic_cast which can be 80 times slower than this.
+	 */
+	virtual void* GetTextOwner() { return nullptr; }
 
 protected:
 	/**
@@ -351,11 +353,6 @@ protected:
 	 * @return Pointer to parent
 	 */
 	IGUIObject* GetParent() const;
-
-	/**
-	 * Get Mouse from CGUI.
-	 */
-	CPos GetMousePos() const;
 
 	/**
 	 * Handle additional children to the \<object\>-tag. In IGUIObject, this function does
@@ -400,9 +397,9 @@ protected:
 	 * Does nothing if no script has been registered for that action.
 	 *
 	 * @param Action Name of action
-	 * @param Argument Argument to pass to action
+	 * @param paramData JS::HandleValueArray arguments to pass to the event.
 	 */
-	void ScriptEvent(const CStr& Action, JS::HandleValue Argument);
+	void ScriptEvent(const CStr& Action, const JS::HandleValueArray& paramData);
 
 	void SetScriptHandler(const CStr& Action, JS::HandleObject Function);
 
@@ -416,12 +413,22 @@ protected:
 	 */
 	void UpdateMouseOver(IGUIObject* const& pMouseOver);
 
+	/**
+	 * Retrieves the configured sound filename from the given setting name and plays that once.
+	 */
+	void PlaySound(const CStr& settingName) const;
+
 	//@}
 private:
 	//--------------------------------------------------------
 	/** @name Internal functions */
 	//--------------------------------------------------------
 	//@{
+
+	/**
+	 * Updates some internal data depending on the setting changed.
+	 */
+	void SettingChanged(const CStr& Setting, const bool SendMessage);
 
 	/**
 	 * Inputs a reference pointer, checks if the new inputted object
@@ -441,13 +448,6 @@ private:
 	//  has got no parent, and technically, it's got the m_BaseObject
 	//  as parent.
 	bool IsRootObject() const;
-
-	/**
-	 * Logs an invalid setting search and returns the correct return result
-	 *
-	 * @return the error result
-	 */
-	PSRETURN LogInvalidSettings(const CStr8& Setting) const;
 
 	static void Trace(JSTracer* trc, void* data)
 	{
@@ -486,7 +486,7 @@ protected:
 
 	// More variables
 
-	// Is mouse hovering the object? used with the function MouseOver()
+	// Is mouse hovering the object? used with the function IsMouseOver()
 	bool									m_MouseHovering;
 
 	/**
@@ -497,12 +497,12 @@ protected:
 	 *
 	 * @see SetupSettings()
 	 */
-	public:
-	std::map<CStr, SGUISetting>				m_Settings;
+public:
+	std::map<CStr, IGUISetting*> m_Settings;
 
-private:
+protected:
 	// An object can't function stand alone
-	CGUI									*m_pGUI;
+	CGUI& m_pGUI;
 
 	// Internal storage for registered script handlers.
 	std::map<CStr, JS::Heap<JSObject*> >	m_ScriptHandlers;
@@ -521,10 +521,11 @@ class CGUIDummyObject : public IGUIObject
 	GUI_OBJECT(CGUIDummyObject)
 
 public:
+	CGUIDummyObject(CGUI& pGUI) : IGUIObject(pGUI) {}
 
 	virtual void Draw() {}
 	// Empty can never be hovered. It is only a category.
-	virtual bool MouseOver() { return false; }
+	virtual bool IsMouseOver() const { return false; }
 };
 
 #endif // INCLUDED_IGUIOBJECT

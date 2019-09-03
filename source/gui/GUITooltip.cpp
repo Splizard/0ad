@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@
 #include "GUITooltip.h"
 
 #include "CGUI.h"
-#include "GUIutil.h"
 #include "IGUIObject.h"
 
 #include "lib/timer.h"
@@ -85,134 +84,140 @@ const double CooldownTime = 0.25; // TODO: Don't hard-code this value
 
 bool GUITooltip::GetTooltip(IGUIObject* obj, CStr& style)
 {
-	CStrW text;
-
-	if (obj && obj->SettingExists("_icon_tooltip_style") && obj->MouseOverIcon() &&
-	    GUI<CStr>::GetSetting(obj, "_icon_tooltip_style", style) == PSRETURN_OK &&
-	    GUI<CStrW>::GetSetting(obj, "_icon_tooltip", text) == PSRETURN_OK && !text.empty())
+	if (obj && obj->SettingExists("_icon_tooltip_style") && obj->MouseOverIcon())
 	{
-		if (style.empty())
-			style = "default";
-
-		m_IsIconTooltip = true;
-		return true;
+		style = obj->GetSetting<CStr>("_icon_tooltip_style");
+		if (!obj->GetSetting<CStrW>("_icon_tooltip").empty())
+		{
+			if (style.empty())
+				style = "default";
+			m_IsIconTooltip = true;
+			return true;
+		}
 	}
 
-	if (obj && obj->SettingExists("tooltip_style") &&
-	    GUI<CStr>::GetSetting(obj, "tooltip_style", style) == PSRETURN_OK &&
-	    GUI<CStrW>::GetSetting(obj, "tooltip", text) == PSRETURN_OK &&
-	    !text.empty())
+	if (obj && obj->SettingExists("tooltip_style"))
 	{
-		if (style.empty())
-			style = "default";
-
-		m_IsIconTooltip = false;
-		return true;
+		style = obj->GetSetting<CStr>("tooltip_style");
+		if (!obj->GetSetting<CStrW>("tooltip").empty())
+		{
+			if (style.empty())
+				style = "default";
+			m_IsIconTooltip = false;
+			return true;
+		}
 	}
 
 	return false;
 }
 
-void GUITooltip::ShowTooltip(IGUIObject* obj, const CPos& pos, const CStr& style, CGUI* gui)
+void GUITooltip::ShowTooltip(IGUIObject* obj, const CPos& pos, const CStr& style, CGUI& pGUI)
 {
 	ENSURE(obj);
 
 	if (style.empty())
 		return;
 
-	IGUIObject* tooltipobj = gui->FindObjectByName("__tooltip_"+style);
-	if (!tooltipobj)
+	// Must be a CTooltip*, but we avoid dynamic_cast
+	IGUIObject* tooltipobj = pGUI.FindObjectByName("__tooltip_" + style);
+	if (!tooltipobj || !tooltipobj->SettingExists("use_object"))
 	{
 		LOGERROR("Cannot find tooltip named '%s'", style.c_str());
 		return;
 	}
 
-	IGUIObject* usedobj = tooltipobj; // object actually used to display the tooltip in
+	IGUIObject* usedobj; // object actually used to display the tooltip in
 
-	CStr usedObjectName;
-	if (GUI<CStr>::GetSetting(tooltipobj, "use_object", usedObjectName) == PSRETURN_OK &&
-	    !usedObjectName.empty())
+	const CStr& usedObjectName = tooltipobj->GetSetting<CStr>("use_object");
+	if (usedObjectName.empty())
 	{
-		usedobj = gui->FindObjectByName(usedObjectName);
+		usedobj = tooltipobj;
+
+		if (usedobj->SettingExists("_mousepos"))
+		{
+			usedobj->SetSetting<CPos>("_mousepos", pos, true);
+		}
+		else
+		{
+			LOGERROR("Object '%s' used by tooltip '%s' isn't a tooltip object!", usedObjectName.c_str(), style.c_str());
+			return;
+		}
+	}
+	else
+	{
+		usedobj = pGUI.FindObjectByName(usedObjectName);
 		if (!usedobj)
 		{
 			LOGERROR("Cannot find object named '%s' used by tooltip '%s'", usedObjectName.c_str(), style.c_str());
 			return;
 		}
 	}
-	else if (GUI<CPos>::SetSetting(usedobj, "_mousepos", pos) != PSRETURN_OK)
-		debug_warn(L"Failed to set tooltip mouse position");
 
-	GUI<bool>::SetSetting(usedobj, "hidden", false);
-
-	CStrW text;
-	if (m_IsIconTooltip)
+	if (usedobj->SettingExists("caption"))
 	{
-		if (GUI<CStrW>::GetSetting(obj, "_icon_tooltip", text) != PSRETURN_OK)
-			debug_warn(L"Failed to retrieve icon tooltip text");
+		const CStrW& text = obj->GetSetting<CStrW>(m_IsIconTooltip ? "_icon_tooltip" : "tooltip");
+		usedobj->SetSettingFromString("caption", text, true);
 	}
-	else if (GUI<CStrW>::GetSetting(obj, "tooltip", text) != PSRETURN_OK)
-		debug_warn(L"Failed to retrieve tooltip text");
+	else
+	{
+		LOGERROR("Object '%s' used by tooltip '%s' must have a caption setting!", usedobj->GetPresentableName().c_str(), style.c_str());
+		return;
+	}
 
-	if (usedobj->SetSetting("caption", text) != PSRETURN_OK)
-		debug_warn(L"Failed to set tooltip caption");
-
-	SGUIMessage msg(GUIM_SETTINGS_UPDATED, "caption");
-	usedobj->HandleMessage(msg);
+	// Every IGUIObject has a "hidden" setting
+	usedobj->SetSetting<bool>("hidden", false, true);
 }
 
-void GUITooltip::HideTooltip(const CStr& style, CGUI* gui)
+void GUITooltip::HideTooltip(const CStr& style, CGUI& pGUI)
 {
 	if (style.empty())
 		return;
 
-	IGUIObject* tooltipobj = gui->FindObjectByName("__tooltip_"+style);
-	if (!tooltipobj)
+	// Must be a CTooltip*, but we avoid dynamic_cast
+	IGUIObject* tooltipobj = pGUI.FindObjectByName("__tooltip_" + style);
+	if (!tooltipobj || !tooltipobj->SettingExists("use_object") || !tooltipobj->SettingExists("hide_object"))
 	{
-		LOGERROR("Cannot find tooltip named '%s'", style.c_str());
+		LOGERROR("Cannot find tooltip named '%s' or it is not a tooltip", style.c_str());
 		return;
 	}
 
-	CStr usedObjectName;
-	if (GUI<CStr>::GetSetting(tooltipobj, "use_object", usedObjectName) == PSRETURN_OK &&
-	    !usedObjectName.empty())
+	const CStr& usedObjectName = tooltipobj->GetSetting<CStr>("use_object");
+	if (!usedObjectName.empty())
 	{
-		IGUIObject* usedobj = gui->FindObjectByName(usedObjectName);
-		if (!usedobj)
+		IGUIObject* usedobj = pGUI.FindObjectByName(usedObjectName);
+		if (usedobj && usedobj->SettingExists("caption"))
 		{
-			LOGERROR("Cannot find object named '%s' used by tooltip '%s'", usedObjectName.c_str(), style.c_str());
+			usedobj->SetSettingFromString("caption", L"", true);
+		}
+		else
+		{
+			LOGERROR("Object named '%s' used by tooltip '%s' does not exist or does not have a caption setting!", usedObjectName.c_str(), style.c_str());
 			return;
 		}
 
-		usedobj->SetSetting("caption", L"");
-		SGUIMessage msg(GUIM_SETTINGS_UPDATED, "caption");
-		usedobj->HandleMessage(msg);
-
-		bool hideobject = true;
-		GUI<bool>::GetSetting(tooltipobj, "hide_object", hideobject);
-
-		if (hideobject)
-			GUI<bool>::SetSetting(usedobj, "hidden", true);
+		if (tooltipobj->GetSetting<bool>("hide_object"))
+			// Every IGUIObject has a "hidden" setting
+			usedobj->SetSetting<bool>("hidden", true, true);
 	}
 	else
-		GUI<bool>::SetSetting(tooltipobj, "hidden", true);
+		tooltipobj->SetSetting<bool>("hidden", true, true);
 }
 
-static int GetTooltipDelay(const CStr& style, CGUI* gui)
+static i32 GetTooltipDelay(const CStr& style, CGUI& pGUI)
 {
-	int delay = 500; // default value (in msec)
+	// Must be a CTooltip*, but we avoid dynamic_cast
+	IGUIObject* tooltipobj = pGUI.FindObjectByName("__tooltip_" + style);
 
-	IGUIObject* tooltipobj = gui->FindObjectByName("__tooltip_"+style);
 	if (!tooltipobj)
 	{
 		LOGERROR("Cannot find tooltip object named '%s'", style.c_str());
-		return delay;
+		return 500;
 	}
-	GUI<int>::GetSetting(tooltipobj, "delay", delay);
-	return delay;
+
+	return tooltipobj->GetSetting<i32>("delay");
 }
 
-void GUITooltip::Update(IGUIObject* Nearest, const CPos& MousePos, CGUI* GUI)
+void GUITooltip::Update(IGUIObject* Nearest, const CPos& MousePos, CGUI& GUI)
 {
 	// Called once per frame, so efficiency isn't vital
 	double now = timer_Time();

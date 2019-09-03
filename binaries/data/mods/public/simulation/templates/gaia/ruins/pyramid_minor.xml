@@ -5,7 +5,6 @@
     <Height>10.0</Height>
   </Footprint>
   <Identity>
-    <GenericName>Pyramid</GenericName>
     <SpecificName>Minor Pyramid</SpecificName>
     <Icon>gaia/special_pyramid.png</Icon>
   </Identity>
@@ -14,7 +13,6 @@
   </Obstruction>
   <ResourceSupply>
     <Amount>5000</Amount>
-    <Type>stone.ruins</Type>
     <MaxGatherers>90</MaxGatherers>
   </ResourceSupply>
   <Sound>

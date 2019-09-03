@@ -26,8 +26,8 @@
   <Identity>
     <Civ>pers</Civ>
     <Classes datatype="tokens">ConquestCritical</Classes>
-    <GenericName>Persian Hall</GenericName>
-    <SpecificName>Duvarthi Visadahyu</SpecificName>
+    <GenericName>Gate of All Nations</GenericName>
+    <SpecificName>Duvarθi Visadahyu</SpecificName>
     <Icon>structures/pers_hall.png</Icon>
     <Tooltip>Train War Elephants and Kardakes mercenaries.</Tooltip>
   </Identity>
@@ -60,6 +60,6 @@
   </TerritoryInfluence>
   <VisualActor>
     <Actor>structures/persians/hall.xml</Actor>
-    <FoundationActor>structures/fndn_6x6.xml</FoundationActor>
+    <FoundationActor>structures/fndn_7x7.xml</FoundationActor>
   </VisualActor>
 </Entity>

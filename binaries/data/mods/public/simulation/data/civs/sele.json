@@ -81,7 +81,7 @@
 		{
 			"Name":"Syrian Tetrapolis",
 			"History":"The political core of the Seleucid Empire consisted of four 'sister' cities: Antioch (the capital), Seleucia Pieria, Apamea, and Laodicea.",
-			"Description":"Allied civil centers −20% resource costs."
+			"Description":"Allied Civil Centers −20% resource costs."
 		}
 	],
 	"Structures":
@@ -102,7 +102,7 @@
 			"History":".",
 			"Requirements":"",
 			"Phase":"Village",
-			"Special":"Trains all cavalry units except Citizen-Militia Cavalry."
+			"Special":"Trains all cavalry except citizen-soldier cavalry."
 		},
 		{
 			"Name":"Military Colony",
@@ -116,7 +116,7 @@
 	],
 	"WallSets":
 	[
-		"other/wallset_palisade",
+		"structures/wallset_palisade",
 		"structures/sele_wallset_stone"
 	],
 	"StartEntities":

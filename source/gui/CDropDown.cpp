@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,42 +19,43 @@
 
 #include "CDropDown.h"
 
+#include "gui/CGUIColor.h"
 #include "lib/external_libraries/libsdl.h"
 #include "lib/ogl.h"
 #include "lib/timer.h"
 #include "ps/CLogger.h"
-#include "soundmanager/ISoundManager.h"
 
-CDropDown::CDropDown()
-	: m_Open(false), m_HideScrollBar(false), m_ElementHighlight(-1)
+CDropDown::CDropDown(CGUI& pGUI)
+	: CList(pGUI), IGUIObject(pGUI),
+	  m_Open(false), m_HideScrollBar(false), m_ElementHighlight(-1)
 {
-	AddSetting(GUIST_float,					"button_width");
-	AddSetting(GUIST_float,					"dropdown_size");
-	AddSetting(GUIST_float,					"dropdown_buffer");
-	AddSetting(GUIST_uint,					"minimum_visible_items");
-//	AddSetting(GUIST_CStrW,					"font");
-	AddSetting(GUIST_CStrW,					"sound_closed");
-	AddSetting(GUIST_CStrW,					"sound_disabled");
-	AddSetting(GUIST_CStrW,					"sound_enter");
-	AddSetting(GUIST_CStrW,					"sound_leave");
-	AddSetting(GUIST_CStrW,					"sound_opened");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite");				// Background that sits around the size
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite_disabled");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite_list");			// Background of the drop down list
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite2");				// Button that sits to the right
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite2_over");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite2_pressed");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite2_disabled");
-	AddSetting(GUIST_EVAlign,				"text_valign");
+	AddSetting<float>("button_width");
+	AddSetting<float>("dropdown_size");
+	AddSetting<float>("dropdown_buffer");
+	AddSetting<u32>("minimum_visible_items");
+//	AddSetting<CStrW, "font");
+	AddSetting<CStrW>("sound_closed");
+	AddSetting<CStrW>("sound_disabled");
+	AddSetting<CStrW>("sound_enter");
+	AddSetting<CStrW>("sound_leave");
+	AddSetting<CStrW>("sound_opened");
+	AddSetting<CGUISpriteInstance>("sprite");				// Background that sits around the size
+	AddSetting<CGUISpriteInstance>("sprite_disabled");
+	AddSetting<CGUISpriteInstance>("sprite_list");			// Background of the drop down list
+	AddSetting<CGUISpriteInstance>("sprite2");				// Button that sits to the right
+	AddSetting<CGUISpriteInstance>("sprite2_over");
+	AddSetting<CGUISpriteInstance>("sprite2_pressed");
+	AddSetting<CGUISpriteInstance>("sprite2_disabled");
+	AddSetting<EVAlign>("text_valign");
 
 	// Add these in CList! And implement TODO
-	//AddSetting(GUIST_CColor,				"textcolor_over");
-	//AddSetting(GUIST_CColor,				"textcolor_pressed");
-	AddSetting(GUIST_CColor,				"textcolor_selected");
-	AddSetting(GUIST_CColor,				"textcolor_disabled");
+	//AddSetting<CGUIColor>("textcolor_over");
+	//AddSetting<CGUIColor>("textcolor_pressed");
+	AddSetting<CGUIColor>("textcolor_selected");
+	AddSetting<CGUIColor>("textcolor_disabled");
 
 	// Scrollbar is forced to be true.
-	GUI<bool>::SetSetting(this, "scrollbar", true);
+	SetSetting<bool>("scrollbar", true, true);
 }
 
 CDropDown::~CDropDown()
@@ -101,23 +102,19 @@ void CDropDown::HandleMessage(SGUIMessage& Message)
 		if (!m_Open)
 			break;
 
-		CPos mouse = GetMousePos();
+		CPos mouse = m_pGUI.GetMousePos();
 
 		if (!GetListRect().PointInside(mouse))
 			break;
 
-		bool scrollbar;
-		CGUIList* pList;
-		GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
-		GUI<CGUIList>::GetSettingPointer(this, "list", pList);
-		float scroll = 0.f;
-		if (scrollbar)
-			scroll = GetScrollBar(0).GetPos();
+		const CGUIList& pList = GetSetting<CGUIList>("list");
+		const bool scrollbar = GetSetting<bool>("scrollbar");
+		const float scroll = scrollbar ? GetScrollBar(0).GetPos() : 0.f;
 
 		CRect rect = GetListRect();
 		mouse.y += scroll;
 		int set = -1;
-		for (int i = 0; i < (int)pList->m_Items.size(); ++i)
+		for (int i = 0; i < static_cast<int>(pList.m_Items.size()); ++i)
 		{
 			if (mouse.y >= rect.top + m_ItemsYPositions[i] &&
 				mouse.y < rect.top + m_ItemsYPositions[i+1] &&
@@ -141,29 +138,17 @@ void CDropDown::HandleMessage(SGUIMessage& Message)
 
 	case GUIM_MOUSE_ENTER:
 	{
-		bool enabled;
-		GUI<bool>::GetSetting(this, "enabled", enabled);
-		if (!enabled)
-			break;
-
-		CStrW soundPath;
-		if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_enter", soundPath) == PSRETURN_OK && !soundPath.empty())
-			g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+		if (GetSetting<bool>("enabled"))
+			PlaySound("sound_enter");
 		break;
 	}
 
 	case GUIM_MOUSE_LEAVE:
 	{
-		GUI<int>::GetSetting(this, "selected", m_ElementHighlight);
+		m_ElementHighlight = GetSetting<i32>("selected");
 
-		bool enabled;
-		GUI<bool>::GetSetting(this, "enabled", enabled);
-		if (!enabled)
-			break;
-
-		CStrW soundPath;
-		if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_leave", soundPath) == PSRETURN_OK && !soundPath.empty())
-			g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+		if (GetSetting<bool>("enabled"))
+			PlaySound("sound_leave");
 		break;
 	}
 
@@ -171,50 +156,38 @@ void CDropDown::HandleMessage(SGUIMessage& Message)
 	// a mouse click to open the dropdown, also the coordinates are changed.
 	case GUIM_MOUSE_PRESS_LEFT:
 	{
-		bool enabled;
-		GUI<bool>::GetSetting(this, "enabled", enabled);
-		if (!enabled)
+		if (!GetSetting<bool>("enabled"))
 		{
-			CStrW soundPath;
-			if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_disabled", soundPath) == PSRETURN_OK && !soundPath.empty())
-				g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+			PlaySound("sound_disabled");
 			break;
 		}
 
 		if (!m_Open)
 		{
-			CGUIList* pList;
-			GUI<CGUIList>::GetSettingPointer(this, "list", pList);
-			if (pList->m_Items.empty())
+			const CGUIList& pList = GetSetting<CGUIList>("list");
+			if (pList.m_Items.empty())
 				return;
 
 			m_Open = true;
 			GetScrollBar(0).SetZ(GetBufferedZ());
-			GUI<int>::GetSetting(this, "selected", m_ElementHighlight);
+			m_ElementHighlight = GetSetting<i32>("selected");
 
 			// Start at the position of the selected item, if possible.
 			GetScrollBar(0).SetPos(m_ItemsYPositions.empty() ? 0 : m_ItemsYPositions[m_ElementHighlight] - 60);
 
-			CStrW soundPath;
-			if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_opened", soundPath) == PSRETURN_OK && !soundPath.empty())
-				g_SoundManager->PlayAsUI(soundPath.c_str(), false);
-
+			PlaySound("sound_opened");
 			return; // overshadow
 		}
 		else
 		{
-			CPos mouse = GetMousePos();
+			const CPos& mouse = m_pGUI.GetMousePos();
 
 			// If the regular area is pressed, then abort, and close.
 			if (m_CachedActualSize.PointInside(mouse))
 			{
 				m_Open = false;
 				GetScrollBar(0).SetZ(GetBufferedZ());
-
-				CStrW soundPath;
-				if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_closed", soundPath) == PSRETURN_OK && !soundPath.empty())
-					g_SoundManager->PlayAsUI(soundPath.c_str(), false);
-
+				PlaySound("sound_closed");
 				return; // overshadow
 			}
 
@@ -232,48 +205,40 @@ void CDropDown::HandleMessage(SGUIMessage& Message)
 
 	case GUIM_MOUSE_WHEEL_DOWN:
 	{
-		bool enabled;
-		GUI<bool>::GetSetting(this, "enabled", enabled);
-
 		// Don't switch elements by scrolling when open, causes a confusing interaction between this and the scrollbar.
-		if (m_Open || !enabled)
+		if (m_Open || !GetSetting<bool>("enabled"))
 			break;
 
-		GUI<int>::GetSetting(this, "selected", m_ElementHighlight);
+		m_ElementHighlight = GetSetting<i32>("selected");
+
 		if (m_ElementHighlight + 1 >= (int)m_ItemsYPositions.size() - 1)
 			break;
 
 		++m_ElementHighlight;
-		GUI<int>::SetSetting(this, "selected", m_ElementHighlight);
+		SetSetting<i32>("selected", m_ElementHighlight, true);
 		break;
 	}
 
 	case GUIM_MOUSE_WHEEL_UP:
 	{
-		bool enabled;
-		GUI<bool>::GetSetting(this, "enabled", enabled);
-
 		// Don't switch elements by scrolling when open, causes a confusing interaction between this and the scrollbar.
-		if (m_Open || !enabled)
+		if (m_Open || !GetSetting<bool>("enabled"))
 			break;
 
-		GUI<int>::GetSetting(this, "selected", m_ElementHighlight);
+		m_ElementHighlight = GetSetting<i32>("selected");
 		if (m_ElementHighlight - 1 < 0)
 			break;
 
-		m_ElementHighlight--;
-		GUI<int>::SetSetting(this, "selected", m_ElementHighlight);
+		--m_ElementHighlight;
+		SetSetting<i32>("selected", m_ElementHighlight, true);
 		break;
 	}
 
 	case GUIM_LOST_FOCUS:
 	{
 		if (m_Open)
-		{
-			CStrW soundPath;
-			if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_closed", soundPath) == PSRETURN_OK && !soundPath.empty())
-				g_SoundManager->PlayAsUI(soundPath.c_str(), false);
-		}
+			PlaySound("sound_closed");
+
 		m_Open = false;
 		break;
 	}
@@ -321,7 +286,7 @@ InReaction CDropDown::ManuallyHandleEvent(const SDL_Event_* ev)
 				return IN_PASS;
 			// Set current selected item to highlighted, before
 			//  then really processing these in CList::ManuallyHandleEvent()
-			GUI<int>::SetSetting(this, "selected", m_ElementHighlight);
+			SetSetting<i32>("selected", m_ElementHighlight, true);
 			update_highlight = true;
 			break;
 
@@ -341,20 +306,19 @@ InReaction CDropDown::ManuallyHandleEvent(const SDL_Event_* ev)
 
 				m_TimeOfLastInput = timer_Time();
 
-				CGUIList* pList;
-				GUI<CGUIList>::GetSettingPointer(this, "list", pList);
+				const CGUIList& pList = GetSetting<CGUIList>("list");
 				// let's look for the closest element
 				// basically it's alphabetic order and "as many letters as we can get".
 				int closest = -1;
 				int bestIndex = -1;
 				int difference = 1250;
-				for (int i = 0; i < (int)pList->m_Items.size(); ++i)
+				for (int i = 0; i < static_cast<int>(pList.m_Items.size()); ++i)
 				{
 					int indexOfDifference = 0;
 					int diff = 0;
 					for (size_t j = 0; j < m_InputBuffer.length(); ++j)
 					{
-						diff = std::abs((int)(pList->m_Items[i].GetRawString().LowerCase()[j]) - (int)m_InputBuffer[j]);
+						diff = std::abs(static_cast<int>(pList.m_Items[i].GetRawString().LowerCase()[j]) - static_cast<int>(m_InputBuffer[j]));
 						if (diff == 0)
 							indexOfDifference = j+1;
 						else
@@ -370,7 +334,7 @@ InReaction CDropDown::ManuallyHandleEvent(const SDL_Event_* ev)
 				// let's select the closest element. There should basically always be one.
 				if (closest != -1)
 				{
-					GUI<int>::SetSetting(this, "selected", closest);
+					SetSetting<i32>("selected", closest, true);
 					update_highlight = true;
 					GetScrollBar(0).SetPos(m_ItemsYPositions[closest] - 60);
 				}
@@ -384,7 +348,7 @@ InReaction CDropDown::ManuallyHandleEvent(const SDL_Event_* ev)
 		result = IN_HANDLED;
 
 	if (update_highlight)
-		GUI<int>::GetSetting(this, "selected", m_ElementHighlight);
+		m_ElementHighlight = GetSetting<i32>("selected");
 
 	return result;
 }
@@ -393,12 +357,11 @@ void CDropDown::SetupListRect()
 {
 	extern int g_yres;
 	extern float g_GuiScale;
-	float size, buffer, yres;
-	yres = g_yres / g_GuiScale;
-	u32 minimumVisibleItems;
-	GUI<float>::GetSetting(this, "dropdown_size", size);
-	GUI<float>::GetSetting(this, "dropdown_buffer", buffer);
-	GUI<u32>::GetSetting(this, "minimum_visible_items", minimumVisibleItems);
+	const float yres = g_yres / g_GuiScale;
+
+	const float size = GetSetting<float>("dropdown_size");
+	const float buffer = GetSetting<float>("dropdown_buffer");
+	const u32 minimumVisibleItems = GetSetting<u32>("minimum_visible_items");
 
 	if (m_ItemsYPositions.empty())
 	{
@@ -456,48 +419,29 @@ CRect CDropDown::GetListRect() const
 	return m_CachedListRect;
 }
 
-bool CDropDown::MouseOver()
+bool CDropDown::IsMouseOver() const
 {
-	if(!GetGUI())
-		throw PSERROR_GUI_OperationNeedsGUIObject();
-
 	if (m_Open)
 	{
 		CRect rect(m_CachedActualSize.left, std::min(m_CachedActualSize.top, GetListRect().top),
 		           m_CachedActualSize.right, std::max(m_CachedActualSize.bottom, GetListRect().bottom));
-		return rect.PointInside(GetMousePos());
+		return rect.PointInside(m_pGUI.GetMousePos());
 	}
 	else
-		return m_CachedActualSize.PointInside(GetMousePos());
+		return m_CachedActualSize.PointInside(m_pGUI.GetMousePos());
 }
 
 void CDropDown::Draw()
 {
-	if (!GetGUI())
-		return;
+	const float bz = GetBufferedZ();
+	const float button_width = GetSetting<float>("button_width");
+	const bool enabled = GetSetting<bool>("enabled");
+	const int cell_id = GetSetting<i32>("cell_id");
+	const int selected = GetSetting<i32>("selected");
+	CGUISpriteInstance& sprite = GetSetting<CGUISpriteInstance>(enabled ? "sprite" : "sprite_disabled");
+	CGUISpriteInstance& sprite2 = GetSetting<CGUISpriteInstance>("sprite2");
 
-	float bz = GetBufferedZ();
-
-	float dropdown_size, button_width;
-	GUI<float>::GetSetting(this, "dropdown_size", dropdown_size);
-	GUI<float>::GetSetting(this, "button_width", button_width);
-
-	CGUISpriteInstance* sprite;
-	CGUISpriteInstance* sprite2;
-	CGUISpriteInstance* sprite2_second;
-	int cell_id, selected = 0;
-	CColor color;
-
-	bool enabled;
-	GUI<bool>::GetSetting(this, "enabled", enabled);
-
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite2", sprite2);
-	GUI<int>::GetSetting(this, "cell_id", cell_id);
-	GUI<int>::GetSetting(this, "selected", selected);
-	GUI<CColor>::GetSetting(this, enabled ? "textcolor_selected" : "textcolor_disabled", color);
-
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, enabled ? "sprite" : "sprite_disabled", sprite);
-	GetGUI()->DrawSprite(*sprite, cell_id, bz, m_CachedActualSize);
+	m_pGUI.DrawSprite(sprite, cell_id, bz, m_CachedActualSize);
 
 	if (button_width > 0.f)
 	{
@@ -506,21 +450,21 @@ void CDropDown::Draw()
 
 		if (!enabled)
 		{
-			GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite2_disabled", sprite2_second);
-			GetGUI()->DrawSprite(GUI<>::FallBackSprite(*sprite2_second, *sprite2), cell_id, bz+0.05f, rect);
+			CGUISpriteInstance& sprite2_second = GetSetting<CGUISpriteInstance>("sprite2_disabled");
+			m_pGUI.DrawSprite(sprite2_second || sprite2, cell_id, bz + 0.05f, rect);
 		}
 		else if (m_Open)
 		{
-			GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite2_pressed", sprite2_second);
-			GetGUI()->DrawSprite(GUI<>::FallBackSprite(*sprite2_second, *sprite2), cell_id, bz+0.05f, rect);
+			CGUISpriteInstance& sprite2_second = GetSetting<CGUISpriteInstance>("sprite2_pressed");
+			m_pGUI.DrawSprite(sprite2_second || sprite2, cell_id, bz + 0.05f, rect);
 		}
 		else if (m_MouseHovering)
 		{
-			GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite2_over", sprite2_second);
-			GetGUI()->DrawSprite(GUI<>::FallBackSprite(*sprite2_second, *sprite2), cell_id, bz+0.05f, rect);
+			CGUISpriteInstance& sprite2_second = GetSetting<CGUISpriteInstance>("sprite2_over");
+			m_pGUI.DrawSprite(sprite2_second || sprite2, cell_id, bz + 0.05f, rect);
 		}
 		else
-			GetGUI()->DrawSprite(*sprite2, cell_id, bz+0.05f, rect);
+			m_pGUI.DrawSprite(sprite2, cell_id, bz + 0.05f, rect);
 	}
 
 	if (selected != -1) // TODO: Maybe check validity completely?
@@ -528,25 +472,25 @@ void CDropDown::Draw()
 		CRect cliparea(m_CachedActualSize.left, m_CachedActualSize.top,
 					   m_CachedActualSize.right-button_width, m_CachedActualSize.bottom);
 
+		const CGUIColor& color = GetSetting<CGUIColor>(enabled ? "textcolor_selected" : "textcolor_disabled");
+
 		CPos pos(m_CachedActualSize.left, m_CachedActualSize.top);
 		DrawText(selected, color, pos, bz+0.1f, cliparea);
 	}
 
-	bool* scrollbar = NULL;
-	bool old;
-	GUI<bool>::GetSettingPointer(this, "scrollbar", scrollbar);
-
-	old = *scrollbar;
+	// Disable scrollbar during drawing without sending a setting-changed message
+	bool& scrollbar = GetSetting<bool>("scrollbar");
+	bool old = scrollbar;
 
 	if (m_Open)
 	{
 		if (m_HideScrollBar)
-			*scrollbar = false;
+			scrollbar = false;
 
 		DrawList(m_ElementHighlight, "sprite_list", "sprite_selectarea", "textcolor");
 
 		if (m_HideScrollBar)
-			*scrollbar = old;
+			scrollbar = old;
 	}
 }
 

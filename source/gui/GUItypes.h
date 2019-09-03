@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -25,20 +25,23 @@ places, and to make it much easier to add a new type). Just do
 to handle every possible type.
 */
 
+#ifndef GUITYPE_IGNORE_COPYABLE
 TYPE(bool)
-TYPE(int)
-TYPE(uint)
+TYPE(i32)
+TYPE(u32)
 TYPE(float)
-TYPE(CColor)
-TYPE(CClientArea)
-TYPE(CGUIString)
-#ifndef GUITYPE_IGNORE_CGUISpriteInstance
-TYPE(CGUISpriteInstance)
-#endif
-TYPE(CStr)
-TYPE(CStrW)
 TYPE(EAlign)
 TYPE(EVAlign)
 TYPE(CPos)
+#endif
+
+#ifndef GUITYPE_IGNORE_NONCOPYABLE
+TYPE(CClientArea)
+TYPE(CGUIColor)
 TYPE(CGUIList)
 TYPE(CGUISeries)
+TYPE(CGUISpriteInstance)
+TYPE(CGUIString)
+TYPE(CStr)
+TYPE(CStrW)
+#endif

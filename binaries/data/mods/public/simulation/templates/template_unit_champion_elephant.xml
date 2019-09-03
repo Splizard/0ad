@@ -23,8 +23,8 @@
     <Max>750</Max>
   </Health>
   <Identity>
-    <GenericName>War Elephant</GenericName>
     <VisibleClasses datatype="tokens">Elephant</VisibleClasses>
+    <GenericName>War Elephant</GenericName>
     <Icon>gaia/fauna_elephant.png</Icon>
   </Identity>
   <Position>
@@ -58,14 +58,8 @@
   <UnitMotion>
     <PassabilityClass>large</PassabilityClass>
     <WalkSpeed op="mul">0.95</WalkSpeed>
-    <Run>
-      <Speed op="mul">0.95</Speed>
-    </Run>
   </UnitMotion>
   <Vision>
     <Range>100</Range>
   </Vision>
-  <VisualActor>
-    <Actor>units/mauryas/champion_elephant.xml</Actor>
-  </VisualActor>
 </Entity>

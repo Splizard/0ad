@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 15:23+0000\n"
+"POT-Creation-Date: 2019-08-30 07:09+0000\n"
+"PO-Revision-Date: 2019-08-30 15:53+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/wildfire-games/0ad/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,9 @@ msgid "Gather food from this bountiful oceanic resource."
 msgstr "この豊かな海の幸から食料を採集します。"
 
 #: simulation/templates/template_gaia_flora_bush.xml:8
+#: simulation/templates/gaia/flora_bush_temperate.xml:4
+#: simulation/templates/gaia/flora_bush_temperate_winter.xml:4
+#: simulation/templates/gaia/flora_bush_tropic.xml:4
 msgid "Bush"
 msgstr "灌木"
 
@@ -51,66 +54,34 @@ msgid "Generic Geology"
 msgstr "一般地形"
 
 #: simulation/templates/template_gaia_geo_mineral.xml:4
-msgid "Mineral"
-msgstr "鉱物"
-
-#: simulation/templates/template_gaia_geo_mineral.xml:5
 msgid "Metal Mine"
 msgstr "金属鉱山"
 
-#: simulation/templates/template_gaia_geo_mineral.xml:6
+#: simulation/templates/template_gaia_geo_mineral.xml:5
 msgid "A mineral deposit, providing access to rare forms of precious Metal."
 msgstr "鉱床は、貴重な金属の原鉱の採取場所です。"
 
 #: simulation/templates/template_gaia_geo_rock.xml:4
-msgid "Rock"
-msgstr "岩"
+msgid "Stone Quarry"
+msgstr ""
 
 #: simulation/templates/template_gaia_geo_rock.xml:5
-msgid "Stone Mine"
-msgstr "採石場"
-
-#: simulation/templates/template_gaia_geo_rock.xml:6
 msgid "Mine these to provide Stone building material."
 msgstr "採石して建材を供給します。"
 
 #: simulation/templates/template_gaia_ruins.xml:8
-msgid "Generic Ruins"
-msgstr "一般遺跡"
-
-#: simulation/templates/template_gaia_ruins.xml:9
-#: simulation/templates/gaia/ruins/column_doric.xml:8
-#: simulation/templates/gaia/ruins/unfinished_greek_temple.xml:8
 msgid "Ruins"
 msgstr "遺跡"
 
-#: simulation/templates/template_gaia_ruins.xml:10
+#: simulation/templates/template_gaia_ruins.xml:9
 msgid "These ruins that can be mined for resources."
 msgstr "これらの遺物から資源を採集できます。"
 
 #: simulation/templates/template_gaia_treasure.xml:8
-msgid "Generic Treasure"
-msgstr "一般の財宝"
-
-#: simulation/templates/template_gaia_treasure.xml:9
-#: simulation/templates/gaia/treasure/food_barrel.xml:8
-#: simulation/templates/gaia/treasure/food_barrels_buried.xml:8
-#: simulation/templates/gaia/treasure/food_bin.xml:8
-#: simulation/templates/gaia/treasure/food_crate.xml:8
-#: simulation/templates/gaia/treasure/food_jars.xml:8
-#: simulation/templates/gaia/treasure/golden_fleece.xml:8
-#: simulation/templates/gaia/treasure/pegasus.xml:8
-#: simulation/templates/gaia/treasure/shipwreck.xml:8
-#: simulation/templates/gaia/treasure/shipwreck_debris.xml:8
-#: simulation/templates/gaia/treasure/shipwreck_ram_bow.xml:8
-#: simulation/templates/gaia/treasure/shipwreck_sail_boat.xml:8
-#: simulation/templates/gaia/treasure/shipwreck_sail_boat_cut.xml:8
-#: simulation/templates/gaia/treasure/stone.xml:8
-#: simulation/templates/gaia/treasure/wood.xml:8
 msgid "Treasure"
 msgstr "財宝"
 
-#: simulation/templates/template_gaia_treasure.xml:10
+#: simulation/templates/template_gaia_treasure.xml:9
 msgid "A treasure that can be quickly gathered."
 msgstr "手早く採集可能な財宝です。"
 
@@ -160,29 +131,29 @@ msgstr "レオニダス1世軍。"
 msgid "Army of Leonidas I"
 msgstr "レオニダス1世軍"
 
-#: simulation/templates/campaigns/campaign_city_minor_test.xml:25
-#: simulation/templates/campaigns/campaign_city_test.xml:25
+#: simulation/templates/campaigns/campaign_city_minor_test.xml:29
+#: simulation/templates/campaigns/campaign_city_test.xml:29
 msgid "Market"
 msgstr "マーケット"
 
-#: simulation/templates/campaigns/campaign_city_minor_test.xml:26
-#: simulation/templates/campaigns/campaign_city_test.xml:26
+#: simulation/templates/campaigns/campaign_city_minor_test.xml:30
+#: simulation/templates/campaigns/campaign_city_test.xml:30
 msgid "Settlement"
 msgstr "入植地"
 
-#: simulation/templates/campaigns/campaign_city_minor_test.xml:27
+#: simulation/templates/campaigns/campaign_city_minor_test.xml:31
 msgid "Minor Greek Polis"
 msgstr "ギリシアの小ポリス"
 
-#: simulation/templates/campaigns/campaign_city_minor_test.xml:28
+#: simulation/templates/campaigns/campaign_city_minor_test.xml:32
 msgid "This is a minor Greek city."
 msgstr "これは小ギリシア都市です。"
 
-#: simulation/templates/campaigns/campaign_city_test.xml:27
+#: simulation/templates/campaigns/campaign_city_test.xml:31
 msgid "Greek Polis"
 msgstr "ギリシアのポリス"
 
-#: simulation/templates/campaigns/campaign_city_test.xml:28
+#: simulation/templates/campaigns/campaign_city_test.xml:32
 msgid "This is a major Greek city."
 msgstr "これは大ギリシア都市です。"
 
@@ -203,19 +174,19 @@ msgstr "ホッキョクギツネ"
 msgid "Canis lupus"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_bear.xml:17
+#: simulation/templates/gaia/fauna_bear.xml:19
 msgid "Brown Bear"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_bear.xml:18
+#: simulation/templates/gaia/fauna_bear.xml:20
 msgid "Ursus arctos"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_boar.xml:17
+#: simulation/templates/gaia/fauna_boar.xml:19
 msgid "Wild Boar"
 msgstr "イノシシ"
 
-#: simulation/templates/gaia/fauna_boar.xml:18
+#: simulation/templates/gaia/fauna_boar.xml:20
 msgid "Sus scrofa"
 msgstr "イノシシ"
 
@@ -227,6 +198,35 @@ msgstr ""
 msgid "Camelus dromedarius"
 msgstr ""
 
+#: simulation/templates/gaia/fauna_cattle_bull.xml:4
+msgid "Bull"
+msgstr ""
+
+#: simulation/templates/gaia/fauna_cattle_bull.xml:5
+#: simulation/templates/gaia/fauna_cattle_cow.xml:5
+msgid "Bos taurus taurus"
+msgstr ""
+
+#: simulation/templates/gaia/fauna_cattle_cow.xml:4
+msgid "Cow"
+msgstr ""
+
+#: simulation/templates/gaia/fauna_cattle_sanga.xml:4
+msgid "Sanga Cattle"
+msgstr ""
+
+#: simulation/templates/gaia/fauna_cattle_sanga.xml:5
+msgid "Bos taurus africanus"
+msgstr ""
+
+#: simulation/templates/gaia/fauna_cattle_zebu.xml:4
+msgid "Zebu"
+msgstr "コブウシ"
+
+#: simulation/templates/gaia/fauna_cattle_zebu.xml:5
+msgid "Bos taurus indicus"
+msgstr ""
+
 #: simulation/templates/gaia/fauna_chicken.xml:11
 msgid "Chicken"
 msgstr "鶏"
@@ -235,11 +235,11 @@ msgstr "鶏"
 msgid "Gallus gallus domesticus"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_crocodile.xml:17
+#: simulation/templates/gaia/fauna_crocodile.xml:19
 msgid "Nile Crocodile"
 msgstr "ナイルワニ"
 
-#: simulation/templates/gaia/fauna_crocodile.xml:18
+#: simulation/templates/gaia/fauna_crocodile.xml:20
 msgid "Crocodylus niloticus"
 msgstr "ナイルワニ"
 
@@ -354,11 +354,11 @@ msgstr "馬"
 msgid "Equus ferus caballus"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_lion.xml:17
+#: simulation/templates/gaia/fauna_lion.xml:19
 msgid "Lion"
 msgstr "ライオン"
 
-#: simulation/templates/gaia/fauna_lion.xml:18
+#: simulation/templates/gaia/fauna_lion.xml:20
 msgid "Panthera leo"
 msgstr ""
 
@@ -419,11 +419,11 @@ msgstr "ウサギ"
 msgid "Oryctolagus cuniculus"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_rhino.xml:17
+#: simulation/templates/gaia/fauna_rhino.xml:19
 msgid "White Rhinoceros"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_rhino.xml:18
+#: simulation/templates/gaia/fauna_rhino.xml:20
 msgid "Ceratotherium simum"
 msgstr ""
 
@@ -443,19 +443,19 @@ msgstr "羊"
 msgid "Ovis aries"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_tiger.xml:17
+#: simulation/templates/gaia/fauna_tiger.xml:19
 msgid "Tiger"
 msgstr "虎"
 
-#: simulation/templates/gaia/fauna_tiger.xml:18
+#: simulation/templates/gaia/fauna_tiger.xml:20
 msgid "Panthera tigris"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_walrus.xml:24
+#: simulation/templates/gaia/fauna_walrus.xml:26
 msgid "Walrus"
 msgstr "セイウチ"
 
-#: simulation/templates/gaia/fauna_walrus.xml:25
+#: simulation/templates/gaia/fauna_walrus.xml:27
 msgid "Odobenus rosmarus"
 msgstr ""
 
@@ -499,14 +499,6 @@ msgstr ""
 msgid "Equus quagga"
 msgstr ""
 
-#: simulation/templates/gaia/fauna_zebu.xml:8
-msgid "Zebu"
-msgstr "コブウシ"
-
-#: simulation/templates/gaia/fauna_zebu.xml:9
-msgid "Bos taurus indicus"
-msgstr ""
-
 #: simulation/templates/gaia/flora_bush_badlands.xml:4
 msgid "Hardy Bush"
 msgstr "丈夫な低木"
@@ -527,10 +519,6 @@ msgstr "葡萄"
 msgid "Gather grapes from these vines for Food."
 msgstr "この垣根から葡萄を採って食料にします。"
 
-#: simulation/templates/gaia/flora_bush_temperate.xml:4
-msgid "Deciduous Bush"
-msgstr "落葉性の灌木"
-
 #: simulation/templates/gaia/flora_tree_acacia.xml:4
 msgid "Acacia Tree"
 msgstr "アカシアの木"
@@ -546,6 +534,18 @@ msgstr "リンゴの木"
 #: simulation/templates/gaia/flora_tree_bamboo.xml:4
 #: simulation/templates/gaia/flora_tree_bamboo_single.xml:4
 msgid "Bamboo"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_bamboo_dragon.xml:8
+msgid "Dragon Bamboo"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_banana.xml:4
+msgid "Banana"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_banana.xml:5
+msgid "Gather bananas for Food."
 msgstr ""
 
 #: simulation/templates/gaia/flora_tree_banyan.xml:8
@@ -593,6 +593,8 @@ msgid "Cretan Date Palm"
 msgstr "クレタナツメヤシ"
 
 #: simulation/templates/gaia/flora_tree_cypress.xml:4
+#: simulation/templates/gaia/flora_tree_cypress_wild.xml:4
+#: simulation/templates/gaia/flora_tree_cypress_windswept.xml:4
 msgid "Cypress Tree"
 msgstr "イトスギの木"
 
@@ -600,18 +602,26 @@ msgstr "イトスギの木"
 msgid "Date Palm"
 msgstr "ナツメヤシ"
 
+#: simulation/templates/gaia/flora_tree_date_palm_dead.xml:4
+msgid "Dead Palm"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_date_palm_fruit.xml:4
 msgid "Fruiting Date Palm"
 msgstr ""
 
 #: simulation/templates/gaia/flora_tree_dead.xml:4
-msgid "Dead Tree"
-msgstr "枯木"
+msgid "Dead Deciduous Tree"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_euro_beech.xml:4
 #: simulation/templates/gaia/flora_tree_euro_beech_aut.xml:4
 msgid "European Beech Tree"
 msgstr "ヨーロッパブナの木"
+
+#: simulation/templates/gaia/flora_tree_euro_birch.xml:4
+msgid "Silver Birch"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_fig.xml:7
 msgid "Fig"
@@ -621,12 +631,25 @@ msgstr "イチジクの木"
 msgid "Gather figs for Food."
 msgstr "イチジクを採って食料にします。"
 
+#: simulation/templates/gaia/flora_tree_fir.xml:4
+#: simulation/templates/gaia/flora_tree_fir_winter.xml:4
+msgid "Fir Tree"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_fir_sapling.xml:4
 msgid "Fir Sapling"
 msgstr ""
 
+#: simulation/templates/gaia/flora_tree_juniper_prickly.xml:4
+msgid "Prickly Juniper"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_mangrove.xml:4
 msgid "Mangrove"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_maple.xml:4
+msgid "Maple"
 msgstr ""
 
 #: simulation/templates/gaia/flora_tree_medit_fan_palm.xml:4
@@ -641,6 +664,10 @@ msgstr "チャボトウジュロ"
 msgid "Oak Tree"
 msgstr "オークの木"
 
+#: simulation/templates/gaia/flora_tree_oak_holly.xml:4
+msgid "Holly Oak"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_oak_large.xml:4
 msgid "Large Oak Tree"
 msgstr "オークの大木"
@@ -648,6 +675,10 @@ msgstr "オークの大木"
 #: simulation/templates/gaia/flora_tree_olive.xml:4
 msgid "Olive Tree"
 msgstr "オリーブの木"
+
+#: simulation/templates/gaia/flora_tree_palm_areca.xml:4
+msgid "Areca Palm"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_palm_doum.xml:4
 msgid "Doum Palm"
@@ -675,6 +706,11 @@ msgstr "マツの木"
 msgid "Black Pine"
 msgstr ""
 
+#: simulation/templates/gaia/flora_tree_pine_maritime.xml:4
+#: simulation/templates/gaia/flora_tree_pine_maritime_short.xml:4
+msgid "Maritime Pine"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_poplar.xml:4
 msgid "Poplar Tree"
 msgstr "ポプラの木"
@@ -687,145 +723,142 @@ msgstr "セイヨウハコヤナギ"
 msgid "Senegal Date Palm"
 msgstr "セネガルヤシ"
 
+#: simulation/templates/gaia/flora_tree_strangler.xml:8
+msgid "Strangler Fig"
+msgstr ""
+
 #: simulation/templates/gaia/flora_tree_tamarix.xml:4
 msgid "Tamarix Tree"
 msgstr "ギョリュウの木"
+
+#: simulation/templates/gaia/flora_tree_teak.xml:8
+msgid "Teak"
+msgstr ""
+
+#: simulation/templates/gaia/flora_tree_temperate.xml:4
+#: simulation/templates/gaia/flora_tree_temperate_autumn.xml:4
+#: simulation/templates/gaia/flora_tree_temperate_winter.xml:4
+msgid "Deciduous Tree"
+msgstr ""
 
 #: simulation/templates/gaia/flora_tree_toona.xml:4
 msgid "Toona Tree"
 msgstr "オーストラリアチャンチン"
 
-#: simulation/templates/gaia/ruins/column_doric.xml:9
+#: simulation/templates/gaia/flora_tree_tropic_rainforest.xml:4
+msgid "Rainforest Tree"
+msgstr ""
+
+#: simulation/templates/gaia/ruins/column_doric.xml:8
 msgid "Ancient Ruins"
 msgstr "古代遺跡"
 
 #: simulation/templates/gaia/ruins/pyramid_great.xml:8
-#: simulation/templates/gaia/ruins/pyramid_minor.xml:8
-msgid "Pyramid"
-msgstr "ピラミッド"
-
-#: simulation/templates/gaia/ruins/pyramid_great.xml:9
 msgid "Great Pyramid"
 msgstr "大ピラミッド"
 
-#: simulation/templates/gaia/ruins/pyramid_minor.xml:9
+#: simulation/templates/gaia/ruins/pyramid_minor.xml:8
 msgid "Minor Pyramid"
 msgstr "小ピラミッド"
 
 #: simulation/templates/gaia/ruins/standing_stone.xml:8
-#: simulation/templates/gaia/ruins/stone_statues_egyptian.xml:8
-#: simulation/templates/gaia/ruins/stone_statues_kushite.xml:8
-#: simulation/templates/gaia/ruins/stone_statues_roman.xml:8
-msgid "Stone Ruins"
-msgstr "石の遺物"
-
-#: simulation/templates/gaia/ruins/standing_stone.xml:9
-#: simulation/templates/gaia/treasure/standing_stone.xml:9
+#: simulation/templates/gaia/treasure/standing_stone.xml:8
 msgid "Celtic Standing Stone"
 msgstr "ケルトの立石"
 
-#: simulation/templates/gaia/ruins/stone_statues_egyptian.xml:9
+#: simulation/templates/gaia/ruins/stone_statues_egyptian.xml:8
 msgid "Ptolemaic Egyptian Statues"
 msgstr "プトレマイオス朝エジプト石像"
 
-#: simulation/templates/gaia/ruins/stone_statues_kushite.xml:9
+#: simulation/templates/gaia/ruins/stone_statues_kushite.xml:8
 msgid "Kushite Statue"
 msgstr "クシュの像"
 
-#: simulation/templates/gaia/ruins/stone_statues_roman.xml:9
+#: simulation/templates/gaia/ruins/stone_statues_roman.xml:8
 msgid "Roman Statues"
 msgstr "ローマ石像"
 
-#: simulation/templates/gaia/ruins/unfinished_greek_temple.xml:9
+#: simulation/templates/gaia/ruins/unfinished_greek_temple.xml:8
 msgid "Unfinished Greek Temple"
 msgstr "未完成のギリシア神殿"
 
-#: simulation/templates/gaia/ruins/unfinished_greek_temple.xml:10
+#: simulation/templates/gaia/ruins/unfinished_greek_temple.xml:9
 msgid "This temple is unfinished and has fallen to ruin."
 msgstr "完成しないまま打ち捨てられた神殿です。"
 
-#: simulation/templates/gaia/treasure/food_barrel.xml:9
-#: simulation/templates/gaia/treasure/food_bin.xml:9
-#: simulation/templates/gaia/treasure/food_crate.xml:9
-#: simulation/templates/gaia/treasure/food_jars.xml:9
-#: simulation/templates/gaia/treasure/food_persian_big.xml:8
-#: simulation/templates/gaia/treasure/food_persian_small.xml:8
+#: simulation/templates/gaia/treasure/food_barrel.xml:8
+#: simulation/templates/gaia/treasure/food_bin.xml:8
+#: simulation/templates/gaia/treasure/food_crate.xml:8
+#: simulation/templates/gaia/treasure/food_jars.xml:8
 msgid "Food Treasure"
 msgstr "食料の財宝"
 
-#: simulation/templates/gaia/treasure/food_barrels_buried.xml:9
+#: simulation/templates/gaia/treasure/food_barrels_buried.xml:8
 msgid "Half-buried Barrels"
 msgstr "埋もれかけの樽"
 
-#: simulation/templates/gaia/treasure/food_persian_big.xml:9
+#: simulation/templates/gaia/treasure/food_persian_big.xml:8
 msgid "Persian Food Stores"
 msgstr "ペルシアの備蓄食料"
 
-#: simulation/templates/gaia/treasure/food_persian_small.xml:9
+#: simulation/templates/gaia/treasure/food_persian_small.xml:8
 msgid "Persian Food Treasure"
 msgstr "ペルシアの食料品"
 
-#: simulation/templates/gaia/treasure/golden_fleece.xml:9
+#: simulation/templates/gaia/treasure/golden_fleece.xml:8
 msgid "Golden Fleece"
 msgstr "金の羊毛"
 
 #: simulation/templates/gaia/treasure/metal.xml:8
-#: simulation/templates/gaia/treasure/metal_persian_big.xml:8
-#: simulation/templates/gaia/treasure/metal_persian_small.xml:8
-msgid "Metal Treasure"
-msgstr "金属の財宝"
-
-#: simulation/templates/gaia/treasure/metal.xml:9
 msgid "Secret Box"
 msgstr "秘密の箱"
 
-#: simulation/templates/gaia/treasure/metal_persian_big.xml:9
+#: simulation/templates/gaia/treasure/metal_persian_big.xml:8
 msgid "Persian Wares"
 msgstr "ペルシアの特産"
 
-#: simulation/templates/gaia/treasure/metal_persian_small.xml:9
+#: simulation/templates/gaia/treasure/metal_persian_small.xml:8
 msgid "Persian Rugs"
 msgstr "ペルシアの敷物"
 
-#: simulation/templates/gaia/treasure/pegasus.xml:9
+#: simulation/templates/gaia/treasure/pegasus.xml:8
 msgid "Pegasus"
 msgstr "ペガサス"
 
-#: simulation/templates/gaia/treasure/shipwreck.xml:9
-#: simulation/templates/gaia/treasure/shipwreck_ram_bow.xml:9
-#: simulation/templates/gaia/treasure/shipwreck_sail_boat.xml:9
-#: simulation/templates/gaia/treasure/shipwreck_sail_boat_cut.xml:9
+#: simulation/templates/gaia/treasure/shipwreck.xml:8
+#: simulation/templates/gaia/treasure/shipwreck_ram_bow.xml:8
+#: simulation/templates/gaia/treasure/shipwreck_sail_boat.xml:8
+#: simulation/templates/gaia/treasure/shipwreck_sail_boat_cut.xml:8
 msgid "Shipwreck"
 msgstr "難破船"
 
-#: simulation/templates/gaia/treasure/shipwreck.xml:10
+#: simulation/templates/gaia/treasure/shipwreck.xml:9
 msgid "A decaying military shipwreck. A good opportunity for any businessman."
 msgstr "朽ちつつある難破した軍艦です。商売人にとってはうれしい掘り出し物です。"
 
-#: simulation/templates/gaia/treasure/shipwreck_debris.xml:9
+#: simulation/templates/gaia/treasure/shipwreck_debris.xml:8
 msgid "Shipwreck Cargo"
 msgstr "難破船の積荷"
 
-#: simulation/templates/gaia/treasure/shipwreck_ram_bow.xml:10
+#: simulation/templates/gaia/treasure/shipwreck_ram_bow.xml:9
 msgid ""
 "A shipwreck with much loss of life. A good opportunity for any businessman."
 msgstr "多数の死者を出した難破船ですが、商売人にとってはうれしい掘り出し物です。"
 
-#: simulation/templates/gaia/treasure/shipwreck_sail_boat.xml:10
+#: simulation/templates/gaia/treasure/shipwreck_sail_boat.xml:9
 msgid ""
 "The wreck of a small cargo ship. A good opportunity for any businessman."
 msgstr "難破した小さな貨物船です。商売人にとってはうれしい掘り出し物です。"
 
-#: simulation/templates/gaia/treasure/shipwreck_sail_boat_cut.xml:10
+#: simulation/templates/gaia/treasure/shipwreck_sail_boat_cut.xml:9
 msgid "A cargo ship rammed in half. A good opportunity for any businessman."
 msgstr "衝角攻撃で半壊した貨物船です。商売人にとってはうれしい掘り出し物です。"
 
-#: simulation/templates/gaia/treasure/standing_stone.xml:8
-#: simulation/templates/gaia/treasure/stone.xml:9
+#: simulation/templates/gaia/treasure/stone.xml:8
 msgid "Stone Treasure"
 msgstr "石材の財宝"
 
-#: simulation/templates/gaia/treasure/wood.xml:9
+#: simulation/templates/gaia/treasure/wood.xml:8
 msgid "Wood Treasure"
 msgstr "木材の財宝"
 
@@ -936,90 +969,61 @@ msgstr "オベリスク"
 msgid "Egyptian Obelisk"
 msgstr "エジプトのオベリスク"
 
-#: simulation/templates/other/palisades_angle_spike.xml:14
-msgid "Palisade Angle Spike"
-msgstr "乱杭"
-
-#: simulation/templates/other/palisades_angle_spike.xml:15
-msgid "Big Spike"
-msgstr "大きな杭"
+#: simulation/templates/other/palisades_angle_spike.xml:17
+msgid "Angle Spike"
+msgstr ""
 
 #: simulation/templates/other/palisades_rocks_curve.xml:14
 msgid "Palisade Curve"
 msgstr "柵の曲がり角"
 
-#: simulation/templates/other/palisades_rocks_curve.xml:15
-msgid "Wooden Wall Corner"
-msgstr "木製の防壁の角"
-
 #: simulation/templates/other/palisades_rocks_end.xml:14
 msgid "Palisade End"
 msgstr "柵の終わり"
 
-#: simulation/templates/other/palisades_rocks_end.xml:15
-msgid "Wooden Wall End"
-msgstr "木製の防壁の終端"
-
-#: simulation/templates/other/palisades_rocks_fort.xml:5
+#: simulation/templates/other/palisades_rocks_fort.xml:9
 msgid "Palisade Fort"
 msgstr "Palisade Fort"
 
-#: simulation/templates/other/palisades_rocks_fort.xml:6
+#: simulation/templates/other/palisades_rocks_fort.xml:10
 msgid "Wooden Tower"
 msgstr "木の塔"
 
-#: simulation/templates/other/palisades_rocks_gate.xml:17
+#: simulation/templates/other/palisades_rocks_gate.xml:21
 msgid "Palisade Gate"
 msgstr "Palisade Gate"
 
-#: simulation/templates/other/palisades_rocks_gate.xml:18
-msgid "Wooden Gate"
-msgstr "木の門"
+#: simulation/templates/other/palisades_rocks_gate.xml:23
+msgid ""
+"Allow units access through a palisade wall. Can be locked to prevent access."
+msgstr ""
 
-#: simulation/templates/other/palisades_rocks_long.xml:26
-#: simulation/templates/other/palisades_rocks_medium.xml:26
-#: simulation/templates/other/palisades_rocks_short.xml:25
+#: simulation/templates/other/palisades_rocks_long.xml:18
+#: simulation/templates/other/palisades_rocks_medium.xml:18
+#: simulation/templates/other/palisades_rocks_short.xml:18
 #: simulation/templates/other/palisades_rocks_straight.xml:14
-#: simulation/templates/other/palisades_rocks_tower.xml:24
-#: simulation/templates/other/wallset_palisade.xml:5
+#: simulation/templates/other/palisades_rocks_tower.xml:18
 msgid "Palisade"
 msgstr "Palisade"
 
-#: simulation/templates/other/palisades_rocks_long.xml:27
-#: simulation/templates/other/palisades_rocks_medium.xml:27
-#: simulation/templates/other/palisades_rocks_short.xml:26
-#: simulation/templates/other/palisades_rocks_straight.xml:15
-#: simulation/templates/other/palisades_rocks_tower.xml:25
-#: simulation/templates/other/wallset_palisade.xml:4
-msgid "Wooden Wall"
-msgstr "木製の防壁"
+#: simulation/templates/other/palisades_rocks_long.xml:33
+msgid ""
+"This will allow you to let units circulate through your fortifications."
+msgstr "この指示により、ユニットが要塞を巡回させることができます。"
 
-#: simulation/templates/other/palisades_rocks_outpost.xml:14
+#: simulation/templates/other/palisades_rocks_outpost.xml:17
 msgid "Outpost"
 msgstr "前哨地"
-
-#: simulation/templates/other/palisades_rocks_outpost.xml:15
-#: simulation/templates/other/palisades_rocks_watchtower.xml:15
-msgid "Wooden Watch Tower"
-msgstr "木の監視塔"
 
 #: simulation/templates/other/palisades_rocks_watchtower.xml:14
 msgid "Watchtower"
 msgstr "物見やぐら"
 
-#: simulation/templates/other/palisades_small_spikes.xml:14
-msgid "Spikes Small"
-msgstr "低い鹿砦"
-
-#: simulation/templates/other/palisades_small_spikes.xml:15
+#: simulation/templates/other/palisades_small_spikes.xml:17
 msgid "Small Spikes"
 msgstr "鹿砦（小）"
 
-#: simulation/templates/other/palisades_tall_spikes.xml:14
-msgid "Spikes Tall"
-msgstr "高い鹿砦"
-
-#: simulation/templates/other/palisades_tall_spikes.xml:15
+#: simulation/templates/other/palisades_tall_spikes.xml:17
 msgid "Tall Spikes"
 msgstr "鹿砦（大）"
 
@@ -1075,7 +1079,7 @@ msgstr "スパイ"
 
 #: simulation/templates/special/formations/anti_cavalry.xml:6
 #: simulation/templates/special/formations/testudo.xml:6
-msgid "At least 16 melee infantry units required."
+msgid "Requires at least 16 Melee Infantry."
 msgstr ""
 
 #: simulation/templates/special/formations/anti_cavalry.xml:7
@@ -1087,7 +1091,7 @@ msgid "Battle Line"
 msgstr "戦線"
 
 #: simulation/templates/special/formations/box.xml:6
-msgid "At least 4 units required."
+msgid "Requires at least 4 Soldiers or Siege engines."
 msgstr ""
 
 #: simulation/templates/special/formations/box.xml:7
@@ -1103,7 +1107,7 @@ msgid "Column Open"
 msgstr "散開縦隊"
 
 #: simulation/templates/special/formations/flank.xml:6
-msgid "At least 8 units required."
+msgid "Requires at least 8 Soldiers or Siege engines."
 msgstr ""
 
 #: simulation/templates/special/formations/flank.xml:7
@@ -1123,7 +1127,7 @@ msgid "None"
 msgstr "なし"
 
 #: simulation/templates/special/formations/phalanx.xml:6
-msgid "At least 10 hoplite infantry required."
+msgid "Requires at least 10 Infantry Hoplites."
 msgstr ""
 
 #: simulation/templates/special/formations/phalanx.xml:7
@@ -1135,7 +1139,7 @@ msgid "Scatter"
 msgstr "不規則"
 
 #: simulation/templates/special/formations/skirmish.xml:5
-msgid "Only ranged units allowed."
+msgid "Requires a Ranged Soldier."
 msgstr ""
 
 #: simulation/templates/special/formations/skirmish.xml:6
@@ -1143,7 +1147,7 @@ msgid "Skirmish"
 msgstr "散兵列"
 
 #: simulation/templates/special/formations/syntagma.xml:6
-msgid "At least 16 pike infantry units required."
+msgid "Requires at least 16 Infantry Pikemen."
 msgstr ""
 
 #: simulation/templates/special/formations/syntagma.xml:8
@@ -1155,7 +1159,7 @@ msgid "Testudo"
 msgstr "テストゥド"
 
 #: simulation/templates/special/formations/wedge.xml:6
-msgid "At least 6 cavalry units required."
+msgid "Requires at least 6 Cavalry."
 msgstr ""
 
 #: simulation/templates/special/formations/wedge.xml:7

@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -36,8 +36,16 @@
 
 CProfiler2 g_Profiler2;
 
+const size_t CProfiler2::MAX_ATTRIBUTE_LENGTH = 256;
+
+// TODO: what's a good size?
+const size_t CProfiler2::BUFFER_SIZE = 4 * 1024 * 1024;
+const size_t CProfiler2::HOLD_BUFFER_SIZE = 128 * 1024;
+
 // A human-recognisable pattern (for debugging) followed by random bytes (for uniqueness)
 const u8 CProfiler2::RESYNC_MAGIC[8] = {0x11, 0x22, 0x33, 0x44, 0xf4, 0x93, 0xbe, 0x15};
+
+thread_local CProfiler2::ThreadStorage* CProfiler2::m_CurrentStorage = nullptr;
 
 CProfiler2::CProfiler2() :
 	m_Initialised(false), m_FrameNumber(0), m_MgContext(NULL), m_GPU(NULL)
@@ -148,8 +156,6 @@ static void* MgCallback(mg_event event, struct mg_connection *conn, const struct
 void CProfiler2::Initialise()
 {
 	ENSURE(!m_Initialised);
-	int err = pthread_key_create(&m_TLS, &CProfiler2::TLSDtor);
-	ENSURE(err == 0);
 	m_Initialised = true;
 
 	RegisterCurrentThread("main");
@@ -235,11 +241,6 @@ void CProfiler2::Shutdown()
 	// the destructor is not called for the main thread
 	// we have to call it manually to avoid memory leaks
 	ENSURE(ThreadUtil::IsMainThread());
-	void * dataptr = pthread_getspecific(m_TLS);
-	TLSDtor(dataptr);
-
-	int err = pthread_key_delete(m_TLS);
-	ENSURE(err == 0);
 	m_Initialised = false;
 }
 
@@ -267,44 +268,30 @@ void CProfiler2::RecordGPURegionLeave(const char* id)
 		m_GPU->RegionLeave(id);
 }
 
-/**
- * Called by pthreads when a registered thread is destroyed.
- */
-void CProfiler2::TLSDtor(void* data)
-{
-	ThreadStorage* storage = (ThreadStorage*)data;
-
-	storage->GetProfiler().RemoveThreadStorage(storage);
-
-	delete (ThreadStorage*)data;
-}
-
 void CProfiler2::RegisterCurrentThread(const std::string& name)
 {
 	ENSURE(m_Initialised);
 
-	ENSURE(pthread_getspecific(m_TLS) == NULL); // mustn't register a thread more than once
+	// Must not register a thread more than once.
+	ENSURE(m_CurrentStorage == nullptr);
 
-	ThreadStorage* storage = new ThreadStorage(*this, name);
-	int err = pthread_setspecific(m_TLS, storage);
-	ENSURE(err == 0);
+	m_CurrentStorage = new ThreadStorage(*this, name);
+	AddThreadStorage(m_CurrentStorage);
 
 	RecordSyncMarker();
 	RecordEvent("thread start");
-
-	AddThreadStorage(storage);
 }
 
 void CProfiler2::AddThreadStorage(ThreadStorage* storage)
 {
-	CScopeLock lock(m_Mutex);
-	m_Threads.push_back(storage);
+	std::lock_guard<std::mutex> lock(m_Mutex);
+	m_Threads.push_back(std::unique_ptr<ThreadStorage>(storage));
 }
 
 void CProfiler2::RemoveThreadStorage(ThreadStorage* storage)
 {
-	CScopeLock lock(m_Mutex);
-	m_Threads.erase(std::find(m_Threads.begin(), m_Threads.end(), storage));
+	std::lock_guard<std::mutex> lock(m_Mutex);
+	m_Threads.erase(std::find_if(m_Threads.begin(), m_Threads.end(), [storage](const std::unique_ptr<ThreadStorage>& s) { return s.get() == storage; }));
 }
 
 CProfiler2::ThreadStorage::ThreadStorage(CProfiler2& profiler, const std::string& name) :
@@ -441,8 +428,10 @@ void rewriteBuffer(u8* buffer, u32& bufferSize)
 	const char* regionName;
 	std::set<std::string> topLevelArgs;
 
-	typedef std::tuple<const char*, double, std::set<std::string> > infoPerType;
-	std::unordered_map<std::string, infoPerType> timeByType;
+	using infoPerType = std::tuple<const char*, double, std::set<std::string> >;
+	using timeByTypeMap = std::unordered_map<std::string, infoPerType>;
+
+	timeByTypeMap timeByType;
 	std::vector<double> last_time_stack;
 	std::vector<const char*> last_names;
 
@@ -532,7 +521,7 @@ void rewriteBuffer(u8* buffer, u32& bufferSize)
 			double time = (double)item_time - last_time_stack.back();
 
 			std::string name = std::string(item_name);
-			auto TimeForType = timeByType.find(name);
+			timeByTypeMap::iterator TimeForType = timeByType.find(name);
 			if (TimeForType == timeByType.end())
 			{
 				// keep reference to the original char pointer to make sure we don't break things down the line
@@ -562,11 +551,11 @@ void rewriteBuffer(u8* buffer, u32& bufferSize)
 			readPos += sizeof(len);
 
 			char message[CProfiler2::MAX_ATTRIBUTE_LENGTH] = {0};
-			memcpy(&message[0], buffer + readPos, len);
+			memcpy(&message[0], buffer + readPos, std::min(size_t(len), CProfiler2::MAX_ATTRIBUTE_LENGTH));
 			CStr mess = CStr((const char*)message, len);
 			if (!last_names.empty())
 			{
-				auto it = timeByType.find(std::string(last_names.back()));
+				timeByTypeMap::iterator it = timeByType.find(std::string(last_names.back()));
 				if (it == timeByType.end())
 					topLevelArgs.insert(mess);
 				else
@@ -596,7 +585,7 @@ void rewriteBuffer(u8* buffer, u32& bufferSize)
 		curTime += 0.000001;
 	}
 	// sub-events, aggregated
-	for (auto& type : timeByType)
+	for (const std::pair<std::string, infoPerType>& type : timeByType)
 	{
 		CProfiler2::SItem_dt_id item = { (float)curTime, std::get<0>(type.second) };
 		buffer[writePos] = (u8)CProfiler2::ITEM_ENTER;
@@ -604,12 +593,12 @@ void rewriteBuffer(u8* buffer, u32& bufferSize)
 		writePos += sizeof(item) + 1;
 
 		// write relevant attributes if present
-		for (const auto& attrib : std::get<2>(type.second))
+		for (const std::string& attrib : std::get<2>(type.second))
 		{
 			buffer[writePos] = (u8)CProfiler2::ITEM_ATTRIBUTE;
 			writePos++;
 			std::string basic = attrib;
-			auto time_attrib = time_per_attribute.find(attrib);
+			std::map<std::string, double>::iterator time_attrib = time_per_attribute.find(attrib);
 			if (time_attrib != time_per_attribute.end())
 				basic += " " + CStr::FromInt(1000000*time_attrib->second) + "us";
 
@@ -724,14 +713,16 @@ void CProfiler2::ConstructJSONOverview(std::ostream& stream)
 {
 	TIMER(L"profile2 overview");
 
-	CScopeLock lock(m_Mutex);
+	std::lock_guard<std::mutex> lock(m_Mutex);
 
 	stream << "{\"threads\":[";
-	for (size_t i = 0; i < m_Threads.size(); ++i)
+	bool first_time = true;
+	for (std::unique_ptr<ThreadStorage>& storage : m_Threads)
 	{
-		if (i != 0)
+		if (!first_time)
 			stream << ",";
-		stream << "{\"name\":\"" << CStr(m_Threads[i]->GetName()).EscapeToPrintableASCII() << "\"}";
+		stream << "{\"name\":\"" << CStr(storage->GetName()).EscapeToPrintableASCII() << "\"}";
+		first_time = false;
 	}
 	stream << "]}";
 }
@@ -902,25 +893,20 @@ const char* CProfiler2::ConstructJSONResponse(std::ostream& stream, const std::s
 	{
 		TIMER(L"profile2 get buffer");
 
-		CScopeLock lock(m_Mutex); // lock against changes to m_Threads or deletions of ThreadStorage
+		std::lock_guard<std::mutex> lock(m_Mutex); // lock against changes to m_Threads or deletions of ThreadStorage
 
-		ThreadStorage* storage = NULL;
-		for (size_t i = 0; i < m_Threads.size(); ++i)
-		{
-			if (m_Threads[i]->GetName() == thread)
-			{
-				storage = m_Threads[i];
-				break;
-			}
-		}
+		std::vector<std::unique_ptr<ThreadStorage>>::iterator it =
+			std::find_if(m_Threads.begin(), m_Threads.end(), [&thread](std::unique_ptr<ThreadStorage>& storage) {
+				return storage->GetName() == thread;
+			});
 
-		if (!storage)
+		if (it == m_Threads.end())
 			return "cannot find named thread";
 
 		stream << "{\"events\":[\n";
 
 		stream << "[\n";
-		buffer = storage->GetBuffer();
+		buffer = (*it)->GetBuffer();
 	}
 
 	BufferVisitor_Dump visitor(stream);
@@ -937,22 +923,17 @@ void CProfiler2::SaveToFile()
 	std::ofstream stream(OsString(path).c_str(), std::ofstream::out | std::ofstream::trunc);
 	ENSURE(stream.good());
 
-	std::vector<ThreadStorage*> threads;
-
-	{
-		CScopeLock lock(m_Mutex);
-		threads = m_Threads;
-	}
-
 	stream << "profileDataCB({\"threads\": [\n";
-	for (size_t i = 0; i < threads.size(); ++i)
+	bool first_time = true;
+	for (std::unique_ptr<ThreadStorage>& storage : m_Threads)
 	{
-		if (i != 0)
+		if (!first_time)
 			stream << ",\n";
-		stream << "{\"name\":\"" << CStr(threads[i]->GetName()).EscapeToPrintableASCII() << "\",\n";
+		stream << "{\"name\":\"" << CStr(storage->GetName()).EscapeToPrintableASCII() << "\",\n";
 		stream << "\"data\": ";
-		ConstructJSONResponse(stream, threads[i]->GetName());
+		ConstructJSONResponse(stream, storage->GetName());
 		stream << "\n}";
+		first_time = false;
 	}
 	stream << "\n]});\n";
 }

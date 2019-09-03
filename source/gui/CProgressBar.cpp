@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,13 +22,14 @@
 
 #include "lib/ogl.h"
 
-CProgressBar::CProgressBar()
+CProgressBar::CProgressBar(CGUI& pGUI)
+	: IGUIObject(pGUI)
 {
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite_background");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite_bar");
-	AddSetting(GUIST_float,					"caption"); // aka value from 0 to 100
-	AddSetting(GUIST_CStrW,					"tooltip");
-	AddSetting(GUIST_CStr,					"tooltip_style");
+	AddSetting<CGUISpriteInstance>("sprite_background");
+	AddSetting<CGUISpriteInstance>("sprite_bar");
+	AddSetting<float>("caption"); // aka value from 0 to 100
+	AddSetting<CStrW>("tooltip");
+	AddSetting<CStr>("tooltip_style");
 }
 
 CProgressBar::~CProgressBar()
@@ -47,13 +48,11 @@ void CProgressBar::HandleMessage(SGUIMessage& Message)
 		// TODO Gee: (2004-09-01) Is this really updated each time it should?
 		if (Message.value == CStr("caption"))
 		{
-			float value;
-			GUI<float>::GetSetting(this, "caption", value);
+			const float value = GetSetting<float>("caption");
 			if (value > 100.f)
-				GUI<float>::SetSetting(this, "caption", 100.f);
-			else
-			if (value < 0.f)
-				GUI<float>::SetSetting(this, "caption", 0.f);
+				SetSetting<float>("caption", 100.f, true);
+			else if (value < 0.f)
+				SetSetting<float>("caption", 0.f, true);
 		}
 		break;
 	default:
@@ -63,23 +62,18 @@ void CProgressBar::HandleMessage(SGUIMessage& Message)
 
 void CProgressBar::Draw()
 {
-	if (!GetGUI())
-		return;
+	CGUISpriteInstance& sprite_bar = GetSetting<CGUISpriteInstance>("sprite_bar");
+	CGUISpriteInstance& sprite_background = GetSetting<CGUISpriteInstance>("sprite_background");
 
 	float bz = GetBufferedZ();
 
-	CGUISpriteInstance* sprite_background;
-	CGUISpriteInstance* sprite_bar;
 	int cell_id = 0;
-	float value = 0;
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite_background", sprite_background);
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite_bar", sprite_bar);
-	GUI<float>::GetSetting(this, "caption", value);
+	const float value = GetSetting<float>("caption");
 
-	GetGUI()->DrawSprite(*sprite_background, cell_id, bz, m_CachedActualSize);
+	m_pGUI.DrawSprite(sprite_background, cell_id, bz, m_CachedActualSize);
 
 	// Get size of bar (notice it is drawn slightly closer, to appear above the background)
 	CRect bar_size(m_CachedActualSize.left, m_CachedActualSize.top,
 				   m_CachedActualSize.left+m_CachedActualSize.GetWidth()*(value/100.f), m_CachedActualSize.bottom);
-	GetGUI()->DrawSprite(*sprite_bar, cell_id, bz+0.01f, bar_size);
+	m_pGUI.DrawSprite(sprite_bar, cell_id, bz+0.01f, bar_size);
 }

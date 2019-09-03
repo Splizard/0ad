@@ -514,7 +514,7 @@ ScenarioEditor::ScenarioEditor(wxWindow* parent)
 					menuHelp->Append(ID_##id, _(wxString(data[#id]["title"])), _(wxString(data[#id]["tooltip"]))); \
 					m_HelpData.insert(std::make_pair( \
 						ID_##id, \
-						HelpItem(wxString(data[#id]["title"]), wxString(data[#id]["tooltip"]), wxString(data[#id]["url"])) \
+						HelpItem(wxString::FromUTF8(data[#id]["title"]), wxString::FromUTF8(data[#id]["tooltip"]), wxString::FromUTF8(data[#id]["url"])) \
 					)); \
 				} while (0)
 			ADD_HELP_ITEM(Manual);
@@ -996,9 +996,14 @@ void ScenarioEditor::OnHelp(wxCommandEvent& event)
 
 void ScenarioEditor::OnMenuOpen(wxMenuEvent& event)
 {
+    // Ignore wxMSW system menu events, see https://trac.wildfiregames.com/ticket/5501
+    const wxMenu* menu = event.GetMenu();
+    if (!menu)
+        return;
+
     // This could be done far more elegantly if wxMenuItem had changeable id.
     wxMenu* pasteMenuItem = NULL;
-    event.GetMenu()->FindItem(ID_Paste, &pasteMenuItem);
+    menu->FindItem(ID_Paste, &pasteMenuItem);
 
     GetMenuBar()->Enable(ID_Paste, false);
 

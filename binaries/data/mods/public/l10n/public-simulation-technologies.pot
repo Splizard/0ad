@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D. — Empires Ascendant\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 10:10+0200\n"
+"POT-Creation-Date: 2019-09-02 07:10+0000\n"
+"PO-Revision-Date: 2019-09-02 07:10+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,6 +18,33 @@ msgid ""
 "health, 1 extra armor level of every type, 20% extra loot, 20% extra attack "
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.json:description
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.json:tooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and -20"
+"% train time, but also -20% health."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.json:genericName
+msgid "Archery Tradition"
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.json:requirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.json:requirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.json:requirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.json:requirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.json:requirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.json:requirementsTooltip
+#: simulation/data/technologies/health_females_01.json:requirementsTooltip
+#: simulation/data/technologies/tower_watch.json:requirementsTooltip
+msgid "Unlocked in Village Phase."
 msgstr ""
 
 #: simulation/data/technologies/armor_cav_01.json:description
@@ -447,18 +474,6 @@ msgstr ""
 msgid "Reinforced hull"
 msgstr ""
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.json:requirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.json:requirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.json:requirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.json:requirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.json:requirementsTooltip
-#: simulation/data/technologies/health_females_01.json:requirementsTooltip
-#: simulation/data/technologies/tower_watch.json:requirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.json:requirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.json:requirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr ""
-
 #: simulation/data/technologies/attack_cav_lance.json:description
 msgid "A long spear made specifically for cavalry."
 msgstr ""
@@ -624,7 +639,7 @@ msgstr ""
 #: simulation/data/technologies/attack_infantry_ranged_01.json:description
 #: simulation/data/technologies/attack_infantry_ranged_02.json:description
 #: simulation/data/technologies/ranged_inf_irregulars.json:description
-msgid "Training increases damage of ranged infantry units."
+msgid "Training increases damage of ranged infantry."
 msgstr ""
 
 #: simulation/data/technologies/attack_infantry_ranged_01.json:tooltip
@@ -1219,8 +1234,8 @@ msgstr ""
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by another +50%. Silver Owls civ bonus "
-"grants an extra +10% metal gather rate to all workers. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
+"grants an extra +10% metal gather rate to all workers. Citizen Soldiers +10% "
+"health. All structures +9 garrisoned regeneration rate."
 msgstr ""
 
 #: simulation/data/technologies/phase_city_athen.json:requirementsTooltip
@@ -1243,8 +1258,8 @@ msgstr ""
 #: simulation/data/technologies/phase_city_generic.json:tooltip
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by another +50%. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
+"radius for Civic Centers increased by another +50%. Citizen Soldiers +10% "
+"health. All structures +9 garrisoned regeneration rate."
 msgstr ""
 
 #: simulation/data/technologies/phase_town.json:genericName
@@ -1270,8 +1285,8 @@ msgstr ""
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by +30%. 'Silver Owls' civ bonus grants "
-"an extra +10% metal gather rate to all workers. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
+"an extra +10% metal gather rate to all workers. Citizen Soldiers +20% "
+"health. All structures +7 garrisoned regeneration rate."
 msgstr ""
 
 #: simulation/data/technologies/phase_town_athen.json:requirementsTooltip
@@ -1293,8 +1308,8 @@ msgstr ""
 #: simulation/data/technologies/phase_town_generic.json:tooltip
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by +30%. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
+"radius for Civic Centers increased by +30%. Citizen Soldiers +20% health. "
+"All structures +7 garrisoned regeneration rate."
 msgstr ""
 
 #: simulation/data/technologies/phase_village.json:genericName
@@ -1432,11 +1447,11 @@ msgid "Amentum"
 msgstr ""
 
 #: simulation/data/technologies/siege_armor.json:description
-msgid "Increased armor on siege weapons"
+msgid "Increased armor on siege engines."
 msgstr ""
 
 #: simulation/data/technologies/siege_armor.json:tooltip
-msgid "All Siege weapons +2 Hack armor levels."
+msgid "Siege Engines +2 hack armor."
 msgstr ""
 
 #: simulation/data/technologies/siege_armor.json:genericName
@@ -1444,11 +1459,11 @@ msgid "Armor plating"
 msgstr ""
 
 #: simulation/data/technologies/siege_attack.json:description
-msgid "Advanced technologies improve siege efficiency"
+msgid "Advanced technologies improve siege efficiency."
 msgstr ""
 
 #: simulation/data/technologies/siege_attack.json:tooltip
-msgid "All siege weapons +25% Crush damage."
+msgid "Siege Engines +25% attack crush damage."
 msgstr ""
 
 #: simulation/data/technologies/siege_attack.json:genericName
@@ -1456,11 +1471,11 @@ msgid "Advanced Siege"
 msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.json:description
-msgid "Improvement to projectile accuracy"
+msgid "Improvement to projectile accuracy."
 msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.json:tooltip
-msgid "Bolt shooter increased accuracy."
+msgid "Bolt Shooters −20% ranged attack spread."
 msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.json:genericName
@@ -1468,11 +1483,11 @@ msgid "Bolt Accuracy"
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.json:description
-msgid "Siege weapons require less metal resource"
+msgid "Siege engines require less metal."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.json:tooltip
-msgid "Siege weapons cost 20% less metal"
+msgid "Siege Engines −20% metal cost."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.json:genericName
@@ -1480,11 +1495,11 @@ msgid "Metalworker"
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.json:description
-msgid "Siege weapons cost less wood"
+msgid "Siege engines require less wood."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.json:tooltip
-msgid "Siege weapons cost 20% less wood"
+msgid "Siege Engines −20% wood cost."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.json:genericName
@@ -1492,11 +1507,11 @@ msgid "Artillery Instructors"
 msgstr ""
 
 #: simulation/data/technologies/siege_packing.json:description
-msgid "Immobile siege weapons are assembled and disassembled faster"
+msgid "Immobile siege engines are assembled and disassembled faster."
 msgstr ""
 
 #: simulation/data/technologies/siege_packing.json:tooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
+msgid "Siege Engines −25% pack and unpack time."
 msgstr ""
 
 #: simulation/data/technologies/siege_packing.json:genericName
@@ -2236,8 +2251,7 @@ msgstr ""
 
 #: simulation/data/technologies/civbonuses/cart_walls.json:tooltip
 msgid ""
-"Carthaginian walls, gates, and wall towers have 3x the health of a standard "
-"wall, but also cost twice as much and take twice as long to build."
+"Carthaginian Walls +100% build time, +100% stone cost, and  +200% health."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/cart_walls.json:genericName
@@ -2250,8 +2264,8 @@ msgstr ""
 
 #: simulation/data/technologies/civbonuses/celt_structures.json:tooltip
 msgid ""
-"Celtic buildings have 20% less health, but are also 20% cheaper and faster "
-"to construct."
+"Briton and Gaulish Structures −20% build time, −20% health, and −20% capture "
+"points."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/celt_structures.json:genericName
@@ -2264,8 +2278,8 @@ msgstr ""
 
 #: simulation/data/technologies/civbonuses/greek_structures.json:tooltip
 msgid ""
-"All structures have 10% more health and capture points, but also take 10% "
-"longer to build."
+"Athenian, Macedonian, and Spartan Structures +10% build time, +10% health, "
+"and +10% capture points."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/greek_structures.json:genericName
@@ -2283,7 +2297,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_population.json:tooltip
-msgid "Mauryas have a 10% higher maximum population limit."
+msgid "Mauryas +10% maximum population limit."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_population.json:genericName
@@ -2301,7 +2315,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_walls.json:tooltip
-msgid "Mauryan city walls have -20% less health and -20% less build time."
+msgid "Mauryan City Walls −20% build time and −20% health."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_walls.json:genericName
@@ -2319,7 +2333,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/pers_population.json:tooltip
-msgid "Persians have a 10% higher maximum population limit."
+msgid "Persians +10% maximum population limit."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/pers_population.json:genericName
@@ -2335,7 +2349,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/spart_population.json:tooltip
-msgid "Spartans have 10% less maximum population."
+msgid "Spartans −10% maximum population limit."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/spart_population.json:genericName
@@ -2426,24 +2440,6 @@ msgstr ""
 msgid "Divine Instruction"
 msgstr ""
 
-#: simulation/data/technologies/mauryas/special_archery_tradition.json:description
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr ""
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.json:tooltip
-#: simulation/data/technologies/persians/special_archery_tradition.json:tooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and -20"
-"% train time, but also -20% health."
-msgstr ""
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.json:genericName
-#: simulation/data/technologies/persians/special_archery_tradition.json:genericName
-msgid "Archery Tradition"
-msgstr ""
-
 #: simulation/data/technologies/persians/immortals.json:description
 msgid ""
 "The Anusiya champion infantry train twice as fast, but lose a little max "
@@ -2476,12 +2472,6 @@ msgstr ""
 msgid "Persian Architecture"
 msgstr ""
 
-#: simulation/data/technologies/persians/special_archery_tradition.json:description
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr ""
-
 #: simulation/data/technologies/persians/special_equine_transports.json:description
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2494,7 +2484,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.json:tooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
+msgid "Phoenician Triremes gain the ability to train cavalry."
 msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.json:genericName
@@ -2584,8 +2574,8 @@ msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.json:description
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
 msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.json:tooltip

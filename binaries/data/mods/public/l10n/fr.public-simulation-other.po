@@ -24,6 +24,7 @@
 # Nexus nexus <neocrysis@gmail.com>, 2016
 # Nicolas Auvray <na.itms76@gmail.com>, 2014-2017
 # nicolas t <deux718281@yahoo.fr>, 2016
+# Pseudo4578, 2019
 # Romain Mesnil <bnb6avekk6@protonmail.com>, 2016
 # silure, 2014
 # Polakrity <sxk-fr@live.fr>, 2014,2017-2018
@@ -31,8 +32,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-03-22 14:47+0000\n"
+"POT-Creation-Date: 2019-05-24 09:43+0200\n"
+"PO-Revision-Date: 2019-05-24 14:54+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/wildfire-games/0ad/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -258,8 +259,8 @@ msgstr "%(_player_)s, vous devez m'envoyer un tribut de %(_amount_)s %(_resource
 #, javascript-format
 msgid ""
 "Unless you send me %(_amount_)s %(_resource_)s, an alliance won’t be formed,"
-" %(_player_)s,"
-msgstr "Tant que vous ne m'enverrez pas %(_amount_)s %(_resource_)s, une alliance ne pourra pas ce former, %(_player_)s."
+" %(_player_)s."
+msgstr ""
 
 #: simulation/ai/petra/chatHelper.js:88
 #, javascript-format
@@ -613,7 +614,7 @@ msgstr "Une attaque contre %(_player_)s a été demandée."
 
 #: simulation/helpers/Commands.js:814
 msgid "There are no bribable units"
-msgstr "Il n'y a pas d'unités à soudoyées."
+msgstr "Il n'y a pas d'unités à soudoyer."
 
 #: simulation/helpers/Commands.js:860
 msgid "Unable to ungarrison unit(s)"
@@ -623,7 +624,7 @@ msgstr "Impossible de décharger la ou les unité(s)."
 msgid "Some unit(s) can't go back to work"
 msgstr "Une ou plusieurs unité(s) ne peuvent pas retourner travailler"
 
-#: simulation/helpers/Commands.js:1114
+#: simulation/helpers/Commands.js:1112
 msgid "The building's technology requirements are not met."
 msgstr "Les technologies nécessaires à la construction n'ont pas été recherchées."
 

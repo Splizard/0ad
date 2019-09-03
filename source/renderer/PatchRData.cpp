@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,9 +17,7 @@
 
 #include "precompiled.h"
 
-#include <set>
-#include <algorithm>
-#include <numeric>
+#include "renderer/PatchRData.h"
 
 #include "graphics/GameView.h"
 #include "graphics/LightEnv.h"
@@ -33,17 +31,20 @@
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
 #include "ps/Game.h"
+#include "ps/GameSetup/Config.h"
 #include "ps/Profile.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/World.h"
-#include "ps/GameSetup/Config.h"
 #include "renderer/AlphaMapCalculator.h"
-#include "renderer/PatchRData.h"
-#include "renderer/TerrainRenderer.h"
 #include "renderer/Renderer.h"
+#include "renderer/TerrainRenderer.h"
 #include "renderer/WaterManager.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/Simulation2.h"
+
+#include <algorithm>
+#include <numeric>
+#include <set>
 
 const ssize_t BlendOffsets[9][2] = {
 	{  0, -1 },
@@ -369,7 +370,7 @@ void CPatchRData::AddBlend(std::vector<SBlendVertex>& blendVertices, std::vector
 	const CLightEnv& lightEnv = g_Renderer.GetLightEnv();
 	CVector3D normal;
 
-	bool cpuLighting = (g_Renderer.GetRenderPath() == CRenderer::RP_FIXED);
+	bool cpuLighting = (g_RenderingOptions.GetRenderPath() == RenderPath::FIXED);
 
 	size_t index = blendVertices.size();
 
@@ -544,7 +545,7 @@ void CPatchRData::BuildVertices()
 	CTerrain* terrain=m_Patch->m_Parent;
 	const CLightEnv& lightEnv = g_Renderer.GetLightEnv();
 
-	bool cpuLighting = (g_Renderer.GetRenderPath() == CRenderer::RP_FIXED);
+	bool cpuLighting = (g_RenderingOptions.GetRenderPath() == RenderPath::FIXED);
 
 	// build vertices
 	for (ssize_t j=0;j<vsize;j++) {
@@ -1344,10 +1345,10 @@ void CPatchRData::BuildWater()
 
 	// The 4 points making a water tile.
 	int moves[4][2] = {
-		{0,0},
-		{water_cell_size,0},
-		{0,water_cell_size},
-		{water_cell_size,water_cell_size}
+		{0, 0},
+		{water_cell_size, 0},
+		{0, water_cell_size},
+		{water_cell_size, water_cell_size}
 	};
 	// Where to look for when checking for water for shore tiles.
 	int check[10][2] = {
@@ -1413,10 +1414,10 @@ void CPatchRData::BuildWater()
 
 			// Check id this tile is partly over land.
 			// If so add a square over the terrain. This is necessary to render waves that go on shore.
-			if (terrain->GetVertexGroundLevel(x+px, z+pz) < waterHeight
-				&& terrain->GetVertexGroundLevel(x+px + water_cell_size, z+pz) < waterHeight
-				&& terrain->GetVertexGroundLevel(x+px, z+pz+water_cell_size) < waterHeight
-				&& terrain->GetVertexGroundLevel(x+px + water_cell_size, z+pz+water_cell_size) < waterHeight)
+			if (terrain->GetVertexGroundLevel(x+px, z+pz) < waterHeight &&
+				terrain->GetVertexGroundLevel(x+px + water_cell_size, z+pz) < waterHeight &&
+				terrain->GetVertexGroundLevel(x+px, z+pz+water_cell_size) < waterHeight &&
+				terrain->GetVertexGroundLevel(x+px + water_cell_size, z+pz+water_cell_size) < waterHeight)
 				continue;
 
 			for (int i = 0; i < 4; ++i)
@@ -1424,7 +1425,7 @@ void CPatchRData::BuildWater()
 				if (water_shore_index_map[z+moves[i][1]][x+moves[i][0]] != 0xFFFF)
 					continue;
 				ssize_t xx = x + px + moves[i][0];
-				ssize_t zz = x + pz + moves[i][1];
+				ssize_t zz = z + pz + moves[i][1];
 
 				SWaterVertex vertex;
 				terrain->CalcPosition(xx,zz, vertex.m_Position);

@@ -5,7 +5,6 @@
     <Height>10.0</Height>
   </Footprint>
   <Identity>
-    <GenericName>Pyramid</GenericName>
     <SpecificName>Great Pyramid</SpecificName>
     <Icon>gaia/special_pyramid.png</Icon>
   </Identity>
@@ -17,7 +16,6 @@
   </Position>
   <ResourceSupply>
     <Amount>10000</Amount>
-    <Type>stone.ruins</Type>
     <MaxGatherers>120</MaxGatherers>
   </ResourceSupply>
   <Sound>

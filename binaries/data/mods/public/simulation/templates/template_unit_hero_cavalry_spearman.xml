@@ -6,9 +6,11 @@
   </Armour>
   <Attack>
     <Melee>
-      <Hack>24.0</Hack>
-      <Pierce>20.0</Pierce>
-      <Crush>0.0</Crush>
+      <Damage>
+        <Hack>24.0</Hack>
+        <Pierce>20.0</Pierce>
+        <Crush>0.0</Crush>
+      </Damage>
       <MaxRange>4.5</MaxRange>
       <Bonuses>
         <BonusCavMelee>
@@ -22,14 +24,11 @@
     </Melee>
   </Attack>
   <Identity>
-    <VisibleClasses datatype="tokens">Melee Spear</VisibleClasses>
+    <VisibleClasses datatype="tokens">Melee Spearman</VisibleClasses>
     <GenericName>Hero Cavalry Spearman</GenericName>
     <Tooltip>Counters: 1.5x vs. Cavalry.</Tooltip>
   </Identity>
   <UnitMotion>
     <WalkSpeed op="mul">1.0</WalkSpeed>
-    <Run>
-      <Speed op="mul">1.0</Speed>
-    </Run>
   </UnitMotion>
 </Entity>

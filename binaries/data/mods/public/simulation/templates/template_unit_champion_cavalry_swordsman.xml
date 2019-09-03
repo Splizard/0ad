@@ -6,9 +6,11 @@
   </Armour>
   <Attack>
     <Melee>
-      <Hack>13.0</Hack>
-      <Pierce>0</Pierce>
-      <Crush>0.0</Crush>
+      <Damage>
+        <Hack>13.0</Hack>
+        <Pierce>0</Pierce>
+        <Crush>0.0</Crush>
+      </Damage>
       <MaxRange>3.5</MaxRange>
       <PrepareTime>375</PrepareTime>
       <RepeatTime>750</RepeatTime>
@@ -25,13 +27,10 @@
     <Max>300</Max>
   </Health>
   <Identity>
-    <VisibleClasses datatype="tokens">Melee Sword</VisibleClasses>
+    <VisibleClasses datatype="tokens">Melee Swordsman</VisibleClasses>
     <GenericName>Champion Cavalry Swordsman</GenericName>
   </Identity>
   <UnitMotion>
     <WalkSpeed op="mul">1.2</WalkSpeed>
-    <Run>
-      <Speed op="mul">1.2</Speed>
-    </Run>
   </UnitMotion>
 </Entity>

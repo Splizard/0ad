@@ -23,9 +23,11 @@
 #ifndef INCLUDED_CAMERA
 #define INCLUDED_CAMERA
 
-#include "Frustum.h"
+#include "graphics/Frustum.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Matrix3D.h"
+
+#include <array>
 
 // view port
 struct SViewPort
@@ -39,20 +41,22 @@ struct SViewPort
 class CCamera
 {
 	public:
+		// Represents camera viewport or frustum side in 3D space.
+		using Quad = std::array<CVector3D, 4>;
+
 		CCamera();
 		~CCamera();
 
-		// Methods for projection
-		void SetProjection(float nearp, float farp, float fov);
-		void SetProjection(const CMatrix3D& matrix) { m_ProjMat = matrix; }
-		void SetProjectionTile(int tiles, int tile_x, int tile_y);
 		CMatrix3D& GetProjection() { return m_ProjMat; }
 		const CMatrix3D& GetProjection() const { return m_ProjMat; }
+		CMatrix3D GetViewProjection() const { return m_ProjMat * m_Orientation.GetInverse(); }
+		void SetProjection(const CMatrix3D& matrix) { m_ProjMat = matrix; }
+		void SetProjectionFromCamera(const CCamera& camera);
+		void SetPerspectiveProjection(float nearp, float farp, float fov);
+		void SetPerspectiveProjectionTile(int tiles, int tile_x, int tile_y);
 
 		CMatrix3D& GetOrientation() { return m_Orientation; }
 		const CMatrix3D& GetOrientation() const { return m_Orientation; }
-
-		CMatrix3D GetViewProjection() const { return m_ProjMat * m_Orientation.GetInverse(); }
 
 		// Updates the frustum planes. Should be called
 		// everytime the view or projection matrices are
@@ -63,13 +67,14 @@ class CCamera
 
 		void SetViewPort(const SViewPort& viewport);
 		const SViewPort& GetViewPort() const { return m_ViewPort; }
+		float GetAspectRatio() const;
 
 		float GetNearPlane() const { return m_NearPlane; }
 		float GetFarPlane() const { return m_FarPlane; }
 		float GetFOV() const { return m_FOV; }
 
-		// Returns four points in camera space at given distance from camera
-		void GetCameraPlanePoints(float dist, CVector3D pts[4]) const;
+		// Returns a quad of view in camera space at given distance from camera.
+		void GetViewQuad(float dist, Quad& quad) const;
 
 		// Build a ray passing through the screen coordinate (px, py) and the camera
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -110,10 +115,9 @@ class CCamera
 		// is the view matrix
 		CMatrix3D		m_Orientation;
 
-		// Should not be tweaked externally if possible
+	private:
 		CMatrix3D		m_ProjMat;
 
-	private:
 		float			m_NearPlane;
 		float			m_FarPlane;
 		float			m_FOV;

@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -35,7 +35,8 @@ GUI Object Base - Button Behavior
 #ifndef INCLUDED_IGUIBUTTONBEHAVIOR
 #define INCLUDED_IGUIBUTTONBEHAVIOR
 
-#include "GUI.h"
+#include "gui/GUI.h"
+#include "gui/IGUIObject.h"
 
 class CGUISpriteInstance;
 
@@ -49,7 +50,7 @@ class CGUISpriteInstance;
 class IGUIButtonBehavior : virtual public IGUIObject
 {
 public:
-	IGUIButtonBehavior();
+	IGUIButtonBehavior(CGUI& pGUI);
 	virtual ~IGUIButtonBehavior();
 
 	/**
@@ -82,7 +83,7 @@ public:
 	 *		textcolor_pressed	-- pressed
 	 *		textcolor_over		-- hovered
 	 */
-	CColor ChooseColor();
+	const CGUIColor& ChooseColor();
 
 
 protected:
@@ -92,7 +93,7 @@ protected:
 	virtual void ResetStates()
 	{
 		// Notify the gui that we aren't hovered anymore
-		UpdateMouseOver(NULL);
+		UpdateMouseOver(nullptr);
 		m_Pressed = false;
 		m_PressedRight = false;
 	}

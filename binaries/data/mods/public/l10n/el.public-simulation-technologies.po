@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 14:26+0000\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 16:07+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/wildfire-games/0ad/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -34,6 +34,33 @@ msgid ""
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
 msgstr "Οι μονάδες που προάγονται σε ανώτερη θέση κερδίζουν πολλά σε ποιότητα: 20% επιπλέον στην υγεία, 1 επιπλέον επίπεδο σε κάθε τύπο πανοπλίας, 20% επιπλέων λάφυρα, 20% επιπλέον επίθεση για τις μονάδες εκ του συστάδην, 4μ επιπλέον βεληνεκές και μεγαλύτερη ακρίβεια για τις μονάδες βολής, γρηγορότερες ταχύτητες κίνησης και επιπλέον ταχύτητα θεραπείας και βεληνεκές για τους θεραπευτές."
+
+#: simulation/data/technologies/archery_tradition.jsondescription
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.jsontooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and "
+"-20% train time, but also -20% health."
+msgstr "+10 μέτρα βεληνεκές για τις μονάδες που χειρίζονται τόξο. Οι τοξότες έχουν καλύτερη ευστοχία και -20% στο χρόνο εκπαιδεύσεις, αλλά και -20% στην υγεία τους."
+
+#: simulation/data/technologies/archery_tradition.jsongenericName
+msgid "Archery Tradition"
+msgstr "Παράδοση στην τοξοβολία"
+
+#: simulation/data/technologies/archery_tradition.jsonrequirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
+#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
+#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
+msgid "Unlocked in Village Phase."
+msgstr "Ξεκλειδωνεί στη Φάση Χωριό."
 
 #: simulation/data/technologies/armor_cav_01.jsondescription
 #: simulation/data/technologies/armor_cav_chamfron.jsondescription
@@ -462,18 +489,6 @@ msgstr "Ξύλινα δοκάρια ενίσχυσης για το κύτος. +
 msgid "Reinforced hull"
 msgstr "Ενισχυμένο κύτος"
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
-#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
-#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsonrequirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsonrequirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr "Ξεκλειδωνεί στη Φάση Χωριό."
-
 #: simulation/data/technologies/attack_cav_lance.jsondescription
 msgid "A long spear made specifically for cavalry."
 msgstr "Ένα μακρύ δόρυ φτιαγμένο ειδικά για το ιππικό."
@@ -639,8 +654,8 @@ msgstr "H xρήση σιδήρου αντί του χαλκού έδωσε στ�
 #: simulation/data/technologies/attack_infantry_ranged_01.jsondescription
 #: simulation/data/technologies/attack_infantry_ranged_02.jsondescription
 #: simulation/data/technologies/ranged_inf_irregulars.jsondescription
-msgid "Training increases damage of ranged infantry units."
-msgstr "Η εκπαίδευση αυξάνει την ζημιά που προκαλούν οι εξ αποστάσεως πεζικάριοι."
+msgid "Training increases damage of ranged infantry."
+msgstr ""
 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsontooltip
 #: simulation/data/technologies/attack_infantry_ranged_02.jsontooltip
@@ -1448,72 +1463,72 @@ msgid "Amentum"
 msgstr "Λωρίον"
 
 #: simulation/data/technologies/siege_armor.jsondescription
-msgid "Increased armor on siege weapons"
-msgstr "Αύξησε την πανοπλία στα όπλα πολιορκίας"
+msgid "Increased armor on siege engines."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsontooltip
-msgid "All Siege weapons +2 Hack armor levels."
-msgstr "Σε όλα τα Πολιορκητικά Όπλα +2 επίπεδα στη πανοπλία κοψίματος."
+msgid "Siege Engines +2 hack armor."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsongenericName
 msgid "Armor plating"
 msgstr "Επιμετάλλωση πανοπλίας"
 
 #: simulation/data/technologies/siege_attack.jsondescription
-msgid "Advanced technologies improve siege efficiency"
-msgstr "Οι προηγμένες τεχνολογίες βελτιώνουν την αποδοτικότητα της πολιορκίας"
+msgid "Advanced technologies improve siege efficiency."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsontooltip
-msgid "All siege weapons +25% Crush damage."
-msgstr "Σε όλα τα Πολιορκητικά Όπλα +25% ζημιά Σύνθλιψης."
+msgid "Siege Engines +25% attack crush damage."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsongenericName
 msgid "Advanced Siege"
 msgstr "Προηγμένη Πολιορκία"
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsondescription
-msgid "Improvement to projectile accuracy"
-msgstr "Βελτίωση στην ακρίβεια βλήματος"
+msgid "Improvement to projectile accuracy."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsontooltip
-msgid "Bolt shooter increased accuracy."
-msgstr "Η ακρίβεια του κοχλία ρίψης αυξήθηκε."
+msgid "Bolt Shooters −20% ranged attack spread."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsongenericName
 msgid "Bolt Accuracy"
 msgstr "Κοχλίας Ακρίβειας"
 
 #: simulation/data/technologies/siege_cost_metal.jsondescription
-msgid "Siege weapons require less metal resource"
-msgstr "Οι πολιορκητικές μηχανές χρειάζονται λιγότερη ποσότητα μετάλλου"
+msgid "Siege engines require less metal."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsontooltip
-msgid "Siege weapons cost 20% less metal"
-msgstr "Οι πολιορκητικές μηχανές κοστίζουν 20% λιγότερο μέταλλο"
+msgid "Siege Engines −20% metal cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsongenericName
 msgid "Metalworker"
 msgstr "Μεταλλουργός"
 
 #: simulation/data/technologies/siege_cost_wood.jsondescription
-msgid "Siege weapons cost less wood"
-msgstr "Οι πολιορκητικές μηχανές κοστίζουν λιγότερο ξύλο"
+msgid "Siege engines require less wood."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsontooltip
-msgid "Siege weapons cost 20% less wood"
-msgstr "Οι πολιορκητικές μηχανές κοστίζουν 20% λιγότερο ξύλο"
+msgid "Siege Engines −20% wood cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsongenericName
 msgid "Artillery Instructors"
 msgstr "Εκπαιδευτές πυροβολικού"
 
 #: simulation/data/technologies/siege_packing.jsondescription
-msgid "Immobile siege weapons are assembled and disassembled faster"
-msgstr "Οι στάσιμες πολιορκητικές μηχανές συναρμολογούνται και αποσυναρμολογούνται πιο γρήγορα"
+msgid "Immobile siege engines are assembled and disassembled faster."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsontooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
-msgstr "-25% στο χρόνο τοποθέτησης και μαζέματος των στάσιμων πολιορκιτικών μηχανών."
+msgid "Siege Engines −25% pack and unpack time."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsongenericName
 msgid "Military Engineers"
@@ -2451,24 +2466,6 @@ msgstr "Εκπαίδευση θεραπευτών της τάξης των εκ�
 msgid "Divine Instruction"
 msgstr "Θεϊκή Καθοδήγηση"
 
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsondescription
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr "Οι Ινδοί είχαν μια παράδοση στη κατασκευή εκλεκτών τόξων και μια τάση για χρήση μαζικών τοξοβόλων στη μάχη."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsontooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsontooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and "
-"-20% train time, but also -20% health."
-msgstr "+10 μέτρα βεληνεκές για τις μονάδες που χειρίζονται τόξο. Οι τοξότες έχουν καλύτερη ευστοχία και -20% στο χρόνο εκπαιδεύσεις, αλλά και -20% στην υγεία τους."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsongenericName
-#: simulation/data/technologies/persians/special_archery_tradition.jsongenericName
-msgid "Archery Tradition"
-msgstr "Παράδοση στην τοξοβολία"
-
 #: simulation/data/technologies/persians/immortals.jsondescription
 msgid ""
 "The Anusiya champion infantry train twice as fast, but lose a little max "
@@ -2501,12 +2498,6 @@ msgstr "Όλα τα περσικά κτίσματα +25% αντοχή και π�
 msgid "Persian Architecture"
 msgstr "Περσική Αρχιτεκτονική"
 
-#: simulation/data/technologies/persians/special_archery_tradition.jsondescription
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed"
-" archers in battle."
-msgstr "Οι Πέρσες είχαν μια παράδοση στη κατασκευή εκλεκτών τόξων και μια τάση για χρήση μαζικών τοξοβόλων στη μάχη."
-
 #: simulation/data/technologies/persians/special_equine_transports.jsondescription
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2519,8 +2510,8 @@ msgid ""
 msgstr "Οι πρώτοι κυβερνήτες των Αχαιμενιδών έδρασαν προς την κατεύθυνση να κάνουν την Περσία την πρώτη μεγάλη ασιατική αυτοκρατορία που ελέγχει τις θάλασσες. Ο Μεγάλος Βασιλιάς συμπεριφέρθηκε ευνοϊκά προς διάφορου θαλάσσιους λαούς, προκειμένου να εξασφαλίσει τις υπηρεσίες τους, αλλά και πραγματοποίησε διάφορες θαλάσσιες πρωτοβουλίες. Κατά τη διάρκεια της βασιλείας του Δαρείου του Μεγάλου, για παράδειγμα, ένα κανάλι χτίστηκε στην Αίγυπτο και ένα Περσικό ναυτικό στάλθηκε για την εξερεύνηση του ποταμού Ινδού. Σύμφωνα με τον Ηρόδοτο, περίπου 300 πλοία του Περσικού ναυτικού είχαν κατασκευαστεί για να μεταφέρουν τα άλογα και τους αναβάτες τους."
 
 #: simulation/data/technologies/persians/special_equine_transports.jsontooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
-msgstr "Οι Φοινικικές Τριήρεις αποκτήσουν την ικανότητα να εκπαιδεύσουν μονάδες ιππικού."
+msgid "Phoenician Triremes gain the ability to train cavalry."
+msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.jsongenericName
 msgid "Equine Transports"
@@ -2609,9 +2600,9 @@ msgstr "Ελληνιστική Μητρόπολη"
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsondescription
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
-msgstr "Σημαντική αύξηση της ταχύτητας εκπαίδευσης των πρωταθλητών και των πολιορκιτικών μηχανών στο κάστρο από την κατάρτισή τους σε μεγάλες ομάδες ή τάγματα."
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
+msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsontooltip
 msgid "Faster batch training speed for the Fortress."

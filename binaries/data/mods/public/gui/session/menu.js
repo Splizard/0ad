@@ -29,7 +29,7 @@ var g_IdleTraderTextColor = "orange";
  * Store civilization code and page (structree or history) opened in civilization info.
  */
 var g_CivInfo = {
-	"code": "",
+	"civ": "",
 	"page": "page_structree.xml"
 };
 
@@ -140,17 +140,6 @@ function chatMenuButton()
 	openChat();
 }
 
-function diplomacyMenuButton()
-{
-	closeOpenDialogs();
-	openDiplomacy();
-}
-
-function pauseMenuButton()
-{
-	togglePause();
-}
-
 function resignMenuButton()
 {
 	closeOpenDialogs();
@@ -236,10 +225,10 @@ function openSave()
 	closeOpenDialogs();
 	pauseGame();
 
-	Engine.PushGuiPage("page_savegame.xml", {
-		"savedGameData": getSavedGameData(),
-		"callback": "resumeGame"
-	});
+	Engine.PushGuiPage(
+		"page_savegame.xml",
+		{ "savedGameData": getSavedGameData() },
+		resumeGame);
 }
 
 function openOptions()
@@ -247,18 +236,16 @@ function openOptions()
 	closeOpenDialogs();
 	pauseGame();
 
-	Engine.PushGuiPage("page_options.xml", {
-		"callback": "optionsPageClosed"
-	});
-}
+	Engine.PushGuiPage(
+		"page_options.xml",
+		{},
+		callbackFunctionNames => {
+			for (let functionName of callbackFunctionNames)
+				if (global[functionName])
+					global[functionName]();
 
-function optionsPageClosed(data)
-{
-	for (let callback of data)
-		if (global[callback])
-			global[callback]();
-
-	resumeGame();
+			resumeGame();
+		});
 }
 
 function openChat(command = "")
@@ -363,7 +350,7 @@ function updateChatHistory()
 
 function onToggleChatWindowExtended()
 {
-	saveSettingAndWriteToUserConfig("chat.session.extended", String(Engine.GetGUIObjectByName("extendedChat").checked));
+	Engine.ConfigDB_CreateAndWriteValueToFile("user", "chat.session.extended", String(Engine.GetGUIObjectByName("extendedChat").checked), "config/user.cfg");
 
 	resizeChatWindow();
 
@@ -563,7 +550,7 @@ function diplomacyFormatSpyRequestButton(i, hidden)
 {
 	let button = Engine.GetGUIObjectByName("diplomacySpyRequest[" + (i - 1) + "]");
 	let template = GetTemplateData("special/spy");
-	button.hidden = hidden || !template || GetSimState().players[g_ViewedPlayer].disabledTemplates["special/spy"];
+	button.hidden = hidden || !template || !!GetSimState().players[g_ViewedPlayer].disabledTemplates["special/spy"];
 	if (button.hidden)
 		return;
 
@@ -873,7 +860,7 @@ function updateBarterButtons()
 	Engine.GetGUIObjectByName("barterHelp").hidden = !canBarter;
 
 	if (canBarter)
-		g_ResourceData.GetCodes().forEach((resCode, i) => { barterUpdateCommon(resCode, i, "barter", g_ViewedPlayer) });
+		g_ResourceData.GetCodes().forEach((resCode, i) => { barterUpdateCommon(resCode, i, "barter", g_ViewedPlayer); });
 }
 
 function getIdleLandTradersText(traderNumber)
@@ -1101,41 +1088,51 @@ function openGameSummary()
 	pauseGame();
 
 	let extendedSimState = Engine.GuiInterfaceCall("GetExtendedSimulationState");
-	Engine.PushGuiPage("page_summary.xml", {
-		"sim": {
-			"mapSettings": g_GameAttributes.settings,
-			"playerStates": extendedSimState.players.filter((state, player) =>
-				g_IsObserver || player == 0 || player == g_ViewedPlayer ||
-				extendedSimState.players[g_ViewedPlayer].hasSharedLos && g_Players[player].isMutualAlly[g_ViewedPlayer]),
-			"timeElapsed": extendedSimState.timeElapsed
+	Engine.PushGuiPage(
+		"page_summary.xml",
+		{
+			"sim": {
+				"mapSettings": g_GameAttributes.settings,
+				"playerStates": extendedSimState.players.filter((state, player) =>
+					g_IsObserver || player == 0 || player == g_ViewedPlayer ||
+					extendedSimState.players[g_ViewedPlayer].hasSharedLos && g_Players[player].isMutualAlly[g_ViewedPlayer]),
+				"timeElapsed": extendedSimState.timeElapsed
+			},
+			"gui": {
+				"dialog": true,
+				"isInGame": true
+			},
+			"selectedData": g_SummarySelectedData
 		},
-		"gui": {
-			"dialog": true,
-			"isInGame": true
-		},
-		"selectedData": g_SummarySelectedData,
-		"callback": "resumeGameAndSaveSummarySelectedData"
-	});
+		resumeGameAndSaveSummarySelectedData);
 }
 
-function openStrucTree()
+function openStrucTree(page)
 {
 	closeOpenDialogs();
 	pauseGame();
 
-	// TODO add info about researched techs and unlocked entities
-
-	Engine.PushGuiPage(g_CivInfo.page, {
-		"civ": g_CivInfo.code || g_Players[g_ViewedPlayer].civ,
-		"callback": "storeCivInfoPage"
-	});
+	Engine.PushGuiPage(
+		page,
+		{
+			"civ": g_CivInfo.civ || g_Players[g_ViewedPlayer].civ
+			// TODO add info about researched techs and unlocked entities
+		},
+		storeCivInfoPage);
 }
 
 function storeCivInfoPage(data)
 {
-	g_CivInfo.code = data.civ;
-	g_CivInfo.page = data.page;
-	resumeGame();
+	if (data.nextPage)
+		Engine.PushGuiPage(
+			data.nextPage,
+			{ "civ": data.civ },
+			storeCivInfoPage);
+	else
+	{
+		g_CivInfo = data;
+		resumeGame();
+	}
 }
 
 /**
@@ -1226,38 +1223,7 @@ function openManual()
 {
 	closeOpenDialogs();
 	pauseGame();
-
-	Engine.PushGuiPage("page_manual.xml", {
-		"page": "manual/intro",
-		"title": translate("Manual"),
-		"url": "https://trac.wildfiregames.com/wiki/0adManual",
-		"callback": "resumeGame"
-	});
-}
-
-function toggleDeveloperOverlay()
-{
-	if (!g_GameAttributes.settings.CheatsEnabled && !g_IsReplay)
-		return;
-
-	let devCommands = Engine.GetGUIObjectByName("devCommands");
-	devCommands.hidden = !devCommands.hidden;
-
-	let message = devCommands.hidden ?
-		markForTranslation("The Developer Overlay was closed.") :
-		markForTranslation("The Developer Overlay was opened.");
-
-	// Only players can send the simulation chat command
-	if (Engine.GetPlayerID() == -1)
-		submitChatDirectly(message);
-	else
-		Engine.PostNetworkCommand({
-			"type": "aichat",
-			"message": message,
-			"translateMessage": true,
-			"translateParameters": [],
-			"parameters": {}
-		});
+	Engine.PushGuiPage("page_manual.xml", {}, resumeGame);
 }
 
 function closeOpenDialogs()

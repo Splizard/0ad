@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="template_gaia_geo">
   <Identity>
-    <GenericName>Mineral</GenericName>
-    <SpecificName>Metal Mine</SpecificName>
-    <Tooltip>A mineral deposit, providing access to rare forms of precious Metal.</Tooltip>
+    <GenericName>Metal Mine</GenericName>
+    <Tooltip>Mine ore for metal.</Tooltip>
     <Icon>gaia/geology_metal.png</Icon>
   </Identity>
   <Minimap>

@@ -685,7 +685,7 @@ function updateToggleBuddy()
 
 	let toggleBuddyButton = Engine.GetGUIObjectByName("toggleBuddyButton");
 	toggleBuddyButton.caption = g_Buddies.indexOf(playerName) != -1 ? translate("Unmark as Buddy") : translate("Mark as Buddy");
-	toggleBuddyButton.enabled = playerName && playerName != g_Username;
+	toggleBuddyButton.enabled = !!playerName && playerName != g_Username;
 }
 
 /**
@@ -784,7 +784,7 @@ function toggleBuddy()
 
 	updateToggleBuddy();
 
-	saveSettingAndWriteToUserConfig("lobby.buddies", g_Buddies.filter(nick => nick).join(g_BuddyListDelimiter) || g_BuddyListDelimiter);
+	Engine.ConfigDB_CreateAndWriteValueToFile("user", "lobby.buddies", g_Buddies.filter(nick => nick).join(g_BuddyListDelimiter) || g_BuddyListDelimiter, "config/user.cfg");
 
 	updatePlayerList();
 	updateGameList();
@@ -1120,7 +1120,7 @@ function updateGameSelection()
 
 	Engine.GetGUIObjectByName("gameInfo").hidden = !game;
 	Engine.GetGUIObjectByName("joinGameButton").hidden = g_Dialog || !game;
-	Engine.GetGUIObjectByName("gameInfoEmpty").hidden = game;
+	Engine.GetGUIObjectByName("gameInfoEmpty").hidden = !!game;
 
 	if (!game)
 		return;
@@ -1157,9 +1157,8 @@ function updateGameSelection()
 	Engine.GetGUIObjectByName("sgMapType").caption = g_MapTypes.Title[mapTypeIdx] || "";
 
 	let mapData = getMapDescriptionAndPreview(game.mapType, game.mapName);
+	Engine.GetGUIObjectByName("sgMapPreview").sprite = getMapPreviewImage(mapData.preview);
 	Engine.GetGUIObjectByName("sgMapDescription").caption = mapData.description;
-
-	setMapPreviewImage("sgMapPreview", mapData.preview);
 }
 
 function selectedGame()
@@ -1406,6 +1405,12 @@ function addChatMessage(msg)
 
 	g_ChatMessages.push(formatted);
 	Engine.GetGUIObjectByName("chatText").caption = g_ChatMessages.join("\n");
+}
+
+function clearChatMessages()
+{
+	g_ChatMessages.length = 0;
+	Engine.GetGUIObjectByName("chatText").caption = "";
 }
 
 /**

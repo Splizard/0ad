@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -585,6 +585,9 @@ namespace glooxwrapper
 		ConstTagList findTagList_clone(const string& expression) const; // like findTagList but each tag must be Tag::free()d
 	};
 
+	/**
+	 * See XEP-0166: Jingle and https://camaya.net/api/gloox/namespacegloox_1_1Jingle.html.
+	 */
 	namespace Jingle
 	{
 
@@ -605,27 +608,19 @@ namespace glooxwrapper
 
 		typedef list<const Plugin*> PluginList;
 
-		class GLOOXWRAPPER_API Content : public Plugin
-		{
-		public:
-			Content(const string& name, const PluginList& plugins);
-			Content();
-		};
-
-		class GLOOXWRAPPER_API ICEUDP : public Plugin
+		/**
+		 * See XEP-0176: Jingle ICE-UDP Transport Method
+		 */
+		class GLOOXWRAPPER_API ICEUDP
 		{
 		public:
 			struct Candidate {
 				string ip;
 				int port;
 			};
-
-			typedef std::list<Candidate> CandidateList;
-
-			ICEUDP(CandidateList& candidates);
-			ICEUDP();
-
-			const CandidateList candidates() const;
+		private:
+			// Class not implemented as it is not used.
+			ICEUDP() = delete;
 		};
 
 		class GLOOXWRAPPER_API Session
@@ -642,13 +637,16 @@ namespace glooxwrapper
 				bool m_Owned;
 			public:
 				Jingle(const gloox::Jingle::Session::Jingle* wrapped, bool owned) : m_Wrapped(wrapped), m_Owned(owned) {}
-
-				const PluginList plugins() const;
-
+				~Jingle()
+				{
+					if (m_Owned)
+						delete m_Wrapped;
+				}
 				ICEUDP::Candidate getCandidate() const;
 			};
 
-			Session(gloox::Jingle::Session* wrapped, bool owned) : m_Wrapped(wrapped), m_Owned(owned) {}
+			Session(gloox::Jingle::Session* wrapped, bool owned);
+			~Session();
 
 			bool sessionInitiate(char* ipStr, uint16_t port);
 		};
@@ -657,7 +655,7 @@ namespace glooxwrapper
 		{
 		public:
 			virtual ~SessionHandler() {}
-			virtual void handleSessionAction(gloox::Jingle::Action action, Session* session, const Session::Jingle* jingle) = 0;
+			virtual void handleSessionAction(gloox::Jingle::Action action, Session& session, const Session::Jingle& jingle) = 0;
 		};
 
 	}

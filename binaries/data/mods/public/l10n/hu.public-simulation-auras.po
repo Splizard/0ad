@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016-2019
-# Balázs Úr <ur.balazs@fsf.hu>, 2017
+# Balázs Úr, 2017
 # Gyuris Gellért <bubu@ujevangelizacio.hu>, 2016
 # Gyuris Gellért <bubu@ujevangelizacio.hu>, 2017
 # Hammer Andrew <andrewhammer87@gmail.com>, 2017
@@ -13,9 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-02 10:16+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 18:07+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/wildfire-games/0ad/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,124 +28,120 @@ msgid "Dockyard Repairs"
 msgstr "Hajógyári javítások"
 
 #: simulation/data/auras/structures/cart_super_dock_repair.jsonauraDescription
-msgid "Repairs garrisoned ship at 10 HP per second."
-msgstr "Másodpercenként 10 ÉP-vel javítja a beszállásolt hajókat."
+msgid "Garrisoned Ships +10 health regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/structures/epic_temple_heal.jsonauraName
 msgid "Blessing of the Gods"
 msgstr "Az istenek áldása"
 
 #: simulation/data/auras/structures/epic_temple_heal.jsonauraDescription
-msgid "Heals units at 3 HP per second."
-msgstr "Másodpercenként 3 ÉP-vel gyógyítja az egységeket."
+msgid "Humans +3 health regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/structures/iber_monument.jsonauraName
 msgid "Religious Fervor"
 msgstr "Vallási buzgalom"
 
 #: simulation/data/auras/structures/iber_monument.jsonauraDescription
-msgid "+20% attack damage for soldiers."
-msgstr "+20% támadás a bajnok katonáknak."
+msgid "Soldiers +20% melee and ranged attack damage."
+msgstr ""
 
 #: simulation/data/auras/structures/kush_pyramids_economic.jsonauraName
 msgid "Patriotism"
 msgstr "Hazafiasság"
 
 #: simulation/data/auras/structures/kush_pyramids_economic.jsonauraDescription
-msgid "Workers +15% gather rates near pyramids."
-msgstr "A munkásoknak +15% begyűjtési sebesség a piramisok közelében. "
+msgid "Workers +15% gather speed."
+msgstr ""
 
 #: simulation/data/auras/structures/kush_pyramids_military.jsonauraName
 msgid "Exhortative Presence"
 msgstr "Buzdító jelenlét"
 
 #: simulation/data/auras/structures/kush_pyramids_military.jsonauraDescription
-msgid "Soldiers near Large Pyramids +10% attack."
-msgstr "A nagy piramisok közelében +10% támadás a katonáknak."
+msgid "Soldiers +10% melee and ranged attack damage."
+msgstr ""
 
 #: simulation/data/auras/structures/kush_pyramids_territory.jsonauraName
 msgid "Meroitic Pyramids"
 msgstr "Meroita piramisok"
 
 #: simulation/data/auras/structures/kush_pyramids_territory.jsonauraDescription
-msgid ""
-"Civic Centers +10% territory influence as long as a Pyramid stands built."
-msgstr "+10% területhatás a városházáknak amíg legalább egy piramis áll."
+msgid "Civic Centers +10% territory influence radius."
+msgstr ""
 
 #: simulation/data/auras/structures/kush_temple_amun.jsonauraName
 msgid "Powerful Priesthood"
 msgstr "Erős papság"
 
 #: simulation/data/auras/structures/kush_temple_amun.jsonauraDescription
-msgid ""
-"Strengthen the Priesthood of Amun and undermine your monarch's influence.\n"
-"-5% health for heroes per temple built."
-msgstr "Erősíti Amun papjait, és aláássa az uralkodó befolyását.\n-5% életerő a hősöknek épített templomonként."
+msgid "Heroes −5% health."
+msgstr ""
 
 #: simulation/data/auras/structures/library.jsonauraName
 msgid "Power of Knowledge"
 msgstr "A tudás hatalma"
 
 #: simulation/data/auras/structures/library.jsonauraDescription
-msgid ""
-"Reduce the cost and research time of technologies by 10% per library owned."
-msgstr "A technológiák költségének és a kutatási idejének csökkentése 10%-kal minden birtokolt könyvtár után."
+msgid "Structures −10% technology resource costs and research time."
+msgstr ""
 
 #: simulation/data/auras/structures/loyalty_regen.jsonauraName
 msgid "Loyalty"
 msgstr "Hűség"
 
 #: simulation/data/auras/structures/loyalty_regen.jsonauraDescription
-msgid "+50% garrisoned loyalty regeneration rate for structures."
-msgstr "+50% beszállásolási hűségregenerációs sebesség az épületeknek."
+msgid "Structures +50% capture points garrison regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/structures/maur_pillar.jsonauraName
 msgid "Edict of Ashoka"
 msgstr "Asóka rendelete"
 
 #: simulation/data/auras/structures/maur_pillar.jsonauraDescription
-msgid "+20% movement speed for traders."
-msgstr "+20% mozgási sebesség a kereskedőknek."
+msgid "Traders +20% movement speed."
+msgstr ""
 
 #: simulation/data/auras/structures/rotary_mill.jsonauraName
 msgid "Farming bonus"
 msgstr "Termesztési bónusz"
 
 #: simulation/data/auras/structures/rotary_mill.jsonauraDescription
-msgid "+25% gather rate for workers in the grainfields."
-msgstr "+25% begyűjtési sebesség a búzatáblákon dolgozó munkásoknak."
+msgid "Workers +25% grain gather rate."
+msgstr ""
 
 #: simulation/data/auras/structures/temple_heal.jsonauraName
 msgid "Medical Treatment"
 msgstr "Orvosi ellátás"
 
 #: simulation/data/auras/structures/temple_heal.jsonauraDescription
-msgid "Heals nearby units at 1 HP per second."
-msgstr "Másodpercenként 1 ÉP-vel gyógyítja a közeli egységeket."
+msgid "Humans +1 health regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/structures/theatron.jsonauraName
 msgid "Hellenization"
 msgstr "Hellenizáció"
 
 #: simulation/data/auras/structures/theatron.jsonauraDescription
-msgid "Increase territory influence by 20% per theatron owned."
-msgstr "A területi befolyás növelése 20%-kal minden birtokolt theatron után."
+msgid "Structures +20% territory influence radius."
+msgstr ""
 
 #: simulation/data/auras/structures/wall_garrisoned.jsonauraName
 msgid "Wall Protection"
 msgstr "Falvédelem"
 
 #: simulation/data/auras/structures/wall_garrisoned.jsonauraDescription
-msgid "Soldiers on walls have +3 armor and higher vision."
-msgstr "A falon lévő katonák további +3 páncélt és nagyobb látótávolságot kapnak."
+msgid "Garrisoned Soldiers +3 armor and +20 vision range."
+msgstr ""
 
 #: simulation/data/auras/structures/wonder_pop_1.jsonauraName
 msgid "Symbol of Greatness"
 msgstr "A nagyság szimbóluma"
 
 #: simulation/data/auras/structures/wonder_pop_1.jsonauraDescription
-msgid "Increase the population limit by 10 per wonder owned."
-msgstr "A népességkorlát növelése 10-zel minden birtokolt csoda után."
+msgid "+10 maximum population limit."
+msgstr ""
 
 #: simulation/data/auras/structures/wonder_pop_2.jsonauraName
 msgid "Glorious Expansion"
@@ -153,56 +149,55 @@ msgstr "Dicsőséges hódítás"
 
 #: simulation/data/auras/structures/wonder_pop_2.jsonauraDescription
 msgid ""
-"Further increase the population limit by 40 per wonder owned (requires "
-"\"Glorious Expansion\" tech)."
-msgstr "A népességkorlát további növelése 40-nel, minden birtokolt csoda után (szükséges a „Dicsőséges hódítás” technológia)."
+"+40 maximum population limit (requires the “Glorious Expansion” technology)."
+msgstr ""
 
 #: simulation/data/auras/structures/workshop_repair.jsonauraName
 msgid "Workshop Repairs"
 msgstr "Műhelyjavítások"
 
 #: simulation/data/auras/structures/workshop_repair.jsonauraDescription
-msgid "Repairs garrisoned siege units at 3 HP per second."
-msgstr "Másodpercenként 3 ÉP-vel javítja a beszállásolt ostromgépeket."
+msgid "Garrisoned Siege Engines +3 health regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/teambonuses/athen_player_teambonus.jsonauraName
 msgid "Delian League"
 msgstr "Déloszi szövetség"
 
 #: simulation/data/auras/teambonuses/athen_player_teambonus.jsonauraDescription
-msgid "Allied warships −25% construction time."
-msgstr "A szövetségeknek -25% gyártási idő a hadihajóknál."
+msgid "Allied Warships −25% construction time."
+msgstr ""
 
 #: simulation/data/auras/teambonuses/brit_player_teambonus.jsonauraName
 msgid "Druids"
 msgstr "Druidák"
 
 #: simulation/data/auras/teambonuses/brit_player_teambonus.jsonauraDescription
-msgid "Allied healers −20% resource costs."
-msgstr "A szövetségeknek -20% nyersanyagköltség a gyógyítóknál."
+msgid "Allied Healers −20% resource costs."
+msgstr ""
 
 #: simulation/data/auras/teambonuses/cart_player_teambonus.jsonauraName
 msgid "Trademasters"
 msgstr "Kereskedőmesterek"
 
 #: simulation/data/auras/teambonuses/cart_player_teambonus.jsonauraDescription
-msgid "Allied markets +10% international trade bonus."
-msgstr "A szövetségeseknek +10% nemzetközi kereskedelmi bónusz a piacoknál."
+msgid "Allied Markets +10% international trade bonus."
+msgstr ""
 
 #: simulation/data/auras/teambonuses/gaul_player_teambonus.jsonauraName
 msgid "Druidic Wisdom"
 msgstr "Druida bölcsesség"
 
 #: simulation/data/auras/teambonuses/gaul_player_teambonus.jsonauraDescription
-msgid "Allied structures −20% technology research time."
-msgstr "A szövetségeknek -20% kutatási idő a műszaki technológiáknál."
+msgid "Allied Structures −20% technology research time."
+msgstr ""
 
 #: simulation/data/auras/teambonuses/iber_player_teambonus.jsonauraName
 msgid "Saripeko"
 msgstr "Saripeko"
 
 #: simulation/data/auras/teambonuses/iber_player_teambonus.jsonauraDescription
-msgid "Allied citizen-soldier javelinists −20% resource costs."
+msgid "Allied Citizen-Soldier Javelinists −20% resource costs."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/kush_player_teambonus.jsonauraName
@@ -210,7 +205,7 @@ msgid "Elephant Suppliers"
 msgstr "Elefántellátók"
 
 #: simulation/data/auras/teambonuses/kush_player_teambonus.jsonauraDescription
-msgid "Allied elephants −20% resource costs and training time."
+msgid "Allied Elephants −20% resource costs and training time."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/mace_player_teambonus.jsonauraName
@@ -219,7 +214,7 @@ msgstr "Egységes váltó"
 
 #: simulation/data/auras/teambonuses/mace_player_teambonus.jsonauraDescription
 msgid "Allies +20% barter sell prices."
-msgstr ""
+msgstr "A szövetségeseknek +20% az eladási árnál cserekor."
 
 #: simulation/data/auras/teambonuses/maur_player_teambonus.jsonauraName
 msgid "Ashoka's Religious Support"
@@ -227,7 +222,7 @@ msgstr "Asóka vallási támogatása"
 
 #: simulation/data/auras/teambonuses/maur_player_teambonus.jsonauraDescription
 msgid ""
-"Allied temples −50% resource costs and building time; temple technologies "
+"Allied Temples −50% resource costs and building time; Temple technologies "
 "−50% resource costs and research time."
 msgstr ""
 
@@ -236,7 +231,7 @@ msgid "The Royal Road"
 msgstr "A királyi út"
 
 #: simulation/data/auras/teambonuses/pers_player_teambonus.jsonauraDescription
-msgid "Allied land traders +15% trade gain."
+msgid "Allied Land Traders +15% trade gain."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/ptol_player_teambonus.jsonauraName
@@ -245,14 +240,14 @@ msgstr "A Földközi-tenger kenyereskosara"
 
 #: simulation/data/auras/teambonuses/ptol_player_teambonus.jsonauraDescription
 msgid "Allies +1.0 food trickle rate."
-msgstr ""
+msgstr "A szövetségeseknek +1,0 folyamatosan érkező élelem."
 
 #: simulation/data/auras/teambonuses/rome_player_teambonus.jsonauraName
 msgid "Conscription"
 msgstr "Sorozás"
 
 #: simulation/data/auras/teambonuses/rome_player_teambonus.jsonauraDescription
-msgid "Allied citizen-soldier infantry −20% training time."
+msgid "Allied Citizen-Soldier Infantry −20% training time."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/sele_player_teambonus.jsonauraName
@@ -260,7 +255,7 @@ msgid "Syrian Tetrapolis"
 msgstr "Szír tetrapolisz"
 
 #: simulation/data/auras/teambonuses/sele_player_teambonus.jsonauraDescription
-msgid "Allied civil centers −20% resource costs."
+msgid "Allied Civil Centers −20% resource costs."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/spart_player_teambonus.jsonauraName
@@ -268,7 +263,7 @@ msgid "Peloponnesian League"
 msgstr "Peloponnészoszi szövetség"
 
 #: simulation/data/auras/teambonuses/spart_player_teambonus.jsonauraDescription
-msgid "Allied citizen-soldier infantry spearmen +10% health."
+msgid "Allied Citizen-Soldier Infantry Spearmen +10% health."
 msgstr ""
 
 #: simulation/data/auras/units/female_inspiration.jsonauraName
@@ -276,8 +271,8 @@ msgid "Inspiration"
 msgstr "Inspiráció"
 
 #: simulation/data/auras/units/female_inspiration.jsonauraDescription
-msgid "+10% build rate and gather rate for citizen soldiers."
-msgstr "+10% építési és begyűjtési sebesség a polgári katonáknál."
+msgid "Citizen Soldiers +10% build rate and gather speed."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/athen_catafalque_1.jsonauraName
 msgid "Economic Reforms"
@@ -286,8 +281,8 @@ msgstr "Gazdasági reformok"
 #: simulation/data/auras/units/catafalques/athen_catafalque_1.jsonauraDescription
 msgid ""
 "Solon instituted several economic reforms encouraging commerce and agriculture.\n"
-"+15% gather rate for workers."
-msgstr "Szolón számos gazdasági reformot vezetett be, ösztönözve a kereskedelmet és a mezőgazdálkodást.\n+15% begyűjtési sebesség a munkásoknak."
+"Workers +15% gather speed."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/athen_catafalque_2.jsonauraName
 msgid "Economic Fortune"
@@ -296,8 +291,8 @@ msgstr "Gazdasági vagyon"
 #: simulation/data/auras/units/catafalques/athen_catafalque_2.jsonauraDescription
 msgid ""
 "Solon brought in a new system of weights and measures, fathers were encouraged to find trades for their sons.\n"
-"-10% cost for economic technologies."
-msgstr "Szolón új súly- és mértékrendszert vezetett be, az apákat ösztönözte, hogy új szakmát keressenek fiaiknak.\n-10% a gazdasági technológiák költségéből."
+"Economic technologies −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/brit_catafalque_1.jsonauraName
 #: simulation/data/auras/units/heroes/iber_hero_viriato_1.jsonauraName
@@ -307,8 +302,8 @@ msgstr "Gerilla taktika"
 #: simulation/data/auras/units/catafalques/brit_catafalque_1.jsonauraDescription
 msgid ""
 "Seeing entrenched defense to be useless against the Roman army, Cassivellaunus resorted to guerrilla tactics. This was later employed by other chieftains too.\n"
-"+15% movement speed and vision range for all soldiers."
-msgstr "Azt látva, hogy a körülárkolt védelem hasztalan a római hadsereg ellen, Cassivellaunus gerilla taktikához folyamodott. Ezt később más törzsfőnökök is bevetették.\n+15% mozgási sebesség és látóhatár minden katonának."
+"Soldiers +15% movement speed and +15% vision range."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/brit_catafalque_2.jsonauraName
 msgid "Skirmisher Harassment"
@@ -317,8 +312,8 @@ msgstr "Zaklató csatárok"
 #: simulation/data/auras/units/catafalques/brit_catafalque_2.jsonauraDescription
 msgid ""
 "Cassivellaunus deployed fast-moving skirmishers to harass Roman troops and foragers.\n"
-"+20% attack range for skirmisher javelins."
-msgstr "Cassivellaunus gyorsan mozgó csatárokat vetett be, hogy zaklassák a római csapatokat és gyűjtögetőket.\n+20% támadási hatótávolság a lándzsás csatároknak."
+"Javelinists +20% attack range."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/cart_catafalque.jsonauraName
 msgid "Commander of Heavy Cavalry"
@@ -327,8 +322,8 @@ msgstr "Nehéz lovassági parancsnok"
 #: simulation/data/auras/units/catafalques/cart_catafalque.jsonauraDescription
 msgid ""
 "Leader of the Carthaginian heavy cavalry at Trebia and Cannae, where his triple charge had devastating effects on the enemy.\n"
-"+1 armor, +10% health for melee cavalry."
-msgstr "A karthágói nehézlovasság vezetője Trebiánál és Cannaenál, ahol a hármas rohamjának elsöprő hatása volt az ellenségen.\n+1 páncél, +10% életerő a közelharci lovasságnak."
+"Melee Cavalry +1 armor and +10% health."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_1.jsonauraName
 msgid "Ambush Slaughter"
@@ -337,8 +332,8 @@ msgstr "Mészárlás lesből"
 #: simulation/data/auras/units/catafalques/gaul_catafalque_1.jsonauraDescription
 msgid ""
 "Warring with the Romans, Ambiorix realized the futility of open warfare and instead resorted to ambush tactics. The Gauls quickly learned where and when to execute surprise attacks.\n"
-"Soldiers require 25% less experience to promote and gain a 5% attack bonus."
-msgstr "A rómaiakkal háborúzva, Ambiorix felismerte a nyílt hadviselés hasztalanságát, és ehelyett lesből támadásos taktikához folyamodott. A gallok gyorsan megtanulták, hogy hol és mikor hajtsanak végre váratlan támadásokat.\nAz egységeknek 25%-kal kevesebb tapasztalat szükséges az előléptetéshez, valamint 5%-os támadási bónuszt kapnak."
+"Soldiers +5% melee and ranged attack damage and −25% promotion experience."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_2.jsonauraName
 msgid "Tribute to Rome"
@@ -347,8 +342,8 @@ msgstr "Sarc Rómának"
 #: simulation/data/auras/units/catafalques/gaul_catafalque_2.jsonauraDescription
 msgid ""
 "When the Roman army fell short of food supplies, the Gallic tribes were ordered to give up a part of their already meagre harvest. The Eburones under Ambiorix were reluctant to do so, therefore Caesar sent troops to take them by force.\n"
-"-10% farming rate."
-msgstr "Mikor a Római haderő fogytán volt az élelemnek, kiadta a Gall törzseknek, hogy átadják az így is csekély takarmányuk egy részét. Az Ambriorix vezetése alatt álló Eburones törzs vonakodott ettől, ezért a Császár csapatokat küldött, hogy erővel vegye el.\n-10% termesztési sebesség"
+"Workers −10% grain gather rate."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/iber_catafalque_1.jsonauraName
 msgid "Mercenary Commander"
@@ -357,8 +352,8 @@ msgstr "Zsoldos parancsnok"
 #: simulation/data/auras/units/catafalques/iber_catafalque_1.jsonauraDescription
 msgid ""
 "Along with his brother Indibil, Mandonius commanded the Iberian recruits and mercenaries that took part in the Punic Wars.\n"
-"-25% metal cost for all allied citizen-soldier mercenaries."
-msgstr "A testvére, Indibil mellett, Mandonius vezette az ibériai újoncokat és zsoldosokat, akik részt vettek a pun háborúkban.\n-25% fém költség a szövetséges polgári katona zsoldosoknak."
+"Allied Citizen-Soldier Mercenaries −25% metal cost."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/iber_catafalque_2.jsonauraName
 msgid "Saver of Lives"
@@ -367,8 +362,8 @@ msgstr "Életmentő"
 #: simulation/data/auras/units/catafalques/iber_catafalque_2.jsonauraDescription
 msgid ""
 "Following the fall of Indibil in battle, Mandonius led the survivors to safety.\n"
-"+10% health for all soldiers."
-msgstr "Indibil csatában eleste után, Mandonius vezette biztonságba a túlélőket.\n+10% életerő minden katonának."
+"Soldiers +10% health."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_1.jsonauraName
 msgid "Earliest Nubian Queen"
@@ -377,8 +372,8 @@ msgstr "Legkorábbi núbiai királynő"
 #: simulation/data/auras/units/catafalques/kush_catafalque_1.jsonauraDescription
 msgid ""
 "Ruling with full power in the Meroë Empire and also playing a significant role in the Meroitic religion, Shanakdakheto represented the might of Kush, something not to be taken lightly.\n"
-"Awe: All enemy female citizens -15% gather rate."
-msgstr "A Meroéi birodalom teljes hatalmával, és a meroita vallásban játszott nagy szerepével, Shanakdekhato Kush hatalmát testesítette meg, amelyet nem szabad lebecsülni.\nHódolat: Minden ellenséges női polgárnak -15% begyűjtési sebesség."
+"Enemy Female Citizens −15% gather speed."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_2.jsonauraName
 msgid "Temple at Naqa"
@@ -386,9 +381,9 @@ msgstr "Templom Naqánál"
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_2.jsonauraDescription
 msgid ""
-"As in all cultures, religion played a significant part in the Meroë Empire. Shanakdakheto had the Temple built around 160 B.C. as a symbol of the advancedness of Meroë.\n"
-"+1 heal rate for units garrisoned in nearby temples."
-msgstr "Mint minden kultúrában, a vallás fontos szerepet játszott a Meroéi birodalomban is. A Shanakdekheto által i.e. 160 körül építtetett templom Meroé fejlettségének szimbóluma volt.\n+1 gyógyulási sebesség a közeli templomokban beszállásolt egységeknek."
+"As in all cultures, religion played a significant part in Kush. Shanakdakheto had the temple built around 160 BC as a symbol of the advancedness of Meroë.\n"
+"Temples +1 garrison heal rate."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/mace_catafalque.jsonauraName
 msgid "Sacker of Cities"
@@ -397,7 +392,7 @@ msgstr "Városok kifosztója"
 #: simulation/data/auras/units/catafalques/mace_catafalque.jsonauraDescription
 msgid ""
 "During the First Macedonian War, Philip and his troops sacked Thermum, the religious and political center of Aetolia.\n"
-"+5 food and wood for every enemy unit killed or structure destroyed."
+"Humans, Siege Engines, Ships, and Structures gain +5 food and wood loot."
 msgstr ""
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_1.jsonauraName
@@ -407,8 +402,8 @@ msgstr "A birodalom megszilárdítója"
 #: simulation/data/auras/units/catafalques/maur_catafalque_1.jsonauraDescription
 msgid ""
 "Son of Chandragupta Maurya, Bindusara consolidated the empire, creating a stable state for his son Ashoka to inherit.\n"
-"+20% territory influence."
-msgstr "Csandragupta Maurja fia, Bindusara megszilárdította a birodalmat, stabil államot létrehozva, amit a fia, Asóka örökölt.\n+20% területi befolyás."
+"Structures +20% territory influence radius."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_2.jsonauraName
 msgid "Vamba Moriyar"
@@ -417,8 +412,8 @@ msgstr "Vamba Moriar"
 #: simulation/data/auras/units/catafalques/maur_catafalque_2.jsonauraDescription
 msgid ""
 "Bindusara is said to have conquered lands to the south of the empire.\n"
-"+15% unit capture rate."
-msgstr "Azt mondják, hogy Binduszára földeket hódított meg a birodalom déli részén.\n+15% egység elfoglalási sebesség."
+"Soldiers +15% capture attack strength."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/pers_catafalque.jsonauraName
 msgid "Great Builder"
@@ -427,8 +422,8 @@ msgstr "Nagy építő"
 #: simulation/data/auras/units/catafalques/pers_catafalque.jsonauraDescription
 msgid ""
 "Throughout his reign, much of Artaxerxes' wealth was spent on building projects. He restored the Palace of Darius I at Susa and restored the ancient city of Ecbatana.\n"
-"+5% health and -10% resource cost for all buildings."
-msgstr "Az uralma alatt, Artaxerxész vagyona nagy részét építési projektekre költötte. Helyreállítatta I. Dárius palotáját Szuszában, és helyreállíttatta Ekbatana ősi városát.\n+5% életerő és -10% nyersanyagköltség minden épületnek."
+"Structures −10% resource costs and +5% health."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/ptol_catafalque.jsonauraName
 msgid "Great Librarian"
@@ -437,8 +432,8 @@ msgstr "Nagy könyvtáros"
 #: simulation/data/auras/units/catafalques/ptol_catafalque.jsonauraDescription
 msgid ""
 "Continuing his predecessors' work on the Great Library of Alexandria, he seized every book brought to the city, thus leaving to his people a vast amount of hoarded wisdom.\n"
-"-10% resource cost for all technologies."
-msgstr "Elődei munkáját folytatva Alexandrai Nagykönyvtárán, beszerzett minden könyvet, ami a városba került, így nagy mennyiségű felhalmozott tudást hagyva a népének.\n-10% kutatási költség minden technológiához."
+"Structure technologies −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/rome_catafalque_1.jsonauraName
 msgid "Avenger of Lucretia"
@@ -447,8 +442,8 @@ msgstr "Lucretia megbosszulója"
 #: simulation/data/auras/units/catafalques/rome_catafalque_1.jsonauraDescription
 msgid ""
 "After the rape of Lucretia by the son of King Tarquinius Superbus and her subsequent suicide, Brutus vowed to avenge her and overthrow the monarchy.\n"
-"Female citizens cost 20% less and work 10% faster."
-msgstr "Miurán Tarquinius Superbus fia megeroszakolta Lucretiát, aki emiatt öngyilkos lett, Brutus fogadalmat tett, hogy megbossulja őt, és megbuktatja a királyságot.\nA polgárnők 20%-kal kevesebbe kerülnek, és 10%-kal gyorsabban dolgoznak."
+"Female Citizens −20% food cost and +10% gather speed."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/rome_catafalque_2.jsonauraName
 msgid "Founder and Defender of the Republic"
@@ -457,8 +452,8 @@ msgstr "A köztársaság alapítója és védelmezője"
 #: simulation/data/auras/units/catafalques/rome_catafalque_2.jsonauraDescription
 msgid ""
 "Brutus was one of the key figures in the overthrow of the monarchy and the founding of the Roman Republic. Later, as consul he led a Roman army to victory against the Etruscan King Tarquinius who sought to retake the throne.\n"
-"+1 armor for all units and siege engines."
-msgstr "Brutis a királyság megdöntésének és a Római köztársaság megalapításának egyik kulcsfigurája volt. Később, konzulként győzelemre vezette a római sereget Tarquinius etruszk királlyal szemben, aki vissza akarta szerezni a trónt.\n+1 páncél minden egységnek és ostromgépnek."
+"Humans and Siege Engines +1 armor."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_1.jsonauraName
 msgid "Founder of the Ezida Temple"
@@ -467,8 +462,8 @@ msgstr "Az Ezida templom alapítója"
 #: simulation/data/auras/units/catafalques/sele_catafalque_1.jsonauraDescription
 msgid ""
 "Antiochus I laid the foundation for the Ezida Temple in Borsippa.\n"
-"-10% resource cost for temples and temple technologies."
-msgstr "I. Antiokhosz rakta le az Ezida templom alapkövét Borszippában.\n-10% nyersanyagköltség a templomokhoz és templomi technológiákhoz."
+"Temples −10% resource costs; Temple technologies −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_2.jsonauraName
 msgid "Immigration"
@@ -477,8 +472,8 @@ msgstr "Bevándorlás"
 #: simulation/data/auras/units/catafalques/sele_catafalque_2.jsonauraDescription
 msgid ""
 "Antiochus encouraged Greek immigration to his realm and established many new cities in Asia Minor to serve as counterweights to the Gauls.\n"
-"+5% maximum population."
-msgstr "Antiokhosz ösztönözte a görög bevándorlást országába, és sok új város alapított Kis-Ázsiában, hogy ellensúlyként szolgáljon a gallokkal szemben.\n+5% népességkorlát."
+"+5% maximum population limit."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_3.jsonauraName
 msgid "Basileus Megas"
@@ -487,8 +482,8 @@ msgstr "Basileus Megas (Nagy király)"
 #: simulation/data/auras/units/catafalques/sele_catafalque_3.jsonauraDescription
 msgid ""
 "Son of Seleucus Nicator, Antiochus succeeded in the formidable task of keeping the empire together, meanwhile founding temples and defeating the invading Gauls with war elephants.\n"
-"-10% cost for War Elephants."
-msgstr "Szeleukosz Nikatór fiának, Antiokhosznak sikerült a rettentő feladat, a birodalom egyben tartása, miközben templomokat alapított, és harci elefántokkal győzte le a betörő gallokat.\n-10% költség a harci elefántoknál."
+"Champion Elephants −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_1.jsonauraName
 #: simulation/data/auras/units/catafalques/spart_catafalque_2.jsonauraName
@@ -498,12 +493,12 @@ msgstr "Lükurgoszi hadi reformok"
 #: simulation/data/auras/units/catafalques/spart_catafalque_1.jsonauraDescription
 msgid ""
 "Lycurgus instituted several military reforms, thus the complete and undivided allegiance to Sparta from its citizens was implemented under his form of government.\n"
-"-10% resource cost for citizen spear infantry."
-msgstr "Lükurgosz számos katonai reformot vezetett be, és így az ő kormányzata érte el a spártai polgárok teljes és osztatlan hűségét.\n-10% nyersanyagköltség a lándzsás polgári gyalogságnál."
+"Citizen-Soldier Infantry Spearmen −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_2.jsonauraDescription
-msgid "-5% resource cost for spear infantry champions."
-msgstr "-5% nyersanyagköltség a bajnok lándzsás gyalogságnál."
+msgid "Champion Infantry Spearmen −5% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_3.jsonauraName
 msgid "Iron Pelanors"
@@ -512,8 +507,8 @@ msgstr "Vas pelanorok"
 #: simulation/data/auras/units/catafalques/spart_catafalque_3.jsonauraDescription
 msgid ""
 "To further support equality, Lycurgus forbade the use of gold and silver, introducing a new iron currency called pelanors.\n"
-"+15% metal gather rate for workers."
-msgstr "Az egyenlőség további megerősítése érdekében Lükurgosz megtiltotta az arany és ezüst használatát, bevezetve egy új vaspénzt, a pelanorokat.\n+15% fémgyűjtési sebesség a munkásoknál."
+"Workers +15% metal gather rate."
+msgstr ""
 
 #: simulation/data/auras/units/heroes/athen_hero_iphicrates_1.jsonauraName
 msgid "Formation Reforms"
@@ -822,8 +817,8 @@ msgid "Forefront Leader"
 msgstr "Élvonalbeli vezető"
 
 #: simulation/data/auras/units/heroes/pers_hero_cyrus.jsonauraDescription
-msgid "+20% attack and +1 capture for cavalry soldiers."
-msgstr "+20% támadás és +1 elfoglalás a lovassági katonáknak."
+msgid "+20% attack and +1 capture for cavalry."
+msgstr ""
 
 #: simulation/data/auras/units/heroes/pers_hero_darius.jsonauraName
 msgid "Leadership"

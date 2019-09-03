@@ -6,15 +6,11 @@
 	<script directory="gui/gamesetup/"/>
 
 	<object	hotkey="civinfo">
-		<action on="Press">
-			Engine.PushGuiPage("page_civinfo.xml", { "civ": g_CivInfo.code, "callback": "storeCivInfoPage" });
-		</action>
+		<action on="Press">Engine.PushGuiPage("page_civinfo.xml", { "civ": g_CivInfo.civ }, storeCivInfoPage);</action>
 	</object>
 
 	<object	hotkey="structree">
-		<action on="Press">
-			Engine.PushGuiPage("page_structree.xml", { "civ": g_CivInfo.code, "callback": "storeCivInfoPage" });
-		</action>
+		<action on="Press">Engine.PushGuiPage("page_structree.xml", { "civ": g_CivInfo.civ }, storeCivInfoPage);</action>
 	</object>
 
 	<object hotkey="cancel">
@@ -71,32 +67,13 @@
 					</object>
 
 					<object name="civInfoButton" type="button" style="IconButton" sprite="iconInfoGold" sprite_over="iconInfoWhite" size="85%-37 0 85%-21 16"/>
-
-					<object name="civResetButton"
-						type="button"
-						style="IconButton"
-						sprite="iconResetGold"
-						sprite_over="iconResetWhite"
-						size="85%-16 0 85% 16"
-					>
-						<translatableAttribute id="tooltip">Reset any civilizations that have been selected to the default (random)</translatableAttribute>
-						<action on="Press">resetCivilizations();</action>
-					</object>
+					<object name="civResetButton" type="button" style="IconButton" sprite="iconResetGold" sprite_over="iconResetWhite" size="85%-16 0 85% 16"/>
 
 					<object name="playerTeamHeading" type="text" style="ModernLabelText" size="85%+5 0 100%-21 100%">
 						<translatableAttribute id="caption">Team</translatableAttribute>
 					</object>
 
-					<object name="teamResetButton"
-						type="button"
-						style="IconButton"
-						sprite="iconResetGold"
-						sprite_over="iconResetWhite"
-						size="100%-21 0 100%-5 16"
-					>
-						<translatableAttribute id="tooltip">Reset all teams to the default.</translatableAttribute>
-						<action on="Press">resetTeams();</action>
-					</object>
+					<object name="teamResetButton" type="button" style="IconButton" sprite="iconResetGold" sprite_over="iconResetWhite" size="100%-21 0 100%-5 16" />
 				</object>
 
 				<object size="1 36 100%-1 100%">
@@ -104,19 +81,13 @@
 						<object name="playerBox[n]" size="0 0 100% 32">
 							<object name="playerColor[n]" type="image" size="0 0 100% 100%"/>
 							<object name="playerName[n]" type="text" style="ModernLabelText" size="0 2 22% 30"/>
-							<object name="playerColorPicker[n]" type="dropdown" style="ModernDropDown" size="22%+5 2 22%+33 30" sprite="" scrollbar="false" button_width="22" font="sans-stroke-14" tooltip_style="onscreenToolTip">
-								<translatableAttribute id="tooltip">Pick a color.</translatableAttribute>
-							</object>
-							<object name="playerAssignment[n]" type="dropdown" style="ModernDropDown" size="22%+37 2 50%+35 30" tooltip_style="onscreenToolTip">
-								<translatableAttribute id="tooltip">Select player.</translatableAttribute>
-							</object>
+							<object name="playerColorPicker[n]" type="dropdown" style="ModernDropDown" size="22%+5 2 22%+33 30" sprite="" scrollbar="false" button_width="22" font="sans-stroke-14" tooltip_style="onscreenToolTip"/>
+							<object name="playerAssignment[n]" type="dropdown" style="ModernDropDown" size="22%+37 2 50%+35 30" tooltip_style="onscreenToolTip"/>
 							<object name="playerAssignmentText[n]" type="text" style="ModernLabelText" size="22%+5 0 50%+35 30"/>
 							<object name="playerConfig[n]" type="button" style="StoneButton" size="50%+40 4 50%+64 28" tooltip_style="onscreenToolTip" font="sans-bold-stroke-12" sprite="ModernGear" sprite_over="ModernGearHover" sprite_pressed="ModernGearPressed"/>
 							<object name="playerCiv[n]" type="dropdown" style="ModernDropDown" size="50%+69 2 85% 30" tooltip_style="onscreenToolTip" dropdown_size="424"/>
 							<object name="playerCivText[n]" type="text" style="ModernLabelText" size="50%+65 0 85% 30"/>
-							<object name="playerTeam[n]" type="dropdown" style="ModernDropDown" size="85%+5 2 100%-5 30" tooltip_style="onscreenToolTip">
-								<translatableAttribute id="tooltip">Select player's team.</translatableAttribute>
-							</object>
+							<object name="playerTeam[n]" type="dropdown" style="ModernDropDown" size="85%+5 2 100%-5 30" tooltip_style="onscreenToolTip"/>
 							<object name="playerTeamText[n]" type="text" style="ModernLabelText" size="85%+5 0 100%-5 100%"/>
 						</object>
 					</repeat>
@@ -128,10 +99,10 @@
 				<object size="4 10 28 34" type="image" sprite="ModernGear"/>
 				<object name="aiTips" size="32 0 100%-20 100%-32" type="text" style="ModernLeftLabelText"/>
 				<object size="30 100%-30 100% 100%-8" type="text" style="ModernLeftLabelText">
-					<translatableAttribute id="caption">Show this message in the future</translatableAttribute>
+					<translatableAttribute id="caption">Show this message in the future.</translatableAttribute>
 				</object>
 				<object name="displaySPTips" size="8 100%-30 28 100%-8" type="checkbox" style="ModernTickBox">
-					<action on="Press">saveSettingAndWriteToUserConfig("gui.gamesetup.enabletips", String(this.checked));</action>
+					<action on="Press">Engine.ConfigDB_CreateAndWriteValueToFile("user", "gui.gamesetup.enabletips", String(this.checked), "config/user.cfg");</action>
 				</object>
 			</object>
 
@@ -210,11 +181,7 @@
 			<!-- Chat window -->
 			<object name="chatPanel" size="24 346 100%-795 100%-60" type="image" sprite="ModernDarkBoxGold">
 				<object name="chatText" size="2 2 100%-2 100%-28" type="text" style="ChatPanel"/>
-
-				<object name="chatInput" size="4 100%-26 100%-96 100%-4" type="input" style="ModernInput">
-					<action on="Press">submitChatInput();</action>
-					<action on="Tab">autoCompleteNick(this, g_Autocomplete);</action>
-				</object>
+				<object name="chatInput" size="4 100%-26 100%-96 100%-4" type="input" style="ModernInput"/>
 
 				<object size="100%-92 100%-26 100%-4 100%-4" type="button" style="StoneButton">
 					<translatableAttribute id="caption">Send</translatableAttribute>
@@ -249,17 +216,7 @@
 			/>
 
 			<!-- Cancel Button -->
-			<object
-				name="cancelGame"
-				type="button"
-				style="StoneButton"
-				size="100%-308 100%-52 100%-168 100%-24"
-				tooltip_style="onscreenToolTip"
-				z="21"
-			>
-				<translatableAttribute id="caption">Back</translatableAttribute>
-				<action on="Press">cancelSetup();</action>
-			</object>
+			<object name="cancelGame" type="button" style="StoneButton" size="100%-308 100%-52 100%-168 100%-24" tooltip_style="onscreenToolTip" z="21"/>
 		</object>
 	</object>
 </objects>

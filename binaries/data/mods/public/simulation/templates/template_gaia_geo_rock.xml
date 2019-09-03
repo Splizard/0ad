@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="template_gaia_geo">
   <Identity>
-    <GenericName>Rock</GenericName>
-    <SpecificName>Stone Mine</SpecificName>
-    <Tooltip>Mine these to provide Stone building material.</Tooltip>
+    <GenericName>Stone Quarry</GenericName>
+    <Tooltip>Quarry rock for stone.</Tooltip>
     <Icon>gaia/geology_stone_1.png</Icon>
   </Identity>
   <Minimap>

@@ -37,7 +37,6 @@
 #include "graphics/TerrainTextureManager.h"
 #include "gui/GUI.h"
 #include "gui/GUIManager.h"
-#include "gui/scripting/ScriptFunctions.h"
 #include "i18n/L10n.h"
 #include "maths/MathUtil.h"
 #include "network/NetServer.h"
@@ -183,19 +182,35 @@ retry:
 // display progress / description in loading screen
 void GUI_DisplayLoadProgress(int percent, const wchar_t* pending_task)
 {
-	g_GUI->GetActiveGUI()->GetScriptInterface()->SetGlobal("g_Progress", percent, true, false, true);
-	g_GUI->GetActiveGUI()->GetScriptInterface()->SetGlobal("g_LoadDescription", pending_task, true, false, true);
-	g_GUI->GetActiveGUI()->SendEventToAll("progress");
+	const ScriptInterface& scriptInterface = *(g_GUI->GetActiveGUI()->GetScriptInterface());
+	JSContext* cx = scriptInterface.GetContext();
+	JSAutoRequest rq(cx);
+
+	JS::AutoValueVector paramData(cx);
+
+	paramData.append(JS::NumberValue(percent));
+
+	JS::RootedValue valPendingTask(cx);
+	scriptInterface.ToJSVal(cx, &valPendingTask, pending_task);
+	paramData.append(valPendingTask);
+
+	g_GUI->GetActiveGUI()->SendEventToAll("GameLoadProgress", paramData);
 }
 
+bool ShouldRender()
+{
+	return !g_app_minimized && (g_app_has_focus || !g_VideoMode.IsInFullscreen());
+}
 
 
 void Render()
 {
-	PROFILE3("render");
+	// Do not render if not focused while in fullscreen or minimised,
+	// as that triggers a difficult-to-reproduce crash on some graphic cards.
+	if (!ShouldRender())
+		return;
 
-	if (g_SoundManager)
-		g_SoundManager->IdleTask();
+	PROFILE3("render");
 
 	ogl_WarnIfError();
 
@@ -505,20 +520,21 @@ void InitPsAutostart(bool networked, JS::HandleValue attrs)
 	JSAutoRequest rq(cx);
 
 	JS::RootedValue playerAssignments(cx);
-	scriptInterface.Eval("({})", &playerAssignments);
+	scriptInterface.CreateObject(&playerAssignments);
 
 	if (!networked)
 	{
 		JS::RootedValue localPlayer(cx);
-		scriptInterface.Eval("({})", &localPlayer);
-		scriptInterface.SetProperty(localPlayer, "player", g_Game->GetPlayerID());
+		scriptInterface.CreateObject(&localPlayer, "player", g_Game->GetPlayerID());
 		scriptInterface.SetProperty(playerAssignments, "local", localPlayer);
 	}
 
 	JS::RootedValue sessionInitData(cx);
-	scriptInterface.Eval("({})", &sessionInitData);
-	scriptInterface.SetProperty(sessionInitData, "attribs", attrs);
-	scriptInterface.SetProperty(sessionInitData, "playerAssignments", playerAssignments);
+
+	scriptInterface.CreateObject(
+		&sessionInitData,
+		"attribs", attrs,
+		"playerAssignments", playerAssignments);
 
 	InitPs(true, L"page_loading.xml", &scriptInterface, sessionInitData);
 }
@@ -578,41 +594,43 @@ static void InitRenderer()
 	// create renderer
 	new CRenderer;
 
+	g_RenderingOptions.ReadConfig();
+
 	// set renderer options from command line options - NOVBO must be set before opening the renderer
 	// and init them in the ConfigDB when needed
-	g_Renderer.SetOptionBool(CRenderer::OPT_NOVBO, g_NoGLVBO);
-	g_Renderer.SetOptionBool(CRenderer::OPT_SHADOWS, g_Shadows);
+	g_RenderingOptions.SetNoVBO(g_NoGLVBO);
+	g_RenderingOptions.SetShadows(g_Shadows);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "shadows", g_Shadows);
 
-	g_Renderer.SetOptionBool(CRenderer::OPT_WATEREFFECTS, g_WaterEffects);
+	g_RenderingOptions.SetWaterEffects(g_WaterEffects);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "watereffects", g_WaterEffects);
-	g_Renderer.SetOptionBool(CRenderer::OPT_WATERFANCYEFFECTS, g_WaterFancyEffects);
+	g_RenderingOptions.SetWaterFancyEffects(g_WaterFancyEffects);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "waterfancyeffects", g_WaterFancyEffects);
-	g_Renderer.SetOptionBool(CRenderer::OPT_WATERREALDEPTH, g_WaterRealDepth);
+	g_RenderingOptions.SetWaterRealDepth(g_WaterRealDepth);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "waterrealdepth", g_WaterRealDepth);
-	g_Renderer.SetOptionBool(CRenderer::OPT_WATERREFLECTION, g_WaterReflection);
+	g_RenderingOptions.SetWaterReflection(g_WaterReflection);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "waterreflection", g_WaterReflection);
-	g_Renderer.SetOptionBool(CRenderer::OPT_WATERREFRACTION, g_WaterRefraction);
+	g_RenderingOptions.SetWaterRefraction(g_WaterRefraction);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "waterrefraction", g_WaterRefraction);
-	g_Renderer.SetOptionBool(CRenderer::OPT_SHADOWSONWATER, g_WaterShadows);
+	g_RenderingOptions.SetWaterShadows(g_WaterShadows);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "watershadows", g_WaterShadows);
 
-	g_Renderer.SetRenderPath(CRenderer::GetRenderPathByName(g_RenderPath));
-	g_Renderer.SetOptionBool(CRenderer::OPT_SHADOWPCF, g_ShadowPCF);
+	g_RenderingOptions.SetRenderPath(RenderPathEnum::FromString(g_RenderPath));
+	g_RenderingOptions.SetShadowPCF(g_ShadowPCF);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "shadowpcf", g_ShadowPCF);
-	g_Renderer.SetOptionBool(CRenderer::OPT_PARTICLES, g_Particles);
+	g_RenderingOptions.SetParticles(g_Particles);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "particles", g_Particles);
-	g_Renderer.SetOptionBool(CRenderer::OPT_FOG, g_Fog);
+	g_RenderingOptions.SetFog(g_Fog);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "fog", g_Fog);
-	g_Renderer.SetOptionBool(CRenderer::OPT_SILHOUETTES, g_Silhouettes);
+	g_RenderingOptions.SetSilhouettes(g_Silhouettes);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "silhouettes", g_Silhouettes);
-	g_Renderer.SetOptionBool(CRenderer::OPT_SHOWSKY, g_ShowSky);
+	g_RenderingOptions.SetShowSky(g_ShowSky);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "showsky", g_ShowSky);
-	g_Renderer.SetOptionBool(CRenderer::OPT_PREFERGLSL, g_PreferGLSL);
+	g_RenderingOptions.SetPreferGLSL(g_PreferGLSL);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "preferglsl", g_PreferGLSL);
-	g_Renderer.SetOptionBool(CRenderer::OPT_POSTPROC, g_PostProc);
+	g_RenderingOptions.SetPostProc(g_PostProc);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "postproc", g_PostProc);
-	g_Renderer.SetOptionBool(CRenderer::OPT_SMOOTHLOS, g_SmoothLOS);
+	g_RenderingOptions.SetSmoothLOS(g_SmoothLOS);
 	g_ConfigDB.SetValueBool(CFG_SYSTEM, "smoothlos", g_SmoothLOS);
 
 	// create terrain related stuff
@@ -678,17 +696,15 @@ static void ShutdownSDL()
 
 void EndGame()
 {
-	const bool nonVisual = g_Game && g_Game->IsGraphicsDisabled();
-
 	if (g_Game && g_Game->IsGameStarted() && !g_Game->IsVisualReplay() &&
-	    g_AtlasGameLoop && !g_AtlasGameLoop->running && !nonVisual)
+	    g_AtlasGameLoop && !g_AtlasGameLoop->running && CRenderer::IsInitialised())
 		VisualReplay::SaveReplayMetadata(g_GUI->GetActiveGUI()->GetScriptInterface().get());
 
 	SAFE_DELETE(g_NetClient);
 	SAFE_DELETE(g_NetServer);
 	SAFE_DELETE(g_Game);
 
-	if (!nonVisual)
+	if (CRenderer::IsInitialised())
 	{
 		ISoundManager::CloseGame();
 		g_Renderer.ResetState();
@@ -697,7 +713,7 @@ void EndGame()
 
 void Shutdown(int flags)
 {
-	const bool nonVisual = g_Game && g_Game->IsGraphicsDisabled();
+	const bool hasRenderer = CRenderer::IsInitialised();
 
 	if ((flags & SHUTDOWN_FROM_CONFIG))
 		goto from_config;
@@ -714,11 +730,10 @@ void Shutdown(int flags)
 	delete &g_TexMan;
 	TIMER_END(L"shutdown TexMan");
 
-	// destroy renderer if it was initialised
-	if (!nonVisual)
+	if (hasRenderer)
 	{
 		TIMER_BEGIN(L"shutdown Renderer");
-		delete &g_Renderer;
+		g_Renderer.~CRenderer();
 		g_VBMan.Shutdown();
 		TIMER_END(L"shutdown Renderer");
 	}
@@ -732,7 +747,7 @@ void Shutdown(int flags)
 	ShutdownSDL();
 	TIMER_END(L"shutdown SDL");
 
-	if (!nonVisual)
+	if (hasRenderer)
 		g_VideoMode.Shutdown();
 
 	TIMER_BEGIN(L"shutdown UserReporter");
@@ -1088,7 +1103,7 @@ void InitGraphics(const CmdLineArgs& args, int flags, const std::vector<CStr>& i
 			JS::RootedValue data(cx);
 			if (g_GUI)
 			{
-				scriptInterface->Eval("({})", &data);
+				scriptInterface->CreateObject(&data);
 				scriptInterface->SetProperty(data, "isStartup", true);
 				if (!installedMods.empty())
 					scriptInterface->SetProperty(data, "installedMods", installedMods);
@@ -1207,6 +1222,7 @@ CStr8 LoadSettingsOfScenarioMap(const VfsPath &mapPath)
  *                                 (default 10 minutes)
  * -autostart-reliccount=NUM       sets the number of relics for relic victory condition
  *                                 (default 2 relics)
+ * -autostart-disable-replay       disable saving of replays
  *
  * Multiplayer:
  * -autostart-playername=NAME      sets local player NAME (default 'anonymous')
@@ -1240,19 +1256,19 @@ bool Autostart(const CmdLineArgs& args)
 	if (autoStartName.empty())
 		return false;
 
-	const bool nonVisual = args.Has("autostart-nonvisual");
-	g_Game = new CGame(nonVisual, !nonVisual);
+	g_Game = new CGame(!args.Has("autostart-disable-replay"));
 
 	ScriptInterface& scriptInterface = g_Game->GetSimulation2()->GetScriptInterface();
 	JSContext* cx = scriptInterface.GetContext();
 	JSAutoRequest rq(cx);
 
 	JS::RootedValue attrs(cx);
-	scriptInterface.Eval("({})", &attrs);
 	JS::RootedValue settings(cx);
-	scriptInterface.Eval("({})", &settings);
 	JS::RootedValue playerData(cx);
-	scriptInterface.Eval("([])", &playerData);
+
+	scriptInterface.CreateObject(&attrs);
+	scriptInterface.CreateObject(&settings);
+	scriptInterface.CreateArray(&playerData);
 
 	// The directory in front of the actual map name indicates which type
 	// of map is being loaded. Drawback of this approach is the association
@@ -1305,11 +1321,11 @@ bool Autostart(const CmdLineArgs& args)
 		for (size_t i = 0; i < numPlayers; ++i)
 		{
 			JS::RootedValue player(cx);
-			scriptInterface.Eval("({})", &player);
 
 			// We could load player_defaults.json here, but that would complicate the logic
 			// even more and autostart is only intended for developers anyway
-			scriptInterface.SetProperty(player, "Civ", std::string("athen"));
+			scriptInterface.CreateObject(&player, "Civ", std::string("athen"));
+
 			scriptInterface.SetPropertyInt(playerData, i, player);
 		}
 		mapType = "random";
@@ -1392,7 +1408,7 @@ bool Autostart(const CmdLineArgs& args)
 					LOGWARNING("Autostart: Invalid player %d in autostart-team option", playerID);
 					continue;
 				}
-				scriptInterface.Eval("({})", &player);
+				scriptInterface.CreateObject(&player);
 			}
 
 			int teamID = civArgs[i].AfterFirst(":").ToInt() - 1;
@@ -1423,7 +1439,7 @@ bool Autostart(const CmdLineArgs& args)
 					LOGWARNING("Autostart: Invalid player %d in autostart-ai option", playerID);
 					continue;
 				}
-				scriptInterface.Eval("({})", &player);
+				scriptInterface.CreateObject(&player);
 			}
 
 			CStr name = aiArgs[i].AfterFirst(":");
@@ -1451,7 +1467,7 @@ bool Autostart(const CmdLineArgs& args)
 					LOGWARNING("Autostart: Invalid player %d in autostart-aidiff option", playerID);
 					continue;
 				}
-				scriptInterface.Eval("({})", &player);
+				scriptInterface.CreateObject(&player);
 			}
 
 			int difficulty = civArgs[i].AfterFirst(":").ToInt();
@@ -1479,7 +1495,7 @@ bool Autostart(const CmdLineArgs& args)
 						LOGWARNING("Autostart: Invalid player %d in autostart-civ option", playerID);
 						continue;
 					}
-					scriptInterface.Eval("({})", &player);
+					scriptInterface.CreateObject(&player);
 				}
 
 				CStr name = civArgs[i].AfterFirst(":");
@@ -1512,7 +1528,7 @@ bool Autostart(const CmdLineArgs& args)
 		FromJSVal_vector(cx, triggerScripts, triggerScriptsVector);
 	}
 
-	if (nonVisual)
+	if (!CRenderer::IsInitialised())
 	{
 		CStr nonVisualScript = "scripts/NonVisualTrigger.js";
 		triggerScriptsVector.push_back(nonVisualScript.FromUTF8());
@@ -1584,7 +1600,7 @@ bool Autostart(const CmdLineArgs& args)
 
 		g_NetClient = new CNetClient(g_Game, true);
 		g_NetClient->SetUserName(userName);
-		g_NetClient->SetupConnection("127.0.0.1", PS_DEFAULT_PORT);
+		g_NetClient->SetupConnection("127.0.0.1", PS_DEFAULT_PORT, nullptr);
 	}
 	else if (args.Has("autostart-client"))
 	{
@@ -1597,7 +1613,7 @@ bool Autostart(const CmdLineArgs& args)
 		if (ip.empty())
 			ip = "127.0.0.1";
 
-		bool ok = g_NetClient->SetupConnection(ip, PS_DEFAULT_PORT);
+		bool ok = g_NetClient->SetupConnection(ip, PS_DEFAULT_PORT, nullptr);
 		ENSURE(ok);
 	}
 	else
@@ -1606,14 +1622,16 @@ bool Autostart(const CmdLineArgs& args)
 
 		g_Game->StartGame(&attrs, "");
 
-		if (nonVisual)
+		if (CRenderer::IsInitialised())
+		{
+			InitPsAutostart(false, attrs);
+		}
+		else
 		{
 			// TODO: Non progressive load can fail - need a decent way to handle this
 			LDR_NonprogressiveLoad();
 			ENSURE(g_Game->ReallyStartGame() == PSRETURN_OK);
 		}
-		else
-			InitPsAutostart(false, attrs);
 	}
 
 	return true;
@@ -1624,7 +1642,7 @@ bool AutostartVisualReplay(const std::string& replayFile)
 	if (!FileExists(OsPath(replayFile)))
 		return false;
 
-	g_Game = new CGame(false, false);
+	g_Game = new CGame(false);
 	g_Game->SetPlayerID(-1);
 	g_Game->StartVisualReplay(replayFile);
 

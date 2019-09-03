@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-03-23 21:15+0000\n"
+"POT-Creation-Date: 2019-08-23 07:09+0000\n"
+"PO-Revision-Date: 2019-08-23 15:28+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/wildfire-games/0ad/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -311,16 +311,16 @@ msgstr "Volcán extinto"
 
 #: maps/random/fields_of_meroe.jsonsettings.Description
 msgid ""
-"The \"Island of Meroe\", a vast peninsula flanked by the Nile and Atbarah "
+"The \"Island of Meroë\", a vast peninsula flanked by the Nile and Atbarah "
 "rivers, formed the heartland of ancient Kush. Where the harsh deserts start "
 "making way for the semi-arid savannahs and small acacia forests dot the "
 "landscape. The area is rich in resources and the ever-present Nile brings "
 "life, but grave threats loom on the opposite riverbank."
-msgstr "A «Illa de Meroe», unha gran península flanqueada polos ríos Nilo e Atbara, formaba o corazón do antigo imperio cuxita. Nela os inhabitábeis desertos deixan paso á sabana semiárida e os bosques de acacia. A zona conta con abundantes recursos e a vida que trae consigo o Nilo, pero na outra ribeira axexan graves ameazas."
+msgstr ""
 
 #: maps/random/fields_of_meroe.jsonsettings.Name
-msgid "Fields of Meroe"
-msgstr "Campos de Meroe"
+msgid "Fields of Meroë"
+msgstr ""
 
 #: maps/random/flood.jsonsettings.Description
 msgid ""
@@ -1574,10 +1574,10 @@ msgstr "Este mapa mostra unha reconstrución da antiga cidade de Napata. [color=
 
 #: maps/scenarios/Necropolis.xml:Description:39
 msgid ""
-"4 players duke it out over the vast Nile Delta. Each city starts out nestled atop a large acropolis, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
+"Four players duke it out over the vast Nile Delta. Each city starts out nestled atop a large plateau, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
 "\n"
 "Scouts say the nearby branches of the Nile River are shallow and fordable in multiple locations, so should only serve as a minor barrier between enemy factions."
-msgstr "4 xogadores enfróntanse no delta do Nilo. Cada cidade comeza sobre unha enorme acrópole, pero os recursos escasean, obrigando a cada xogador a expandir as súas tarefas de recolección ás terras dos arredores.\n\nOs exploradores din que os afluentes próximos do Nilo son pouco profundos, e poden vadearse por varios puntos, polo que non deberían supoñer un verdadeiro obstáculo entre as faccións inimigas."
+msgstr ""
 
 #: maps/scenarios/Necropolis.xml:Name:39
 msgid "Necropolis"
@@ -2043,7 +2043,7 @@ msgstr "Todas as unidades do xogo."
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27
+#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
 msgid "Give an interesting description of your map."
 msgstr "Dálle unha descrición interesante ao mapa."
 
@@ -2068,6 +2068,7 @@ msgid "A quick battle demo map using Roman legionnaires."
 msgstr "Un mapa rápido de demostración de batallas usando lexionarios romanos."
 
 #: maps/scenarios/_default.xml:Name:28
+#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "Mapa sen nome"
 
@@ -2099,12 +2100,24 @@ msgstr "Demostración naval"
 msgid "Base Temperate Map"
 msgstr "Mapa temperado de base"
 
+#: maps/scenarios/unit_motion_integration_test.xml:Description:40
+msgid ""
+"This map is designed to test some basic unit movement cases. It will involve"
+" unitAI, unitMotion and the relevant pathfinders and thus acts as an "
+"integrated test map. Look for things such as stuck units, wrong animations, "
+"and weird pathing."
+msgstr ""
+
+#: maps/scenarios/unit_motion_integration_test.xml:Name:40
+msgid "Unit Motion Integration Test"
+msgstr ""
+
 #: maps/skirmishes/Acropolis Bay (2).xml:Description:39
 msgid ""
-"Each player starts the match atop a large flat plateau, otherwise known as an acropolis.\n"
+"Each player starts the match atop a large flat plateau.\n"
 "\n"
-"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed acropolis commanding the valley below."
-msgstr "Cada xogador comeza a partida nunha enorme meseta tamén coñecida como «acrópole».\n\nNo leste hai unha enorme baía rica en peixe. O oeste ofrece un terreo abrupto reinado por unha acrópole que non pertence a ninguén."
+"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed plateau commanding the valley below."
+msgstr ""
 
 #: maps/skirmishes/Acropolis Bay (2).xml:Name:39
 msgid "Acropolis Bay (2)"
@@ -2324,6 +2337,14 @@ msgid ""
 "- Western desert: Oasis Charga and Siwa, Qattara Depression\n"
 msgstr "Loita polos restos do antigo Exipto!\n\nOs xogadores comezan con cidades enteiras e pequenos exércitos, e con distintas vantaxes e desvantaxes. Ten coidado, hai 7 importantes fortalezas e bandidos axexando!\n\nÉ o último século antes do 0 d.C. Exipto está dividido internamente entre os helenos (Alexandría, representada polos seléucidas) e as influencias tradicionais (Memfis, representada polos tolemaicos). Tebas, no clima sureño do río Nilo, xa caeu en mans dos cuxitas. No noroeste, en Al-Dschabal al-Achdar, onde se sitúa a cidade mediterránea de Cirene, os romanos prepáranse para a invasión. Do deserto at-Tih do leste e do monte Sinaí chegan inimigos (representados polos persas), e tamén ao leste se atopa o oasis Siwa. Os Charga (representada polos cartaxineses), no deserto do suroeste, intentan tamén quedar cun anaco do biscoito.\nLugares:\n- Alexandría: biblioteca, porto.\n- Memfis: necrópole, pirámides, altar de Apis.\n- Tebas: distrito relixioso, Val dos Reis.\n- Cirene: maquia mediterránea, árbores de olivas.\n- Faiún: altar dos crocodilos, présa do Nilo.\n- Deserto oriental: monte Sinaí, profundidades de Wadi, arrecifes do mar Vermello.\n- Deserto occidental: Oasis Charga e Siwa, depresión de Qattara.\n"
 
+#: maps/skirmishes/Farmland (2).xml:Description:40
+msgid "Farmland in Eastern Europe."
+msgstr ""
+
+#: maps/skirmishes/Farmland (2).xml:Name:40
+msgid "Farmland (2)"
+msgstr ""
+
 #: maps/skirmishes/Forest Battle (4).xml:Description:40
 msgid ""
 "A forest battle map where all players fight for supremacy and control over "
@@ -2361,8 +2382,8 @@ msgstr "Río Gambia (3)"
 #: maps/skirmishes/Golden Island (2).xml:Description:40
 msgid ""
 "A ring of land borders a resource-rich island in the Mediterranean. Players "
-"can access the center via a narrow strip of land or via boat."
-msgstr "Un anel de terra fai fronteira con unha illa rica en recursos no Mediterráneo. Os xogadores poden acceder ao centro a través dunha estreita franxa de terra ou a través de barco."
+"can access the center via a narrow strip of shallow water or via boat."
+msgstr ""
 
 #: maps/skirmishes/Golden Island (2).xml:Name:40
 msgid "Golden Island (2)"
@@ -2382,10 +2403,10 @@ msgstr "Oasis de ouro (2)"
 #: maps/skirmishes/Greek Acropolis (2).xml:Description:39
 #: maps/skirmishes/Greek Acropolis Night (2).xml:Description:39
 msgid ""
-"Two factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Two factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Dúas faccións vense a salvo sobre altas mesetas rochosas, ou «acrópoles».\n\nExplora o territorio para atopar tesouros e para conseguir novos recursos."
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (2).xml:Name:39
 msgid "Greek Acropolis (2)"
@@ -2393,10 +2414,10 @@ msgstr "Acrópole grega (2)"
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Description:39
 msgid ""
-"Three factions find themselves perched safely atop large rocky plateaus, or acropolises, whereas the fourth one is separated from their foes by a river branch.\n"
+"Three factions find themselves perched safely atop large rocky plateaus, whereas the fourth one is separated from their foes by a river branch.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources.."
-msgstr "Tres faccións vense a salvo sobre altas mesetas rochosas, ou «acrópoles», mentres que unha cuarta está separada do resto polo afluente dun río.\n\nExplora o territorio para atopar tesouros e para conseguir novos recursos.."
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Name:39
 msgid "Greek Acropolis (4)"
@@ -2508,6 +2529,14 @@ msgstr "Atrapados á mercé das xeadas temperaturas nórdicas, 2 xogadores loita
 msgid "Northern Island (2)"
 msgstr "Illa nórdica (2)"
 
+#: maps/skirmishes/Oceanside (2).xml:Description:40
+msgid "A Lush temperate biome along an ocean. "
+msgstr ""
+
+#: maps/skirmishes/Oceanside (2).xml:Name:40
+msgid "Oceanside (2)"
+msgstr ""
+
 #: maps/skirmishes/Persian Highlands (4).xml:Description:39
 msgid ""
 "A dry central basin rich in minerals surrounded by rocky hills and "
@@ -2611,12 +2640,20 @@ msgstr "Un oasis rodeado de montañas e deserto. As terras próximas á beira do
 msgid "Team Oasis (2v2)"
 msgstr "Oasis por equipos (2 e 2)"
 
+#: maps/skirmishes/Temperate Roadway (2).xml:Description:40
+msgid "Temperate zone map with plentiful resources. Map Size: Small"
+msgstr ""
+
+#: maps/skirmishes/Temperate Roadway (2).xml:Name:40
+msgid "Temperate Roadway (2)"
+msgstr ""
+
 #: maps/skirmishes/Thessalian Plains (4).xml:Description:39
 msgid ""
 "The rolling Thessalian plain is traversed with narrow streams, easily "
 "forded. Wide-open spaces allow for massive expansion, while each player "
-"starts the match safe atop a large acropolis."
-msgstr "A chaira de Tesalia está atravesada por estreitos arroios que podes vadear con facilidade. Os espazos abertos permites expandirse, mentres que os xogadores comezan a partida na cima de grandes acrópoles."
+"starts the match safe atop a large plateau."
+msgstr ""
 
 #: maps/skirmishes/Thessalian Plains (4).xml:Name:39
 msgid "Thessalian Plains (4)"
@@ -2624,10 +2661,10 @@ msgstr "Chairas de Tesalia (4)"
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Description:40
 msgid ""
-"Four factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Four factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Catro faccións vense protexidas na cima de outeiros, ou «acrópoles».\n\nExplora as terras para atopar tesouros sen reclamar e novos recursos."
+msgstr ""
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Name:40
 msgid "Tuscan Acropolis (4)"

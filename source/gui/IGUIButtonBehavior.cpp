@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,9 +20,9 @@
 #include "GUI.h"
 
 #include "ps/CLogger.h"
-#include "soundmanager/ISoundManager.h"
 
-IGUIButtonBehavior::IGUIButtonBehavior() : m_Pressed(false)
+IGUIButtonBehavior::IGUIButtonBehavior(CGUI& pGUI)
+	: IGUIObject(pGUI), m_Pressed(false)
 {
 }
 
@@ -32,26 +32,20 @@ IGUIButtonBehavior::~IGUIButtonBehavior()
 
 void IGUIButtonBehavior::HandleMessage(SGUIMessage& Message)
 {
-	bool enabled;
-	GUI<bool>::GetSetting(this, "enabled", enabled);
+	const bool enabled = GetSetting<bool>("enabled");
+
 	CStrW soundPath;
 	// TODO Gee: easier access functions
 	switch (Message.type)
 	{
 	case GUIM_MOUSE_ENTER:
-		if (!enabled)
-			break;
-
-		if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_enter", soundPath) == PSRETURN_OK && !soundPath.empty())
-			g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+		if (enabled)
+			PlaySound("sound_enter");
 		break;
 
 	case GUIM_MOUSE_LEAVE:
-		if (!enabled)
-			break;
-
-		if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_leave", soundPath) == PSRETURN_OK && !soundPath.empty())
-			g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+		if (enabled)
+			PlaySound("sound_leave");
 		break;
 
 	case GUIM_MOUSE_DBLCLICK_LEFT:
@@ -66,14 +60,11 @@ void IGUIButtonBehavior::HandleMessage(SGUIMessage& Message)
 	case GUIM_MOUSE_PRESS_LEFT:
 		if (!enabled)
 		{
-			if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_disabled", soundPath) == PSRETURN_OK && !soundPath.empty())
-				g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+			PlaySound("sound_disabled");
 			break;
 		}
 
-		// Button was clicked
-		if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_pressed", soundPath) == PSRETURN_OK && !soundPath.empty())
-			g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+		PlaySound("sound_pressed");
 		SendEvent(GUIM_PRESSED, "press");
 		m_Pressed = true;
 		break;
@@ -90,14 +81,12 @@ void IGUIButtonBehavior::HandleMessage(SGUIMessage& Message)
 	case GUIM_MOUSE_PRESS_RIGHT:
 		if (!enabled)
 		{
-			if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_disabled", soundPath) == PSRETURN_OK && !soundPath.empty())
-				g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+			PlaySound("sound_disabled");
 			break;
 		}
 
 		// Button was right-clicked
-		if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_pressed", soundPath) == PSRETURN_OK && !soundPath.empty())
-			g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+		PlaySound("sound_pressed");
 		SendEvent(GUIM_PRESSED_MOUSE_RIGHT, "pressright");
 		m_PressedRight = true;
 		break;
@@ -109,8 +98,7 @@ void IGUIButtonBehavior::HandleMessage(SGUIMessage& Message)
 		if (m_PressedRight)
 		{
 			m_PressedRight = false;
-			if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_released", soundPath) == PSRETURN_OK && !soundPath.empty())
-				g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+			PlaySound("sound_released");
 		}
 		break;
 
@@ -121,8 +109,7 @@ void IGUIButtonBehavior::HandleMessage(SGUIMessage& Message)
 		if (m_Pressed)
 		{
 			m_Pressed = false;
-			if (g_SoundManager && GUI<CStrW>::GetSetting(this, "sound_released", soundPath) == PSRETURN_OK && !soundPath.empty())
-				g_SoundManager->PlayAsUI(soundPath.c_str(), false);
+			PlaySound("sound_released");
 		}
 		break;
 
@@ -131,55 +118,36 @@ void IGUIButtonBehavior::HandleMessage(SGUIMessage& Message)
 	}
 }
 
-CColor IGUIButtonBehavior::ChooseColor()
+const CGUIColor& IGUIButtonBehavior::ChooseColor()
 {
-	CColor color, color2;
-
 	// Yes, the object must possess these settings. They are standard
-	GUI<CColor>::GetSetting(this, "textcolor", color);
+	const CGUIColor& color = GetSetting<CGUIColor>("textcolor");
 
-	bool enabled;
-	GUI<bool>::GetSetting(this, "enabled", enabled);
+	if (!GetSetting<bool>("enabled"))
+		return GetSetting<CGUIColor>("textcolor_disabled") || color;
 
-	if (!enabled)
-	{
-		GUI<CColor>::GetSetting(this, "textcolor_disabled", color2);
-		return GUI<>::FallBackColor(color2, color);
-	}
-	else if (m_MouseHovering)
+	if (m_MouseHovering)
 	{
 		if (m_Pressed)
-		{
-			GUI<CColor>::GetSetting(this, "textcolor_pressed", color2);
-			return GUI<>::FallBackColor(color2, color);
-		}
+			return GetSetting<CGUIColor>("textcolor_pressed") || color;
 		else
-		{
-			GUI<CColor>::GetSetting(this, "textcolor_over", color2);
-			return GUI<>::FallBackColor(color2, color);
-		}
+			return GetSetting<CGUIColor>("textcolor_over") || color;
 	}
-	else
-		return color;
+
+	return color;
 }
 
 void IGUIButtonBehavior::DrawButton(const CRect& rect, const float& z, CGUISpriteInstance& sprite, CGUISpriteInstance& sprite_over, CGUISpriteInstance& sprite_pressed, CGUISpriteInstance& sprite_disabled, int cell_id)
 {
-	if (!GetGUI())
-		return;
-
-	bool enabled;
-	GUI<bool>::GetSetting(this, "enabled", enabled);
-
-	if (!enabled)
-		GetGUI()->DrawSprite(GUI<>::FallBackSprite(sprite_disabled, sprite), cell_id, z, rect);
+	if (!GetSetting<bool>("enabled"))
+		m_pGUI.DrawSprite(sprite_disabled || sprite, cell_id, z, rect);
 	else if (m_MouseHovering)
 	{
 		if (m_Pressed)
-			GetGUI()->DrawSprite(GUI<>::FallBackSprite(sprite_pressed, sprite), cell_id, z, rect);
+			m_pGUI.DrawSprite(sprite_pressed || sprite, cell_id, z, rect);
 		else
-			GetGUI()->DrawSprite(GUI<>::FallBackSprite(sprite_over, sprite), cell_id, z, rect);
+			m_pGUI.DrawSprite(sprite_over || sprite, cell_id, z, rect);
 	}
 	else
-		GetGUI()->DrawSprite(sprite, cell_id, z, rect);
+		m_pGUI.DrawSprite(sprite, cell_id, z, rect);
 }

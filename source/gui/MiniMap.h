@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,15 +21,15 @@
 #include "gui/GUI.h"
 #include "renderer/VertexArray.h"
 
-
 class CCamera;
+class CMatrix3D;
 class CTerrain;
 
 class CMiniMap : public IGUIObject
 {
 	GUI_OBJECT(CMiniMap)
 public:
-	CMiniMap();
+	CMiniMap(CGUI& pGUI);
 	virtual ~CMiniMap();
 protected:
 	virtual void Draw();
@@ -40,9 +40,9 @@ protected:
 	virtual void HandleMessage(SGUIMessage& Message);
 
 	/**
-	 * @see IGUIObject#MouseOver()
+	 * @see IGUIObject#IsMouseOver()
 	 */
-	virtual bool MouseOver();
+	virtual bool IsMouseOver() const;
 
 	// create the minimap textures
 	void CreateTextures();
@@ -90,13 +90,13 @@ protected:
 
 	float m_WaterHeight;
 
-	void DrawTexture(CShaderProgramPtr shader, float coordMax, float angle, float x, float y, float x2, float y2, float z);
+	void DrawTexture(CShaderProgramPtr shader, float coordMax, float angle, float x, float y, float x2, float y2, float z) const;
 
-	void DrawViewRect(CMatrix3D transform);
+	void DrawViewRect(CMatrix3D transform) const;
 
-	void GetMouseWorldCoordinates(float& x, float& z);
+	void GetMouseWorldCoordinates(float& x, float& z) const;
 
-	float GetAngle();
+	float GetAngle() const;
 
 	VertexIndexArray m_IndexArray;
 	VertexArray m_VertexArray;

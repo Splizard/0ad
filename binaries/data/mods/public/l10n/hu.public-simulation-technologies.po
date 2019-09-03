@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2015-2019
-# Balázs Úr <ur.balazs@fsf.hu>, 2015-2017
+# Balázs Úr, 2015-2017
 # Benedict Drummer <inactive+beni1999@transifex.com>, 2014
 # Benedict Drummer <inactive+beni1999@transifex.com>, 2014
 # Boross Péter <borosspet@web.de>, 2015
@@ -19,9 +19,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-02 10:03+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 16:07+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/wildfire-games/0ad/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +36,33 @@ msgid ""
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
 msgstr "A fejlett osztályra képzett egységek a következő bónuszokat kapják: 20% további életerő, 1 további páncélszint minden típusból, 20% további zsákmány, 20%-kal nagyobb támadás a közelharci egységeknek, 4 m további hatótávolság és jobb pontosság a távolsági egységeknek, gyorsabb mozgási sebesség és további gyógyítási sebesség és hatótáv a gyógyítóknak."
+
+#: simulation/data/technologies/archery_tradition.jsondescription
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
+msgstr "Az indiaiak és irániak nagy íjászhagyománnyal rendelkeztek és előszeretettel vetették be nagy tömegben az íjászokat a csatában."
+
+#: simulation/data/technologies/archery_tradition.jsontooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and "
+"-20% train time, but also -20% health."
+msgstr "+10 méter hatótávolság az íjászegységeknek. Az íjászegységek pontosabbak és 20%-kal gyorsabban kerülnek kiképzésre, de 20%-kal kevesebb életerejük lesz."
+
+#: simulation/data/technologies/archery_tradition.jsongenericName
+msgid "Archery Tradition"
+msgstr "Íjászhagyomány"
+
+#: simulation/data/technologies/archery_tradition.jsonrequirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
+#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
+#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
+msgid "Unlocked in Village Phase."
+msgstr "Falusi szakasztól érhető el."
 
 #: simulation/data/technologies/armor_cav_01.jsondescription
 #: simulation/data/technologies/armor_cav_chamfron.jsondescription
@@ -464,18 +491,6 @@ msgstr "Fából készült erősítő gerendák a hajótestekhez. +2 szint minden
 msgid "Reinforced hull"
 msgstr "Megerősített hajótest"
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
-#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
-#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsonrequirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsonrequirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr "Falusi szakasztól érhető el."
-
 #: simulation/data/technologies/attack_cav_lance.jsondescription
 msgid "A long spear made specifically for cavalry."
 msgstr "Egy hosszú lándzsa kifejezetten a lovasságnak készítve."
@@ -641,8 +656,8 @@ msgstr "Bronz helyett vas használata többlet erőt ad a fegyvereknek."
 #: simulation/data/technologies/attack_infantry_ranged_01.jsondescription
 #: simulation/data/technologies/attack_infantry_ranged_02.jsondescription
 #: simulation/data/technologies/ranged_inf_irregulars.jsondescription
-msgid "Training increases damage of ranged infantry units."
-msgstr "A kiképzés növeli a távolsági gyalogos egységek sebzését."
+msgid "Training increases damage of ranged infantry."
+msgstr ""
 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsontooltip
 #: simulation/data/technologies/attack_infantry_ranged_02.jsontooltip
@@ -1450,72 +1465,72 @@ msgid "Amentum"
 msgstr "Amentum"
 
 #: simulation/data/technologies/siege_armor.jsondescription
-msgid "Increased armor on siege weapons"
-msgstr "Megnövelt páncél az ostromgépeken"
+msgid "Increased armor on siege engines."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsontooltip
-msgid "All Siege weapons +2 Hack armor levels."
-msgstr "Minden ostromgépnek +2 vágás páncél szint."
+msgid "Siege Engines +2 hack armor."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsongenericName
 msgid "Armor plating"
 msgstr "Páncélzat"
 
 #: simulation/data/technologies/siege_attack.jsondescription
-msgid "Advanced technologies improve siege efficiency"
-msgstr "A fejlett technológiák tökéletesítik az ostrom hatékonyságát"
+msgid "Advanced technologies improve siege efficiency."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsontooltip
-msgid "All siege weapons +25% Crush damage."
-msgstr "Minden ostromgépnek +25% zúzás sebzés."
+msgid "Siege Engines +25% attack crush damage."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsongenericName
 msgid "Advanced Siege"
 msgstr "Fejlett ostrom"
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsondescription
-msgid "Improvement to projectile accuracy"
-msgstr "Fejlesztés a lövedékek pontosságára"
+msgid "Improvement to projectile accuracy."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsontooltip
-msgid "Bolt shooter increased accuracy."
-msgstr "Növelt nyílvető pontosság."
+msgid "Bolt Shooters −20% ranged attack spread."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsongenericName
 msgid "Bolt Accuracy"
 msgstr "Nyílpontosság"
 
 #: simulation/data/technologies/siege_cost_metal.jsondescription
-msgid "Siege weapons require less metal resource"
-msgstr "Az ostromgépek kevesebb fém nyersanyagot igényelnek"
+msgid "Siege engines require less metal."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsontooltip
-msgid "Siege weapons cost 20% less metal"
-msgstr "Az ostromgépek 20%-kal kevesebb fémbe kerülnek"
+msgid "Siege Engines −20% metal cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsongenericName
 msgid "Metalworker"
 msgstr "Fémmunkás"
 
 #: simulation/data/technologies/siege_cost_wood.jsondescription
-msgid "Siege weapons cost less wood"
-msgstr "Az ostromgépek kevesebb fába kerülnek"
+msgid "Siege engines require less wood."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsontooltip
-msgid "Siege weapons cost 20% less wood"
-msgstr "Az ostromgépek 20%-kal kevesebb fába kerülnek"
+msgid "Siege Engines −20% wood cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsongenericName
 msgid "Artillery Instructors"
 msgstr "Tüzérségi utasítások"
 
 #: simulation/data/technologies/siege_packing.jsondescription
-msgid "Immobile siege weapons are assembled and disassembled faster"
-msgstr "A rögzített ostromgépeket gyorsabban szerelik össze és szét"
+msgid "Immobile siege engines are assembled and disassembled faster."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsontooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
-msgstr "-25% csomagolási és kibontási idő a rögzített ostromgépeknél."
+msgid "Siege Engines −25% pack and unpack time."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsongenericName
 msgid "Military Engineers"
@@ -2453,24 +2468,6 @@ msgstr "Elit rangú gyógyítók kiképzése."
 msgid "Divine Instruction"
 msgstr "Isteni utasítás"
 
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsondescription
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr "Az indiaiak nagy íjászhagyománnyal rendelkeztek és előszeretettel vetették be nagy tömegben az íjászokat a csatában."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsontooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsontooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and "
-"-20% train time, but also -20% health."
-msgstr "+10 méter hatótávolság az íjászegységeknek. Az íjászegységek pontosabbak és 20%-kal gyorsabban kerülnek kiképzésre, de 20%-kal kevesebb életerejük lesz."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsongenericName
-#: simulation/data/technologies/persians/special_archery_tradition.jsongenericName
-msgid "Archery Tradition"
-msgstr "Íjászhagyomány"
-
 #: simulation/data/technologies/persians/immortals.jsondescription
 msgid ""
 "The Anusiya champion infantry train twice as fast, but lose a little max "
@@ -2503,12 +2500,6 @@ msgstr "Minden perzsa épületnek +25% életerő és foglalási pont, de +20% é
 msgid "Persian Architecture"
 msgstr "Perzsa építészet"
 
-#: simulation/data/technologies/persians/special_archery_tradition.jsondescription
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed"
-" archers in battle."
-msgstr "A perzsák nagy íjászhagyománnyal rendelkeztek, és előszeretettel használtak íjászokat tömegesen a csatában."
-
 #: simulation/data/technologies/persians/special_equine_transports.jsondescription
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2521,8 +2512,8 @@ msgid ""
 msgstr "A korai óperzsa uralkodók az irányba tevékenykedtek, hogy Perzsia legyen az első nagy ázsiai birodalom, amely uralja a tengereket. A nagykirály különböző tengeri népek kedvére tevékenykedett, hogy biztosítsa szolgálataikat, de különféle tengeri kezdeményezései is voltak. Nagy Dárajavaus uralma alatt például egy csatorna épült Egyiptomban ás a perzsa flottát az Indus folyó felfedezésére küldték. Hérodotosz szerint körülbelül 300 perzsa hadihajó lett átépítve, hogy lovakat és lovasaikat szállítsák."
 
 #: simulation/data/technologies/persians/special_equine_transports.jsontooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
-msgstr "A föníciai triérészek képesek lovas egységek kiképzésére."
+msgid "Phoenician Triremes gain the ability to train cavalry."
+msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.jsongenericName
 msgid "Equine Transports"
@@ -2611,9 +2602,9 @@ msgstr "Görög metropolisz"
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsondescription
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
-msgstr "Jelentősen növeli a bajnokok és az ostromgépek kiképzési sebességét az erődben azáltal, hogy nagy csoportokban vagy zászlóaljakban képzi ki őket."
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
+msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsontooltip
 msgid "Faster batch training speed for the Fortress."

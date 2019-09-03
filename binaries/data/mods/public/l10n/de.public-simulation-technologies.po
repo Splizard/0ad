@@ -5,10 +5,12 @@
 # Translators:
 # Wuzzy <almikes@aol.com>, 2014-2018
 # xtother90, 2018
+# Elias Keis, 2019
 # Fabian Gref <fabian.gref@gmail.com>, 2017
 # Firstname Lastname <je.eppler@posteo.net>, 2019
 # Glorfindel Of Gondolin, 2019
-# Kilian Seizinger <Kilian.Seizinger@gmx.de>, 2019
+# duichwer <Kilian.Seizinger@gmx.de>, 2019
+# Kjell, 2019
 # leper <leper@wildfiregames.com>, 2014-2016
 # Lukas Heiniger <kenionatus@techie.com>, 2019
 # MartinusMagnus <martinkleemann@web.de>, 2014
@@ -19,15 +21,15 @@
 # Paul Friedrig <george.2juggernaut@gmail.com>, 2016
 # Paul Müller <paulbochynek@web.de>, 2015
 # qwertz, 2015
-# Raymond Vetter, 2014-2018
+# Raymond Vetter, 2014-2019
 # Tilo S, 2016-2017
 # xtother90, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-07 02:30+0000\n"
-"Last-Translator: Firstname Lastname <je.eppler@posteo.net>\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-27 18:45+0000\n"
+"Last-Translator: Raymond Vetter\n"
 "Language-Team: German (http://www.transifex.com/wildfire-games/0ad/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +44,33 @@ msgid ""
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
 msgstr "Einheiten, die zum fortgeschrittenen Rang befördert werden, bekommen viele Extras dazu: 20% Gesundheit, 1 Rüstungslevel jedes Typs, 20% Angriff für Nahkampfeinheiten, 4m Reichweite und höhere Genauigkeit für Fernkämpfer, höhere Bewegungsgeschwindigkeit und mehr Heilrate und -reichweite für Heiler."
+
+#: simulation/data/technologies/archery_tradition.jsondescription
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
+msgstr "Die indischen und iranischen Völker hatten eine Tradition des ausgezeichneten Bogenschießens und eine Vorliebe für den Einsatz von Bogenschützen in der Schlacht."
+
+#: simulation/data/technologies/archery_tradition.jsontooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and "
+"-20% train time, but also -20% health."
+msgstr "+10 Meter Reichweite für Einheiten mit Bogen. Bessere Genauigkeit für Bogenschützen und -20% Ausbildungszeit, aber auch -20% Gesundheit."
+
+#: simulation/data/technologies/archery_tradition.jsongenericName
+msgid "Archery Tradition"
+msgstr "Bogenschießtradition"
+
+#: simulation/data/technologies/archery_tradition.jsonrequirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
+#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
+#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
+msgid "Unlocked in Village Phase."
+msgstr "Freigeschaltet in der Dorfphase."
 
 #: simulation/data/technologies/armor_cav_01.jsondescription
 #: simulation/data/technologies/armor_cav_chamfron.jsondescription
@@ -470,18 +499,6 @@ msgstr "Verstärkte Holzbalken für Schiffsrümpfe. +2 zu allen Rüstungsarten."
 msgid "Reinforced hull"
 msgstr "Verstärkter Rumpf"
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
-#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
-#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsonrequirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsonrequirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr "Freigeschaltet in der Dorfphase."
-
 #: simulation/data/technologies/attack_cav_lance.jsondescription
 msgid "A long spear made specifically for cavalry."
 msgstr "Ein langer Speer, speziell für Kavallerie hergestellt."
@@ -647,8 +664,8 @@ msgstr "Die Verwendung von Eisen anstatt Bronze gab den Waffen mehr Durschschlag
 #: simulation/data/technologies/attack_infantry_ranged_01.jsondescription
 #: simulation/data/technologies/attack_infantry_ranged_02.jsondescription
 #: simulation/data/technologies/ranged_inf_irregulars.jsondescription
-msgid "Training increases damage of ranged infantry units."
-msgstr "Training erhöht den Schaden der Fernkampfinfanterie."
+msgid "Training increases damage of ranged infantry."
+msgstr "Training erhöht den Schaden der Nahkampfinfanterie."
 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsontooltip
 #: simulation/data/technologies/attack_infantry_ranged_02.jsontooltip
@@ -1456,72 +1473,72 @@ msgid "Amentum"
 msgstr "Amentum"
 
 #: simulation/data/technologies/siege_armor.jsondescription
-msgid "Increased armor on siege weapons"
-msgstr "Verstärkt die Panzerung der Belagerungswaffen"
+msgid "Increased armor on siege engines."
+msgstr "Erhöhte Rüstung für Belagerungsmaschinen."
 
 #: simulation/data/technologies/siege_armor.jsontooltip
-msgid "All Siege weapons +2 Hack armor levels."
-msgstr "Alle Belagerungswaffen +2 Hiebschutz."
+msgid "Siege Engines +2 hack armor."
+msgstr "Belagerungsmaschinen +2 Hiebschutz."
 
 #: simulation/data/technologies/siege_armor.jsongenericName
 msgid "Armor plating"
 msgstr "Panzerung"
 
 #: simulation/data/technologies/siege_attack.jsondescription
-msgid "Advanced technologies improve siege efficiency"
-msgstr "Fortschrittliche Technologien verbessern die Belagerungswaffeneffizienz."
+msgid "Advanced technologies improve siege efficiency."
+msgstr "Fortschrittliche Technologien zur Verbesserung der Belagerungseffizienz."
 
 #: simulation/data/technologies/siege_attack.jsontooltip
-msgid "All siege weapons +25% Crush damage."
-msgstr "Alle Belagerungswaffen +25% Schmetterschaden."
+msgid "Siege Engines +25% attack crush damage."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsongenericName
 msgid "Advanced Siege"
 msgstr "Fortschrittlichere Belagerungswaffen"
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsondescription
-msgid "Improvement to projectile accuracy"
-msgstr "Verbesserung der Zielgenauigkeit"
+msgid "Improvement to projectile accuracy."
+msgstr "Verbesserung der Zielgenauigkeit."
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsontooltip
-msgid "Bolt shooter increased accuracy."
-msgstr "Erhöhte Genauigkeit für das Bolzengeschütz."
+msgid "Bolt Shooters −20% ranged attack spread."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsongenericName
 msgid "Bolt Accuracy"
 msgstr "Bolzengenauigkeit"
 
 #: simulation/data/technologies/siege_cost_metal.jsondescription
-msgid "Siege weapons require less metal resource"
-msgstr "Belagerungswaffen benötigen weniger Metall"
+msgid "Siege engines require less metal."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsontooltip
-msgid "Siege weapons cost 20% less metal"
-msgstr "Belagerungswaffen kosten 20% weniger Metall"
+msgid "Siege Engines −20% metal cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsongenericName
 msgid "Metalworker"
 msgstr "Waffenschlosser"
 
 #: simulation/data/technologies/siege_cost_wood.jsondescription
-msgid "Siege weapons cost less wood"
-msgstr "Belagerungswaffen kosten weniger Holz"
+msgid "Siege engines require less wood."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsontooltip
-msgid "Siege weapons cost 20% less wood"
-msgstr "Belagerungswaffen kosten 20% weniger Holz"
+msgid "Siege Engines −20% wood cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsongenericName
 msgid "Artillery Instructors"
 msgstr "Artillerieausbilder"
 
 #: simulation/data/technologies/siege_packing.jsondescription
-msgid "Immobile siege weapons are assembled and disassembled faster"
+msgid "Immobile siege engines are assembled and disassembled faster."
 msgstr "Unbewegliche Belagerungswaffen werden schneller zusammen- und auseinandergebaut"
 
 #: simulation/data/technologies/siege_packing.jsontooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
-msgstr "-25% Auf- und Abbauzeit für immobile Belagerungswaffen."
+msgid "Siege Engines −25% pack and unpack time."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsongenericName
 msgid "Military Engineers"
@@ -2459,24 +2476,6 @@ msgstr "Bilde Elite-Heiler aus."
 msgid "Divine Instruction"
 msgstr "Göttliche Eingebung"
 
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsondescription
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr "Die Inder hatten eine Tradition ausgefeilter Bogenschießkunst und neigten dazu, Massen an Bogenschützen im Kampf einzusetzen."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsontooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsontooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and "
-"-20% train time, but also -20% health."
-msgstr "+10 Meter Reichweite für Einheiten mit Bogen. Bessere Genauigkeit für Bogenschützen und -20% Ausbildungszeit, aber auch -20% Gesundheit."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsongenericName
-#: simulation/data/technologies/persians/special_archery_tradition.jsongenericName
-msgid "Archery Tradition"
-msgstr "Bogenschießtradition"
-
 #: simulation/data/technologies/persians/immortals.jsondescription
 msgid ""
 "The Anusiya champion infantry train twice as fast, but lose a little max "
@@ -2509,12 +2508,6 @@ msgstr "Alle persischen Gebäude haben 25% mehr Gesundheit und Eroberungspunkte,
 msgid "Persian Architecture"
 msgstr "Persische Architektur"
 
-#: simulation/data/technologies/persians/special_archery_tradition.jsondescription
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed"
-" archers in battle."
-msgstr "Bei den Persern galt das präzise Bogenschießen als Tradition  und sie bevorzugten es, mächtige Bogenschützen in ihren Schlachten einzusetzen. "
-
 #: simulation/data/technologies/persians/special_equine_transports.jsondescription
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2527,8 +2520,8 @@ msgid ""
 msgstr "Die frühen Achämenidenherrscher machten Persien zum ersten asiatischen Großreich, welches die See beherrschte. Der Großkönig begünstigte die vielen Seevölker um deren Dienste zu sichern, startete aber auch selbst diverse Marineaktivitäten. Während der Herrschaft von Dareios I. wurde beispielsweise ein Kanal in Ägypten gebaut und eine persische Flotte zur Induserkundung ausgeschickt. Laut Herodot wurden etwa 300 Schiffe der persischen Marine nachgerüstet, um den Transport von Reitern und deren Pferden zu ermöglichen."
 
 #: simulation/data/technologies/persians/special_equine_transports.jsontooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
-msgstr "Phönizische Trieren erhalten die Fähigkeit Kavallerieeinheiten auszubilden."
+msgid "Phoenician Triremes gain the ability to train cavalry."
+msgstr "Phönizische Trieren erhalten die einzigartige Fähigkeit Kavallerieeinheiten auszubilden."
 
 #: simulation/data/technologies/persians/special_equine_transports.jsongenericName
 msgid "Equine Transports"
@@ -2617,9 +2610,9 @@ msgstr "Hellenistische Metropole"
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsondescription
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
-msgstr "Erhöht die Trainingsgeschwindigkeit von Gardeeinheiten und Belagerungswaffen in Festungen, wenn sie in großen Bataillonen ausgebildet werden."
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
+msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsontooltip
 msgid "Faster batch training speed for the Fortress."

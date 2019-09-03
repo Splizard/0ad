@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,6 +21,11 @@
 
 #include "GUI.h"
 
+CRadioButton::CRadioButton(CGUI& pGUI)
+	: CCheckBox(pGUI), IGUIObject(pGUI)
+{
+}
+
 void CRadioButton::HandleMessage(SGUIMessage& Message)
 {
 	// Important
@@ -30,15 +35,15 @@ void CRadioButton::HandleMessage(SGUIMessage& Message)
 	switch (Message.type)
 	{
 	case GUIM_PRESSED:
-		for (IGUIObject* const& obj : *GetParent())
+		for (IGUIObject* const& obj : GetParent()->GetChildren())
 		{
 			// Notice, if you use other objects within the parent object that has got
 			//  the setting "checked", it too will change. Hence NO OTHER OBJECTS THAN
 			//  RADIO BUTTONS SHOULD BE WITHIN IT!
-			GUI<bool>::SetSetting(obj, "checked", false);
+			obj->SetSetting<bool>("checked", false, true);
 		}
 
-		GUI<bool>::SetSetting(this, "checked", true);
+		SetSetting<bool>("checked", true, true);
 		break;
 
 	default:

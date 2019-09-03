@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -38,7 +38,7 @@ protected: // forwards
 	struct SRow;
 
 public:
-	CInput();
+	CInput(CGUI& pGUI);
 	virtual ~CInput();
 
 	/**
@@ -68,12 +68,12 @@ protected:
 	/**
 	* Handle events manually to catch keys which change the text.
 	*/
-	virtual void ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW* pCaption);
+	virtual void ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW& pCaption);
 
 	/**
 	* Handle events manually to catch keys which don't change the text.
 	*/
-	virtual void ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW* pCaption);
+	virtual void ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW& pCaption);
 
 	/**
 	 * Handle hotkey events (called by ManuallyHandleEvent)

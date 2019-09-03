@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Entity parent="template_unit_mechanical_ship_fishing">
+<Entity parent="template_unit_ship_fishing">
   <Identity>
     <Civ>rome</Civ>
-    <SpecificName>Navicula Piscatoria</SpecificName>
+    <SpecificName>Nāvicula Piscātōria</SpecificName>
     <Icon>units/hele_ship_fishing.png</Icon>
   </Identity>
   <VisualActor>

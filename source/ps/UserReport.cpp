@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@
 #include "lib/timer.h"
 #include "lib/utf8.h"
 #include "lib/external_libraries/curl.h"
-#include "lib/external_libraries/libsdl.h"
 #include "lib/external_libraries/zlib.h"
 #include "lib/file/archive/stream.h"
 #include "lib/os_path.h"
@@ -30,10 +29,12 @@
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/Profiler2.h"
-#include "ps/ThreadUtil.h"
 
+#include <condition_variable>
 #include <fstream>
+#include <mutex>
 #include <string>
+#include <thread>
 
 #define DEBUG_UPLOADS 0
 
@@ -135,23 +136,11 @@ public:
 		m_Headers = curl_slist_append(m_Headers, "Accept: ");
 		curl_easy_setopt(m_Curl, CURLOPT_HTTPHEADER, m_Headers);
 
-
-		// Set up the worker thread:
-
-		// Use SDL semaphores since OS X doesn't implement sem_init
-		m_WorkerSem = SDL_CreateSemaphore(0);
-		ENSURE(m_WorkerSem);
-
-		int ret = pthread_create(&m_WorkerThread, NULL, &RunThread, this);
-		ENSURE(ret == 0);
+		m_WorkerThread = std::thread(RunThread, this);
 	}
 
 	~CUserReporterWorker()
 	{
-		// Clean up resources
-
-		SDL_DestroySemaphore(m_WorkerSem);
-
 		curl_slist_free_all(m_Headers);
 		curl_easy_cleanup(m_Curl);
 	}
@@ -161,13 +150,13 @@ public:
 	 */
 	void SetEnabled(bool enabled)
 	{
-		CScopeLock lock(m_WorkerMutex);
+		std::lock_guard<std::mutex> lock(m_WorkerMutex);
 		if (enabled != m_Enabled)
 		{
 			m_Enabled = enabled;
 
 			// Wake up the worker thread
-			SDL_SemPost(m_WorkerSem);
+			m_WorkerCV.notify_all();
 		}
 	}
 
@@ -181,16 +170,16 @@ public:
 	bool Shutdown()
 	{
 		{
-			CScopeLock lock(m_WorkerMutex);
+			std::lock_guard<std::mutex> lock(m_WorkerMutex);
 			m_Shutdown = true;
 		}
 
 		// Wake up the worker thread
-		SDL_SemPost(m_WorkerSem);
+		m_WorkerCV.notify_all();
 
 		// Wait for it to shut down cleanly
 		// TODO: should have a timeout in case of network hangs
-		pthread_join(m_WorkerThread, NULL);
+		m_WorkerThread.join();
 
 		return true;
 	}
@@ -200,7 +189,7 @@ public:
 	 */
 	std::string GetStatus()
 	{
-		CScopeLock lock(m_WorkerMutex);
+		std::lock_guard<std::mutex> lock(m_WorkerMutex);
 		return m_Status;
 	}
 
@@ -210,12 +199,12 @@ public:
 	void Submit(const shared_ptr<CUserReport>& report)
 	{
 		{
-			CScopeLock lock(m_WorkerMutex);
+			std::lock_guard<std::mutex> lock(m_WorkerMutex);
 			m_ReportQueue.push_back(report);
 		}
 
 		// Wake up the worker thread
-		SDL_SemPost(m_WorkerSem);
+		m_WorkerCV.notify_all();
 	}
 
 	/**
@@ -228,21 +217,19 @@ public:
 		if (now > m_LastUpdateTime + TIMER_CHECK_INTERVAL)
 		{
 			// Wake up the worker thread
-			SDL_SemPost(m_WorkerSem);
+			m_WorkerCV.notify_all();
 
 			m_LastUpdateTime = now;
 		}
 	}
 
 private:
-	static void* RunThread(void* data)
+	static void RunThread(CUserReporterWorker* data)
 	{
 		debug_SetThreadName("CUserReportWorker");
 		g_Profiler2.RegisterCurrentThread("userreport");
 
-		static_cast<CUserReporterWorker*>(data)->Run();
-
-		return NULL;
+		data->Run();
 	}
 
 	void Run()
@@ -261,7 +248,7 @@ private:
 		SetStatus("waiting");
 
 		/*
-		 * We use a semaphore to let the thread be woken up when it has
+		 * We use a condition_variable to let the thread be woken up when it has
 		 * work to do. Various actions from the main thread can wake it:
 		 *   * SetEnabled()
 		 *   * Shutdown()
@@ -273,19 +260,17 @@ private:
 		 * nothing during the subsequent wakeups). We should never hang due to
 		 * processing fewer actions than wakeups.
 		 *
-		 * Retransmission timeouts are triggered via the main thread - we can't simply
-		 * use SDL_SemWaitTimeout because on Linux it's implemented as an inefficient
-		 * busy-wait loop, and we can't use a manual busy-wait with a long delay time
-		 * because we'd lose responsiveness. So the main thread pings the worker
-		 * occasionally so it can check its timer.
+		 * Retransmission timeouts are triggered via the main thread.
 		 */
 
 		// Wait until the main thread wakes us up
 		while (true)
 		{
-			g_Profiler2.RecordRegionEnter("semaphore wait");
+			g_Profiler2.RecordRegionEnter("condition_variable wait");
 
-			ENSURE(SDL_SemWait(m_WorkerSem) == 0);
+			std::unique_lock<std::mutex> lock(m_WorkerMutex);
+			m_WorkerCV.wait(lock, [this] { return m_Enabled || m_Shutdown; });
+			lock.unlock();
 
 			g_Profiler2.RecordRegionLeave();
 
@@ -314,19 +299,19 @@ private:
 
 	bool GetEnabled()
 	{
-		CScopeLock lock(m_WorkerMutex);
+		std::lock_guard<std::mutex> lock(m_WorkerMutex);
 		return m_Enabled;
 	}
 
 	bool GetShutdown()
 	{
-		CScopeLock lock(m_WorkerMutex);
+		std::lock_guard<std::mutex> lock(m_WorkerMutex);
 		return m_Shutdown;
 	}
 
 	void SetStatus(const std::string& status)
 	{
-		CScopeLock lock(m_WorkerMutex);
+		std::lock_guard<std::mutex> lock(m_WorkerMutex);
 		m_Status = status;
 #if DEBUG_UPLOADS
 		debug_printf(">>> CUserReporterWorker status: %s\n", status.c_str());
@@ -340,7 +325,7 @@ private:
 		shared_ptr<CUserReport> report;
 
 		{
-			CScopeLock lock(m_WorkerMutex);
+			std::lock_guard<std::mutex> lock(m_WorkerMutex);
 			if (m_ReportQueue.empty())
 				return false;
 			report = m_ReportQueue.front();
@@ -381,7 +366,7 @@ private:
 			// so shut down and stop talking to it (to avoid wasting bandwidth)
 			if (code == 410)
 			{
-				CScopeLock lock(m_WorkerMutex);
+				std::lock_guard<std::mutex> lock(m_WorkerMutex);
 				m_Shutdown = true;
 				return false;
 			}
@@ -401,7 +386,7 @@ private:
 		// a long interval
 
 		{
-			CScopeLock lock(m_WorkerMutex);
+			std::lock_guard<std::mutex> lock(m_WorkerMutex);
 			m_ReportQueue.push_front(report);
 		}
 
@@ -488,9 +473,9 @@ private:
 
 private:
 	// Thread-related members:
-	pthread_t m_WorkerThread;
-	CMutex m_WorkerMutex;
-	SDL_sem* m_WorkerSem;
+	std::thread m_WorkerThread;
+	std::mutex m_WorkerMutex;
+	std::condition_variable m_WorkerCV;
 
 	// Shared by main thread and worker thread:
 	// These variables are all protected by m_WorkerMutex

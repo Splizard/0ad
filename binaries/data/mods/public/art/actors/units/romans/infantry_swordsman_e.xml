@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <actor version="1">
   <castshadow/>
   <group>
@@ -13,14 +13,81 @@
     </variant>
   </group>
   <group>
-    <variant frequency="1" name="chain hauberk">
+    <variant frequency="1" name="Greave-01">
+      <props>
+        <prop actor="props/units/armor/greave_06_bronze_r.xml" attachpoint="leg_R"/>
+        <prop actor="props/units/armor/greave_06_bronze_l.xml" attachpoint="leg_L"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Greave-03">
+      <props>
+        <prop actor="props/units/armor/greave_08_bronze_r.xml" attachpoint="leg_R"/>
+        <prop actor="props/units/armor/greave_08_bronze_l.xml" attachpoint="leg_L"/>
+      </props>
+    </variant>
+  </group>
+  <group>
+    <variant frequency="1" name="Hele Attic Helmet-01">
+      <props>
+        <prop actor="props/units/helmets/hele_attic_r1.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Hele Attic Helmet-02">
+      <props>
+        <prop actor="props/units/helmets/hele_attic_r2.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Hele Attic Helmet-03">
+      <props>
+        <prop actor="props/units/helmets/hele_attic_r3.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
+  </group>
+  <group>
+    <variant frequency="0" name="chain hauberk">
       <textures>
         <texture file="skeletal/rome_isw_a.dds" name="baseTex"/>
       </textures>
     </variant>
-    <variant frequency="1" name="chain thorax">
+    <variant frequency="0" name="chain thorax">
       <textures>
         <texture file="skeletal/rome_isw_e.dds" name="baseTex"/>
+      </textures>
+    </variant>
+    <variant frequency="1" name="rome-chainmail-2a">
+      <textures>
+        <texture file="skeletal/rome_chainmail_2_a.png" name="baseTex"/>
+        <texture file="skeletal/rome_chainmail_2_spec.png" name="specTex"/>
+      </textures>
+    </variant>
+    <variant frequency="1" name="rome-chainmail-2b">
+      <textures>
+        <texture file="skeletal/rome_chainmail_2_b.png" name="baseTex"/>
+        <texture file="skeletal/rome_chainmail_2_spec.png" name="specTex"/>
+      </textures>
+    </variant>
+    <variant frequency="1" name="rome-chainmail-2c">
+      <textures>
+        <texture file="skeletal/rome_chainmail_2_c.png" name="baseTex"/>
+        <texture file="skeletal/rome_chainmail_2_spec.png" name="specTex"/>
+      </textures>
+    </variant>
+    <variant frequency="1" name="rome-chainmail-3a">
+      <textures>
+        <texture file="skeletal/rome_chainmail_3_a.png" name="baseTex"/>
+        <texture file="skeletal/rome_chainmail_3_spec.png" name="specTex"/>
+      </textures>
+    </variant>
+    <variant frequency="1" name="rome-chainmail-3b">
+      <textures>
+        <texture file="skeletal/rome_chainmail_3_b.png" name="baseTex"/>
+        <texture file="skeletal/rome_chainmail_3_spec.png" name="specTex"/>
+      </textures>
+    </variant>
+    <variant frequency="1" name="rome-chainmail-3c">
+      <textures>
+        <texture file="skeletal/rome_chainmail_3_c.png" name="baseTex"/>
+        <texture file="skeletal/rome_chainmail_3_spec.png" name="specTex"/>
       </textures>
     </variant>
   </group>
@@ -31,9 +98,6 @@
     <variant file="biped/carry_wood.xml"/>
     <variant file="biped/carry_stone.xml"/>
     <variant file="biped/carry_metal.xml"/>
-  </group>
-  <group>
-    <variant frequency="1" name="Idle"/>
     <variant file="biped/attack_capture.xml"/>
     <variant file="biped/attack_slaughter.xml"/>
     <variant file="biped/gather_tree.xml"/>
@@ -47,20 +111,12 @@
     <variant file="biped/build.xml"/>
     <variant file="biped/build_farm.xml"/>
     <variant file="biped/death_infantry.xml"/>
+    <variant file="biped/formations/testudo_top.xml"/>
+    <variant file="biped/formations/testudo_front.xml"/>
+    <variant file="biped/formations/testudo_front_left.xml"/>
+    <variant file="biped/formations/testudo_front_right.xml"/>
+    <variant file="biped/formations/testudo_left.xml"/>
+    <variant file="biped/formations/testudo_right.xml"/>
   </group>
-  <group>
-    <variant file="biped/formations/testudo_idle_top.xml"/>
-    <variant file="biped/formations/testudo_idle_front.xml"/>
-    <variant file="biped/formations/testudo_walk_top.xml"/>
-    <variant file="biped/formations/testudo_walk_front.xml"/>
-    <variant file="biped/formations/testudo_idle_front_left.xml"/>
-    <variant file="biped/formations/testudo_idle_front_right.xml"/>
-    <variant file="biped/formations/testudo_idle_left.xml"/>
-    <variant file="biped/formations/testudo_idle_right.xml"/>
-    <variant file="biped/formations/testudo_walk_left.xml"/>
-    <variant file="biped/formations/testudo_walk_right.xml"/>
-    <variant file="biped/formations/testudo_walk_front_left.xml"/>
-    <variant file="biped/formations/testudo_walk_front_right.xml"/>
-  </group>
-  <material>player_trans.xml</material>
+  <material>player_trans_spec.xml</material>
 </actor>

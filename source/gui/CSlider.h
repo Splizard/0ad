@@ -26,7 +26,7 @@ class CSlider : public IGUIObject
 	GUI_OBJECT(CSlider)
 
 public:
-	CSlider();
+	CSlider(CGUI& pGUI);
 	virtual ~CSlider();
 
 protected:
@@ -43,7 +43,7 @@ protected:
 	 */
 	void UpdateValue();
 
-	CRect GetButtonRect();
+	CRect GetButtonRect() const;
 
 	/**
 	 * @return ratio between the value of the slider and its actual size in the GUI

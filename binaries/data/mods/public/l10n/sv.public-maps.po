@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-03-22 16:01+0000\n"
+"POT-Creation-Date: 2019-08-23 07:09+0000\n"
+"PO-Revision-Date: 2019-08-23 15:28+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/wildfire-games/0ad/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -314,15 +314,15 @@ msgstr "Utdöd Vulkan"
 
 #: maps/random/fields_of_meroe.jsonsettings.Description
 msgid ""
-"The \"Island of Meroe\", a vast peninsula flanked by the Nile and Atbarah "
+"The \"Island of Meroë\", a vast peninsula flanked by the Nile and Atbarah "
 "rivers, formed the heartland of ancient Kush. Where the harsh deserts start "
 "making way for the semi-arid savannahs and small acacia forests dot the "
 "landscape. The area is rich in resources and the ever-present Nile brings "
 "life, but grave threats loom on the opposite riverbank."
-msgstr "\"Ön Meroe\", en stor halvö flankerad av Nilen och Atbarah floder, bildade hjärtat av den gamla Kush. Där de hårda öknarna börjar ta plats för de halvdörda savannorna och små akacia skogar prickar landskapet. Området är rik på resurser och den ständigt närvarande Nilen ger liv, men stora hot på vägen mot den motsatta flodbredden."
+msgstr "\"Ön Meroë\", en stor halvö flankerad av Nilen och Atbarah floder, bildade hjärtat av den gamla Kush. Där de hårda öknarna börjar ta plats för de halvdörda savannorna och små akacia skogar prickar landskapet. Området är rik på resurser och den ständigt närvarande Nilen ger liv, men stora hot på vägen mot den motsatta flodbredden."
 
 #: maps/random/fields_of_meroe.jsonsettings.Name
-msgid "Fields of Meroe"
+msgid "Fields of Meroë"
 msgstr "Meroës fält"
 
 #: maps/random/flood.jsonsettings.Description
@@ -1577,10 +1577,10 @@ msgstr "Den här kartan visar en rekonstruktion av den antika staden Napata. [co
 
 #: maps/scenarios/Necropolis.xml:Description:39
 msgid ""
-"4 players duke it out over the vast Nile Delta. Each city starts out nestled atop a large acropolis, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
+"Four players duke it out over the vast Nile Delta. Each city starts out nestled atop a large plateau, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
 "\n"
 "Scouts say the nearby branches of the Nile River are shallow and fordable in multiple locations, so should only serve as a minor barrier between enemy factions."
-msgstr "4 spelare kämpar om stora Nildeltat. Varje stad börjar inbäddad ovanpå en stor Akropolis men resurserna är knappa och tvingar varje spelare att expandera sin verksamhet i de omgivande trakterna.\n\nScouter säger att nära Nilegrenar är grunda vid flera platser så de fungerar bara som en liten barriär mellan fientliga fraktioner."
+msgstr ""
 
 #: maps/scenarios/Necropolis.xml:Name:39
 msgid "Necropolis"
@@ -2046,7 +2046,7 @@ msgstr "Alla enheterna i spelet."
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27
+#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
 msgid "Give an interesting description of your map."
 msgstr "Ange en intressant beskrivning av din karta."
 
@@ -2071,6 +2071,7 @@ msgid "A quick battle demo map using Roman legionnaires."
 msgstr "En kort stridsdemo karta med romerska legionärer."
 
 #: maps/scenarios/_default.xml:Name:28
+#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "Ej namngiven karta"
 
@@ -2102,12 +2103,24 @@ msgstr "Fartygs Demo"
 msgid "Base Temperate Map"
 msgstr "Tempererad Baskarta"
 
+#: maps/scenarios/unit_motion_integration_test.xml:Description:40
+msgid ""
+"This map is designed to test some basic unit movement cases. It will involve"
+" unitAI, unitMotion and the relevant pathfinders and thus acts as an "
+"integrated test map. Look for things such as stuck units, wrong animations, "
+"and weird pathing."
+msgstr "Denna karta är utformad för att testa några grundläggande enheters rörelseförmåga. Den kommer att involvera unitAI, unitMotion och relevanta stigfinnare och därmed fungera som en integrerad testkarta. Leta efter saker som fastnade enheter, felaktiga animationer och konstiga sökvägar."
+
+#: maps/scenarios/unit_motion_integration_test.xml:Name:40
+msgid "Unit Motion Integration Test"
+msgstr "Enhets rörelse integrations test"
+
 #: maps/skirmishes/Acropolis Bay (2).xml:Description:39
 msgid ""
-"Each player starts the match atop a large flat plateau, otherwise known as an acropolis.\n"
+"Each player starts the match atop a large flat plateau.\n"
 "\n"
-"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed acropolis commanding the valley below."
-msgstr "Varje spelare startar matchen uppe på en stor platt platå, även kallad en Akropolis.\n\nI öster ligger en stor bukt med fiskemöjligheter. Till väst är ojämnt inland med en ledig Akropolis med makt över dalen nedanför."
+"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed plateau commanding the valley below."
+msgstr ""
 
 #: maps/skirmishes/Acropolis Bay (2).xml:Name:39
 msgid "Acropolis Bay (2)"
@@ -2327,6 +2340,14 @@ msgid ""
 "- Western desert: Oasis Charga and Siwa, Qattara Depression\n"
 msgstr "Kämpa för resterna av antika Egypten!\n\nSpelarna börjar med fullvuxna städer och små arméer, som alla har olika fördelar och nackdelar. Var försiktig, det finns 7 mäktiga fort och plundrande bandider!\n\nDet är förra seklet före 0 A.D. Egypten är internt uppdelad mellan hellenistisk (Alexandria, representerad av Seleukiderna) och traditionella influenser (Memphis, representerad av Ptolemyerna). Theber i södra klumpen av floden Nilen har redan tagits över av Kush. I nordvästra Al-Dschabal al-Achdar, där medelhavet staden Cyrene ligger, förbereder romarna sin invasion. Från den östra öknen vid-Tih och Mount Sinai pressar fiender (representerade av perserna) framåt och oasen Siwa. Charga (representerat av Karthago) i den sydvästra delen av öken försöker få en del av cirkeln också.\nPlatser:\n- Alexandria: bibliotek, hamn\n- Memphis: Nekropol, pyramider, Apis-helgedom\n- Thebe: Templet, Kungarnas dal\n- Kyrene: Medelhavet Macchie, olivlundar\n- Fayoum: krokodil helgedom, damm i Nilen\n- Östra öknen: Mount Sinai, djupa Wadi, Röda havet rev\n- Västra öknen: Oasen Kharga och Siwa, Qattarasänkan\n"
 
+#: maps/skirmishes/Farmland (2).xml:Description:40
+msgid "Farmland in Eastern Europe."
+msgstr "Jordbruks mark i Östeuropa."
+
+#: maps/skirmishes/Farmland (2).xml:Name:40
+msgid "Farmland (2)"
+msgstr "Jordbruks mark (2)"
+
 #: maps/skirmishes/Forest Battle (4).xml:Description:40
 msgid ""
 "A forest battle map where all players fight for supremacy and control over "
@@ -2364,8 +2385,8 @@ msgstr "Gambiafloden (3)"
 #: maps/skirmishes/Golden Island (2).xml:Description:40
 msgid ""
 "A ring of land borders a resource-rich island in the Mediterranean. Players "
-"can access the center via a narrow strip of land or via boat."
-msgstr "En rik Medelhavsö omringad av land. Spelare kan nå mitten via en smal remsa land eller med skepp."
+"can access the center via a narrow strip of shallow water or via boat."
+msgstr ""
 
 #: maps/skirmishes/Golden Island (2).xml:Name:40
 msgid "Golden Island (2)"
@@ -2385,10 +2406,10 @@ msgstr "Guld Oasen (2)"
 #: maps/skirmishes/Greek Acropolis (2).xml:Description:39
 #: maps/skirmishes/Greek Acropolis Night (2).xml:Description:39
 msgid ""
-"Two factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Two factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Två fraktioner befinner sig säkert uppe på stora steniga platåer, även kallade för Akropolis.\n\nUpptäck områden runtomkring för att hitta skatter och för att säkra nya resurser."
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (2).xml:Name:39
 msgid "Greek Acropolis (2)"
@@ -2396,10 +2417,10 @@ msgstr "Grekisk Akropolis (2)"
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Description:39
 msgid ""
-"Three factions find themselves perched safely atop large rocky plateaus, or acropolises, whereas the fourth one is separated from their foes by a river branch.\n"
+"Three factions find themselves perched safely atop large rocky plateaus, whereas the fourth one is separated from their foes by a river branch.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources.."
-msgstr "Tre fraktioner befinner sig säkert uppe på stora steniga platåer, även kallade för Akropolis, medans den fjärde separeras från fienderna av en flod.\n\nUpptäck områden runtomkring för att hitta skatter och för att säkra nya resurser."
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Name:39
 msgid "Greek Acropolis (4)"
@@ -2511,6 +2532,14 @@ msgstr "Fastnade i kalla Norden slåss 2 spelare om herraväldet över ön. En s
 msgid "Northern Island (2)"
 msgstr "Norra Ön (2)"
 
+#: maps/skirmishes/Oceanside (2).xml:Description:40
+msgid "A Lush temperate biome along an ocean. "
+msgstr "En frodig tempererad Biome längs ett hav. "
+
+#: maps/skirmishes/Oceanside (2).xml:Name:40
+msgid "Oceanside (2)"
+msgstr "Kust områden (2)"
+
 #: maps/skirmishes/Persian Highlands (4).xml:Description:39
 msgid ""
 "A dry central basin rich in minerals surrounded by rocky hills and "
@@ -2614,12 +2643,20 @@ msgstr "En oas omgiven av berg och öken. Jordbruksmark nära vattnet ger välbe
 msgid "Team Oasis (2v2)"
 msgstr "Lag Oas (2v2)"
 
+#: maps/skirmishes/Temperate Roadway (2).xml:Description:40
+msgid "Temperate zone map with plentiful resources. Map Size: Small"
+msgstr "Tempererad zonkarta med rikliga resurser. Kartans storlek: liten"
+
+#: maps/skirmishes/Temperate Roadway (2).xml:Name:40
+msgid "Temperate Roadway (2)"
+msgstr "Tempererade vägbanan (2)"
+
 #: maps/skirmishes/Thessalian Plains (4).xml:Description:39
 msgid ""
 "The rolling Thessalian plain is traversed with narrow streams, easily "
 "forded. Wide-open spaces allow for massive expansion, while each player "
-"starts the match safe atop a large acropolis."
-msgstr "Den rullande Thessaliska slätten genomkorsas av smala bäckar som är lätta att korsa. Varje spelare startar matchen säkert ovanpå en stor Akropolis, medans vidderna möjliggör massiv expansion."
+"starts the match safe atop a large plateau."
+msgstr ""
 
 #: maps/skirmishes/Thessalian Plains (4).xml:Name:39
 msgid "Thessalian Plains (4)"
@@ -2627,10 +2664,10 @@ msgstr "Thessaliska Slätter (4)"
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Description:40
 msgid ""
-"Four factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Four factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Fyra fraktioner befinner sig säkert uppe på stora steniga platåer, även kallade för Akropolis.\n\nUpptäck områden runtomkring för att hitta skatter och för att säkra nya resurser."
+msgstr ""
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Name:40
 msgid "Tuscan Acropolis (4)"

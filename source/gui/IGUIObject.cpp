@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,63 +19,49 @@
 
 #include "GUI.h"
 
+#include "gui/CGUISetting.h"
 #include "gui/scripting/JSInterface_GUITypes.h"
 #include "gui/scripting/JSInterface_IGUIObject.h"
-
 #include "ps/GameSetup/Config.h"
 #include "ps/CLogger.h"
 #include "ps/Profile.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "soundmanager/ISoundManager.h"
 
-
-IGUIObject::IGUIObject()
-	: m_pGUI(NULL), m_pParent(NULL), m_MouseHovering(false), m_LastClickTime()
+IGUIObject::IGUIObject(CGUI& pGUI)
+	: m_pGUI(pGUI), m_pParent(NULL), m_MouseHovering(false), m_LastClickTime()
 {
-	AddSetting(GUIST_bool,			"enabled");
-	AddSetting(GUIST_bool,			"hidden");
-	AddSetting(GUIST_CClientArea,	"size");
-	AddSetting(GUIST_CStr,			"style");
-	AddSetting(GUIST_CStr,			"hotkey");
-	AddSetting(GUIST_float,			"z");
-	AddSetting(GUIST_bool,			"absolute");
-	AddSetting(GUIST_bool,			"ghost");
-	AddSetting(GUIST_float,			"aspectratio");
-	AddSetting(GUIST_CStrW,			"tooltip");
-	AddSetting(GUIST_CStr,			"tooltip_style");
+	AddSetting<bool>("enabled");
+	AddSetting<bool>("hidden");
+	AddSetting<CClientArea>("size");
+	AddSetting<CStr>("style");
+	AddSetting<CStr>("hotkey");
+	AddSetting<float>("z");
+	AddSetting<bool>("absolute");
+	AddSetting<bool>("ghost");
+	AddSetting<float>("aspectratio");
+	AddSetting<CStrW>("tooltip");
+	AddSetting<CStr>("tooltip_style");
 
 	// Setup important defaults
-	GUI<bool>::SetSetting(this, "hidden", false);
-	GUI<bool>::SetSetting(this, "ghost", false);
-	GUI<bool>::SetSetting(this, "enabled", true);
-	GUI<bool>::SetSetting(this, "absolute", true);
+	SetSetting<bool>("hidden", false, true);
+	SetSetting<bool>("ghost", false, true);
+	SetSetting<bool>("enabled", true, true);
+	SetSetting<bool>("absolute", true, true);
 }
 
 IGUIObject::~IGUIObject()
 {
-	for (const std::pair<CStr, SGUISetting>& p : m_Settings)
-		switch (p.second.m_Type)
-		{
-			// delete() needs to know the type of the variable - never delete a void*
-#define TYPE(t) case GUIST_##t: delete (t*)p.second.m_pSetting; break;
-#include "GUItypes.h"
-#undef TYPE
-		default:
-			debug_warn(L"Invalid setting type");
-		}
+	for (const std::pair<CStr, IGUISetting*>& p : m_Settings)
+		delete p.second;
 
-	if (m_pGUI)
-		JS_RemoveExtraGCRootsTracer(m_pGUI->GetScriptInterface()->GetJSRuntime(), Trace, this);
+	if (!m_ScriptHandlers.empty())
+		JS_RemoveExtraGCRootsTracer(m_pGUI.GetScriptInterface()->GetJSRuntime(), Trace, this);
 }
 
 //-------------------------------------------------------------------
 //  Functions
 //-------------------------------------------------------------------
-void IGUIObject::SetGUI(CGUI* const& pGUI)
-{
-	if (!m_pGUI)
-		JS_AddExtraGCRootsTracer(pGUI->GetScriptInterface()->GetJSRuntime(), Trace, this);
-	m_pGUI = pGUI;
-}
 
 void IGUIObject::AddChild(IGUIObject* pChild)
 {
@@ -85,18 +71,13 @@ void IGUIObject::AddChild(IGUIObject* pChild)
 
 	m_Children.push_back(pChild);
 
-	// If this (not the child) object is already attached
-	//  to a CGUI, it pGUI pointer will be non-null.
-	//  This will mean we'll have to check if we're using
-	//  names already used.
-	if (pChild->GetGUI())
 	{
 		try
 		{
 			// Atomic function, if it fails it won't
 			//  have changed anything
 			//UpdateObjects();
-			pChild->GetGUI()->UpdateObjects();
+			pChild->GetGUI().UpdateObjects();
 		}
 		catch (PSERROR_GUI&)
 		{
@@ -138,53 +119,81 @@ void IGUIObject::Destroy()
 	// Is there anything besides the children to destroy?
 }
 
-void IGUIObject::AddSetting(const EGUISettingType& Type, const CStr& Name)
+template<typename T>
+void IGUIObject::AddSetting(const CStr& Name)
 {
-	// Is name already taken?
-	if (m_Settings.count(Name) >= 1)
+	// This can happen due to inheritance
+	if (SettingExists(Name))
 		return;
 
-	// Construct, and set type
-	m_Settings[Name].m_Type = Type;
+	m_Settings[Name] = new CGUISetting<T>(*this, Name);
+}
 
-	switch (Type)
+bool IGUIObject::SettingExists(const CStr& Setting) const
+{
+	return m_Settings.count(Setting) == 1;
+}
+
+template <typename T>
+T& IGUIObject::GetSetting(const CStr& Setting)
+{
+	return static_cast<CGUISetting<T>* >(m_Settings.at(Setting))->m_pSetting;
+}
+
+template <typename T>
+const T& IGUIObject::GetSetting(const CStr& Setting) const
+{
+	return static_cast<CGUISetting<T>* >(m_Settings.at(Setting))->m_pSetting;
+}
+
+bool IGUIObject::SetSettingFromString(const CStr& Setting, const CStrW& Value, const bool SendMessage)
+{
+	return m_Settings[Setting]->FromString(Value, SendMessage);
+}
+
+template <typename T>
+void IGUIObject::SetSetting(const CStr& Setting, T& Value, const bool SendMessage)
+{
+	static_cast<CGUISetting<T>* >(m_Settings[Setting])->m_pSetting = std::move(Value);
+	SettingChanged(Setting, SendMessage);
+}
+
+template <typename T>
+void IGUIObject::SetSetting(const CStr& Setting, const T& Value, const bool SendMessage)
+{
+	static_cast<CGUISetting<T>* >(m_Settings[Setting])->m_pSetting = Value;
+	SettingChanged(Setting, SendMessage);
+}
+
+void IGUIObject::SettingChanged(const CStr& Setting, const bool SendMessage)
+{
+	if (Setting == "size")
 	{
-#define TYPE(type) \
-	case GUIST_##type: \
-		m_Settings[Name].m_pSetting = new type(); \
-		break;
+		// If setting was "size", we need to re-cache itself and all children
+		RecurseObject(nullptr, &IGUIObject::UpdateCachedSize);
+	}
+	else if (Setting == "hidden")
+	{
+		// Hiding an object requires us to reset it and all children
+		if (GetSetting<bool>(Setting))
+			RecurseObject(nullptr, &IGUIObject::ResetStates);
+	}
 
-		// Construct the setting.
-		#include "GUItypes.h"
-
-#undef TYPE
-
-	default:
-		debug_warn(L"IGUIObject::AddSetting failed, type not recognized!");
-		break;
+	if (SendMessage)
+	{
+		SGUIMessage msg(GUIM_SETTINGS_UPDATED, Setting);
+		HandleMessage(msg);
 	}
 }
 
-
-bool IGUIObject::MouseOver()
+bool IGUIObject::IsMouseOver() const
 {
-	if (!GetGUI())
-		throw PSERROR_GUI_OperationNeedsGUIObject();
-
-	return m_CachedActualSize.PointInside(GetMousePos());
+	return m_CachedActualSize.PointInside(m_pGUI.GetMousePos());
 }
 
 bool IGUIObject::MouseOverIcon()
 {
 	return false;
-}
-
-CPos IGUIObject::GetMousePos() const
-{
-	if (GetGUI())
-		return GetGUI()->m_MousePos;
-
-	return CPos();
 }
 
 void IGUIObject::UpdateMouseOver(IGUIObject* const& pMouseOver)
@@ -208,64 +217,9 @@ void IGUIObject::UpdateMouseOver(IGUIObject* const& pMouseOver)
 	}
 }
 
-bool IGUIObject::SettingExists(const CStr& Setting) const
-{
-	// Because GetOffsets will direct dynamically defined
-	//  classes with polymorphism to respective ms_SettingsInfo
-	//  we need to make no further updates on this function
-	//  in derived classes.
-	//return (GetSettingsInfo().count(Setting) >= 1);
-	return (m_Settings.count(Setting) >= 1);
-}
-
-PSRETURN IGUIObject::SetSetting(const CStr& Setting, const CStrW& Value, const bool& SkipMessage)
-{
-	if (!SettingExists(Setting))
-		return PSRETURN_GUI_InvalidSetting;
-
-	SGUISetting set = m_Settings[Setting];
-
-#define TYPE(type) \
-	else if (set.m_Type == GUIST_##type) \
-	{ \
-		type _Value; \
-		if (!GUI<type>::ParseString(Value, _Value)) \
-			return PSRETURN_GUI_UnableToParse; \
-		GUI<type>::SetSetting(this, Setting, _Value, SkipMessage); \
-	}
-
-	if (0)
-		;
-#include "GUItypes.h"
-#undef TYPE
-	else
-	{
-		// Why does it always fail?
-		//return PS_FAIL;
-		return LogInvalidSettings(Setting);
-	}
-	return PSRETURN_OK;
-}
-
-
-
-PSRETURN IGUIObject::GetSettingType(const CStr& Setting, EGUISettingType& Type) const
-{
-	if (!SettingExists(Setting))
-		return LogInvalidSettings(Setting);
-
-	if (m_Settings.find(Setting) == m_Settings.end())
-		return LogInvalidSettings(Setting);
-
-	Type = m_Settings.find(Setting)->second.m_Type;
-
-	return PSRETURN_OK;
-}
-
-
 void IGUIObject::ChooseMouseOverAndClosest(IGUIObject*& pObject)
 {
-	if (!MouseOver())
+	if (!IsMouseOver())
 		return;
 
 	// Check if we've got competition at all
@@ -296,21 +250,21 @@ IGUIObject* IGUIObject::GetParent() const
 	return m_pParent;
 }
 
+void IGUIObject::ResetStates()
+{
+	// Notify the gui that we aren't hovered anymore
+	UpdateMouseOver(nullptr);
+}
+
 void IGUIObject::UpdateCachedSize()
 {
-	bool absolute;
-	GUI<bool>::GetSetting(this, "absolute", absolute);
-
-	float aspectratio = 0.f;
-	GUI<float>::GetSetting(this, "aspectratio", aspectratio);
-
-	CClientArea ca;
-	GUI<CClientArea>::GetSetting(this, "size", ca);
+	const CClientArea& ca = GetSetting<CClientArea>("size");
+	const float aspectratio = GetSetting<float>("aspectratio");
 
 	// If absolute="false" and the object has got a parent,
 	//  use its cached size instead of the screen. Notice
 	//  it must have just been cached for it to work.
-	if (absolute == false && m_pParent && !IsRootObject())
+	if (!GetSetting<bool>("absolute") && m_pParent && !IsRootObject())
 		m_CachedActualSize = ca.GetClientArea(m_pParent->m_CachedActualSize);
 	else
 		m_CachedActualSize = ca.GetClientArea(CRect(0.f, 0.f, g_xres / g_GuiScale, g_yres / g_GuiScale));
@@ -335,47 +289,31 @@ void IGUIObject::UpdateCachedSize()
 	}
 }
 
-void IGUIObject::LoadStyle(CGUI& GUIinstance, const CStr& StyleName)
+void IGUIObject::LoadStyle(const CStr& StyleName)
 {
-	// Fetch style
-	if (GUIinstance.m_Styles.count(StyleName) == 1)
-	{
-		LoadStyle(GUIinstance.m_Styles[StyleName]);
-	}
-	else
-	{
+	if (!m_pGUI.HasStyle(StyleName))
 		debug_warn(L"IGUIObject::LoadStyle failed");
-	}
-}
 
-void IGUIObject::LoadStyle(const SGUIStyle& Style)
-{
-	// Iterate settings, it won't be able to set them all probably, but that doesn't matter
-	for (const std::pair<CStr, CStrW>& p : Style.m_SettingsDefaults)
+	// The default style may specify settings for any GUI object.
+	// Other styles are reported if they specify a Setting that does not exist,
+	// so that the XML author is informed and can correct the style.
+
+	for (const std::pair<CStr, CStrW>& p : m_pGUI.GetStyle(StyleName).m_SettingsDefaults)
 	{
-		// Try set setting in object
-		SetSetting(p.first, p.second);
-
-		// It doesn't matter if it fail, it's not suppose to be able to set every setting.
-		//  since it's generic.
-
-		// The beauty with styles is that it can contain more settings
-		//  than exists for the objects using it. So if the SetSetting
-		//  fails, don't care.
+		if (SettingExists(p.first))
+			SetSettingFromString(p.first, p.second, true);
+		else if (StyleName != "default")
+			LOGWARNING("GUI object has no setting \"%s\", but the style \"%s\" defines it", p.first, StyleName.c_str());
 	}
 }
 
 float IGUIObject::GetBufferedZ() const
 {
-	bool absolute;
-	GUI<bool>::GetSetting(this, "absolute", absolute);
+	const float Z = GetSetting<float>("z");
 
-	float Z;
-	GUI<float>::GetSetting(this, "z", Z);
-
-	if (absolute)
+	if (GetSetting<bool>("absolute"))
 		return Z;
-	else
+
 	{
 		if (GetParent())
 			return GetParent()->GetBufferedZ() + Z;
@@ -389,14 +327,11 @@ float IGUIObject::GetBufferedZ() const
 	}
 }
 
-void IGUIObject::RegisterScriptHandler(const CStr& Action, const CStr& Code, CGUI* pGUI)
+void IGUIObject::RegisterScriptHandler(const CStr& Action, const CStr& Code, CGUI& pGUI)
 {
-	if(!GetGUI())
-		throw PSERROR_GUI_OperationNeedsGUIObject();
-
-	JSContext* cx = pGUI->GetScriptInterface()->GetContext();
+	JSContext* cx = pGUI.GetScriptInterface()->GetContext();
 	JSAutoRequest rq(cx);
-	JS::RootedValue globalVal(cx, pGUI->GetGlobalObject());
+	JS::RootedValue globalVal(cx, pGUI.GetGlobalObject());
 	JS::RootedObject globalObj(cx, &globalVal.toObject());
 
 	const int paramCount = 1;
@@ -412,7 +347,7 @@ void IGUIObject::RegisterScriptHandler(const CStr& Action, const CStr& Code, CGU
 
 	JS::CompileOptions options(cx);
 	options.setFileAndLine(CodeName.c_str(), 0);
-	options.setCompileAndGo(true);
+	options.setIsRunOnce(false);
 
 	JS::RootedFunction func(cx);
 	JS::AutoObjectVector emptyScopeChain(cx);
@@ -428,9 +363,9 @@ void IGUIObject::RegisterScriptHandler(const CStr& Action, const CStr& Code, CGU
 
 void IGUIObject::SetScriptHandler(const CStr& Action, JS::HandleObject Function)
 {
-	// m_ScriptHandlers is only rooted after SetGUI() has been called (which sets up the GC trace callbacks),
-	// so we can't safely store objects in it if the GUI hasn't been set yet.
-	ENSURE(m_pGUI && "A GUI must be associated with the GUIObject before adding ScriptHandlers!");
+	if (m_ScriptHandlers.empty())
+		JS_AddExtraGCRootsTracer(m_pGUI.GetScriptInterface()->GetJSRuntime(), Trace, this);
+
 	m_ScriptHandlers[Action] = JS::Heap<JSObject*>(Function);
 }
 
@@ -450,19 +385,23 @@ InReaction IGUIObject::SendEvent(EGUIMessageType type, const CStr& EventName)
 
 void IGUIObject::ScriptEvent(const CStr& Action)
 {
-	std::map<CStr, JS::Heap<JSObject*>>::iterator it = m_ScriptHandlers.find(Action);
+	std::map<CStr, JS::Heap<JSObject*> >::iterator it = m_ScriptHandlers.find(Action);
 	if (it == m_ScriptHandlers.end())
 		return;
 
-	JSContext* cx = m_pGUI->GetScriptInterface()->GetContext();
+	JSContext* cx = m_pGUI.GetScriptInterface()->GetContext();
 	JSAutoRequest rq(cx);
 
 	// Set up the 'mouse' parameter
 	JS::RootedValue mouse(cx);
-	m_pGUI->GetScriptInterface()->Eval("({})", &mouse);
-	m_pGUI->GetScriptInterface()->SetProperty(mouse, "x", m_pGUI->m_MousePos.x, false);
-	m_pGUI->GetScriptInterface()->SetProperty(mouse, "y", m_pGUI->m_MousePos.y, false);
-	m_pGUI->GetScriptInterface()->SetProperty(mouse, "buttons", m_pGUI->m_MouseButtons, false);
+
+	const CPos& mousePos = m_pGUI.GetMousePos();
+
+	m_pGUI.GetScriptInterface()->CreateObject(
+		&mouse,
+		"x", mousePos.x,
+		"y", mousePos.y,
+		"buttons", m_pGUI.GetMouseButtons());
 
 	JS::AutoValueVector paramData(cx);
 	paramData.append(mouse);
@@ -477,39 +416,64 @@ void IGUIObject::ScriptEvent(const CStr& Action)
 	}
 }
 
-void IGUIObject::ScriptEvent(const CStr& Action, JS::HandleValue Argument)
+void IGUIObject::ScriptEvent(const CStr& Action, const JS::HandleValueArray& paramData)
 {
-	std::map<CStr, JS::Heap<JSObject*>>::iterator it = m_ScriptHandlers.find(Action);
+	std::map<CStr, JS::Heap<JSObject*> >::iterator it = m_ScriptHandlers.find(Action);
 	if (it == m_ScriptHandlers.end())
 		return;
 
-	JSContext* cx = m_pGUI->GetScriptInterface()->GetContext();
+	JSContext* cx = m_pGUI.GetScriptInterface()->GetContext();
 	JSAutoRequest rq(cx);
-	JS::AutoValueVector paramData(cx);
-	paramData.append(Argument.get());
 	JS::RootedObject obj(cx, GetJSObject());
 	JS::RootedValue handlerVal(cx, JS::ObjectValue(*it->second));
 	JS::RootedValue result(cx);
-	bool ok = JS_CallFunctionValue(cx, obj, handlerVal, paramData, &result);
-	if (!ok)
-	{
+
+	if (!JS_CallFunctionValue(cx, obj, handlerVal, paramData, &result))
 		JS_ReportError(cx, "Errors executing script action \"%s\"", Action.c_str());
-	}
+}
+
+void IGUIObject::CreateJSObject()
+{
+	JSContext* cx = m_pGUI.GetScriptInterface()->GetContext();
+	JSAutoRequest rq(cx);
+
+	m_JSObject.init(cx, m_pGUI.GetScriptInterface()->CreateCustomObject("GUIObject"));
+	JS_SetPrivate(m_JSObject.get(), this);
 }
 
 JSObject* IGUIObject::GetJSObject()
 {
-	JSContext* cx = m_pGUI->GetScriptInterface()->GetContext();
-	JSAutoRequest rq(cx);
 	// Cache the object when somebody first asks for it, because otherwise
-	// we end up doing far too much object allocation. TODO: Would be nice to
-	// not have these objects hang around forever using up memory, though.
+	// we end up doing far too much object allocation.
 	if (!m_JSObject.initialized())
-	{
-		m_JSObject.init(cx, m_pGUI->GetScriptInterface()->CreateCustomObject("GUIObject"));
-		JS_SetPrivate(m_JSObject.get(), this);
-	}
+		CreateJSObject();
+
 	return m_JSObject.get();
+}
+
+bool IGUIObject::IsHidden() const
+{
+	// Statically initialise some strings, so we don't have to do
+	// lots of allocation every time this function is called
+	static const CStr strHidden("hidden");
+	return GetSetting<bool>(strHidden);
+}
+
+bool IGUIObject::IsHiddenOrGhost() const
+{
+	static const CStr strGhost("ghost");
+	return IsHidden() || GetSetting<bool>(strGhost);
+}
+
+void IGUIObject::PlaySound(const CStr& settingName) const
+{
+	if (!g_SoundManager)
+		return;
+
+	const CStrW& soundPath = GetSetting<CStrW>(settingName);
+
+	if (!soundPath.empty())
+		g_SoundManager->PlayAsUI(soundPath.c_str(), false);
 }
 
 CStr IGUIObject::GetPresentableName() const
@@ -527,27 +491,43 @@ CStr IGUIObject::GetPresentableName() const
 
 void IGUIObject::SetFocus()
 {
-	GetGUI()->m_FocusedObject = this;
+	m_pGUI.SetFocusedObject(this);
 }
 
 bool IGUIObject::IsFocused() const
 {
-	return GetGUI()->m_FocusedObject == this;
+	return m_pGUI.GetFocusedObject() == this;
 }
 
 bool IGUIObject::IsRootObject() const
 {
-	return GetGUI() != 0 && m_pParent == GetGUI()->m_BaseObject;
+	return m_pParent == m_pGUI.GetBaseObject();
 }
 
 void IGUIObject::TraceMember(JSTracer* trc)
 {
+	// Please ensure to adapt the Tracer enabling and disabling in accordance with the GC things traced!
+
 	for (std::pair<const CStr, JS::Heap<JSObject*>>& handler : m_ScriptHandlers)
 		JS_CallObjectTracer(trc, &handler.second, "IGUIObject::m_ScriptHandlers");
 }
 
-PSRETURN IGUIObject::LogInvalidSettings(const CStr8& Setting) const
-{
-	LOGWARNING("IGUIObject: setting %s was not found on an object", Setting.c_str());
-	return PSRETURN_GUI_InvalidSetting;
-}
+// Instantiate templated functions:
+// These functions avoid copies by working with a reference and move semantics.
+#define TYPE(T) \
+	template void IGUIObject::AddSetting<T>(const CStr& Name); \
+	template T& IGUIObject::GetSetting<T>(const CStr& Setting); \
+	template const T& IGUIObject::GetSetting<T>(const CStr& Setting) const; \
+	template void IGUIObject::SetSetting<T>(const CStr& Setting, T& Value, const bool SendMessage); \
+
+#include "gui/GUItypes.h"
+#undef TYPE
+
+// Copying functions - discouraged except for primitives.
+#define TYPE(T) \
+	template void IGUIObject::SetSetting<T>(const CStr& Setting, const T& Value, const bool SendMessage); \
+
+#define GUITYPE_IGNORE_NONCOPYABLE
+#include "gui/GUItypes.h"
+#undef GUITYPE_IGNORE_NONCOPYABLE
+#undef TYPE

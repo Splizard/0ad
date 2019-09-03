@@ -97,10 +97,15 @@ function onTick()
 
 		if (Engine.ConfigDB_GetValue("user", "gui.splashscreen.enable") === "true" ||
 		    Engine.ConfigDB_GetValue("user", "gui.splashscreen.version") < Engine.GetFileMTime("gui/splashscreen/splashscreen.txt"))
-			Engine.PushGuiPage("page_splashscreen.xml", { "page": "splashscreen", "callback": "SplashScreenClosedCallback" });
+			ShowSplashScreen();
 		else
 			ShowRenderPathMessage();
 	}
+}
+
+function ShowSplashScreen()
+{
+	Engine.PushGuiPage("page_splashscreen.xml", {}, ShowRenderPathMessage);
 }
 
 function ShowRenderPathMessage()
@@ -123,11 +128,6 @@ function ShowRenderPathMessage()
 			[translate("OK"), translate("Read More")],
 			[ null, function() { Engine.OpenURL("https://www.wildfiregames.com/forum/index.php?showtopic=16734"); } ]
 		);
-}
-
-function SplashScreenClosedCallback()
-{
-	ShowRenderPathMessage();
 }
 
 /**
@@ -231,7 +231,14 @@ function getLobbyDisabledByBuild()
 	return translate("Launch the multiplayer lobby to join and host publicly visible games and chat with other players. \\[DISABLED BY BUILD]");
 }
 
-function getManual()
+function openStrucTree(page)
 {
-	return translate("Manual");
+	closeMenu();
+	Engine.PushGuiPage(page, {}, storeCivInfoPage);
+}
+
+function storeCivInfoPage(data)
+{
+	if (data.nextPage)
+		Engine.PushGuiPage(data.nextPage, { "civ": data.civ }, storeCivInfoPage);
 }

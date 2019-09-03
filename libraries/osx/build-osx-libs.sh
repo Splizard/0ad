@@ -35,11 +35,10 @@ OGG_VERSION="libogg-1.3.3"
 VORBIS_VERSION="libvorbis-1.3.6"
 # gloox requires GnuTLS, GnuTLS requires Nettle and GMP
 GMP_VERSION="gmp-6.1.2"
-NETTLE_VERSION="nettle-3.4"
-GNUTLS_VERSION="gnutls-3.5.19"
-GLOOX_VERSION="gloox-1.0.20"
-# NSPR is necessary for threadsafe Spidermonkey
-NSPR_VERSION="4.15"
+NETTLE_VERSION="nettle-3.5.1"
+# NOTE: remember to also update LIB_URL below when changing version
+GNUTLS_VERSION="gnutls-3.6.8"
+GLOOX_VERSION="gloox-1.0.22"
 # OS X only includes part of ICU, and only the dylib
 # NOTE: remember to also update LIB_URL below when changing version
 ICU_VERSION="icu4c-59_1"
@@ -48,7 +47,7 @@ MINIUPNPC_VERSION="miniupnpc-2.0.20180222"
 SODIUM_VERSION="libsodium-1.0.16"
 # --------------------------------------------------------------
 # Bundled with the game:
-# * SpiderMonkey 38
+# * SpiderMonkey 45
 # * NVTT
 # * FCollada
 # --------------------------------------------------------------
@@ -118,7 +117,7 @@ download_lib()
 
   if [ ! -e $filename ]; then
     echo "Downloading $filename"
-    curl -L -o ${filename} ${url}${filename} || die "Download of $url$filename failed"
+    curl -fLo ${filename} ${url}${filename} || die "Download of $url$filename failed"
   fi
 }
 
@@ -169,7 +168,11 @@ then
   pushd $LIB_DIRECTORY
 
   # patch zlib's configure script to use our CFLAGS and LDFLAGS
-  (patch -p0 -i ../../patches/zlib_flags.diff && CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" ./configure --prefix="$ZLIB_DIR" --static && make ${JOBS} && make install) || die "zlib build failed"
+  (patch -Np0 -i ../../patches/zlib_flags.diff \
+    && CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
+      ./configure --prefix="$ZLIB_DIR" \
+         --static \
+    && make ${JOBS} && make install) || die "zlib build failed"
   popd
   touch .already-built
 else
@@ -199,7 +202,34 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix="$INSTALL_DIR" --enable-ipv6 --with-darwinssl --without-gssapi --without-libmetalink --without-libpsl --without-librtmp --without-libssh2 --without-nghttp2 --without-nss --without-polarssl --without-ssl --without-gnutls --without-brotli --without-cyassl --without-winssl --without-mbedtls --without-wolfssl --without-spnego --disable-ares --disable-ldap --disable-ldaps --without-libidn2 --with-zlib="${ZLIB_DIR}" --enable-shared=no && make ${JOBS} && make install) || die "libcurl build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix="$INSTALL_DIR" \
+      --enable-ipv6 \
+      --with-darwinssl \
+      --without-gssapi \
+      --without-libmetalink \
+      --without-libpsl \
+      --without-librtmp \
+      --without-libssh2 \
+      --without-nghttp2 \
+      --without-nss \
+      --without-polarssl \
+      --without-ssl \
+      --without-gnutls \
+      --without-brotli \
+      --without-cyassl \
+      --without-winssl \
+      --without-mbedtls \
+      --without-wolfssl \
+      --without-spnego \
+      --disable-ares \
+      --disable-ldap \
+      --disable-ldaps \
+      --without-libidn2 \
+      --with-zlib="${ZLIB_DIR}" \
+      --enable-shared=no \
+    && make ${JOBS} && make install) || die "libcurl build failed"
   popd
   touch .already-built
 else
@@ -229,7 +259,14 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix="$ICONV_DIR" --without-libiconv-prefix --without-libintl-prefix --disable-nls --enable-shared=no && make ${JOBS} && make install) || die "libiconv build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix="$ICONV_DIR" \
+      --without-libiconv-prefix \
+      --without-libintl-prefix \
+      --disable-nls \
+      --enable-shared=no \
+    && make ${JOBS} && make install) || die "libiconv build failed"
   popd
   touch .already-built
 else
@@ -259,7 +296,15 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix="$INSTALL_DIR" --without-lzma --without-python --with-iconv="${ICONV_DIR}" --with-zlib="${ZLIB_DIR}" --enable-shared=no && make ${JOBS} && make install) || die "libxml2 build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix="$INSTALL_DIR" \
+      --without-lzma \
+      --without-python \
+      --with-iconv="${ICONV_DIR}" \
+      --with-zlib="${ZLIB_DIR}" \
+      --enable-shared=no \
+    && make ${JOBS} && make install) || die "libxml2 build failed"
   popd
   touch .already-built
 else
@@ -292,7 +337,15 @@ then
 
   # We don't want SDL2 to pull in system iconv, force it to detect ours with flags.
   # Don't use X11 - we don't need it and Mountain Lion removed it
-  (./configure CPPFLAGS="-I${ICONV_DIR}/include" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS -L${ICONV_DIR}/lib" --prefix="$INSTALL_DIR" --disable-video-x11 --without-x --enable-shared=no && make $JOBS && make install) || die "SDL2 build failed"
+  (./configure CPPFLAGS="-I${ICONV_DIR}/include" \
+      CFLAGS="$CFLAGS" \
+      CXXFLAGS="$CXXFLAGS" \
+      LDFLAGS="$LDFLAGS -L${ICONV_DIR}/lib" \
+      --prefix="$INSTALL_DIR" \
+      --disable-video-x11 \
+      --without-x \
+      --enable-shared=no \
+    && make $JOBS && make install) || die "SDL2 build failed"
   popd
   touch .already-built
 else
@@ -323,7 +376,19 @@ then
   pushd $LIB_DIRECTORY
 
   # Can't use macosx-version, see above comment.
-(./bootstrap.sh --with-libraries=filesystem,system --prefix=$INSTALL_DIR && ./b2 cflags="$CFLAGS" toolset=clang cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" ${JOBS} -d2 --layout=tagged --debug-configuration link=static threading=multi variant=release,debug install) || die "Boost build failed"
+  (./bootstrap.sh --with-libraries=filesystem,system \
+      --prefix=$INSTALL_DIR \
+    && ./b2 cflags="$CFLAGS" \
+          toolset=clang \
+          cxxflags="$CXXFLAGS" \
+          linkflags="$LDFLAGS" ${JOBS} \
+          -d2 \
+          --layout=tagged \
+          --debug-configuration \
+          link=static \
+          threading=multi \
+          variant=release,debug install \
+    ) || die "Boost build failed"
 
   popd
   touch .already-built
@@ -358,13 +423,33 @@ then
   mkdir -p build-release
   pushd build-release
 
-  CONF_OPTS="--prefix=$INSTALL_DIR --disable-shared --enable-macosx_arch=$ARCH --enable-unicode --with-cocoa --with-opengl --with-libiconv-prefix=${ICONV_DIR} --with-expat=builtin --with-png=builtin --without-libtiff --without-sdl --without-x --disable-webview --disable-webkit --disable-webviewwebkit --disable-webviewie"
+  CONF_OPTS="--prefix=$INSTALL_DIR
+    --disable-shared
+    --enable-macosx_arch=$ARCH
+    --enable-unicode
+    --with-cocoa
+    --with-opengl
+    --with-libiconv-prefix=${ICONV_DIR}
+    --with-expat=builtin
+    --with-libpng=builtin
+    --without-libtiff
+    --without-sdl
+    --without-x
+    --disable-webview
+    --disable-webkit
+    --disable-webviewwebkit
+    --disable-webviewie
+    --without-libjpeg"
   # wxWidgets configure now defaults to targeting 10.5, if not specified,
   # but that conflicts with our flags
   if [[ $MIN_OSX_VERSION && ${MIN_OSX_VERSION-_} ]]; then
     CONF_OPTS="$CONF_OPTS --with-macosx-version-min=$MIN_OSX_VERSION"
   fi
-  (../configure CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" CPPFLAGS="-stdlib=libc++ -D__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES=1" LDFLAGS="$LDFLAGS" $CONF_OPTS && make ${JOBS} && make install) || die "wxWidgets build failed"
+  (../configure CFLAGS="$CFLAGS" \
+      CXXFLAGS="$CXXFLAGS" \
+      CPPFLAGS="-stdlib=libc++ -D__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES=1" \
+      LDFLAGS="$LDFLAGS" $CONF_OPTS \
+    && make ${JOBS} && make install) || die "wxWidgets build failed"
   popd
   popd
   touch .already-built
@@ -395,7 +480,11 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix=$INSTALL_DIR --enable-shared=no && make ${JOBS} && make install) || die "libpng build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix=$INSTALL_DIR \
+      --enable-shared=no \
+    && make ${JOBS} && make install) || die "libpng build failed"
   popd
   touch .already-built
 else
@@ -428,7 +517,11 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix=$OGG_DIR --enable-shared=no && make ${JOBS} && make install) || die "libogg build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix=$OGG_DIR \
+      --enable-shared=no \
+    && make ${JOBS} && make install) || die "libogg build failed"
   popd
   touch .already-built
 else
@@ -457,7 +550,12 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix="$INSTALL_DIR" --enable-shared=no --with-ogg="$OGG_DIR" && make ${JOBS} && make install) || die "libvorbis build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix="$INSTALL_DIR" \
+      --enable-shared=no \
+      --with-ogg="$OGG_DIR" \
+    && make ${JOBS} && make install) || die "libvorbis build failed"
   popd
   touch .already-built
 else
@@ -489,7 +587,16 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" --prefix="$INSTALL_DIR" --disable-shared && make ${JOBS} && make install) || die "GMP build failed"
+  # NOTE: enable-fat in this case allows building and running on different CPUS.
+  # Otherwise CPU-specific instructions will be used with no fallback for older CPUs.
+  (./configure CFLAGS="$CFLAGS" \
+      CXXFLAGS="$CXXFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix="$INSTALL_DIR" \
+      --enable-fat \
+      --disable-shared \
+      --with-pic \
+    && make ${JOBS} && make install) || die "GMP build failed"
   popd
   touch .already-built
 else
@@ -521,7 +628,20 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-(./configure CFLAGS="$CFLAGS -m64" CXXFLAGS="$CXXFLAGS -m64" LDFLAGS="$LDFLAGS -m64" --with-include-path="${GMP_DIR}/include" --with-lib-path="${GMP_DIR}/lib" --prefix="$INSTALL_DIR" --disable-shared --disable-documentation --disable-openssl --disable-assembler && make ${JOBS} && make install) || die "Nettle build failed"
+  # NOTE: enable-fat in this case allows building and running on different CPUS.
+  # Otherwise CPU-specific instructions will be used with no fallback for older CPUs.
+  (./configure CFLAGS="$CFLAGS" \
+      CXXFLAGS="$CXXFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --with-include-path="${GMP_DIR}/include" \
+      --with-lib-path="${GMP_DIR}/lib" \
+      --prefix="$INSTALL_DIR" \
+      --enable-fat \
+      --disable-shared \
+      --disable-documentation \
+      --disable-openssl \
+      --disable-assembler \
+    && make ${JOBS} && make install) || die "Nettle build failed"
   popd
   touch .already-built
 else
@@ -535,7 +655,7 @@ echo -e "Building GnuTLS..."
 LIB_VERSION="${GNUTLS_VERSION}"
 LIB_ARCHIVE="$LIB_VERSION.tar.xz"
 LIB_DIRECTORY="$LIB_VERSION"
-LIB_URL="https://www.gnupg.org/ftp/gcrypt/gnutls/v3.5/"
+LIB_URL="https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/"
 
 mkdir -p gnutls
 pushd gnutls > /dev/null
@@ -553,7 +673,29 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-(./configure CFLAGS="$CFLAGS -m64" CXXFLAGS="$CXXFLAGS -m64" LDFLAGS="$LDFLAGS -m64" NETTLE_CFLAGS="-I${NETTLE_DIR}/include" NETTLE_LIBS="-L${NETTLE_DIR}/lib -lnettle" HOGWEED_CFLAGS="-I${NETTLE_DIR}/include" HOGWEED_LIBS="-L${NETTLE_DIR}/lib -lhogweed" GMP_CFLAGS="-I${GMP_DIR}/include" GMP_LIBS="-L${GMP_DIR}/lib -lgmp" --prefix="$INSTALL_DIR" --enable-shared=no --without-idn --with-included-unistring --with-included-libtasn1 --without-p11-kit --disable-tests && make ${JOBS} && make install) || die "GnuTLS build failed"
+  # GnuTLS 3.6.8 added the TCP Fast Open feature, which requires connectx
+  # but that's only available on OS X 10.11+ (GnuTLS doesn't support SDK based builds yet)
+  # So we disable that functionality
+  (patch -Np0 -i ../../patches/gnutls-disable-tcpfastopen.diff \
+    && ./configure CFLAGS="$CFLAGS" \
+          CXXFLAGS="$CXXFLAGS" \
+          LDFLAGS="$LDFLAGS" \
+          LIBS="-L${GMP_DIR}/lib -lgmp" \
+          NETTLE_CFLAGS="-I${NETTLE_DIR}/include" \
+          NETTLE_LIBS="-L${NETTLE_DIR}/lib -lnettle" \
+          HOGWEED_CFLAGS="-I${NETTLE_DIR}/include" \
+          HOGWEED_LIBS="-L${NETTLE_DIR}/lib -lhogweed" \
+          GMP_CFLAGS="-I${GMP_DIR}/include" \
+          GMP_LIBS="-L${GMP_DIR}/lib -lgmp" \
+          --prefix="$INSTALL_DIR" \
+          --enable-shared=no \
+          --without-idn \
+          --with-included-unistring \
+          --with-included-libtasn1 \
+          --without-p11-kit \
+          --disable-tests \
+          --disable-nls \
+    && make ${JOBS} && make install) || die "GnuTLS build failed"
   popd
   touch .already-built
 else
@@ -584,40 +726,22 @@ then
   pushd $LIB_DIRECTORY
 
   # TODO: pulls in libresolv dependency from /usr/lib
-  (./configure CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" --prefix="$INSTALL_DIR" GNUTLS_CFLAGS="-I${GNUTLS_DIR}/include" GNUTLS_LIBS="-L${GNUTLS_DIR}/lib -lgnutls" --enable-shared=no --with-zlib="${ZLIB_DIR}" --without-libidn --with-gnutls="yes" --without-openssl --without-tests --without-examples && make ${JOBS} && make install) || die "gloox build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      CXXFLAGS="$CXXFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix="$INSTALL_DIR" \
+      GNUTLS_CFLAGS="-I${GNUTLS_DIR}/include" \
+      GNUTLS_LIBS="-L${GNUTLS_DIR}/lib -lgnutls" \
+      --enable-shared=no \
+      --with-zlib="${ZLIB_DIR}" \
+      --without-libidn \
+      --with-gnutls="yes" \
+      --without-openssl \
+      --without-tests \
+      --without-examples \
+      --disable-getaddrinfo \
+    && make ${JOBS} && make install) || die "gloox build failed"
   popd
-  touch .already-built
-else
-  already_built
-fi
-popd > /dev/null
-
-# --------------------------------------------------------------
-echo -e "Building NSPR..."
-
-LIB_VERSION="${NSPR_VERSION}"
-LIB_ARCHIVE="nspr-$LIB_VERSION.tar.gz"
-LIB_DIRECTORY="nspr-$LIB_VERSION"
-LIB_URL="https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v$LIB_VERSION/src/"
-
-mkdir -p nspr
-pushd nspr > /dev/null
-
-NSPR_DIR="$(pwd)"
-
-if [[ "$force_rebuild" = "true" ]] || [[ ! -e .already-built ]] || [[ .already-built -ot $LIB_DIRECTORY ]]
-then
-  rm -f .already-built
-  download_lib $LIB_URL $LIB_ARCHIVE
-
-  rm -rf $LIB_DIRECTORY bin include lib share
-  tar -xf $LIB_ARCHIVE
-  pushd $LIB_DIRECTORY/nspr
-
-  (CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" ./configure --prefix="$NSPR_DIR" --enable-64bit && make ${JOBS} && make install) || die "NSPR build failed"
-  popd
-  # TODO: how can we not build the dylibs?
-  rm -f lib/*.dylib
   touch .already-built
 else
   already_built
@@ -632,7 +756,7 @@ LIB_ARCHIVE="$LIB_VERSION-src.tgz"
 LIB_DIRECTORY="icu"
 LIB_URL="http://download.icu-project.org/files/icu4c/59.1/"
 
-mkdir -p icu
+mkdir -p $LIB_DIRECTORY
 pushd icu > /dev/null
 
 if [[ "$force_rebuild" = "true" ]] || [[ ! -e .already-built ]] || [[ .already-built -ot $LIB_DIRECTORY ]]
@@ -649,7 +773,16 @@ then
   mkdir -p source/build
   pushd source/build
 
-(CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" ../runConfigureICU MacOSX --prefix=$INSTALL_DIR --disable-shared --enable-static --disable-samples --enable-extras --enable-icuio --enable-tools && make ${JOBS} && make install) || die "ICU build failed"
+  (CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" \
+    ../runConfigureICU MacOSX \
+        --prefix=$INSTALL_DIR \
+        --disable-shared \
+        --enable-static \
+        --disable-samples \
+        --enable-extras \
+        --enable-icuio \
+        --enable-tools \
+    && make ${JOBS} && make install) || die "ICU build failed"
   popd
   popd
   touch .already-built
@@ -680,7 +813,11 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix=${INSTALL_DIR} --enable-shared=no && make clean && make ${JOBS} && make install) || die "ENet build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix=${INSTALL_DIR} \
+      --enable-shared=no \
+    && make clean && make ${JOBS} && make install) || die "ENet build failed"
   popd
   touch .already-built
 else
@@ -710,7 +847,10 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (make clean && CFLAGS=$CFLAGS LDFLAGS=$LDFLAGS make ${JOBS} && INSTALLPREFIX="$INSTALL_DIR" make install) || die "MiniUPnPc build failed"
+  (make clean \
+    && CFLAGS=$CFLAGS LDFLAGS=$LDFLAGS make ${JOBS} \
+    && INSTALLPREFIX="$INSTALL_DIR" make install \
+  ) || die "MiniUPnPc build failed"
   popd
   # TODO: how can we not build the dylibs?
   rm -f lib/*.dylib
@@ -742,7 +882,15 @@ then
   tar -xf $LIB_ARCHIVE
   pushd $LIB_DIRECTORY
 
-  (./configure CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" --prefix=${INSTALL_DIR} --enable-shared=no && make clean && CFLAGS=$CFLAGS LDFLAGS=$LDFLAGS make ${JOBS} && make check && INSTALLPREFIX="$INSTALL_DIR" make install) || die "libsodium build failed"
+  (./configure CFLAGS="$CFLAGS" \
+      LDFLAGS="$LDFLAGS" \
+      --prefix=${INSTALL_DIR} \
+      --enable-shared=no \
+    && make clean \
+    && CFLAGS=$CFLAGS LDFLAGS=$LDFLAGS make ${JOBS} \
+    && make check \
+    && INSTALLPREFIX="$INSTALL_DIR" make install \
+  ) || die "libsodium build failed"
   popd
   touch .already-built
 else
@@ -755,9 +903,9 @@ popd > /dev/null
 # be customized, so we build and install them from bundled sources
 # --------------------------------------------------------------------
 echo -e "Building Spidermonkey..."
-LIB_VERSION="mozjs-38.2.1"
-LIB_ARCHIVE="$LIB_VERSION.rc0.tar.bz2"
-LIB_DIRECTORY="mozjs-38.0.0"
+LIB_VERSION="mozjs-45.0.2"
+LIB_ARCHIVE="$LIB_VERSION.tar.bz2"
+LIB_DIRECTORY="mozjs-45.0.2"
 
 pushd ../source/spidermonkey/ > /dev/null
 
@@ -778,14 +926,17 @@ then
   popd
 
   pushd $LIB_DIRECTORY/js/src
-  # We want separate debug/release versions of the library, so change their install name in the Makefile
-  perl -i.bak -pe 's/(^STATIC_LIBRARY_NAME\s+=).*/$1'\''mozjs38-ps-debug'\''/' moz.build
 
-  CONF_OPTS="--target=$ARCH-apple-darwin --prefix=${INSTALL_DIR} --with-system-nspr --with-nspr-prefix=${NSPR_DIR} --with-system-zlib=${ZLIB_DIR} --disable-tests --disable-shared-js"
+  CONF_OPTS="--target=$ARCH-apple-darwin
+    --prefix=${INSTALL_DIR}
+    --enable-posix-nspr-emulation
+    --with-system-zlib=${ZLIB_DIR}
+    --disable-tests
+    --disable-shared-js
+    --disable-jemalloc
+    --without-intl-api"
   # Change the default location where the tracelogger should store its output, which is /tmp/ on OSX.
   TLCXXFLAGS='-DTRACE_LOG_DIR="\"../../source/tools/tracelogger/\""'
-  # Uncomment this line for 32-bit 10.5 cross compile:
-  #CONF_OPTS="$CONF_OPTS --target=i386-apple-darwin9.0.0"
   if [[ $MIN_OSX_VERSION && ${MIN_OSX_VERSION-_} ]]; then
     CONF_OPTS="$CONF_OPTS --enable-macos-target=$MIN_OSX_VERSION"
   fi
@@ -793,24 +944,36 @@ then
     CONF_OPTS="$CONF_OPTS --with-macosx-sdk=$SYSROOT"
   fi
 
+  # We want separate debug/release versions of the library, so change their install name in the Makefile
+  perl -i.bak -pe 's/(^STATIC_LIBRARY_NAME\s+=).*/$1'\''mozjs45-ps-debug'\''/' moz.build
   mkdir -p build-debug
   pushd build-debug
-  (CC="clang" CXX="clang++" CXXFLAGS="${TLCXXFLAGS}" AR=ar CROSS_COMPILE=1 ../configure $CONF_OPTS --enable-debug --disable-optimize --enable-js-diagnostics --enable-gczeal && make ${JOBS}) || die "Spidermonkey build failed"
+  (CC="clang" CXX="clang++" CXXFLAGS="${TLCXXFLAGS}" AR=ar CROSS_COMPILE=1 \
+    ../configure $CONF_OPTS \
+        --enable-debug \
+        --disable-optimize \
+        --enable-js-diagnostics \
+        --enable-gczeal \
+    && make ${JOBS}) || die "Spidermonkey build failed"
   # js-config.h is different for debug and release builds, so we need different include directories for both
   mkdir -p $INCLUDE_DIR_DEBUG
   cp -R -L dist/include/* $INCLUDE_DIR_DEBUG/
-  cp dist/lib/*.a $INSTALL_DIR/lib
+  cp dist/sdk/lib/*.a $INSTALL_DIR/lib
   popd
   mv moz.build.bak moz.build
 
-  perl -i.bak -pe 's/(^STATIC_LIBRARY_NAME\s+=).*/$1'\''mozjs38-ps-release'\''/' moz.build
+  perl -i.bak -pe 's/(^STATIC_LIBRARY_NAME\s+=).*/$1'\''mozjs45-ps-release'\''/' moz.build
   mkdir -p build-release
   pushd build-release
-  (CC="clang" CXX="clang++" CXXFLAGS="${TLCXXFLAGS}" AR=ar CROSS_COMPILE=1 ../configure $CONF_OPTS --enable-optimize && make ${JOBS}) || die "Spidermonkey build failed"
+  (CC="clang" CXX="clang++" CXXFLAGS="${TLCXXFLAGS}" AR=ar CROSS_COMPILE=1 \
+    ../configure $CONF_OPTS \
+        --enable-optimize \
+    && make ${JOBS}) || die "Spidermonkey build failed"
   # js-config.h is different for debug and release builds, so we need different include directories for both
   mkdir -p $INCLUDE_DIR_RELEASE
   cp -R -L dist/include/* $INCLUDE_DIR_RELEASE/
-  cp dist/lib/*.a $INSTALL_DIR/lib
+  cp dist/sdk/lib/*.a $INSTALL_DIR/lib
+  cp js/src/*.a $INSTALL_DIR/lib
   popd
   mv moz.build.bak moz.build
   
@@ -840,7 +1003,23 @@ then
   # Could use CMAKE_OSX_DEPLOYMENT_TARGET and CMAKE_OSX_SYSROOT
   # but they're not as flexible for cross-compiling
   # Disable optional libs that we don't need (avoids some conflicts with MacPorts)
-  (cmake .. -DCMAKE_LINK_FLAGS="$LDFLAGS" -DCMAKE_C_FLAGS="$CFLAGS" -DCMAKE_CXX_FLAGS="$CXXFLAGS" -DCMAKE_BUILD_TYPE=Release -DBINDIR=bin -DLIBDIR=lib -DGLUT=0 -DGLEW=0 -DCG=0 -DCUDA=0 -DOPENEXR=0 -DJPEG=0 -DPNG=0 -DTIFF=0 -G "Unix Makefiles" && make clean && make nvtt ${JOBS}) || die "NVTT build failed"
+  (cmake .. \
+      -DCMAKE_LINK_FLAGS="$LDFLAGS" \
+      -DCMAKE_C_FLAGS="$CFLAGS" \
+      -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBINDIR=bin \
+      -DLIBDIR=lib \
+      -DGLUT=0 \
+      -DGLEW=0 \
+      -DCG=0 \
+      -DCUDA=0 \
+      -DOPENEXR=0 \
+      -DJPEG=0 \
+      -DPNG=0 \
+      -DTIFF=0 \
+      -G "Unix Makefiles" \
+    && make clean && make nvtt ${JOBS}) || die "NVTT build failed"
   popd
 
   mkdir -p ../lib

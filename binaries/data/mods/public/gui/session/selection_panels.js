@@ -941,7 +941,7 @@ g_SelectionPanels.Training = {
 			"player": data.player
 		});
 
-		let unitIds = data.unitEntStates.map(status => status.id)
+		let unitIds = data.unitEntStates.map(status => status.id);
 		let [buildingsCountToTrainFullBatch, fullBatchSize, remainderBatch] =
 			getTrainingStatus(unitIds, data.item, data.playerState);
 
@@ -1061,12 +1061,12 @@ g_SelectionPanels.Upgrade = {
 		{
 			let tooltips = [];
 			if (data.item.tooltip)
-				tooltips.push(sprintf(translate("Upgrade into a %(name)s. %(tooltip)s"), {
+				tooltips.push(sprintf(translate("Upgrade to %(name)s. %(tooltip)s"), {
 					"name": template.name.generic,
 					"tooltip": translate(data.item.tooltip)
 				}));
 			else
-				tooltips.push(sprintf(translate("Upgrade into a %(name)s."), {
+				tooltips.push(sprintf(translate("Upgrade to %(name)s."), {
 					"name": template.name.generic
 				}));
 
@@ -1143,11 +1143,13 @@ function showTemplateDetails(templateName, civCode)
 {
 	pauseGame();
 
-	Engine.PushGuiPage("page_viewer.xml", {
-		"templateName": templateName,
-		"callback": "resumeGame",
-		"civ": civCode
-	});
+	Engine.PushGuiPage(
+		"page_viewer.xml",
+		{
+			"templateName": templateName,
+			"civ": civCode
+		},
+		resumeGame);
 }
 
 /**

@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,37 +22,39 @@
 
 #include <algorithm>
 
-CTooltip::CTooltip()
+CTooltip::CTooltip(CGUI& pGUI)
+	: IGUIObject(pGUI), IGUITextOwner(pGUI)
 {
 	// If the tooltip is an object by itself:
-	AddSetting(GUIST_float,					"buffer_zone");
-	AddSetting(GUIST_CGUIString,			"caption");
-	AddSetting(GUIST_CStrW,					"font");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite");
-	AddSetting(GUIST_int,					"delay");
-	AddSetting(GUIST_CColor,				"textcolor");
-	AddSetting(GUIST_float,					"maxwidth");
-	AddSetting(GUIST_CPos,					"offset");
-	AddSetting(GUIST_EVAlign,				"anchor");
-	AddSetting(GUIST_EAlign,				"text_align");
+	AddSetting<float>("buffer_zone");
+	AddSetting<CGUIString>("caption");
+	AddSetting<CStrW>("font");
+	AddSetting<CGUISpriteInstance>("sprite");
+	AddSetting<i32>("delay"); // in milliseconds
+	AddSetting<CGUIColor>("textcolor");
+	AddSetting<float>("maxwidth");
+	AddSetting<CPos>("offset");
+	AddSetting<EVAlign>("anchor");
+	AddSetting<EAlign>("text_align");
 	// This is used for tooltips that are hidden/revealed manually by scripts, rather than through the standard tooltip display mechanism
-	AddSetting(GUIST_bool,					"independent");
+	AddSetting<bool>("independent");
 
 	// If the tooltip is just a reference to another object:
-	AddSetting(GUIST_CStr,					"use_object");
-	AddSetting(GUIST_bool,					"hide_object");
+	AddSetting<CStr>("use_object");
+	AddSetting<bool>("hide_object");
 
 	// Private settings:
-	AddSetting(GUIST_CPos,					"_mousepos");
+	// This is set by GUITooltip
+	AddSetting<CPos>("_mousepos");
 
 	// Defaults
-	GUI<int>::SetSetting(this, "delay", 500);
-	GUI<EVAlign>::SetSetting(this, "anchor", EVAlign_Bottom);
-	GUI<EAlign>::SetSetting(this, "text_align", EAlign_Left);
+	SetSetting<i32>("delay", 500, true);
+	SetSetting<EVAlign>("anchor", EVAlign_Bottom, true);
+	SetSetting<EAlign>("text_align", EAlign_Left, true);
 
 	// Set up a blank piece of text, to be replaced with a more
 	// interesting message later
-	AddText(new SGUIText());
+	AddText();
 }
 
 CTooltip::~CTooltip()
@@ -61,49 +63,31 @@ CTooltip::~CTooltip()
 
 void CTooltip::SetupText()
 {
-	if (!GetGUI())
-		return;
-
 	ENSURE(m_GeneratedTexts.size() == 1);
 
-	CStrW font;
-	if (GUI<CStrW>::GetSetting(this, "font", font) != PSRETURN_OK || font.empty())
-		font = L"default";
+	const CGUIString& caption = GetSetting<CGUIString>("caption");
+	const CStrW& font = GetSetting<CStrW>("font");
+	const float max_width = GetSetting<float>("maxwidth");
+	const float buffer_zone = GetSetting<float>("buffer_zone");
 
-	float buffer_zone = 0.f;
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
-
-	CGUIString caption;
-	GUI<CGUIString>::GetSetting(this, "caption", caption);
-
-	float max_width = 0.f;
-	GUI<float>::GetSetting(this, "maxwidth", max_width);
-
-	*m_GeneratedTexts[0] = GetGUI()->GenerateText(caption, font, max_width, buffer_zone, this);
-
+	m_GeneratedTexts[0] = CGUIText(m_pGUI, caption, font, max_width, buffer_zone, this);
 
 	// Position the tooltip relative to the mouse:
 
-	CPos mousepos, offset;
-	EVAlign anchor;
-	bool independent;
+	const CPos& mousepos = GetSetting<bool>("independent") ?
+		m_pGUI.GetMousePos() :
+		GetSetting<CPos>("_mousepos");
 
-	GUI<bool>::GetSetting(this, "independent", independent);
-	if (independent)
-		mousepos = GetMousePos();
-	else
-		GUI<CPos>::GetSetting(this, "_mousepos", mousepos);
+	const CPos& offset = GetSetting<CPos>("offset");
 
-	GUI<CPos>::GetSetting(this, "offset", offset);
-	GUI<EVAlign>::GetSetting(this, "anchor", anchor);
-
-	float textwidth = m_GeneratedTexts[0]->m_Size.cx;
-	float textheight = m_GeneratedTexts[0]->m_Size.cy;
+	float textwidth = m_GeneratedTexts[0].GetSize().cx;
+	float textheight = m_GeneratedTexts[0].GetSize().cy;
 
 	CClientArea size;
 	size.pixel.left = mousepos.x + offset.x;
 	size.pixel.right = size.pixel.left + textwidth;
-	switch (anchor)
+
+	switch (GetSetting<EVAlign>("anchor"))
 	{
 	case EVAlign_Top:
 		size.pixel.top = mousepos.y + offset.y;
@@ -139,7 +123,7 @@ void CTooltip::SetupText()
 	else if (size.pixel.right > screenw)
 		size.pixel.left -= (size.pixel.right-screenw), size.pixel.right = screenw;
 
-	GUI<CClientArea>::SetSetting(this, "size", size);
+	SetSetting<CClientArea>("size", size, true);
 }
 
 void CTooltip::HandleMessage(SGUIMessage& Message)
@@ -149,13 +133,9 @@ void CTooltip::HandleMessage(SGUIMessage& Message)
 
 void CTooltip::Draw()
 {
-	if (!GetGUI())
-		return;
-
 	float z = 900.f; // TODO: Find a nicer way of putting the tooltip on top of everything else
 
-	CGUISpriteInstance* sprite;
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite", sprite);
+	CGUISpriteInstance& sprite = GetSetting<CGUISpriteInstance>("sprite");
 
 	// Normally IGUITextOwner will handle this updating but since SetupText can modify the position
 	// we need to call it now *before* we do the rest of the drawing
@@ -165,10 +145,8 @@ void CTooltip::Draw()
 		m_GeneratedTextsValid = true;
 	}
 
-	GetGUI()->DrawSprite(*sprite, 0, z, m_CachedActualSize);
+	m_pGUI.DrawSprite(sprite, 0, z, m_CachedActualSize);
 
-	CColor color;
-	GUI<CColor>::GetSetting(this, "textcolor", color);
-
+	const CGUIColor& color = GetSetting<CGUIColor>("textcolor");
 	DrawText(0, color, m_CachedActualSize.TopLeft(), z+0.1f);
 }

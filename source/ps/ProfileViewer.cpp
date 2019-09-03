@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,22 +22,22 @@
 
 #include "precompiled.h"
 
-#include <ctime>
-#include <algorithm>
-
 #include "ProfileViewer.h"
 
 #include "graphics/FontMetrics.h"
-#include "gui/GUIutil.h"
 #include "graphics/ShaderManager.h"
 #include "graphics/TextRenderer.h"
+#include "gui/GUIMatrix.h"
+#include "lib/external_libraries/libsdl.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Hotkey.h"
 #include "ps/Profile.h"
-#include "lib/external_libraries/libsdl.h"
 #include "renderer/Renderer.h"
 #include "scriptinterface/ScriptInterface.h"
+
+#include <algorithm>
+#include <ctime>
 
 extern int g_xres, g_yres;
 
@@ -531,14 +531,15 @@ namespace
 			JSAutoRequest rq(cx);
 
 			JS::RootedValue data(cx);
-			m_ScriptInterface.Eval("({})", &data);
+			m_ScriptInterface.CreateObject(&data);
 
 			const std::vector<ProfileColumn>& columns = table->GetColumns();
 
 			for (size_t r = 0; r < table->GetNumberRows(); ++r)
 			{
 				JS::RootedValue row(cx);
-				m_ScriptInterface.Eval("([])", &row);
+				m_ScriptInterface.CreateArray(&row);
+
 				m_ScriptInterface.SetProperty(data, table->GetCellText(r, 0).c_str(), row);
 
 				if (table->GetChild(r))

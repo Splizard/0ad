@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 #include "lib/self_test.h"
 
 #include "gui/GUIbase.h"
-#include "gui/GUIutil.h"
+#include "gui/CGUI.h"
 #include "ps/CLogger.h"
 
 class TestGuiParseString : public CxxTest::TestSuite
@@ -68,12 +68,12 @@ public:
 		TestLogger nolog;
 		CRect test;
 
-		TS_ASSERT(__ParseString(CStrW(L"0.0 10.0 20.0 30.0"), test));
+		TS_ASSERT(CGUI::ParseString<CRect>(nullptr, CStrW(L"0.0 10.0 20.0 30.0"), test));
 		TS_ASSERT_EQUALS(CRect(0.0, 10.0, 20.0, 30.0), test);
 
-		TS_ASSERT(!__ParseString(CStrW(L"0 10 20"), test));
-		TS_ASSERT(!__ParseString(CStrW(L"0 10 20 30 40"), test));
-		TS_ASSERT(!__ParseString(CStrW(L"0,0 10,0 20,0 30,0"), test));
+		TS_ASSERT(!CGUI::ParseString<CRect>(nullptr, CStrW(L"0 10 20"), test));
+		TS_ASSERT(!CGUI::ParseString<CRect>(nullptr, CStrW(L"0 10 20 30 40"), test));
+		TS_ASSERT(!CGUI::ParseString<CRect>(nullptr, CStrW(L"0,0 10,0 20,0 30,0"), test));
 	}
 
 	void test_size()
@@ -81,12 +81,12 @@ public:
 		TestLogger nolog;
 		CSize test;
 
-		TS_ASSERT(__ParseString(CStrW(L"0.0 10.0"), test));
+		TS_ASSERT(CGUI::ParseString<CSize>(nullptr, CStrW(L"0.0 10.0"), test));
 		TS_ASSERT_EQUALS(CSize(0.0, 10.0), test);
 
-		TS_ASSERT(!__ParseString(CStrW(L"0"), test));
-		TS_ASSERT(!__ParseString(CStrW(L"0 10 20"), test));
-		TS_ASSERT(!__ParseString(CStrW(L"0,0 10,0"), test));
+		TS_ASSERT(!CGUI::ParseString<CSize>(nullptr, CStrW(L"0"), test));
+		TS_ASSERT(!CGUI::ParseString<CSize>(nullptr, CStrW(L"0 10 20"), test));
+		TS_ASSERT(!CGUI::ParseString<CSize>(nullptr, CStrW(L"0,0 10,0"), test));
 	}
 
 	void test_pos()
@@ -94,11 +94,11 @@ public:
 		TestLogger nolog;
 		CPos test;
 
-		TS_ASSERT(__ParseString(CStrW(L"0.0 10.0"), test));
+		TS_ASSERT(CGUI::ParseString<CPos>(nullptr, CStrW(L"0.0 10.0"), test));
 		TS_ASSERT_EQUALS(CPos(0.0, 10.0), test);
 
-		TS_ASSERT(!__ParseString(CStrW(L"0"), test));
-		TS_ASSERT(!__ParseString(CStrW(L"0 10 20"), test));
-		TS_ASSERT(!__ParseString(CStrW(L"0,0 10,0"), test));
+		TS_ASSERT(!CGUI::ParseString<CPos>(nullptr, CStrW(L"0"), test));
+		TS_ASSERT(!CGUI::ParseString<CPos>(nullptr, CStrW(L"0 10 20"), test));
+		TS_ASSERT(!CGUI::ParseString<CPos>(nullptr, CStrW(L"0,0 10,0"), test));
 	}
 };

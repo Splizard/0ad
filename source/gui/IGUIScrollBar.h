@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -49,6 +49,11 @@ A GUI ScrollBar
  */
 struct SGUIScrollBarStyle
 {
+	// CGUISpriteInstance makes this NONCOPYABLE implicitly, make it explicit
+	NONCOPYABLE(SGUIScrollBarStyle);
+	MOVABLE(SGUIScrollBarStyle);
+	SGUIScrollBarStyle() = default;
+
 	//--------------------------------------------------------
 	/** @name General Settings */
 	//--------------------------------------------------------
@@ -155,7 +160,9 @@ struct SGUIScrollBarStyle
 class IGUIScrollBar
 {
 public:
-	IGUIScrollBar();
+	NONCOPYABLE(IGUIScrollBar);
+
+	IGUIScrollBar(CGUI& pGUI);
 	virtual ~IGUIScrollBar();
 
 public:
@@ -239,18 +246,6 @@ public:
 	 * @param pOwner Pointer to host object.
 	 */
 	void SetHostObject(IGUIScrollBarOwner* pOwner) { m_pHostObject = pOwner; }
-
-	/**
-	 * Get GUI pointer
-	 * @return CGUI pointer
-	 */
-	CGUI* GetGUI() const;
-
-	/**
-	 * Set GUI pointer
-	 * @param pGUI pointer to CGUI object.
-	 */
-	void SetGUI(CGUI* pGUI) { m_pGUI = pGUI; }
 
 	/**
 	 * Set Width
@@ -401,7 +396,7 @@ protected:
 	/**
 	 * Reference to CGUI object, these cannot work stand-alone
 	 */
-	CGUI *m_pGUI;
+	CGUI& m_pGUI;
 
 	/**
 	 * Mouse position when bar was pressed

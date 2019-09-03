@@ -11,6 +11,7 @@
 # karubabu <karubabu@protonmail.com>, 2018
 # Gu Hong Min <placidmoon1@gmail.com>, 2015
 # ks k, 2019
+# ks k, 2019
 # llen_llen, 2016
 # naoki yoshida <oimotanaka1122@gmail.com>, 2015
 # red hare <www3@hotmail.co.jp>, 2017
@@ -19,8 +20,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-04-10 14:30+0000\n"
+"POT-Creation-Date: 2019-05-24 09:43+0200\n"
+"PO-Revision-Date: 2019-08-10 15:32+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/wildfire-games/0ad/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -104,7 +105,7 @@ msgstr "이번에는 %(_player_)s 님을 도와드릴 수 있지만, 앞으로�
 #: simulation/ai/petra/chatHelper.js:36
 #, javascript-format
 msgid "I am in need of %(resource)s, can you help? I will make it up to you."
-msgstr "저는 %(resource)s 자원이 필요합니다. 도와주시겠어요? 보상해 드리겠습니다."
+msgstr "나는 %(resource)s 자원이 필요합니다. 도와주시겠습니까? 보상해 드리겠습니다."
 
 #: simulation/ai/petra/chatHelper.js:37
 #, javascript-format
@@ -117,7 +118,7 @@ msgstr "만약 당신이 나에게 약간의 %(resource)s 자원을 제공해 �
 #, javascript-format
 msgid ""
 "If you can spare me some %(resource)s, I will be able to strengthen my army."
-msgstr "%(resource)s 을(를) 절약 할 수 있다면, 군대를 강화시킬 수 있을 것입니다."
+msgstr "%(resource)s 을(를) 절약할 수 있다면, 군대를 강화시킬 수 있을 것입니다."
 
 #: simulation/ai/petra/chatHelper.js:42
 #, javascript-format
@@ -131,7 +132,7 @@ msgstr "%(_player_)s 님과 새로운 경로를 설정했습니다. 거래는 �
 msgid ""
 "A new trade route is set up with %(_player_)s. Take your share of the "
 "profits."
-msgstr "새로운 무역 경로가 %(_player_)s 님으로 설정됩니다. 이익을 나누십시오."
+msgstr "새로운 교역 경로가 %(_player_)s 님으로 설정됩니다. 이익을 나누십시오."
 
 #: simulation/ai/petra/chatHelper.js:48
 #, javascript-format
@@ -246,8 +247,8 @@ msgstr "%(_player_)s 님, 당신과 동맹을 맺기 전에 나에게 %(_resourc
 #, javascript-format
 msgid ""
 "Unless you send me %(_amount_)s %(_resource_)s, an alliance won’t be formed,"
-" %(_player_)s,"
-msgstr "%(_player_)s 님, 나에게 %(_resource_)s %(_amount_)s 를 보내지 않는다면, 동맹은 맺어지지 않을 것입니다,"
+" %(_player_)s."
+msgstr "%(_player_)s 님, 나에게 %(_resource_)s %(_amount_)s 를 보내지 않는다면, 동맹은 맺어지지 않을 것입니다."
 
 #: simulation/ai/petra/chatHelper.js:88
 #, javascript-format
@@ -364,27 +365,27 @@ msgstr "%(_player_)s 님, 중립 협정을 위한 나의 제안을 취소하기�
 msgid ""
 "%(_player_)s, as you have failed to respond to my request for peace between "
 "us, I have abrogated my offer."
-msgstr "%(_player_)s 님, 당신이 우리 사이의 평화에 대한 나의 요청에 응답하지 않았기 때문에, 나의 제안을 포기했습니다."
+msgstr "%(_player_)s 님, 당신이 우리 사이의 평화에 대한 나의 요청에 응답하지 않았기 때문에, 나의 협정을 파기합니다."
 
 #: simulation/components/BuildRestrictions.js:87
 #, javascript-format
 msgid "%(name)s cannot be built due to unknown error"
-msgstr "알 수 없는 오류로 인해 %(name)을(를) 건설할 수 없습니다"
+msgstr "알 수 없는 오류로 인해 %(name)s 건축물을 지을 수 없습니다"
 
 #: simulation/components/BuildRestrictions.js:108
 #, javascript-format
 msgid "%(name)s cannot be built in unexplored area"
-msgstr "%(name)s 님은 미개척 지역에 건설할 수 없습니다"
+msgstr "%(name)s 건축물은 미개척 지역에 건설할 수 없습니다"
 
 #: simulation/components/BuildRestrictions.js:156
 #, javascript-format
 msgid "%(name)s cannot be built on another building or resource"
-msgstr "%(name)s 님은 다른 건물이나 자원에 건설할 수 없습니다"
+msgstr "%(name)s 건축물은 다른 건물이나 자원에 건설할 수 없습니다"
 
 #: simulation/components/BuildRestrictions.js:160
 #, javascript-format
 msgid "%(name)s cannot be built on invalid terrain"
-msgstr "%(name)s 건물은 잘못된 지형에 건설할 수 없습니다"
+msgstr "%(name)s 건축물은 잘못된 지형에 건설할 수 없습니다"
 
 #. Translation: territoryType being displayed in a translated sentence in the
 #. form: "House cannot be built in %(territoryType)s territory.".
@@ -426,19 +427,19 @@ msgstr "중립국"
 #: simulation/components/BuildRestrictions.js:209
 msgctxt "Territory type"
 msgid "enemy"
-msgstr "적군"
+msgstr "적국"
 
 #: simulation/components/BuildRestrictions.js:214
 #, javascript-format
 msgid ""
 "%(name)s cannot be built in %(territoryType)s territory. Valid territories: "
 "%(validTerritories)s"
-msgstr "%(name)s 님은 %(territoryType)s 영역에서는 구축 할 수 없습니다. 유효한 지역: %(validTerritories)s"
+msgstr "%(name)s 은(는) %(territoryType)s 영역에서는 지을 수 없습니다. 유효한 지역: %(validTerritories)s"
 
 #: simulation/components/BuildRestrictions.js:228
 #, javascript-format
 msgid "%(name)s must be built on a valid shoreline"
-msgstr "%(name)s 님은 적절한 해안선에 건설되어야 합니다"
+msgstr "%(name)s 은(는) 적절한 해안선에 건설되어야 합니다"
 
 #: simulation/components/BuildRestrictions.js:256
 #, javascript-format
@@ -448,7 +449,7 @@ msgid ""
 msgid_plural ""
 "%(name)s too close to a %(category)s, must be at least %(distance)s meters "
 "away"
-msgstr[0] "%(name)s 님이 %(category)s 에 너무 가까이 있으며, 적어도 %(distance)s 미터 이상 떨어져 있어야 합니다"
+msgstr[0] "%(name)s 은(는) %(category)s 에 너무 가까이 있으며, 적어도 %(distance)s 미터 이상 떨어져 있어야 합니다"
 
 #: simulation/components/BuildRestrictions.js:277
 #, javascript-format
@@ -456,7 +457,7 @@ msgid ""
 "%(name)s too far from a %(category)s, must be within %(distance)s meter"
 msgid_plural ""
 "%(name)s too far from a %(category)s, must be within %(distance)s meters"
-msgstr[0] "%(name)s 님이 %(category)s 에서 너무 멀리 떨어져 있으며, %(distance)s 미터 이내에 있어야 합니다"
+msgstr[0] "%(name)s 은(는) %(category)s 에서 너무 멀리 떨어져 있으며, %(distance)s 미터 이내에 있어야 합니다"
 
 #. Translation: Territory types being displayed as part of a list like "Valid
 #. territories: own, ally".
@@ -493,7 +494,7 @@ msgstr "%(time)s 간격으로 공격할 수 있습니다"
 
 #: simulation/components/CeasefireManager.js:112
 msgid "You can attack now!"
-msgstr "당신은 지금 공격 할 수 있습니다!"
+msgstr "당신은 지금 공격할 수 있습니다!"
 
 #: simulation/components/EndGameManager.js:171
 #, javascript-format
@@ -508,12 +509,12 @@ msgstr "마지막으로 남은 선수가 승리 합니다."
 #: simulation/components/EntityLimits.js:165
 #, javascript-format
 msgid "%(category)s build limit of %(limit)s reached"
-msgstr "%(limit)s의 %(category)s 건설 한도에 도달했습니다"
+msgstr "%(limit)s 의 %(category)s 건설 한도에 도달했습니다"
 
 #: simulation/components/EntityLimits.js:167
 #, javascript-format
 msgid "%(category)s training limit of %(limit)s reached"
-msgstr "%(limit)s의 %(category)s 훈련 한도에 도달했습니다"
+msgstr "%(limit)s 의 %(category)s 훈련 한도에 도달했습니다"
 
 #: simulation/components/EntityLimits.js:171
 #, javascript-format
@@ -608,13 +609,13 @@ msgstr "유닛을 배치할 수 없습니다."
 msgid "Some unit(s) can't go back to work"
 msgstr "일부 유닛은 다시 작업할 수 없습니다"
 
-#: simulation/helpers/Commands.js:1114
+#: simulation/helpers/Commands.js:1112
 msgid "The building's technology requirements are not met."
 msgstr "이 건물에 필요한 기술이 충족되지 않았습니다."
 
 #: simulation/data/settings/player_defaults.jsonPlayerData[0].Name
 msgid "Gaia"
-msgstr "자연or 지구"
+msgstr "자연ehsms 대자연"
 
 #: simulation/data/settings/player_defaults.jsonPlayerData[1].Name
 msgid "Player 1"
@@ -742,7 +743,7 @@ msgid ""
 "win the game. The timer will be reset when the Wonder is destroyed or "
 "captured. If the allied victory mode is enabled, the timer will also be "
 "reset when the alliances of the owner change."
-msgstr "가장 먼저 불가사의를 짓거나 점령or 빼앗은 후, 일정 시간동안 지켜내야 게임에서 승리합니다. 불가사의가 파괴되거나 점령되면 타이머가 초기화됩니다. 연합군의 승리 모드가 활성화된 경우나, 자국의 동맹이 바뀌면 타이머가 초기화 됩니다."
+msgstr "가장 먼저 불가사의를 짓거나 점령or 빼앗은 후, 일정 시간동안 지켜내야 놀이에서 승리합니다. 불가사의가 파괴되거나 점령되면 타이머가 초기화됩니다. 연합군의 승리 모드가 활성화된 경우나, 자국의 동맹이 바뀌면 타이머가 초기화 됩니다."
 
 #: simulation/data/settings/victory_conditions/wonder.jsonData.Title
 msgid "Wonder"
@@ -836,7 +837,7 @@ msgstr "작음"
 msgid ""
 "Small maps are suitable for 1v1 matches, as players can reach the enemy "
 "quickly while still having some room to expand."
-msgstr "소형 지도는 1v1 매치에 적합합니다. 선수가 확장할 공간이 있는 상태에서 신속하게 적에게 접근할 수 있습니다."
+msgstr "소형 지도는 1v1 경기들에 적합합니다. 선수가 확장할 공간이 있는 상태에서 신속하게 적군에게 접근할 수 있습니다."
 
 #: simulation/data/settings/map_sizes.jsonData[2].Tooltip
 msgid ""
@@ -873,7 +874,7 @@ msgstr "아주 큼"
 msgid ""
 "Very large maps are not recommended as it takes very long to reach the enemy"
 " and the game performance can be reduced."
-msgstr "초대형 지도는 적에게 도달하는 데 아주 오래 걸리고, 게임 성능이 저하될 수 있기 때문에 권장하지 않습니다."
+msgstr "초대형 지도는 적에게 도달하는 데 아주 오래 걸리고, 놀이 성능이 저하될 수 있기 때문에 권장하지 않습니다."
 
 #: simulation/data/settings/map_sizes.jsonData[6].Name
 msgid "Giant"

@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,6 +23,8 @@
 
 #include "Profile.h"
 #include "ProfileViewer.h"
+#include "ThreadUtil.h"
+
 #include "lib/timer.h"
 
 #if OS_WIN && !defined(NDEBUG)
@@ -461,7 +463,7 @@ static long get_memory_alloc_count()
 // http://www.gnu.org/software/libc/manual/html_node/Hooks-for-Malloc.html
 static intptr_t malloc_count = 0;
 static void *(*old_malloc_hook) (size_t, const void*);
-static pthread_mutex_t alloc_hook_mutex = PTHREAD_MUTEX_INITIALIZER;
+static std::mutex alloc_hook_mutex;
 static void *malloc_hook(size_t size, const void* UNUSED(caller))
 {
 	// This doesn't really work across threads. The hooks are global variables, and
@@ -471,24 +473,22 @@ static void *malloc_hook(size_t size, const void* UNUSED(caller))
 
 	// Two threads may execute the hook simultaneously, so we need to do the
 	// temporary unhooking in a thread-safe way, so for simplicity we just use a mutex.
-	pthread_mutex_lock(&alloc_hook_mutex);
+	std::lock_guard<std::mutex> lock(alloc_hook_mutex);
 	++malloc_count;
 	__malloc_hook = old_malloc_hook;
 	void* result = malloc(size);
 	old_malloc_hook = __malloc_hook;
 	__malloc_hook = malloc_hook;
-	pthread_mutex_unlock(&alloc_hook_mutex);
 	return result;
 }
 
 static void alloc_hook_initialize()
 {
-	pthread_mutex_lock(&alloc_hook_mutex);
+	std::lock_guard<std::mutex> lock(alloc_hook_mutex);
 	old_malloc_hook = __malloc_hook;
 	__malloc_hook = malloc_hook;
 	// (we don't want to bother hooking realloc and memalign, because if they allocate
 	// new memory then they'll be caught by the malloc hook anyway)
-	pthread_mutex_unlock(&alloc_hook_mutex);
 }
 /*
 It would be nice to do:
@@ -753,4 +753,21 @@ void CProfileManager::PerformStructuralReset()
 	root->Call();
 	current = root;
 	g_ProfileViewer.AddRootTable(root->display_table, true);
+}
+
+CProfileSample::CProfileSample(const char* name)
+{
+	if (CProfileManager::IsInitialised())
+	{
+		// The profiler is only safe to use on the main thread
+		if(ThreadUtil::IsMainThread())
+			g_Profiler.Start(name);
+	}
+}
+
+CProfileSample::~CProfileSample()
+{
+	if (CProfileManager::IsInitialised())
+		if(ThreadUtil::IsMainThread())
+			g_Profiler.Stop();
 }

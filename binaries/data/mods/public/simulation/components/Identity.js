@@ -1,31 +1,34 @@
 function Identity() {}
 
 Identity.prototype.Schema =
-	"<a:help>Specifies various names and values associated with the unit type, typically for GUI display to users.</a:help>" +
+	"<a:help>Specifies various names and values associated with the entity, typically for GUI display to users.</a:help>" +
 	"<a:example>" +
 		"<Civ>athen</Civ>" +
 		"<GenericName>Athenian Hoplite</GenericName>" +
 		"<SpecificName>Hoplī́tēs Athēnaïkós</SpecificName>" +
 		"<Icon>units/athen_infantry_spearman.png</Icon>" +
 	"</a:example>" +
-	"<element name='Civ' a:help='Civilisation that this unit is primarily associated with, typically a 4-letter code. Choices include: gaia (world objects), athen (Athenians), brit (Britons), cart (Carthaginians), gaul (Gauls), iber (Iberians), kush (Kushites), mace (Macedonians), maur (Mauryas), pers (Persians), ptol (Ptolemies), rome (Romans), sele (Seleucids), spart (Spartans)'>" +
+	"<element name='Civ' a:help='Civilization that this unit is primarily associated with, typically a 4-letter code. Choices include: gaia (world objects), skirm (skirmish map placeholders), athen (Athenians), brit (Britons), cart (Carthaginians), gaul (Gauls), iber (Iberians), kush (Kushites), mace (Macedonians), maur (Mauryas), pers (Persians), ptol (Ptolemies), rome (Romans), sele (Seleucids), spart (Spartans).'>" +
 		"<text/>" +
 	"</element>" +
 	"<optional>" +
-		"<element name='Lang' a:help='Unit language for voices'>" +
+		"<element name='Lang' a:help='Unit language for voices.'>" +
 			"<text/>" +
 		"</element>" +
 	"</optional>" +
 	"<optional>" +
-		"<element name='Gender' a:help='Unit gender for voices. Choices includes male or female.'>" +
+		"<element name='Phenotype' a:help='Unit phenotype for voices and visual. If more than one is specified a random one will be chosen.'>" +
+			"<attribute name='datatype'>" +
+				"<value>tokens</value>" +
+			"</attribute>" +
 			"<text/>" +
 		"</element>" +
 	"</optional>" +
-	"<element name='GenericName' a:help='Generic English-language name for this class of unit.'>" +
+	"<element name='GenericName' a:help='Generic English-language name for this entity.'>" +
 		"<text/>" +
 	"</element>" +
 	"<optional>" +
-		"<element name='SpecificName' a:help='Specific native-language name for this unit type.'>" +
+		"<element name='SpecificName' a:help='Specific native-language name for this entity.'>" +
 			"<text/>" +
 		"</element>" +
 	"</optional>" +
@@ -54,7 +57,7 @@ Identity.prototype.Schema =
 		"</element>" +
 	"</optional>" +
 	"<optional>" +
-		"<element name='Classes' a:help='Optional list of space-separated classes applying to this entity. Choices include: Animal, Apadana, ArmyCamp, Ashoka, BarterMarket, Celt, CitizenSoldier, CivCentre, Colony, ConquestCritical, Defensive, Domestic, DropsiteFood, DropsiteMetal, DropsiteStone, DropsiteWood, FemaleCitizen, FishingBoat, ForestPlant, Fortress, GarrisonFortress, GarrisonTower, Gates, Human, Iberian, Immortal, Italian, Juggernaut, Kennel, Lighthouse, LongWall, MercenaryCamp, Naval, NavalMarket, Organic, Palace, Palisade, Player, PtolemyIV, SeaCreature, SiegeWall, SpecialBuilding, StoneWall, Structure, Syssiton, Theater, Tower, Unit'>" +
+		"<element name='Classes' a:help='Optional list of space-separated classes applying to this entity. Choices include: Animal, Apadana, ArmyCamp, Ashoka, BarterMarket, Celt, CitizenSoldier, CivCentre, Colony, ConquestCritical, Defensive, Domestic, DropsiteFood, DropsiteMetal, DropsiteStone, DropsiteWood, FemaleCitizen, FishingBoat, ForestPlant, Fortress, GarrisonFortress, GarrisonTower, Gates, Human, Iberian, Immortal, Italian, Juggernaut, Kennel, Lighthouse, LongWall, MercenaryCamp, Naval, NavalMarket, Organic, Palace, Palisade, Player, PtolemyIV, SeaCreature, SiegeWall, SpecialBuilding, StoneWall, Structure, Syssiton, Theater, Tower, Unit.'>" +
 			"<attribute name='datatype'>" +
 				"<value>tokens</value>" +
 			"</attribute>" +
@@ -62,7 +65,7 @@ Identity.prototype.Schema =
 		"</element>" +
 	"</optional>" +
 	"<optional>" +
-		"<element name='VisibleClasses' a:help='Optional list of space-separated classes applying to this entity. These classes will also be visible in various GUI elements. If the classes need spaces, underscores will be replaced with spaces. Choices include: Archer, Barracks, Blacksmith, BoltShooter, Camel, Catapult, Cavalry, Champion, Chariot, Citizen, City, Civic, CivilCentre, Corral, DefenseTower, Dock, Dog, Economic, Elephant, ElephantStables, Embassy, Farmstead, Field, Fireship, Healer, Hero, House, Infantry, Javelin, Maceman, Market, Mechanical, Melee, Mercenary, Military, Outpost, Pike, Ram, Ranged, Relic, Resource, SentryTower, Ship, Shipyard, Siege, SiegeTower, Slave, Sling, Soldier, Spear, Stables, Storehouse, Support, Sword, Temple, Town, Trader, Village, Warship, Wonder, Worker, Workshop'>" +
+		"<element name='VisibleClasses' a:help='Optional list of space-separated classes applying to this entity. These classes will also be visible in various GUI elements. If the classes need spaces, underscores will be replaced with spaces. Choices include: Archer, Axeman, Barracks, Bireme, Blacksmith, BoltShooter, Camel, Cavalry, Champion, Chariot, Citizen, City, Civic, CivilCentre, Clubman, Corral, Crossbowman, DefenseTower, Dock, Dog, Economic, Elephant, ElephantStable, Embassy, Farmstead, Field, Fireship, Healer, Hero, House, Infantry, Javelinist, Maceman, Melee, Market, Mercenary, Military, Outpost, Pikeman, Quadrireme, Quinquereme, Ram, Range, Ranged, Relic, Resource, SentryTower, Ship, Shipyard, Siege, SiegeTower, Slave, Slinger, Soldier, Spearman, Stable, StoneThrower, Storehouse, Support, Swordsman, Temple, Town, Trader, Trireme, Village, Warship, Wonder, Worker, Workshop.'>" +
 			"<attribute name='datatype'>" +
 				"<value>tokens</value>" +
 			"</attribute>" +
@@ -70,7 +73,7 @@ Identity.prototype.Schema =
 		"</element>" +
 	"</optional>" +
 	"<optional>" +
-		"<element name='Formations' a:help='Optional list of space-separated formations this unit is allowed to use. Choices include: Scatter, Box, ColumnClosed, LineClosed, ColumnOpen, LineOpen, Flank, Skirmish, Wedge, Testudo, Phalanx, Syntagma, BattleLine'>" +
+		"<element name='Formations' a:help='Optional list of space-separated formations this unit is allowed to use. Choices include: Scatter, Box, ColumnClosed, LineClosed, ColumnOpen, LineOpen, Flank, Skirmish, Wedge, Testudo, Phalanx, Syntagma, BattleLine.'>" +
 			"<attribute name='datatype'>" +
 				"<value>tokens</value>" +
 			"</attribute>" +
@@ -95,14 +98,11 @@ Identity.prototype.Init = function()
 {
 	this.classesList = GetIdentityClasses(this.template);
 	this.visibleClassesList = GetVisibleIdentityClasses(this.template);
+	if (this.template.Phenotype)
+		this.phenotype = pickRandom(this.GetPossiblePhenotypes());
+	else
+		this.phenotype = "default";
 };
-
-Identity.prototype.Deserialize = function ()
-{
-	this.Init();
-};
-
-Identity.prototype.Serialize = null; // we have no dynamic state to save
 
 Identity.prototype.GetCiv = function()
 {
@@ -114,9 +114,22 @@ Identity.prototype.GetLang = function()
 	return this.template.Lang || "greek"; // ugly default
 };
 
-Identity.prototype.GetGender = function()
+/**
+ * Get a list of possible Phenotypes.
+ * @return {string[]} A list of possible phenotypes.
+ */
+Identity.prototype.GetPossiblePhenotypes = function()
 {
-	return this.template.Gender || "male"; // ugly default
+	return this.template.Phenotype._string.split(/\s+/);
+};
+
+/**
+ * Get the current Phenotype.
+ * @return {string} The current phenotype.
+ */
+Identity.prototype.GetPhenotype = function()
+{
+	return this.phenotype;
 };
 
 Identity.prototype.GetRank = function()

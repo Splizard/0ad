@@ -35,12 +35,13 @@ GUI Core, stuff that the whole GUI uses
 #include <map>
 #include <vector>
 
-#include "graphics/Color.h"
+#include "gui/CGUIColor.h"
 #include "ps/CStr.h"
 #include "ps/Errors.h"
 // I would like to just forward declare CSize, but it doesn't
 //  seem to be defined anywhere in the predefined header.
 #include "ps/Shapes.h"
+#include "scriptinterface/ScriptInterface.h"
 
 class IGUIObject;
 
@@ -48,7 +49,8 @@ class IGUIObject;
 // Setup an object's ConstructObject function
 #define GUI_OBJECT(obj)													\
 public:																	\
-	static IGUIObject* ConstructObject() { return new obj(); }
+	static IGUIObject* ConstructObject(CGUI& pGUI)					\
+		{ return new obj(pGUI); }
 
 
 /**
@@ -93,6 +95,9 @@ enum EGUIMessageType
  */
 struct SGUIMessage
 {
+	// This should be passed as a const reference or pointer.
+	NONCOPYABLE(SGUIMessage);
+
 	SGUIMessage(EGUIMessageType _type) : type(_type), skipped(false) {}
 	SGUIMessage(EGUIMessageType _type, const CStr& _value) : type(_type), value(_value), skipped(false) {}
 
@@ -120,20 +125,6 @@ struct SGUIMessage
 	bool skipped;
 };
 
-/**
- * Recurse restrictions, when we recurse, if an object
- * is hidden for instance, you might want it to skip
- * the children also
- * Notice these are flags! and we don't really need one
- * for no restrictions, because then you'll just enter 0
- */
-enum
-{
-	GUIRR_HIDDEN		= 0x00000001,
-	GUIRR_DISABLED		= 0x00000010,
-	GUIRR_GHOST			= 0x00000100
-};
-
 // Text alignments
 enum EAlign { EAlign_Left, EAlign_Right, EAlign_Center };
 enum EVAlign { EVAlign_Top, EVAlign_Bottom, EVAlign_Center };
@@ -146,6 +137,10 @@ typedef std::vector<IGUIObject*> vector_pObjects;
 //  you use them in text owned by different objects... Such as CText.
 struct SGUIIcon
 {
+	// This struct represents an immutable type, so ensure to avoid copying the strings.
+	NONCOPYABLE(SGUIIcon);
+	MOVABLE(SGUIIcon);
+
 	SGUIIcon() : m_CellID(0) {}
 
 	// Sprite name of icon
@@ -167,6 +162,8 @@ struct SGUIIcon
 class CClientArea
 {
 public:
+	// COPYABLE, since there are only primitives involved, making move and copy identical,
+	// and since some temporaries cannot be avoided.
 	CClientArea();
 	CClientArea(const CStr& Value);
 	CClientArea(const CRect& pixel, const CRect& percent);
@@ -202,12 +199,14 @@ public:
 	{
 		return pixel == other.pixel && percent == other.percent;
 	}
+
+	void ToJSVal(JSContext* cx, JS::MutableHandleValue ret) const;
+	bool FromJSVal(JSContext* cx, JS::HandleValue v);
 };
 
 
 ERROR_GROUP(GUI);
 
-ERROR_TYPE(GUI, NullObjectProvided);
 ERROR_TYPE(GUI, InvalidSetting);
 ERROR_TYPE(GUI, OperationNeedsGUIObject);
 ERROR_TYPE(GUI, NameAmbiguity);

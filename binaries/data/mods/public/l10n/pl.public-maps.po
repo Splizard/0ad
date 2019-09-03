@@ -29,14 +29,14 @@
 # Piotr Lehmann <lejmus@o2.pl>, 2017
 # Przemysław Murach <moonshine133@vp.pl>, 2019
 # slodki12341 <slodki1234@gmail.com>, 2014
-# Tomasz Pudło <wptom@wp.pl>, 2016,2018
+# tombox <wptom@wp.pl>, 2016,2018
 # Voltinus <voltinusmail@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-03-22 16:01+0000\n"
-"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"POT-Creation-Date: 2019-08-23 07:09+0000\n"
+"PO-Revision-Date: 2019-08-24 15:54+0000\n"
+"Last-Translator: Przemysław Murach <moonshine133@vp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/wildfire-games/0ad/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,16 +333,16 @@ msgstr "Wygasły wulkan"
 
 #: maps/random/fields_of_meroe.jsonsettings.Description
 msgid ""
-"The \"Island of Meroe\", a vast peninsula flanked by the Nile and Atbarah "
+"The \"Island of Meroë\", a vast peninsula flanked by the Nile and Atbarah "
 "rivers, formed the heartland of ancient Kush. Where the harsh deserts start "
 "making way for the semi-arid savannahs and small acacia forests dot the "
 "landscape. The area is rich in resources and the ever-present Nile brings "
 "life, but grave threats loom on the opposite riverbank."
-msgstr "\"Wyspa Meroe\", rozległy półwysep otoczony przez rzeki Nilu i Atbaray, tworzy serce starożytnego Kush. Tam, gdzie surowe pustynie zaczynają ustępować miejsca półpustynnym sawannom i małym akacjowym lasom. Obszar ten jest bogaty w surowce, a wszechobecny Nil przynosi życie, ale poważne zagrożenia pojawiają się na przeciwległym brzegu rzeki."
+msgstr "\"Wyspa Meroë\", rozległy półwysep otoczony przez rzeki Nilu i Atbaray, tworzy serce starożytnego Kush. Tam, gdzie surowe pustynie zaczynają ustępować miejsca półpustynnym sawannom i małym akacjowym lasom. Obszar ten jest bogaty w surowce, a wszechobecny Nil przynosi życie, ale poważne zagrożenia pojawiają się na przeciwległym brzegu rzeki."
 
 #: maps/random/fields_of_meroe.jsonsettings.Name
-msgid "Fields of Meroe"
-msgstr "Pola Meroe"
+msgid "Fields of Meroë"
+msgstr "Pola Meroë"
 
 #: maps/random/flood.jsonsettings.Description
 msgid ""
@@ -1600,7 +1600,7 @@ msgstr "Ta mapa przedstawia rekonstrukcję starożytnego miasta Napata. [color=\
 
 #: maps/scenarios/Necropolis.xml:Description:39
 msgid ""
-"4 players duke it out over the vast Nile Delta. Each city starts out nestled atop a large acropolis, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
+"Four players duke it out over the vast Nile Delta. Each city starts out nestled atop a large plateau, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
 "\n"
 "Scouts say the nearby branches of the Nile River are shallow and fordable in multiple locations, so should only serve as a minor barrier between enemy factions."
 msgstr "4 graczy zawalczy o kontrolę nad ogromną Deltą Nilu. Każde miasto rozpoczyna na rozległym wzniesieniu, gdzie jednakże zasoby są ograniczone, zmuszając każdego gracza, aby skierował swoją uwagę na przyległe dalsze rejony.\n\nZwiadowcy donoszą o płytkim i dostępnym dorzeczu Nilu,  które będzie stanowić jedynie słabą przeszkodę pomiędzy wrogimi frakcjami."
@@ -2069,7 +2069,7 @@ msgstr "Wszystkie jednostki w grze."
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27
+#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
 msgid "Give an interesting description of your map."
 msgstr "Daj ciekawy opis swojej mapie."
 
@@ -2094,6 +2094,7 @@ msgid "A quick battle demo map using Roman legionnaires."
 msgstr "Szybka, demonstracyjna bitwa z użyciem legionów rzymskich."
 
 #: maps/scenarios/_default.xml:Name:28
+#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "Nienazwana mapa"
 
@@ -2125,12 +2126,24 @@ msgstr "Okręty (demonstracja)"
 msgid "Base Temperate Map"
 msgstr "Podstawowa umiarkowana mapa"
 
+#: maps/scenarios/unit_motion_integration_test.xml:Description:40
+msgid ""
+"This map is designed to test some basic unit movement cases. It will involve"
+" unitAI, unitMotion and the relevant pathfinders and thus acts as an "
+"integrated test map. Look for things such as stuck units, wrong animations, "
+"and weird pathing."
+msgstr "Ta mapa została zaprojektowana do testowania podstawowych ruchów jednostek. Wykorzystuje unitAI, unitMotion i ścieżki szukania ruchu, dzięki czemu służy za zintegrowaną mapę testową. Szukaj zablokowanych jednostek, niewłaściwych animacji i dziwnego wyszukiwania ścieżek ruchu."
+
+#: maps/scenarios/unit_motion_integration_test.xml:Name:40
+msgid "Unit Motion Integration Test"
+msgstr "Test integracji ruchu jednostki"
+
 #: maps/skirmishes/Acropolis Bay (2).xml:Description:39
 msgid ""
-"Each player starts the match atop a large flat plateau, otherwise known as an acropolis.\n"
+"Each player starts the match atop a large flat plateau.\n"
 "\n"
-"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed acropolis commanding the valley below."
-msgstr "Każdy gracz zaczyna na szczycie dużego płaskowyżu znanego jako akropol.\n\nNa wschodzie znajduje się duża zatoka, której wody są pełne ryb. W głębi lądu, na zachodzie wznosi się niezamieszkały akropol strzegący wejścia do doliny."
+"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed plateau commanding the valley below."
+msgstr "Każdy gracz zaczyna na szczycie dużego płaskowyżu.\n\nNa wschodzie znajduje się duża zatoka, której wody są pełne ryb. W głębi lądu, na zachodzie wznosi się niezamieszkały płaskowyż nad wejściem do doliny."
 
 #: maps/skirmishes/Acropolis Bay (2).xml:Name:39
 msgid "Acropolis Bay (2)"
@@ -2350,6 +2363,14 @@ msgid ""
 "- Western desert: Oasis Charga and Siwa, Qattara Depression\n"
 msgstr "Walcz o pozostałości starożytnego Egiptu!\n\nGracze zaczynają od w pełni rozwiniętych miast i małych armii, z których każda ma wyraźne zalety i wady. Uważaj, jest 7 potężnych fortów i grabiących bandytów!\n\nJest to ostatni wiek przed 0 A.D. Egipt jest wewnętrznie podzielony między helleńskim (Aleksandria, reprezentowana przez Seleucydy) a tradycyjnymi wpływami (Memfis, reprezentowany przez Ptolemeuszów). Teby w południowym krainie rzeki Nil zostały już przejęte przez Kusz. W północno-zachodniej Al-Dschabal al-Achdar, gdzie znajduje się śródziemnomorskie miasto Cyrene, Rzymianie przygotowują inwazję. Od wschodniej pustyni w Tih i na górze Synaj wrogowie (reprezentowani przez Persów) nacierają naprzód na oazę Siwa. Charga (reprezentowana przez Kartaginę) na południowo-zachodniej pustyni stara się również zdobyć część tortu.\nLokalizacje:\n- Aleksandria: biblioteka, port\n- Memphis: Nekropolia, piramidy, świątynia Apis\n- Teby: dzielnica świątynna, Dolina Królów\n- Cyrene: śródziemnomorska Macchie, gaje oliwne\n- Fayyum: świątynia krokodyla, zapora nilowa\n- Wschodnia pustynia: góra Synaj, głębokie Wadi, rafy Morza Czerwonego\n- Zachodnia pustynia: Oaza Charga i Siwa, Depresja Qattara"
 
+#: maps/skirmishes/Farmland (2).xml:Description:40
+msgid "Farmland in Eastern Europe."
+msgstr "Ziemie uprawne w Europie Wschodniej."
+
+#: maps/skirmishes/Farmland (2).xml:Name:40
+msgid "Farmland (2)"
+msgstr "Ziemie uprawne (2)"
+
 #: maps/skirmishes/Forest Battle (4).xml:Description:40
 msgid ""
 "A forest battle map where all players fight for supremacy and control over "
@@ -2387,8 +2408,8 @@ msgstr "Rzeka Gambia (3)"
 #: maps/skirmishes/Golden Island (2).xml:Description:40
 msgid ""
 "A ring of land borders a resource-rich island in the Mediterranean. Players "
-"can access the center via a narrow strip of land or via boat."
-msgstr "Pierścień terenu graniczy z wyspą bogatą w zasoby na basenie Morza Śródziemnego. Gracze mogą korzystać z centrum poprzez wąski pas ziemi lub za pośrednictwem łodzi."
+"can access the center via a narrow strip of shallow water or via boat."
+msgstr "Pierścień terenu graniczy z wyspą bogatą w zasoby na basenie Morza Śródziemnego. Gracze mogą korzystać z centrum poprzez wąski pas płycizny lub za pośrednictwem łodzi."
 
 #: maps/skirmishes/Golden Island (2).xml:Name:40
 msgid "Golden Island (2)"
@@ -2408,10 +2429,10 @@ msgstr "Złota oaza (2)"
 #: maps/skirmishes/Greek Acropolis (2).xml:Description:39
 #: maps/skirmishes/Greek Acropolis Night (2).xml:Description:39
 msgid ""
-"Two factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Two factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Dwa przeciwne obozy usytuowane są na grzbietach skalistych płaskowyży. \n\nWyślij zwiad w pobliskie tereny aby zbadać i zabezpieczyć nowe źródła zasobów."
+msgstr "Dwa przeciwne obozy usytuowane są na grzbietach skalistych płaskowyżów. \n\nWyślij zwiad w pobliskie tereny, aby zbadać i zabezpieczyć nowe źródła zasobów."
 
 #: maps/skirmishes/Greek Acropolis (2).xml:Name:39
 msgid "Greek Acropolis (2)"
@@ -2419,10 +2440,10 @@ msgstr "Grecki Akropol (2)"
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Description:39
 msgid ""
-"Three factions find themselves perched safely atop large rocky plateaus, or acropolises, whereas the fourth one is separated from their foes by a river branch.\n"
+"Three factions find themselves perched safely atop large rocky plateaus, whereas the fourth one is separated from their foes by a river branch.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources.."
-msgstr "Obozy trzech frakcji rozlokowane są bezpiecznie na skalistych płaskowyżach jednakże czwarta jest odizolowana od swych nieprzyjaciół zakolem rzecznym.\n\nWyślij zwiad w pobliskie tereny aby zabezpieczyć nowe źródła zasobów."
+msgstr "Obozy trzech frakcji rozlokowane są bezpiecznie na skalistych płaskowyżach, natomiast czwarty z nich jest odizolowany od swych nieprzyjaciół gałęzią rzeki.\n\nWyślij zwiad w pobliskie tereny, aby zabezpieczyć nowe źródła zasobów."
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Name:39
 msgid "Greek Acropolis (4)"
@@ -2534,6 +2555,14 @@ msgstr "Na zimnych i osieroconych północnych terenach 2-óch graczy walczy o d
 msgid "Northern Island (2)"
 msgstr "Wyspa Północna (2)"
 
+#: maps/skirmishes/Oceanside (2).xml:Description:40
+msgid "A Lush temperate biome along an ocean. "
+msgstr "Bujne tereny nad brzegiem oceanu."
+
+#: maps/skirmishes/Oceanside (2).xml:Name:40
+msgid "Oceanside (2)"
+msgstr "Nad oceanem (2)"
+
 #: maps/skirmishes/Persian Highlands (4).xml:Description:39
 msgid ""
 "A dry central basin rich in minerals surrounded by rocky hills and "
@@ -2637,12 +2666,20 @@ msgstr "Oaza w otoczeniu gór i pustyni. Ziemie uprawne w pobliżu brzegu zapewn
 msgid "Team Oasis (2v2)"
 msgstr "Drużynowa Oaza (2v2)"
 
+#: maps/skirmishes/Temperate Roadway (2).xml:Description:40
+msgid "Temperate zone map with plentiful resources. Map Size: Small"
+msgstr "Mapa o umiarkowanym klimacie z wieloma zasobami. Rozmiar mapy: mała"
+
+#: maps/skirmishes/Temperate Roadway (2).xml:Name:40
+msgid "Temperate Roadway (2)"
+msgstr "Rozwidlenie (2)"
+
 #: maps/skirmishes/Thessalian Plains (4).xml:Description:39
 msgid ""
 "The rolling Thessalian plain is traversed with narrow streams, easily "
 "forded. Wide-open spaces allow for massive expansion, while each player "
-"starts the match safe atop a large acropolis."
-msgstr "Płaskie równiny Thesaloniki są poprzecinane licznymi, wąskimi potokami. Duży dostępny teren umożliwia szeroką eksploracje terenu. Poczas gdy każdy gracz rozpoczyna na bezpiecznym stoku. "
+"starts the match safe atop a large plateau."
+msgstr "Płaskie równiny Saloników są poprzecinane licznymi, wąskimi potokami. Otwarte tereny pozwalają na potężną ekspansję, ponieważ każdy z graczy rozpoczyna na szczycie bezpiecznego płaskowyżu."
 
 #: maps/skirmishes/Thessalian Plains (4).xml:Name:39
 msgid "Thessalian Plains (4)"
@@ -2650,10 +2687,10 @@ msgstr "Tesalijskie Równiny (4)"
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Description:40
 msgid ""
-"Four factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Four factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "Dwa przeciwne obozy usytuowane są na grzbietach skalistych płaskowyży. \n\nWyślij zwiad w pobliskie tereny aby zbadać i zabezpieczyć nowe źródła zasobów."
+msgstr "Cztery przeciwne obozy usytuowane są na grzbietach skalistych płaskowyżów. \n\nWyślij zwiad w pobliskie tereny, aby zbadać i zabezpieczyć nowe źródła zasobów oraz znaleźć skarby."
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Name:40
 msgid "Tuscan Acropolis (4)"

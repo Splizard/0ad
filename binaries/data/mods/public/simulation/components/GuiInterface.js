@@ -254,7 +254,7 @@ GuiInterface.prototype.GetEntityState = function(player, ent)
 	{
 		ret.hitpoints = cmpHealth.GetHitpoints();
 		ret.maxHitpoints = cmpHealth.GetMaxHitpoints();
-		ret.needsRepair = cmpHealth.IsRepairable() && cmpHealth.GetHitpoints() < cmpHealth.GetMaxHitpoints();
+		ret.needsRepair = cmpHealth.IsRepairable() && cmpHealth.IsInjured();
 		ret.needsHeal = !cmpHealth.IsUnhealable();
 	}
 
@@ -388,8 +388,13 @@ GuiInterface.prototype.GetEntityState = function(player, ent)
 
 		for (let type of types)
 		{
-			ret.attack[type] = cmpAttack.GetAttackStrengths(type);
+			ret.attack[type] = {};
+
+			Object.assign(ret.attack[type], cmpAttack.GetAttackEffectsData(type));
+
 			ret.attack[type].splash = cmpAttack.GetSplashDamage(type);
+			if (ret.attack[type].splash)
+				Object.assign(ret.attack[type].splash, cmpAttack.GetAttackEffectsData(type, true));
 
 			let range = cmpAttack.GetRange(type);
 			ret.attack[type].minRange = range.min;
@@ -427,9 +432,9 @@ GuiInterface.prototype.GetEntityState = function(player, ent)
 		}
 	}
 
-	let cmpArmour = Engine.QueryInterface(ent, IID_DamageReceiver);
+	let cmpArmour = Engine.QueryInterface(ent, IID_Resistance);
 	if (cmpArmour)
-		ret.armour = cmpArmour.GetArmourStrengths();
+		ret.armour = cmpArmour.GetArmourStrengths("Damage");
 
 	let cmpBuildingAI = Engine.QueryInterface(ent, IID_BuildingAI);
 	if (cmpBuildingAI)
@@ -502,7 +507,7 @@ GuiInterface.prototype.GetEntityState = function(player, ent)
 	if (cmpUnitMotion)
 		ret.speed = {
 			"walk": cmpUnitMotion.GetWalkSpeed(),
-			"run": cmpUnitMotion.GetRunSpeed()
+			"run": cmpUnitMotion.GetWalkSpeed() * cmpUnitMotion.GetRunMultiplier()
 		};
 
 	return ret;
@@ -542,14 +547,14 @@ GuiInterface.prototype.GetTemplateData = function(player, templateName)
 	let aurasTemplate = {};
 
 	if (!template.Auras)
-		return GetTemplateDataHelper(template, player, aurasTemplate, Resources, DamageTypes);
+		return GetTemplateDataHelper(template, player, aurasTemplate, Resources);
 
 	let auraNames = template.Auras._string.split(/\s+/);
 
 	for (let name of auraNames)
 		aurasTemplate[name] = AuraTemplates.Get(name);
 
-	return GetTemplateDataHelper(template, player, aurasTemplate, Resources, DamageTypes);
+	return GetTemplateDataHelper(template, player, aurasTemplate, Resources);
 };
 
 GuiInterface.prototype.IsTechnologyResearched = function(player, data)
@@ -851,7 +856,7 @@ GuiInterface.prototype.SetStatusBars = function(player, cmd)
 		let cmpStatusBars = Engine.QueryInterface(ent, IID_StatusBars);
 		if (!cmpStatusBars)
 			continue;
-		cmpStatusBars.SetEnabled(cmd.enabled, cmd.showRank);
+		cmpStatusBars.SetEnabled(cmd.enabled, cmd.showRank, cmd.showExperience);
 
 		let cmpAuras = Engine.QueryInterface(ent, IID_Auras);
 		if (!cmpAuras)

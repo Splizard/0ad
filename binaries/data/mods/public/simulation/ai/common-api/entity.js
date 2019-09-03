@@ -198,14 +198,16 @@ m.Template = m.Class({
 	"getPopulationBonus": function() { return +this.get("Cost/PopulationBonus"); },
 
 	"armourStrengths": function() {
-		if (!this.get("Armour"))
+		let armourDamageTypes = this.get("Armour");
+		if (!armourDamageTypes)
 			return undefined;
 
-		return {
-			"Hack": +this.get("Armour/Hack"),
-			"Pierce": +this.get("Armour/Pierce"),
-			"Crush": +this.get("Armour/Crush")
-		};
+		let armour = {};
+		for (let damageType in armourDamageTypes)
+			if (damageType != "Foundation")
+				armour[damageType] = +armourDamageTypes[damageType];
+
+		return armour;
 	},
 
 	"attackTypes": function() {
@@ -229,21 +231,22 @@ m.Template = m.Class({
 	},
 
 	"attackStrengths": function(type) {
-		if (!this.get("Attack/" + type +""))
+		let attackDamageTypes = this.get("Attack/" + type + "/Damage");
+		if (!attackDamageTypes)
 			return undefined;
 
-		return {
-			"Hack": +(this.get("Attack/" + type + "/Hack") || 0),
-			"Pierce": +(this.get("Attack/" + type + "/Pierce") || 0),
-			"Crush": +(this.get("Attack/" + type + "/Crush") || 0)
-		};
+		let damage = {};
+		for (let damageType in attackDamageTypes)
+			damage[damageType] = +attackDamageTypes[damageType];
+
+		return damage;
 	},
 
 	"captureStrength": function() {
 		if (!this.get("Attack/Capture"))
 			return undefined;
 
-		return +this.get("Attack/Capture/Value") || 0;
+		return +this.get("Attack/Capture/Capture") || 0;
 	},
 
 	"attackTimes": function(type) {
@@ -272,7 +275,7 @@ m.Template = m.Class({
 			{
 				let bonusClasses = this.get("Attack/" + type + "/Bonuses/" + b + "/Classes");
 				if (bonusClasses)
-					Classes.push([bonusClasses.split(" "), +this.get("Attack/" + type +"/Bonuses" + b +"/Multiplier")]);
+					Classes.push([bonusClasses.split(" "), +this.get("Attack/" + type +"/Bonuses/" + b +"/Multiplier")]);
 			}
 		}
 		return Classes;

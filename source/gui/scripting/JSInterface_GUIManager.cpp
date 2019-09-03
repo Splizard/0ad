@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,6 +19,7 @@
 
 #include "JSInterface_GUIManager.h"
 
+#include "gui/CGUI.h"
 #include "gui/GUIManager.h"
 #include "gui/IGUIObject.h"
 #include "ps/GameSetup/Config.h"
@@ -26,9 +27,9 @@
 
 // Note that the initData argument may only contain clonable data.
 // Functions aren't supported for example!
-void JSI_GUIManager::PushGuiPage(ScriptInterface::CxPrivate* pCxPrivate, const std::wstring& name, JS::HandleValue initData)
+void JSI_GUIManager::PushGuiPage(ScriptInterface::CxPrivate* pCxPrivate, const std::wstring& name, JS::HandleValue initData, JS::HandleValue callbackFunction)
 {
-	g_GUI->PushPage(name, pCxPrivate->pScriptInterface->WriteStructuredClone(initData));
+	g_GUI->PushPage(name, pCxPrivate->pScriptInterface->WriteStructuredClone(initData), callbackFunction);
 }
 
 void JSI_GUIManager::SwitchGuiPage(ScriptInterface::CxPrivate* pCxPrivate, const std::wstring& name, JS::HandleValue initData)
@@ -36,19 +37,16 @@ void JSI_GUIManager::SwitchGuiPage(ScriptInterface::CxPrivate* pCxPrivate, const
 	g_GUI->SwitchPage(name, pCxPrivate->pScriptInterface, initData);
 }
 
-void JSI_GUIManager::PopGuiPage(ScriptInterface::CxPrivate* UNUSED(pCxPrivate))
+void JSI_GUIManager::PopGuiPage(ScriptInterface::CxPrivate* pCxPrivate, JS::HandleValue args)
 {
-	g_GUI->PopPage();
+	g_GUI->PopPage(pCxPrivate->pScriptInterface->WriteStructuredClone(args));
 }
 
-void JSI_GUIManager::PopGuiPageCB(ScriptInterface::CxPrivate* pCxPrivate, JS::HandleValue args)
+JS::Value JSI_GUIManager::GetGUIObjectByName(ScriptInterface::CxPrivate* pCxPrivate, const std::string& name)
 {
-	g_GUI->PopPageCB(pCxPrivate->pScriptInterface->WriteStructuredClone(args));
-}
+	CGUI* guiPage = static_cast<CGUI*>(pCxPrivate->pCBData);
 
-JS::Value JSI_GUIManager::GetGUIObjectByName(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), const std::string& name)
-{
-	IGUIObject* guiObj = g_GUI->FindObjectByName(name);
+	IGUIObject* guiObj = guiPage->FindObjectByName(name);
 	if (!guiObj)
 		return JS::UndefinedValue();
 
@@ -79,10 +77,9 @@ CParamNode JSI_GUIManager::GetTemplate(ScriptInterface::CxPrivate* UNUSED(pCxPri
 
 void JSI_GUIManager::RegisterScriptFunctions(const ScriptInterface& scriptInterface)
 {
-	scriptInterface.RegisterFunction<void, std::wstring, JS::HandleValue, &PushGuiPage>("PushGuiPage");
+	scriptInterface.RegisterFunction<void, std::wstring, JS::HandleValue, JS::HandleValue, &PushGuiPage>("PushGuiPage");
 	scriptInterface.RegisterFunction<void, std::wstring, JS::HandleValue, &SwitchGuiPage>("SwitchGuiPage");
-	scriptInterface.RegisterFunction<void, &PopGuiPage>("PopGuiPage");
-	scriptInterface.RegisterFunction<void, JS::HandleValue, &PopGuiPageCB>("PopGuiPageCB");
+	scriptInterface.RegisterFunction<void, JS::HandleValue, &PopGuiPage>("PopGuiPage");
 	scriptInterface.RegisterFunction<JS::Value, std::string, &GetGUIObjectByName>("GetGUIObjectByName");
 	scriptInterface.RegisterFunction<std::wstring, std::wstring, &SetCursor>("SetCursor");
 	scriptInterface.RegisterFunction<void, &ResetCursor>("ResetCursor");

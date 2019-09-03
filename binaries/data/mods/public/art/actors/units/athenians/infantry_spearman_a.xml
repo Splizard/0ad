@@ -5,22 +5,51 @@
     <variant frequency="1" name="Base">
       <mesh>skeletal/new/m_armor_tunic_short.dae</mesh>
       <props>
-        <prop actor="props/units/shields/hele_round_a.xml" attachpoint="shield_arm"/>
         <prop actor="props/units/weapons/spear_hoplite.xml" attachpoint="weapon_R"/>
+        <prop actor="props/units/shields/aspis_athen_a.xml" attachpoint="shield_arm"/>
       </props>
     </variant>
   </group>
   <group>
+    <variant frequency="1" name="Greave-01">
+      <props>
+        <prop actor="props/units/armor/greave_11_bronze_l.xml" attachpoint="leg_L"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Greave-02">
+      <props>
+        <prop actor="props/units/armor/greave_07_bronze_l.xml" attachpoint="leg_L"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Greave-03">
+      <props>
+        <prop actor="props/units/armor/greave_09_bronze_l.xml" attachpoint="leg_L"/>
+      </props>
+    </variant>
+  </group>
+  <group>
+    <variant frequency="1" name="Helmet-Corinthians1">
+      <props>
+        <prop actor="props/units/heads/new/head_hele_a.xml" attachpoint="head"/>
+        <prop actor="props/units/helmets/hele_corinthian_b1.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
     <variant frequency="1" name="Helmet-Corinthians">
       <props>
-        <prop actor="props/units/heads/new/head_corinthian.xml" attachpoint="head"/>
-        <prop actor="props/units/helmets/hele_hoplite_a.xml" attachpoint="helmet"/>
+        <prop actor="props/units/heads/new/head_hele_a.xml" attachpoint="head"/>
+        <prop actor="props/units/helmets/hele_corinthian_b2.xml" attachpoint="helmet"/>
       </props>
     </variant>
     <variant frequency="1" name="Helmet-Later">
       <props>
         <prop actor="props/units/heads/new/head_hele_a.xml" attachpoint="head"/>
-        <prop actor="props/units/helmets/hele_hoplite_a2.xml" attachpoint="helmet"/>
+        <prop actor="props/units/helmets/hele_corinthian_b3.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Helmet-Corinthianb">
+      <props>
+        <prop actor="props/units/heads/new/head_hele_a.xml" attachpoint="head"/>
+        <prop actor="props/units/helmets/hele_corinthian_b4.xml" attachpoint="helmet"/>
       </props>
     </variant>
   </group>
@@ -48,9 +77,6 @@
     <variant file="biped/carry_wood.xml"/>
     <variant file="biped/carry_stone.xml"/>
     <variant file="biped/carry_metal.xml"/>
-  </group>
-  <group>
-    <variant frequency="1" name="Idle"/>
     <variant file="biped/attack_capture.xml"/>
     <variant file="biped/attack_slaughter.xml"/>
     <variant file="biped/gather_tree.xml"/>
@@ -64,6 +90,9 @@
     <variant file="biped/build.xml"/>
     <variant file="biped/build_farm.xml"/>
     <variant file="biped/death_infantry.xml"/>
+    <variant file="biped/formations/phalanx_front.xml"/>
+    <variant file="biped/formations/phalanx_mid.xml"/>
+    <variant file="biped/formations/phalanx_back.xml"/>
   </group>
   <material>player_trans.xml</material>
 </actor>

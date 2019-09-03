@@ -2,13 +2,6 @@
 <actor version="1">
   <castshadow/>
   <group>
-    <variant frequency="1" name="Berry Bush Base">
-      <props>
-        <prop actor="particle/sparks_blacksmith.xml" attachpoint="root"/>
-      </props>
-    </variant>
-  </group>
-  <group>
     <variant frequency="1" name="Berry Bush Mesh 01">
       <mesh>gaia/berry_bush_01.dae</mesh>
     </variant>

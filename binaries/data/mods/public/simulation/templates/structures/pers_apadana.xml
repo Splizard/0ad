@@ -26,8 +26,8 @@
   </Health>
   <Identity>
     <Civ>pers</Civ>
-    <GenericName>Persian Palace</GenericName>
-    <SpecificName>Apadana</SpecificName>
+    <GenericName>Throne Hall</GenericName>
+    <SpecificName>Apadāna</SpecificName>
     <Classes datatype="tokens">Apadana ConquestCritical Palace</Classes>
     <Icon>structures/palace.png</Icon>
     <Tooltip>"Satrapy Tribute": Gain a trickle of food, wood, stone, and metal resources. Train Persian heroes and their "Immortals" bodyguards.</Tooltip>
@@ -67,6 +67,6 @@
   </TerritoryInfluence>
   <VisualActor>
     <Actor>structures/persians/apadana.xml</Actor>
-    <FoundationActor>structures/fndn_6x6.xml</FoundationActor>
+    <FoundationActor>structures/fndn_8x9.xml</FoundationActor>
   </VisualActor>
 </Entity>

@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,45 +19,45 @@
 
 #include "CText.h"
 
-#include "CGUIScrollBarVertical.h"
-#include "GUI.h"
-
+#include "gui/CGUIScrollBarVertical.h"
+#include "gui/GUI.h"
 #include "lib/ogl.h"
 
-CText::CText()
+CText::CText(CGUI& pGUI)
+	: IGUIObject(pGUI), IGUIScrollBarOwner(pGUI), IGUITextOwner(pGUI)
 {
-	AddSetting(GUIST_float,					"buffer_zone");
-	AddSetting(GUIST_CGUIString,			"caption");
-	AddSetting(GUIST_int,					"cell_id");
-	AddSetting(GUIST_bool,					"clip");
-	AddSetting(GUIST_CStrW,					"font");
-	AddSetting(GUIST_bool,					"scrollbar");
-	AddSetting(GUIST_CStr,					"scrollbar_style");
-	AddSetting(GUIST_bool,					"scroll_bottom");
-	AddSetting(GUIST_bool,					"scroll_top");
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite");
-	AddSetting(GUIST_EAlign,				"text_align");
-	AddSetting(GUIST_EVAlign,				"text_valign");
-	AddSetting(GUIST_CColor,				"textcolor");
-	AddSetting(GUIST_CColor,				"textcolor_disabled");
-	AddSetting(GUIST_CStrW,					"tooltip");
-	AddSetting(GUIST_CStr,					"tooltip_style");
+	AddSetting<float>("buffer_zone");
+	AddSetting<CGUIString>("caption");
+	AddSetting<i32>("cell_id");
+	AddSetting<bool>("clip");
+	AddSetting<CStrW>("font");
+	AddSetting<bool>("scrollbar");
+	AddSetting<CStr>("scrollbar_style");
+	AddSetting<bool>("scroll_bottom");
+	AddSetting<bool>("scroll_top");
+	AddSetting<CGUISpriteInstance>("sprite");
+	AddSetting<EAlign>("text_align");
+	AddSetting<EVAlign>("text_valign");
+	AddSetting<CGUIColor>("textcolor");
+	AddSetting<CGUIColor>("textcolor_disabled");
+	AddSetting<CStrW>("tooltip");
+	AddSetting<CStr>("tooltip_style");
 
 	// Private settings
-	AddSetting(GUIST_CStrW,					"_icon_tooltip");
-	AddSetting(GUIST_CStr,					"_icon_tooltip_style");
+	AddSetting<CStrW>("_icon_tooltip");
+	AddSetting<CStr>("_icon_tooltip_style");
 
-	//GUI<bool>::SetSetting(this, "ghost", true);
-	GUI<bool>::SetSetting(this, "scrollbar", false);
-	GUI<bool>::SetSetting(this, "clip", true);
+	//SetSetting<bool>("ghost", true, true);
+	SetSetting<bool>("scrollbar", false, true);
+	SetSetting<bool>("clip", true, true);
 
 	// Add scroll-bar
-	CGUIScrollBarVertical* bar = new CGUIScrollBarVertical();
+	CGUIScrollBarVertical* bar = new CGUIScrollBarVertical(pGUI);
 	bar->SetRightAligned(true);
 	AddScrollBar(bar);
 
 	// Add text
-	AddText(new SGUIText());
+	AddText();
 }
 
 CText::~CText()
@@ -66,41 +66,30 @@ CText::~CText()
 
 void CText::SetupText()
 {
-	if (!GetGUI())
+	if (m_GeneratedTexts.empty())
 		return;
 
-	ENSURE(m_GeneratedTexts.size()>=1);
-
-	CStrW font;
-	if (GUI<CStrW>::GetSetting(this, "font", font) != PSRETURN_OK || font.empty())
-		// Use the default if none is specified
-		// TODO Gee: (2004-08-14) Don't define standard like this. Do it with the default style.
-		font = L"default";
-
-	CGUIString caption;
-	bool scrollbar;
-	GUI<CGUIString>::GetSetting(this, "caption", caption);
-	GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
+	const bool scrollbar = GetSetting<bool>("scrollbar");
 
 	float width = m_CachedActualSize.GetWidth();
 	// remove scrollbar if applicable
 	if (scrollbar && GetScrollBar(0).GetStyle())
 		width -= GetScrollBar(0).GetStyle()->m_Width;
 
+	const CGUIString& caption = GetSetting<CGUIString>("caption");
+	const CStrW& font = GetSetting<CStrW>("font");
+	const float buffer_zone = GetSetting<float>("buffer_zone");
 
-    float buffer_zone = 0.f;
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
-	*m_GeneratedTexts[0] = GetGUI()->GenerateText(caption, font, width, buffer_zone, this);
+	m_GeneratedTexts[0] = CGUIText(m_pGUI, caption, font, width, buffer_zone, this);
 
 	if (!scrollbar)
-		CalculateTextPosition(m_CachedActualSize, m_TextPos, *m_GeneratedTexts[0]);
+		CalculateTextPosition(m_CachedActualSize, m_TextPos, m_GeneratedTexts[0]);
 
 	// Setup scrollbar
 	if (scrollbar)
 	{
-		bool scroll_top = false, scroll_bottom = false;
-		GUI<bool>::GetSetting(this, "scroll_bottom", scroll_bottom);
-		GUI<bool>::GetSetting(this, "scroll_top", scroll_top);
+		const bool scroll_bottom = GetSetting<bool>("scroll_bottom");
+		const bool scroll_top = GetSetting<bool>("scroll_top");
 
 		// If we are currently scrolled to the bottom of the text,
 		// then add more lines of text, update the scrollbar so we
@@ -110,7 +99,7 @@ void CText::SetupText()
 		if (scroll_bottom && GetScrollBar(0).GetPos() > GetScrollBar(0).GetMaxPos() - 1.5f)
 			bottom = true;
 
-		GetScrollBar(0).SetScrollRange(m_GeneratedTexts[0]->m_Size.cy);
+		GetScrollBar(0).SetScrollRange(m_GeneratedTexts[0].GetSize().cy);
 		GetScrollBar(0).SetScrollSpace(m_CachedActualSize.GetHeight());
 
 		GetScrollBar(0).SetX(m_CachedActualSize.right);
@@ -139,11 +128,7 @@ void CText::HandleMessage(SGUIMessage& Message)
 		// Update scrollbar
 		if (Message.value == "scrollbar_style")
 		{
-			CStr scrollbar_style;
-			GUI<CStr>::GetSetting(this, Message.value, scrollbar_style);
-
-			GetScrollBar(0).SetScrollBarStyle(scrollbar_style);
-
+			GetScrollBar(0).SetScrollBarStyle(GetSetting<CStr>(Message.value));
 			SetupText();
 		}
 
@@ -173,10 +158,7 @@ void CText::HandleMessage(SGUIMessage& Message)
 		GetScrollBar(0).SetY(m_CachedActualSize.top);
 		GetScrollBar(0).SetZ(GetBufferedZ());
 		GetScrollBar(0).SetLength(m_CachedActualSize.bottom - m_CachedActualSize.top);
-
-		CStr scrollbar_style;
-		GUI<CStr>::GetSetting(this, "scrollbar_style", scrollbar_style);
-		GetScrollBar(0).SetScrollBarStyle(scrollbar_style);
+		GetScrollBar(0).SetScrollBarStyle(GetSetting<CStr>("scrollbar_style"));
 		break;
 	}
 
@@ -191,25 +173,16 @@ void CText::Draw()
 {
 	float bz = GetBufferedZ();
 
-	// First call draw on ScrollBarOwner
-	bool scrollbar;
-	GUI<bool>::GetSetting(this, "scrollbar", scrollbar);
+	const bool scrollbar = GetSetting<bool>("scrollbar");
 
 	if (scrollbar)
-		// Draw scrollbar
 		IGUIScrollBarOwner::Draw();
 
-	if (!GetGUI())
-		return;
+	CGUISpriteInstance& sprite = GetSetting<CGUISpriteInstance>("sprite");
+	const int cell_id = GetSetting<i32>("cell_id");
+	const bool clip = GetSetting<bool>("clip");
 
-	CGUISpriteInstance* sprite;
-	int cell_id;
-	bool clip;
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite", sprite);
-	GUI<int>::GetSetting(this, "cell_id", cell_id);
-	GUI<bool>::GetSetting(this, "clip", clip);
-
-	GetGUI()->DrawSprite(*sprite, cell_id, bz, m_CachedActualSize);
+	m_pGUI.DrawSprite(sprite, cell_id, bz, m_CachedActualSize);
 
 	float scroll = 0.f;
 	if (scrollbar)
@@ -234,32 +207,29 @@ void CText::Draw()
 		}
 	}
 
-	bool enabled;
-	GUI<bool>::GetSetting(this, "enabled", enabled);
-
-	CColor color;
-	GUI<CColor>::GetSetting(this, enabled ? "textcolor" : "textcolor_disabled", color);
+	const bool enabled = GetSetting<bool>("enabled");
+	const CGUIColor& color = GetSetting<CGUIColor>(enabled ? "textcolor" : "textcolor_disabled");
 
 	if (scrollbar)
-		DrawText(0, color, m_CachedActualSize.TopLeft() - CPos(0.f, scroll), bz+0.1f, cliparea);
+		DrawText(0, color, m_CachedActualSize.TopLeft() - CPos(0.f, scroll), bz + 0.1f, cliparea);
 	else
-		DrawText(0, color, m_TextPos, bz+0.1f, cliparea);
+		DrawText(0, color, m_TextPos, bz + 0.1f, cliparea);
 }
 
 bool CText::MouseOverIcon()
 {
-	for (SGUIText* const& guitext : m_GeneratedTexts)
-		for (const SGUIText::SSpriteCall& spritecall : guitext->m_SpriteCalls)
+	for (const CGUIText& guitext : m_GeneratedTexts)
+		for (const CGUIText::SSpriteCall& spritecall : guitext.GetSpriteCalls())
 		{
 			// Check mouse over sprite
-			if (!spritecall.m_Area.PointInside(GetMousePos() - m_CachedActualSize.TopLeft()))
+			if (!spritecall.m_Area.PointInside(m_pGUI.GetMousePos() - m_CachedActualSize.TopLeft()))
 				continue;
 
 			// If tooltip exists, set the property
 			if (!spritecall.m_Tooltip.empty())
 			{
-				SetSetting("_icon_tooltip_style", spritecall.m_TooltipStyle);
-				SetSetting("_icon_tooltip", spritecall.m_Tooltip);
+				SetSettingFromString("_icon_tooltip_style", spritecall.m_TooltipStyle, true);
+				SetSettingFromString("_icon_tooltip", spritecall.m_Tooltip, true);
 			}
 
 			return true;

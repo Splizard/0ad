@@ -1,6 +1,6 @@
 const debugLog = false;
 
-var attackerTemplate = "trigger/fauna_arctic_wolf_attack";
+var attackerTemplate = "gaia/fauna_arctic_wolf_domestic";
 
 var minWaveSize = 1;
 var maxWaveSize = 3;
@@ -37,7 +37,6 @@ Trigger.prototype.SpawnWolvesAndAttack = function()
 
 	let allTargets;
 
-	let cmpDamage = Engine.QueryInterface(SYSTEM_ENTITY, IID_Damage);
 	let players = new Array(TriggerHelper.GetNumberOfPlayers()).fill(0).map((v, i) => i + 1);
 
 	for (let spawnPoint in attackers)
@@ -52,7 +51,7 @@ Trigger.prototype.SpawnWolvesAndAttack = function()
 			continue;
 
 		// The returned entities are sorted by RangeManager already
-		let targets = cmpDamage.EntitiesNearPoint(attackerPos, 200, players).filter(ent => {
+		let targets = Attacking.EntitiesNearPoint(attackerPos, 200, players).filter(ent => {
 			let cmpIdentity = Engine.QueryInterface(ent, IID_Identity);
 			return cmpIdentity && MatchesClassList(cmpIdentity.GetClassesList(), targetClasses);
 		});

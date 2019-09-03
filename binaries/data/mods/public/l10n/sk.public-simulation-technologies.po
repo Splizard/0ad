@@ -13,11 +13,12 @@
 # Peto (wt-ts) <peter.tuharsky@gmail.com>, 2016
 # Roman 'Kaktuxista' Benji <romanbeno273@gmail.com>, 2014
 # Angen <slavomir.slovenkai@gmail.com>, 2017-2019
+# Tom Hanax, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 14:26+0000\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 16:07+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/wildfire-games/0ad/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +33,34 @@ msgid ""
 "health, 1 extra armor level of every type, 20% extra loot, 20% extra attack "
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
+msgstr "Jednotky povýšené do pokročilej triedy získajú veľa výhod: 20% extra zdravie, 1 extra pancier každého typu, 20% extra korisť, 20% extra útok pre jednotky na boj z blízka, 4m extra dostrel a lepšia presnosť pre jednotky na boj z diaľky, rýchlejší pohyb a extra rýchlosť liečenia a dosah liečiteľov."
+
+#: simulation/data/technologies/archery_tradition.jsondescription
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
 msgstr ""
+
+#: simulation/data/technologies/archery_tradition.jsontooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and "
+"-20% train time, but also -20% health."
+msgstr "Dosah +10 metrov pre jednotky s lukom. Lukostrelci lepšia prestnosť a -20% doba tréningu, ale zato aj -20% zdravia."
+
+#: simulation/data/technologies/archery_tradition.jsongenericName
+msgid "Archery Tradition"
+msgstr "Lukostrelecká tradícia"
+
+#: simulation/data/technologies/archery_tradition.jsonrequirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
+#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
+#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
+msgid "Unlocked in Village Phase."
+msgstr "Odomknuté vo fáze dediny."
 
 #: simulation/data/technologies/armor_cav_01.jsondescription
 #: simulation/data/technologies/armor_cav_chamfron.jsondescription
@@ -461,18 +489,6 @@ msgstr "Drevené výstuže nosníkov pre lodné trupy. +2 úrovne všetkých typ
 msgid "Reinforced hull"
 msgstr "Zosilnený trup"
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
-#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
-#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsonrequirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsonrequirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr "Odomknuté vo fáze dediny."
-
 #: simulation/data/technologies/attack_cav_lance.jsondescription
 msgid "A long spear made specifically for cavalry."
 msgstr "Dlhá kopija vyrobená špeciálne pre jazdu."
@@ -638,8 +654,8 @@ msgstr "Použitie železa namiesto bronzu dodalo zbraniam dodatočnú silu."
 #: simulation/data/technologies/attack_infantry_ranged_01.jsondescription
 #: simulation/data/technologies/attack_infantry_ranged_02.jsondescription
 #: simulation/data/technologies/ranged_inf_irregulars.jsondescription
-msgid "Training increases damage of ranged infantry units."
-msgstr "Tréning zvýši silu útoku jednotiek pechoty bojujúcich na diaľku."
+msgid "Training increases damage of ranged infantry."
+msgstr ""
 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsontooltip
 #: simulation/data/technologies/attack_infantry_ranged_02.jsontooltip
@@ -735,7 +751,7 @@ msgid ""
 " extra armor level of every type, 20% extra loot, 20% extra attack for melee"
 " units, 4m extra range and better precision for ranged units, faster "
 "movement speeds and extra heal speed and range for healers."
-msgstr ""
+msgstr "Jednotky povýšené do elitnej triedy získajú veľa výhod: 20% extra zdravie, 1 extra pancier každého typu, 20% extra korisť, 20% extra útok pre jednotky na boj z blízka, 4m extra dostrel a lepšia presnosť pre jednotky na boj z diaľky, rýchlejší pohyb a extra rýchlosť liečenia a dosah liečiteľov."
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsondescription
 msgid "Breeding livestock for food."
@@ -833,7 +849,7 @@ msgstr "Tréning v zberaní"
 
 #: simulation/data/technologies/gather_fishing_net.jsondescription
 msgid "Nets improve the productivity of fishing boats."
-msgstr ""
+msgstr "Siete zlepšujú produktivitu rybárskych lodí."
 
 #: simulation/data/technologies/gather_fishing_net.jsontooltip
 msgid ""
@@ -1069,7 +1085,7 @@ msgid ""
 "The loom allowed the creation of finer clothing for settlers. Women of the "
 "household were taught from a young age how to weave on the loom, and "
 "subsequently spent a large share of their lives working with it."
-msgstr ""
+msgstr "Tkáčsky stav umožnil vytvorenie jemnejšieho oblečenia pre obyvateľov. Ženy v domácnosti sa už od mladého veku učili, ako na ňom tkať, a následne pri práci s ním strávili aj prevažnú časť svojho života."
 
 #: simulation/data/technologies/health_females_01.jsontooltip
 msgid "+50% health for female citizens."
@@ -1447,72 +1463,72 @@ msgid "Amentum"
 msgstr "Amentum"
 
 #: simulation/data/technologies/siege_armor.jsondescription
-msgid "Increased armor on siege weapons"
-msgstr "Zlepšená zbroj obliehacích zbraní"
+msgid "Increased armor on siege engines."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsontooltip
-msgid "All Siege weapons +2 Hack armor levels."
-msgstr "Všetky obliehacie zbrane +2 úrovne sečnej zbroje."
+msgid "Siege Engines +2 hack armor."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsongenericName
 msgid "Armor plating"
 msgstr "Pancierovanie"
 
 #: simulation/data/technologies/siege_attack.jsondescription
-msgid "Advanced technologies improve siege efficiency"
-msgstr "Pokročilé technológie zlepšujú efektivitu obliehaní"
+msgid "Advanced technologies improve siege efficiency."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsontooltip
-msgid "All siege weapons +25% Crush damage."
-msgstr "Všetky obliehacie stroje +25% drviaci útok."
+msgid "Siege Engines +25% attack crush damage."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsongenericName
 msgid "Advanced Siege"
 msgstr "Pokročilé obliehanie"
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsondescription
-msgid "Improvement to projectile accuracy"
-msgstr "Zlepšenie presnosti striel"
+msgid "Improvement to projectile accuracy."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsontooltip
-msgid "Bolt shooter increased accuracy."
-msgstr "Zvyšuje presnosť vrhačov šípov."
+msgid "Bolt Shooters −20% ranged attack spread."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsongenericName
 msgid "Bolt Accuracy"
 msgstr "Presnosť šípov"
 
 #: simulation/data/technologies/siege_cost_metal.jsondescription
-msgid "Siege weapons require less metal resource"
-msgstr "Obliehacie zbrane vyžadujú menej kovu"
+msgid "Siege engines require less metal."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsontooltip
-msgid "Siege weapons cost 20% less metal"
-msgstr "Obliehacie zbrane stoja o 20% menej kovu"
+msgid "Siege Engines −20% metal cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsongenericName
 msgid "Metalworker"
 msgstr "Kováč"
 
 #: simulation/data/technologies/siege_cost_wood.jsondescription
-msgid "Siege weapons cost less wood"
-msgstr "Obliehacie zbrane stoja menej dreva"
+msgid "Siege engines require less wood."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsontooltip
-msgid "Siege weapons cost 20% less wood"
-msgstr "Obliehacie zbrane stoja o 20% menej dreva"
+msgid "Siege Engines −20% wood cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsongenericName
 msgid "Artillery Instructors"
 msgstr "Inštruktori delostrelectva"
 
 #: simulation/data/technologies/siege_packing.jsondescription
-msgid "Immobile siege weapons are assembled and disassembled faster"
-msgstr "Nepohyblivé obliehacie zbrane budú môcť byť zmontované a rozmontované rýchlejšie."
+msgid "Immobile siege engines are assembled and disassembled faster."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsontooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
-msgstr "-25% čas rozbalenia a skladania pre nepohyblivé obliehacie stroje."
+msgid "Siege Engines −25% pack and unpack time."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsongenericName
 msgid "Military Engineers"
@@ -1711,7 +1727,7 @@ msgstr "Pokročilé remeselníctvo"
 msgid ""
 "Significantly increase training speed of soldiers at the Barracks by "
 "training them in large batches or battalions."
-msgstr ""
+msgstr "Rýchlosť tréningu vojakov v Kasárňach sa podstatne zvýši vďaka ich trénovaniu vo väčších skupinách alebo práporoch."
 
 #: simulation/data/technologies/training_conscription.jsontooltip
 #: simulation/data/technologies/persians/training_conscription_infantry.jsontooltip
@@ -1863,7 +1879,7 @@ msgstr "Povoľ podplácanie jednotiek druhých hráčov pre zdieľanie toho, čo
 
 #: simulation/data/technologies/unlock_spies.jsongenericName
 msgid "Espionage"
-msgstr ""
+msgstr "Špionáž"
 
 #: simulation/data/technologies/upgrade_rank_advanced_cavalry.jsondescription
 #: simulation/data/technologies/upgrade_rank_elite_cavalry.jsondescription
@@ -2430,7 +2446,7 @@ msgstr "Aténske Dlhé múry"
 msgid ""
 "+25% HP and -50% build time for Civic Centers, Temples, Pyramids and "
 "Wonders."
-msgstr ""
+msgstr "+25% HP a -50% času výstavby pre Občianske Centrá, Chrámy, Pyramídy a Divy sveta."
 
 #: simulation/data/technologies/kushites/monumental_architecture.jsongenericName
 msgid "Monumental Architecture"
@@ -2449,24 +2465,6 @@ msgstr "Trénuje elitnú hodnosť liečiteľov."
 #: simulation/data/technologies/kushites/upgrade_rank_elite_healer.jsongenericName
 msgid "Divine Instruction"
 msgstr ""
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsondescription
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr "Indovia mali tradíciu skvelej lukostreľby a sklon k používaniu lukostrelcov v bitke vo veľkom."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsontooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsontooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and "
-"-20% train time, but also -20% health."
-msgstr "Dosah +10 metrov pre jednotky s lukom. Lukostrelci lepšia prestnosť a -20% doba tréningu, ale zato aj -20% zdravia."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsongenericName
-#: simulation/data/technologies/persians/special_archery_tradition.jsongenericName
-msgid "Archery Tradition"
-msgstr "Lukostrelecká tradícia"
 
 #: simulation/data/technologies/persians/immortals.jsondescription
 msgid ""
@@ -2500,12 +2498,6 @@ msgstr "Všetky perzské budovy +25% životnosti a obsadzovacích bodov, ale tie
 msgid "Persian Architecture"
 msgstr "Perzská architektúra"
 
-#: simulation/data/technologies/persians/special_archery_tradition.jsondescription
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed"
-" archers in battle."
-msgstr "Peržania mali tradíciu presnej lukostreľby a záľubu v masovom používaní lukostrelcov v bitke. "
-
 #: simulation/data/technologies/persians/special_equine_transports.jsondescription
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2518,8 +2510,8 @@ msgid ""
 msgstr "Raní achaemenidskí vládcovia konali v záujme toho, aby sa Perzia stala prvou veľkou ázijskou ríšou, ktorej sa podarí ovládnuť moria. Veľký kráľ priateľsky vystupoval voči mnohým prímorským národom za účelom zaistenia si ich služieb, avšak podnikal aj rôzne námorné iniciatívy. Počas vlády Dáriusa Veľkého bol napríklad v Egypte vybudovaný kanál a perzské námorníctvo zase vyslané preskúmať rieku Indus. Podľa Herodota bolo asi 300 lodí v perzskej flotile uspôsobených tak, aby boli schopné prevážať kone a ich jazdcov."
 
 #: simulation/data/technologies/persians/special_equine_transports.jsontooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
-msgstr "Fénické trirémy získajú schopnosť trénovať jednotky jazdy."
+msgid "Phoenician Triremes gain the ability to train cavalry."
+msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.jsongenericName
 msgid "Equine Transports"
@@ -2608,9 +2600,9 @@ msgstr "Helénske metropoly"
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsondescription
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
-msgstr "Podstatne zvýši rýchlosť tréningu šampiónov a obliehacích zbraní v pevnosti ich trénovaním vo väčších skupinách alebo práporoch."
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
+msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsontooltip
 msgid "Faster batch training speed for the Fortress."

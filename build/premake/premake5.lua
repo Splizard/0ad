@@ -6,7 +6,7 @@ newoption { trigger = "icc", description = "Use Intel C++ Compiler (Linux only; 
 newoption { trigger = "jenkins-tests", description = "Configure CxxTest to use the XmlPrinter runner which produces Jenkins-compatible output" }
 newoption { trigger = "minimal-flags", description = "Only set compiler/linker flags that are really needed. Has no effect on Windows builds" }
 newoption { trigger = "outpath", description = "Location for generated project files" }
-newoption { trigger = "with-system-mozjs38", description = "Search standard paths for libmozjs38, instead of using bundled copy" }
+newoption { trigger = "with-system-mozjs45", description = "Search standard paths for libmozjs45, instead of using bundled copy" }
 newoption { trigger = "with-system-nvtt", description = "Search standard paths for nvidia-texture-tools library, instead of using bundled copy" }
 newoption { trigger = "without-audio", description = "Disable use of OpenAL/Ogg/Vorbis APIs" }
 newoption { trigger = "without-lobby", description = "Disable the use of gloox and the multiplayer lobby" }
@@ -14,6 +14,9 @@ newoption { trigger = "without-miniupnpc", description = "Disable use of miniupn
 newoption { trigger = "without-nvtt", description = "Disable use of NVTT" }
 newoption { trigger = "without-pch", description = "Disable generation and usage of precompiled headers" }
 newoption { trigger = "without-tests", description = "Disable generation of test projects" }
+
+-- Linux/BSD specific options
+newoption { trigger = "prefer-local-libs", description = "Prefer locally built libs. Any local libraries used must also be listed within a file within /etc/ld.so.conf.d so the dynamic linker can find them at runtime." }
 
 -- OS X specific options
 newoption { trigger = "macosx-bundle", description = "Enable OSX bundle, the argument is the bundle identifier string (e.g. com.wildfiregames.0ad)" }
@@ -345,6 +348,10 @@ function project_set_build_flags()
 		end
 
 		if os.istarget("linux") or os.istarget("bsd") then
+			if _OPTIONS["prefer-local-libs"] then
+				libdirs { "/usr/local/lib" }
+			end
+
 			-- To use our local shared libraries, they need to be found in the
 			-- runtime dynamic linker path. Add their path to -rpath.
 			if _OPTIONS["libdir"] then
@@ -364,23 +371,6 @@ function project_set_build_flags()
 			end
 		end
 
-	end
-end
-
--- add X11 includes paths after all the others so they don't conflict with
--- bundled libs
-function project_add_x11_dirs()
-	if not os.istarget("windows") and not os.istarget("macosx") then
-		-- X11 includes may be installed in one of a gadzillion of five places
-		-- Famous last words: "You can't include too much! ;-)"
-		sysincludedirs {
-			"/usr/X11R6/include/X11",
-			"/usr/X11R6/include",
-			"/usr/local/include/X11",
-			"/usr/local/include",
-			"/usr/include/X11"
-		}
-		libdirs { "/usr/X11R6/lib" }
 	end
 end
 
@@ -528,7 +518,6 @@ function setup_static_lib_project (project_name, rel_source_dirs, extern_libs, e
 	project_create(project_name, target_type)
 	project_add_contents(source_root, rel_source_dirs, {}, extra_params)
 	project_add_extern_libs(extern_libs, target_type)
-	project_add_x11_dirs()
 
 	if not extra_params["no_default_link"] then
 		table.insert(static_lib_names, project_name)
@@ -536,6 +525,8 @@ function setup_static_lib_project (project_name, rel_source_dirs, extern_libs, e
 
 	if os.istarget("windows") then
 		rtti "off"
+	elseif os.istarget("macosx") and _OPTIONS["macosx-version-min"] then
+		xcodebuildsettings { MACOSX_DEPLOYMENT_TARGET = _OPTIONS["macosx-version-min"] }
 	end
 end
 
@@ -551,7 +542,6 @@ function setup_shared_lib_project (project_name, rel_source_dirs, extern_libs, e
 	project_create(project_name, target_type)
 	project_add_contents(source_root, rel_source_dirs, {}, extra_params)
 	project_add_extern_libs(extern_libs, target_type)
-	project_add_x11_dirs()
 
 	if not extra_params["no_default_link"] then
 		table.insert(static_lib_names, project_name)
@@ -560,6 +550,8 @@ function setup_shared_lib_project (project_name, rel_source_dirs, extern_libs, e
 	if os.istarget("windows") then
 		rtti "off"
 		links { "delayimp" }
+	elseif os.istarget("macosx") and _OPTIONS["macosx-version-min"] then
+		xcodebuildsettings { MACOSX_DEPLOYMENT_TARGET = _OPTIONS["macosx-version-min"] }
 	end
 end
 
@@ -961,7 +953,6 @@ function setup_main_exe ()
 	}
 	project_add_contents(source_root, {}, {}, extra_params)
 	project_add_extern_libs(used_extern_libs, target_type)
-	project_add_x11_dirs()
 
 	dependson { "Collada" }
 
@@ -1034,7 +1025,9 @@ function setup_main_exe ()
 
 		links { "pthread" }
 		links { "ApplicationServices.framework", "Cocoa.framework", "CoreFoundation.framework" }
-
+		if _OPTIONS["macosx-version-min"] then
+			xcodebuildsettings { MACOSX_DEPLOYMENT_TARGET = _OPTIONS["macosx-version-min"] }
+		end
 	end
 end
 
@@ -1057,7 +1050,6 @@ function setup_atlas_project(project_name, target_type, rel_source_dirs, rel_inc
 
 	project_add_contents(source_root, rel_source_dirs, rel_include_dirs, extra_params)
 	project_add_extern_libs(extern_libs, target_type)
-	project_add_x11_dirs()
 
 	-- Platform Specifics
 	if os.istarget("windows") then
@@ -1108,8 +1100,7 @@ function setup_atlas_projects()
 	},{	-- extern_libs
 		"boost",
 		"iconv",
-		"libxml2",
-		"wxwidgets"
+		"libxml2"
 	},{	-- extra_params
 		no_pch = 1
 	})
@@ -1180,7 +1171,6 @@ function setup_atlas_frontend_project (project_name)
 
 	local target_type = get_main_project_target_type()
 	project_create(project_name, target_type)
-	project_add_x11_dirs()
 
 	local source_root = rootdir.."/source/tools/atlas/AtlasFrontends/"
 	files { source_root..project_name..".cpp" }
@@ -1220,7 +1210,6 @@ function setup_collada_project(project_name, target_type, rel_source_dirs, rel_i
 	extra_params["pch_dir"] = source_root
 	project_add_contents(source_root, rel_source_dirs, rel_include_dirs, extra_params)
 	project_add_extern_libs(extern_libs, target_type)
-	project_add_x11_dirs()
 
 	-- Platform Specifics
 	if os.istarget("windows") then
@@ -1356,7 +1345,6 @@ function setup_tests()
 	links { "mocks_test" }
 	if _OPTIONS["atlas"] then
 		links { "AtlasObject" }
-		project_add_extern_libs({"wxwidgets"}, target_type)
 	end
 	extra_params = {
 		extra_files = { "test_setup.cpp" },
@@ -1364,7 +1352,6 @@ function setup_tests()
 
 	project_add_contents(source_root, {}, {}, extra_params)
 	project_add_extern_libs(used_extern_libs, target_type)
-	project_add_x11_dirs()
 
 	dependson { "Collada" }
 
@@ -1419,6 +1406,9 @@ function setup_tests()
 		filter { }
 
 		includedirs { source_root .. "pch/test/" }
+
+	elseif os.istarget("macosx") and _OPTIONS["macosx-version-min"] then
+		xcodebuildsettings { MACOSX_DEPLOYMENT_TARGET = _OPTIONS["macosx-version-min"] }
 	end
 end
 

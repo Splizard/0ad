@@ -42,15 +42,19 @@ extern const double SELECT_DBLCLICK_RATE;
  */
 struct SGUIStyle
 {
+	// Take advantage of moving the entire map instead and avoiding unintended copies.
+	NONCOPYABLE(SGUIStyle);
+	MOVABLE(SGUIStyle);
+	SGUIStyle() = default;
+
 	std::map<CStr, CStrW> m_SettingsDefaults;
 };
 
 class JSObject; // The GUI stores a JSObject*, so needs to know that JSObject exists
 class IGUIObject;
 class CGUISpriteInstance;
-struct SGUIText;
-struct CColor;
-struct SGUIText;
+struct CGUIColor;
+class CGUIText;
 struct SGUIIcon;
 class CGUIString;
 class CGUISprite;
@@ -67,12 +71,9 @@ class CGUI
 {
 	NONCOPYABLE(CGUI);
 
-	friend class IGUIObject;
-	friend class CInternalCGUIAccessorBase;
-
 private:
 	// Private typedefs
-	typedef IGUIObject *(*ConstructObjectFunction)();
+	using ConstructObjectFunction = IGUIObject* (*)(CGUI&);
 
 public:
 	CGUI(const shared_ptr<ScriptRuntime>& runtime);
@@ -97,6 +98,14 @@ public:
 	void SendEventToAll(const CStr& EventName);
 
 	/**
+	 * Sends a specified script event to every object
+	 *
+	 * @param EventName String representation of event name
+	 * @param paramData JS::HandleValueArray storing the arguments passed to the event handler.
+	 */
+	void SendEventToAll(const CStr& EventName, const JS::HandleValueArray& paramData);
+
+	/**
 	 * Displays the whole GUI
 	 */
 	void Draw();
@@ -113,17 +122,6 @@ public:
 	 * @param Clipping The sprite shouldn't be drawn outside this rectangle
 	 */
 	void DrawSprite(const CGUISpriteInstance& Sprite, int CellID, const float& Z, const CRect& Rect, const CRect& Clipping = CRect());
-
-	/**
-	 * Draw a SGUIText object
-	 *
-	 * @param Text Text object.
-	 * @param DefaultColor Color used if no tag applied.
-	 * @param pos position
-	 * @param z z value.
-	 * @param clipping
-	 */
-	void DrawText(SGUIText& Text, const CColor& DefaultColor, const CPos& pos, const float& z, const CRect& clipping);
 
 	/**
 	 * Clean up, call this to clean up all memory allocated
@@ -150,13 +148,17 @@ public:
 	void LoadXmlFile(const VfsPath& Filename, boost::unordered_set<VfsPath>& Paths);
 
 	/**
+	 * Return the object which is an ancestor of every other GUI object.
+	 */
+	IGUIObject* GetBaseObject() const { return m_BaseObject; };
+
+	/**
 	 * Checks if object exists and return true or false accordingly
 	 *
 	 * @param Name String name of object
 	 * @return true if object exists
 	 */
 	bool ObjectExists(const CStr& Name) const;
-
 
 	/**
 	 * Returns the GUI object with the desired name, or NULL
@@ -171,6 +173,16 @@ public:
 	 * Returns the GUI object under the mouse, or NULL if none.
 	 */
 	IGUIObject* FindObjectUnderMouse() const;
+
+	/**
+	 * Returns the current screen coordinates of the cursor.
+	 */
+	const CPos& GetMousePos() const { return m_MousePos; };
+
+	/**
+	 * Returns the currently pressed mouse buttons.
+	 */
+	const unsigned int& GetMouseButtons() { return m_MouseButtons; };
 
 	const SGUIScrollBarStyle* GetScrollBarStyle(const CStr& style) const;
 
@@ -203,45 +215,37 @@ public:
 	void UpdateResolution();
 
 	/**
-	 * Generate a SGUIText object from the inputted string.
-	 * The function will break down the string and its
-	 * tags to calculate exactly which rendering queries
-	 * will be sent to the Renderer. Also, horizontal alignment
-	 * is taken into acount in this method but NOT vertical alignment.
-	 *
-	 * Done through the CGUI since it can communicate with
-	 *
-	 * @param Text Text to generate SGUIText object from
-	 * @param Font Default font, notice both Default color and default font
-	 *		  can be changed by tags.
-	 * @param Width Width, 0 if no word-wrapping.
-	 * @param BufferZone space between text and edge, and space between text and images.
-	 * @param pObject Optional parameter for error output. Used *only* if error parsing fails,
-	 *		  and we need to be able to output which object the error occurred in to aid the user.
-	 */
-	SGUIText GenerateText(const CGUIString& Text, const CStrW& Font, const float& Width, const float& BufferZone, const IGUIObject* pObject = NULL);
-
-
-	/**
 	 * Check if an icon exists
 	 */
-	bool IconExists(const CStr& str) const { return (m_Icons.count(str) != 0); }
+	bool HasIcon(const CStr& name) const { return (m_Icons.count(name) != 0); }
 
 	/**
-	 * Get Icon (a copy, can never be changed)
+	 * Get Icon (a const reference, can never be changed)
 	 */
-	SGUIIcon GetIcon(const CStr& str) const { return m_Icons.find(str)->second; }
+	const SGUIIcon& GetIcon(const CStr& name) const { return m_Icons.at(name); }
 
 	/**
-	 * Get pre-defined color (if it exists)
-	 * Returns false if it fails.
+	 * Check if a style exists
 	 */
-	bool GetPreDefinedColor(const CStr& name, CColor& Output) const;
+	bool HasStyle(const CStr& name) const { return (m_Styles.count(name) != 0); }
+
+	/**
+	 * Get Style if it exists, otherwise throws an exception.
+	 */
+	const SGUIStyle& GetStyle(const CStr& name) const { return m_Styles.at(name); }
+
+	/**
+	 * Check if a predefined color of that name exists.
+	 */
+	bool HasPreDefinedColor(const CStr& name) const { return (m_PreDefinedColors.count(name) != 0); }
+
+	/**
+	 * Resolve the predefined color if it exists, otherwise throws an exception.
+	 */
+	const CGUIColor& GetPreDefinedColor(const CStr& name) const { return m_PreDefinedColors.at(name); }
 
 	shared_ptr<ScriptInterface> GetScriptInterface() { return m_ScriptInterface; };
 	JS::Value GetGlobalObject() { return m_ScriptInterface->GetGlobalObject(); };
-
-private:
 
 	/**
 	 * Updates the object pointers, needs to be called each
@@ -254,6 +258,7 @@ private:
 	 */
 	void UpdateObjects();
 
+private:
 	/**
 	 * Adds an object to the GUI's object database
 	 * Private, since you can only add objects through
@@ -274,12 +279,12 @@ private:
 	 */
 	IGUIObject* ConstructObject(const CStr& str);
 
+public:
 	/**
 	 * Get Focused Object.
 	 */
 	IGUIObject* GetFocusedObject() { return m_FocusedObject; }
 
-public:
 	/**
 	 * Change focus to new object.
 	 * Will send LOST_FOCUS/GOT_FOCUS messages as appropriate.
@@ -287,7 +292,21 @@ public:
 	 */
 	void SetFocusedObject(IGUIObject* pObject);
 
+	/**
+	 * Reads a string value and modifies the given value of type T if successful.
+	 * Does not change the value upon conversion failure.
+	 *
+	 * @param pGUI The GUI page which may contain data relevant to the parsing
+	 *             (for example predefined colors).
+	 * @param Value The value in string form, like "0 0 100% 100%"
+	 * @param tOutput Parsed value of type T
+	 * @return True at success.
+	 */
+	template <typename T>
+	static bool ParseString(const CGUI* pGUI, const CStrW& Value, T& tOutput);
+
 private:
+
 	//--------------------------------------------------------
 	/** @name XML Reading Xeromyces specific subroutines
 	 *
@@ -559,14 +578,6 @@ private:
 	// Tooltip
 	GUITooltip m_Tooltip;
 
-	/**
-	 * This is a bank of custom colors, it is simply a look up table that
-	 * will return a color object when someone inputs the name of that
-	 * color. Of course the colors have to be declared in XML, there are
-	 * no hard-coded values.
-	 */
-	std::map<CStr, CColor>	m_PreDefinedColors;
-
 	//@}
 	//--------------------------------------------------------
 	/** @name Objects */
@@ -621,19 +632,24 @@ private:
 
 	//--------------------------------------------------------
 	//	Databases
+	//	These are loaded from XML files and marked as noncopyable and const to
+	//	rule out unintentional modification and copy, especially during Draw calls.
 	//--------------------------------------------------------
 
+	// Colors
+	std::map<CStr, const CGUIColor> m_PreDefinedColors;
+
 	// Sprites
-	std::map<CStr, CGUISprite*> m_Sprites;
+	std::map<CStr, const CGUISprite*> m_Sprites;
 
 	// Styles
-	std::map<CStr, SGUIStyle> m_Styles;
+	std::map<CStr, const SGUIStyle> m_Styles;
 
 	// Scroll-bar styles
-	std::map<CStr, SGUIScrollBarStyle> m_ScrollBarStyles;
+	std::map<CStr, const SGUIScrollBarStyle> m_ScrollBarStyles;
 
 	// Icons
-	std::map<CStr, SGUIIcon> m_Icons;
+	std::map<CStr, const SGUIIcon> m_Icons;
 };
 
 #endif // INCLUDED_CGUI

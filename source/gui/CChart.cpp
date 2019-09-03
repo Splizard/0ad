@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -16,8 +16,12 @@
  */
 
 #include "precompiled.h"
+
 #include "CChart.h"
 
+#include "gui/CGUIColor.h"
+#include "gui/CGUIString.h"
+#include "gui/GUIMatrix.h"
 #include "graphics/ShaderManager.h"
 #include "i18n/L10n.h"
 #include "lib/ogl.h"
@@ -27,21 +31,22 @@
 
 #include <cmath>
 
-CChart::CChart()
+CChart::CChart(CGUI& pGUI)
+	: IGUIObject(pGUI), IGUITextOwner(pGUI)
 {
-	AddSetting(GUIST_CColor, "axis_color");
-	AddSetting(GUIST_float, "axis_width");
-	AddSetting(GUIST_float, "buffer_zone");
-	AddSetting(GUIST_CStrW, "font");
-	AddSetting(GUIST_CStrW, "format_x");
-	AddSetting(GUIST_CStrW, "format_y");
-	AddSetting(GUIST_CGUIList, "series_color");
-	AddSetting(GUIST_CGUISeries, "series");
-	AddSetting(GUIST_EAlign, "text_align");
+	AddSetting<CGUIColor>("axis_color");
+	AddSetting<float>("axis_width");
+	AddSetting<float>("buffer_zone");
+	AddSetting<CStrW>("font");
+	AddSetting<CStrW>("format_x");
+	AddSetting<CStrW>("format_y");
+	AddSetting<CGUIList>("series_color");
+	AddSetting<CGUISeries>("series");
+	AddSetting<EAlign>("text_align");
 
-	GUI<float>::GetSetting(this, "axis_width", m_AxisWidth);
-	GUI<CStrW>::GetSetting(this, "format_x", m_FormatX);
-	GUI<CStrW>::GetSetting(this, "format_y", m_FormatY);
+	m_AxisWidth = GetSetting<float>("axis_width");
+	m_FormatX = GetSetting<CStrW>("format_x");
+	m_FormatY = GetSetting<CStrW>("format_y");
 }
 
 CChart::~CChart()
@@ -55,9 +60,9 @@ void CChart::HandleMessage(SGUIMessage& Message)
 	{
 	case GUIM_SETTINGS_UPDATED:
 	{
-		GUI<float>::GetSetting(this, "axis_width", m_AxisWidth);
-		GUI<CStrW>::GetSetting(this, "format_x", m_FormatX);
-		GUI<CStrW>::GetSetting(this, "format_y", m_FormatY);
+		m_AxisWidth = GetSetting<float>("axis_width");
+		m_FormatX = GetSetting<CStrW>("format_x");
+		m_FormatY = GetSetting<CStrW>("format_y");
 
 		UpdateSeries();
 		break;
@@ -65,7 +70,7 @@ void CChart::HandleMessage(SGUIMessage& Message)
 	}
 }
 
-void CChart::DrawLine(const CShaderProgramPtr& shader, const CColor& color, const std::vector<float>& vertices) const
+void CChart::DrawLine(const CShaderProgramPtr& shader, const CGUIColor& color, const std::vector<float>& vertices) const
 {
 	shader->Uniform(str_color, color);
 	shader->VertexPointer(3, GL_FLOAT, 0, &vertices[0]);
@@ -79,7 +84,7 @@ void CChart::DrawLine(const CShaderProgramPtr& shader, const CColor& color, cons
 	glDisable(GL_LINE_SMOOTH);
 }
 
-void CChart::DrawTriangleStrip(const CShaderProgramPtr& shader, const CColor& color, const std::vector<float>& vertices) const
+void CChart::DrawTriangleStrip(const CShaderProgramPtr& shader, const CGUIColor& color, const std::vector<float>& vertices) const
 {
 	shader->Uniform(str_color, color);
 	shader->VertexPointer(3, GL_FLOAT, 0, &vertices[0]);
@@ -103,17 +108,12 @@ void CChart::DrawAxes(const CShaderProgramPtr& shader) const
 	ADD(m_CachedActualSize.left, m_CachedActualSize.top);
 	ADD(rect.left, rect.top - m_AxisWidth);
 #undef ADD
-	CColor axis_color(0.5f, 0.5f, 0.5f, 1.f);
-	GUI<CColor>::GetSetting(this, "axis_color", axis_color);
-	DrawTriangleStrip(shader, axis_color, vertices);
+	DrawTriangleStrip(shader, GetSetting<CGUIColor>("axis_color"), vertices);
 }
 
 void CChart::Draw()
 {
 	PROFILE3("render chart");
-
-	if (!GetGUI())
-		return;
 
 	if (m_Series.empty())
 		return;
@@ -169,7 +169,7 @@ void CChart::Draw()
 	glDepthMask(1);
 
 	for (size_t i = 0; i < m_TextPositions.size(); ++i)
-		DrawText(i, CColor(1.f, 1.f, 1.f, 1.f), m_TextPositions[i], bz + 0.5f);
+		DrawText(i, CGUIColor(1.f, 1.f, 1.f, 1.f), m_TextPositions[i], bz + 0.5f);
 }
 
 CRect CChart::GetChartRect() const
@@ -182,22 +182,19 @@ CRect CChart::GetChartRect() const
 
 void CChart::UpdateSeries()
 {
-	CGUISeries* pSeries;
-	GUI<CGUISeries>::GetSettingPointer(this, "series", pSeries);
-
-	CGUIList* pSeriesColor;
-	GUI<CGUIList>::GetSettingPointer(this, "series_color", pSeriesColor);
+	const CGUISeries& pSeries = GetSetting<CGUISeries>("series");
+	const CGUIList& pSeriesColor = GetSetting<CGUIList>("series_color");
 
 	m_Series.clear();
-	m_Series.resize(pSeries->m_Series.size());
-	for (size_t i = 0; i < pSeries->m_Series.size(); ++i)
+	m_Series.resize(pSeries.m_Series.size());
+	for (size_t i = 0; i < pSeries.m_Series.size(); ++i)
 	{
 		CChartData& data = m_Series[i];
 
-		if (i < pSeriesColor->m_Items.size() && !GUI<int>::ParseColor(pSeriesColor->m_Items[i].GetOriginalString(), data.m_Color, 0))
-			LOGWARNING("GUI: Error parsing 'series_color' (\"%s\")", utf8_from_wstring(pSeriesColor->m_Items[i].GetOriginalString()));
+		if (i < pSeriesColor.m_Items.size() && !data.m_Color.ParseString(m_pGUI, pSeriesColor.m_Items[i].GetOriginalString().ToUTF8(), 0))
+			LOGWARNING("GUI: Error parsing 'series_color' (\"%s\")", utf8_from_wstring(pSeriesColor.m_Items[i].GetOriginalString()));
 
-		data.m_Points = pSeries->m_Series[i];
+		data.m_Points = pSeries.m_Series[i];
 	}
 	UpdateBounds();
 
@@ -206,26 +203,17 @@ void CChart::UpdateSeries()
 
 void CChart::SetupText()
 {
-	if (!GetGUI())
-		return;
-
-	for (SGUIText* t : m_GeneratedTexts)
-		delete t;
 	m_GeneratedTexts.clear();
 	m_TextPositions.clear();
 
 	if (m_Series.empty())
 		return;
 
-	CStrW font;
-	if (GUI<CStrW>::GetSetting(this, "font", font) != PSRETURN_OK || font.empty())
-		font = L"default";
-
-	float buffer_zone = 0.f;
-	GUI<float>::GetSetting(this, "buffer_zone", buffer_zone);
+	const CStrW& font = GetSetting<CStrW>("font");
+	const float buffer_zone = GetSetting<float>("buffer_zone");
 
 	// Add Y-axis
-	GUI<CStrW>::GetSetting(this, "format_y", m_FormatY);
+	m_FormatY = GetSetting<CStrW>("format_y");
 	const float height = GetChartRect().GetHeight();
 	// TODO: split values depend on the format;
 	if (m_EqualY)
@@ -242,7 +230,7 @@ void CChart::SetupText()
 		}
 
 	// Add X-axis
-	GUI<CStrW>::GetSetting(this, "format_x", m_FormatX);
+	m_FormatX = GetSetting<CStrW>("format_x");
 	const float width = GetChartRect().GetWidth();
 	if (m_EqualX)
 	{
@@ -270,7 +258,7 @@ CSize CChart::AddFormattedValue(const CStrW& format, const float value, const CS
 	else if (format == L"INTEGER")
 	{
 		wchar_t buffer[64];
-		swprintf(buffer, 64, L"%d", static_cast<int>(value));
+		swprintf(buffer, 64, L"%d", std::lround(value));
 		gui_str.SetValue(buffer);
 	}
 	else if (format == L"DURATION_SHORT")
@@ -280,15 +268,19 @@ CSize CChart::AddFormattedValue(const CStrW& format, const float value, const CS
 		swprintf(buffer, 64, L"%d:%02d", seconds / 60, seconds % 60);
 		gui_str.SetValue(buffer);
 	}
+	else if (format == L"PERCENTAGE")
+	{
+		wchar_t buffer[64];
+		swprintf(buffer, 64, L"%d%%", std::lround(value));
+		gui_str.SetValue(buffer);
+	}
 	else
 	{
 		LOGERROR("Unsupported chart format: " + format.EscapeToPrintableASCII());
 		return CSize();
 	}
-	SGUIText* text = new SGUIText();
-	*text = GetGUI()->GenerateText(gui_str, font, 0, buffer_zone, this);
-	AddText(text);
-	return text->m_Size;
+
+	return AddText(gui_str, font, 0, buffer_zone, this).GetSize();
 }
 
 void CChart::UpdateBounds()

@@ -3,7 +3,10 @@
 # This file is distributed under the same license as the 0 A.D. — Empires Ascendant project.
 # 
 # Translators:
+# azayrahmad <azayrahmad@gmail.com>, 2019
 # Bagus Yogatama <bagusyogatama21@gmail.com>, 2018
+# donny widi <citozpremium@gmail.com>, 2019
+# febri afud <febriafud12@gmail.com>, 2019
 # Joshua Randiny <jrandiny2@gmail.com>, 2016
 # kaipunk djaja <ucilucryt@gmail.com>, 2017
 # Samuel <srandiny@gmail.com>, 2016
@@ -11,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 18:04+0000\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 18:07+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/wildfire-games/0ad/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -26,58 +29,55 @@ msgid "Dockyard Repairs"
 msgstr "Perbaikan dari Galangan"
 
 #: simulation/data/auras/structures/cart_super_dock_repair.jsonauraDescription
-msgid "Repairs garrisoned ship at 10 HP per second."
-msgstr "Memperbaiki kapal yang berlabuh sebesar 10 HP per detik"
+msgid "Garrisoned Ships +10 health regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/structures/epic_temple_heal.jsonauraName
 msgid "Blessing of the Gods"
 msgstr "Berkat dari Dewa"
 
 #: simulation/data/auras/structures/epic_temple_heal.jsonauraDescription
-msgid "Heals units at 3 HP per second."
-msgstr "Menyembuhkan unit sebesar 3 nyawa per detik"
+msgid "Humans +3 health regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/structures/iber_monument.jsonauraName
 msgid "Religious Fervor"
 msgstr "Semangat Keagamaan"
 
 #: simulation/data/auras/structures/iber_monument.jsonauraDescription
-msgid "+20% attack damage for soldiers."
-msgstr "+20% serangan untuk prajurit."
+msgid "Soldiers +20% melee and ranged attack damage."
+msgstr ""
 
 #: simulation/data/auras/structures/kush_pyramids_economic.jsonauraName
 msgid "Patriotism"
 msgstr "Patriotisme"
 
 #: simulation/data/auras/structures/kush_pyramids_economic.jsonauraDescription
-msgid "Workers +15% gather rates near pyramids."
-msgstr "Kecepatan Pekerja mengumpulkan +15% di dekat Piramida"
+msgid "Workers +15% gather speed."
+msgstr ""
 
 #: simulation/data/auras/structures/kush_pyramids_military.jsonauraName
 msgid "Exhortative Presence"
-msgstr ""
+msgstr "Wibawa Penyemangat"
 
 #: simulation/data/auras/structures/kush_pyramids_military.jsonauraDescription
-msgid "Soldiers near Large Pyramids +10% attack."
-msgstr "Serangan prajurit +10% saat dekat Piramida Besar"
+msgid "Soldiers +10% melee and ranged attack damage."
+msgstr ""
 
 #: simulation/data/auras/structures/kush_pyramids_territory.jsonauraName
 msgid "Meroitic Pyramids"
 msgstr "Piramida Meroitic"
 
 #: simulation/data/auras/structures/kush_pyramids_territory.jsonauraDescription
-msgid ""
-"Civic Centers +10% territory influence as long as a Pyramid stands built."
+msgid "Civic Centers +10% territory influence radius."
 msgstr ""
 
 #: simulation/data/auras/structures/kush_temple_amun.jsonauraName
 msgid "Powerful Priesthood"
-msgstr ""
+msgstr "Pendeta yang Kuat"
 
 #: simulation/data/auras/structures/kush_temple_amun.jsonauraDescription
-msgid ""
-"Strengthen the Priesthood of Amun and undermine your monarch's influence.\n"
-"-5% health for heroes per temple built."
+msgid "Heroes −5% health."
 msgstr ""
 
 #: simulation/data/auras/structures/library.jsonauraName
@@ -85,16 +85,15 @@ msgid "Power of Knowledge"
 msgstr "Kekuatan dari Pengetahuan"
 
 #: simulation/data/auras/structures/library.jsonauraDescription
-msgid ""
-"Reduce the cost and research time of technologies by 10% per library owned."
-msgstr "Mengurangi biaya dan waktu penelitian teknologi sebesar 10% per perpustakaan yang dimiliki."
+msgid "Structures −10% technology resource costs and research time."
+msgstr ""
 
 #: simulation/data/auras/structures/loyalty_regen.jsonauraName
 msgid "Loyalty"
 msgstr "Kesetiaan"
 
 #: simulation/data/auras/structures/loyalty_regen.jsonauraDescription
-msgid "+50% garrisoned loyalty regeneration rate for structures."
+msgid "Structures +50% capture points garrison regeneration rate."
 msgstr ""
 
 #: simulation/data/auras/structures/maur_pillar.jsonauraName
@@ -102,48 +101,48 @@ msgid "Edict of Ashoka"
 msgstr "Dekrit Asoka"
 
 #: simulation/data/auras/structures/maur_pillar.jsonauraDescription
-msgid "+20% movement speed for traders."
-msgstr "+20% kecepatan bergerak pedagang."
+msgid "Traders +20% movement speed."
+msgstr ""
 
 #: simulation/data/auras/structures/rotary_mill.jsonauraName
 msgid "Farming bonus"
 msgstr "Bonus bertani"
 
 #: simulation/data/auras/structures/rotary_mill.jsonauraDescription
-msgid "+25% gather rate for workers in the grainfields."
-msgstr "+25% tingkat pengumpulan untuk pekerja di ladang padi."
+msgid "Workers +25% grain gather rate."
+msgstr ""
 
 #: simulation/data/auras/structures/temple_heal.jsonauraName
 msgid "Medical Treatment"
 msgstr "Perawatan Medis"
 
 #: simulation/data/auras/structures/temple_heal.jsonauraDescription
-msgid "Heals nearby units at 1 HP per second."
-msgstr "Menyembuhkan unit di sekitar sebesar 1 nyawa per detik."
+msgid "Humans +1 health regeneration rate."
+msgstr ""
 
 #: simulation/data/auras/structures/theatron.jsonauraName
 msgid "Hellenization"
 msgstr "Helenisasi"
 
 #: simulation/data/auras/structures/theatron.jsonauraDescription
-msgid "Increase territory influence by 20% per theatron owned."
-msgstr "Meningkatkan pengaruh wilayah sebesar 20% per theatron yang dimiliki."
+msgid "Structures +20% territory influence radius."
+msgstr ""
 
 #: simulation/data/auras/structures/wall_garrisoned.jsonauraName
 msgid "Wall Protection"
 msgstr "Proteksi Tembok"
 
 #: simulation/data/auras/structures/wall_garrisoned.jsonauraDescription
-msgid "Soldiers on walls have +3 armor and higher vision."
-msgstr "Pasukan di atas tembok mendapat +3 zirah dan jarak pandang lebih jauh."
+msgid "Garrisoned Soldiers +3 armor and +20 vision range."
+msgstr ""
 
 #: simulation/data/auras/structures/wonder_pop_1.jsonauraName
 msgid "Symbol of Greatness"
 msgstr "Lambang Kehebatan"
 
 #: simulation/data/auras/structures/wonder_pop_1.jsonauraDescription
-msgid "Increase the population limit by 10 per wonder owned."
-msgstr "Meningkatkan batas populasi sebanyak 10 per keajaiban yang dimiliki."
+msgid "+10 maximum population limit."
+msgstr ""
 
 #: simulation/data/auras/structures/wonder_pop_2.jsonauraName
 msgid "Glorious Expansion"
@@ -151,16 +150,15 @@ msgstr "Ekspansi Megah"
 
 #: simulation/data/auras/structures/wonder_pop_2.jsonauraDescription
 msgid ""
-"Further increase the population limit by 40 per wonder owned (requires "
-"\"Glorious Expansion\" tech)."
-msgstr "Menambahkan batas populasi sebesar 40 per keajaiban yang dimiliki (membutuhkan teknologi \"Ekspansi Megah\")."
+"+40 maximum population limit (requires the “Glorious Expansion” technology)."
+msgstr ""
 
 #: simulation/data/auras/structures/workshop_repair.jsonauraName
 msgid "Workshop Repairs"
-msgstr ""
+msgstr "Bengkel Perbaikan "
 
 #: simulation/data/auras/structures/workshop_repair.jsonauraDescription
-msgid "Repairs garrisoned siege units at 3 HP per second."
+msgid "Garrisoned Siege Engines +3 health regeneration rate."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/athen_player_teambonus.jsonauraName
@@ -168,48 +166,48 @@ msgid "Delian League"
 msgstr "Liga Delos"
 
 #: simulation/data/auras/teambonuses/athen_player_teambonus.jsonauraDescription
-msgid "Allied warships −25% construction time."
-msgstr ""
+msgid "Allied Warships −25% construction time."
+msgstr "Waktu pembangunan Kapal Perang sekutu berkurang 25%"
 
 #: simulation/data/auras/teambonuses/brit_player_teambonus.jsonauraName
 msgid "Druids"
 msgstr "Druid"
 
 #: simulation/data/auras/teambonuses/brit_player_teambonus.jsonauraDescription
-msgid "Allied healers −20% resource costs."
-msgstr ""
+msgid "Allied Healers −20% resource costs."
+msgstr "Biaya sumber Penyembuh sekutu berkurang 20%"
 
 #: simulation/data/auras/teambonuses/cart_player_teambonus.jsonauraName
 msgid "Trademasters"
 msgstr "Ahli Dagang"
 
 #: simulation/data/auras/teambonuses/cart_player_teambonus.jsonauraDescription
-msgid "Allied markets +10% international trade bonus."
-msgstr ""
+msgid "Allied Markets +10% international trade bonus."
+msgstr "Bonus perdagangan Pasar internasional sekutu bertambah 10%"
 
 #: simulation/data/auras/teambonuses/gaul_player_teambonus.jsonauraName
 msgid "Druidic Wisdom"
 msgstr "Kebijakan Druid"
 
 #: simulation/data/auras/teambonuses/gaul_player_teambonus.jsonauraDescription
-msgid "Allied structures −20% technology research time."
-msgstr ""
+msgid "Allied Structures −20% technology research time."
+msgstr "Waktu riset tehnologi struktur Sekutu berkurang 20%"
 
 #: simulation/data/auras/teambonuses/iber_player_teambonus.jsonauraName
 msgid "Saripeko"
 msgstr "Saripeko"
 
 #: simulation/data/auras/teambonuses/iber_player_teambonus.jsonauraDescription
-msgid "Allied citizen-soldier javelinists −20% resource costs."
-msgstr ""
+msgid "Allied Citizen-Soldier Javelinists −20% resource costs."
+msgstr "Biaya sumber warga Tentara Berlembing Sekutu berkurang 20%"
 
 #: simulation/data/auras/teambonuses/kush_player_teambonus.jsonauraName
 msgid "Elephant Suppliers"
-msgstr ""
+msgstr "Penyuplai Gajah"
 
 #: simulation/data/auras/teambonuses/kush_player_teambonus.jsonauraDescription
-msgid "Allied elephants −20% resource costs and training time."
-msgstr ""
+msgid "Allied Elephants −20% resource costs and training time."
+msgstr "Waktu dan biaya latihan Gajah Sekutu -20%"
 
 #: simulation/data/auras/teambonuses/mace_player_teambonus.jsonauraName
 msgid "Standardized Currency"
@@ -217,7 +215,7 @@ msgstr "Mata Uang Standar"
 
 #: simulation/data/auras/teambonuses/mace_player_teambonus.jsonauraDescription
 msgid "Allies +20% barter sell prices."
-msgstr ""
+msgstr "Harga jual tukar-menukar barang sekutu +20%"
 
 #: simulation/data/auras/teambonuses/maur_player_teambonus.jsonauraName
 msgid "Ashoka's Religious Support"
@@ -225,16 +223,16 @@ msgstr "Dukungan Keagamaan Asoka"
 
 #: simulation/data/auras/teambonuses/maur_player_teambonus.jsonauraDescription
 msgid ""
-"Allied temples −50% resource costs and building time; temple technologies "
+"Allied Temples −50% resource costs and building time; Temple technologies "
 "−50% resource costs and research time."
-msgstr ""
+msgstr "Biaya dan waktu pembuatan candi sekutu -50%: biaya dan waktu riset tehnologi Candi -50%"
 
 #: simulation/data/auras/teambonuses/pers_player_teambonus.jsonauraName
 msgid "The Royal Road"
 msgstr "Jalur Kerajaan"
 
 #: simulation/data/auras/teambonuses/pers_player_teambonus.jsonauraDescription
-msgid "Allied land traders +15% trade gain."
+msgid "Allied Land Traders +15% trade gain."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/ptol_player_teambonus.jsonauraName
@@ -250,7 +248,7 @@ msgid "Conscription"
 msgstr "Wajib Militer"
 
 #: simulation/data/auras/teambonuses/rome_player_teambonus.jsonauraDescription
-msgid "Allied citizen-soldier infantry −20% training time."
+msgid "Allied Citizen-Soldier Infantry −20% training time."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/sele_player_teambonus.jsonauraName
@@ -258,7 +256,7 @@ msgid "Syrian Tetrapolis"
 msgstr "Tetrapolis Suriah"
 
 #: simulation/data/auras/teambonuses/sele_player_teambonus.jsonauraDescription
-msgid "Allied civil centers −20% resource costs."
+msgid "Allied Civil Centers −20% resource costs."
 msgstr ""
 
 #: simulation/data/auras/teambonuses/spart_player_teambonus.jsonauraName
@@ -266,7 +264,7 @@ msgid "Peloponnesian League"
 msgstr "Liga Peloponnesia"
 
 #: simulation/data/auras/teambonuses/spart_player_teambonus.jsonauraDescription
-msgid "Allied citizen-soldier infantry spearmen +10% health."
+msgid "Allied Citizen-Soldier Infantry Spearmen +10% health."
 msgstr ""
 
 #: simulation/data/auras/units/female_inspiration.jsonauraName
@@ -274,8 +272,8 @@ msgid "Inspiration"
 msgstr "Inspirasi"
 
 #: simulation/data/auras/units/female_inspiration.jsonauraDescription
-msgid "+10% build rate and gather rate for citizen soldiers."
-msgstr "+10% tingkat membangun dan pengumpulan untuk prajurit rakyat."
+msgid "Citizen Soldiers +10% build rate and gather speed."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/athen_catafalque_1.jsonauraName
 msgid "Economic Reforms"
@@ -284,8 +282,8 @@ msgstr "Reformasi Ekonomi"
 #: simulation/data/auras/units/catafalques/athen_catafalque_1.jsonauraDescription
 msgid ""
 "Solon instituted several economic reforms encouraging commerce and agriculture.\n"
-"+15% gather rate for workers."
-msgstr "Solon memulai beberapa reformasi ekonomi untuk mendorong perdagangan dan pertanian.\n+15% tingkat pengumpulan untuk pekerja."
+"Workers +15% gather speed."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/athen_catafalque_2.jsonauraName
 msgid "Economic Fortune"
@@ -294,8 +292,8 @@ msgstr "Nasib Ekonomi"
 #: simulation/data/auras/units/catafalques/athen_catafalque_2.jsonauraDescription
 msgid ""
 "Solon brought in a new system of weights and measures, fathers were encouraged to find trades for their sons.\n"
-"-10% cost for economic technologies."
-msgstr "Solon membawa sistem baru mengenai berat dan pengukuran, ayah-ayah didorong untuk mencarikan perdagangan untuk anak mereka.\n-10% biaya untuk teknologi ekonomi."
+"Economic technologies −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/brit_catafalque_1.jsonauraName
 #: simulation/data/auras/units/heroes/iber_hero_viriato_1.jsonauraName
@@ -305,8 +303,8 @@ msgstr "Taktik Gerilya"
 #: simulation/data/auras/units/catafalques/brit_catafalque_1.jsonauraDescription
 msgid ""
 "Seeing entrenched defense to be useless against the Roman army, Cassivellaunus resorted to guerrilla tactics. This was later employed by other chieftains too.\n"
-"+15% movement speed and vision range for all soldiers."
-msgstr "Melihat taktik pertahanan berakar tidak berhasil untuk melawan pasukan Romawi, Cassivellaunus mempergunakan taktik gerilya. Taktik ini lalu digunakan juga oleh kepala suku lainnya. +15% kecepatan bergerak dan jarak padang untuk semua prajurit."
+"Soldiers +15% movement speed and +15% vision range."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/brit_catafalque_2.jsonauraName
 msgid "Skirmisher Harassment"
@@ -315,8 +313,8 @@ msgstr "Gangguan Penskirmis"
 #: simulation/data/auras/units/catafalques/brit_catafalque_2.jsonauraDescription
 msgid ""
 "Cassivellaunus deployed fast-moving skirmishers to harass Roman troops and foragers.\n"
-"+20% attack range for skirmisher javelins."
-msgstr "Cassivellaunus mengeluarkan penskirmis bergerak cepat untuk mengganggu prajurit Romawi dan pengumpul.\n+20% jarak serangan untuk lembing penskirmis."
+"Javelinists +20% attack range."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/cart_catafalque.jsonauraName
 msgid "Commander of Heavy Cavalry"
@@ -325,8 +323,8 @@ msgstr "Komandan Kavaleri Berat"
 #: simulation/data/auras/units/catafalques/cart_catafalque.jsonauraDescription
 msgid ""
 "Leader of the Carthaginian heavy cavalry at Trebia and Cannae, where his triple charge had devastating effects on the enemy.\n"
-"+1 armor, +10% health for melee cavalry."
-msgstr "Pemimpin dari kavaleri berat Kartago di Trebbia dan Cannae, dimana serangan tiga kali lipatnya memiliki efek mematikan pada musuh.\n+1 zirah, +10% nyawa untuk kavaleri jarak dekat."
+"Melee Cavalry +1 armor and +10% health."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_1.jsonauraName
 msgid "Ambush Slaughter"
@@ -335,8 +333,8 @@ msgstr "Pembantaian Serangan Mendadak"
 #: simulation/data/auras/units/catafalques/gaul_catafalque_1.jsonauraDescription
 msgid ""
 "Warring with the Romans, Ambiorix realized the futility of open warfare and instead resorted to ambush tactics. The Gauls quickly learned where and when to execute surprise attacks.\n"
-"Soldiers require 25% less experience to promote and gain a 5% attack bonus."
-msgstr "Berperang dengan bangsa Roma, Ambiorix menyadari kegagalan dari perang medan terbuka dan memilih untuk menggunakan taktik serangan mendadak. Bangsa Galia dengan cepat belajar dimana dan kapan untuk melakukan serangan mendadak.\nPrajurit membutuhkan 25% pengalaman lebih sedikit untuk naik pangkat dan mendapat 5% bonus serangan."
+"Soldiers +5% melee and ranged attack damage and −25% promotion experience."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/gaul_catafalque_2.jsonauraName
 msgid "Tribute to Rome"
@@ -345,8 +343,8 @@ msgstr "Upeti kepada Roma"
 #: simulation/data/auras/units/catafalques/gaul_catafalque_2.jsonauraDescription
 msgid ""
 "When the Roman army fell short of food supplies, the Gallic tribes were ordered to give up a part of their already meagre harvest. The Eburones under Ambiorix were reluctant to do so, therefore Caesar sent troops to take them by force.\n"
-"-10% farming rate."
-msgstr "Saat pasukan Romawi kekurangan makanan, suku-suku Galia dipaksa untuk memberikan sebagian dari hasil panennya. Suku Eburones dibawah pimpinan Ambiorix menolak melakukan hal itu, karena itu Caesar mengirim pasukan untuk mengambilnya secara paksa.\n-10% tingkat pertanian."
+"Workers −10% grain gather rate."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/iber_catafalque_1.jsonauraName
 msgid "Mercenary Commander"
@@ -355,8 +353,8 @@ msgstr "Komandan Prajurit Bayaran"
 #: simulation/data/auras/units/catafalques/iber_catafalque_1.jsonauraDescription
 msgid ""
 "Along with his brother Indibil, Mandonius commanded the Iberian recruits and mercenaries that took part in the Punic Wars.\n"
-"-25% metal cost for all allied citizen-soldier mercenaries."
-msgstr "Bersama dengan saudaranya Indibil, Mandonius memerintahkan rekrut Iberia dan prajurit bayaran untuk mengambil bagian dalam Perang Punisia.\n-25% biaya logam untuk semua prajurit rakyat bayaran sekutu."
+"Allied Citizen-Soldier Mercenaries −25% metal cost."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/iber_catafalque_2.jsonauraName
 msgid "Saver of Lives"
@@ -365,8 +363,8 @@ msgstr "Penyelamat Nyawa"
 #: simulation/data/auras/units/catafalques/iber_catafalque_2.jsonauraDescription
 msgid ""
 "Following the fall of Indibil in battle, Mandonius led the survivors to safety.\n"
-"+10% health for all soldiers."
-msgstr "Setelah jatuhnya Indibil di peperangan, Mandonius memimpin prajurit yang selamat ke tempat aman.\n+10% nyawa semua prajurit."
+"Soldiers +10% health."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_1.jsonauraName
 msgid "Earliest Nubian Queen"
@@ -375,7 +373,7 @@ msgstr ""
 #: simulation/data/auras/units/catafalques/kush_catafalque_1.jsonauraDescription
 msgid ""
 "Ruling with full power in the Meroë Empire and also playing a significant role in the Meroitic religion, Shanakdakheto represented the might of Kush, something not to be taken lightly.\n"
-"Awe: All enemy female citizens -15% gather rate."
+"Enemy Female Citizens −15% gather speed."
 msgstr ""
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_2.jsonauraName
@@ -384,8 +382,8 @@ msgstr ""
 
 #: simulation/data/auras/units/catafalques/kush_catafalque_2.jsonauraDescription
 msgid ""
-"As in all cultures, religion played a significant part in the Meroë Empire. Shanakdakheto had the Temple built around 160 B.C. as a symbol of the advancedness of Meroë.\n"
-"+1 heal rate for units garrisoned in nearby temples."
+"As in all cultures, religion played a significant part in Kush. Shanakdakheto had the temple built around 160 BC as a symbol of the advancedness of Meroë.\n"
+"Temples +1 garrison heal rate."
 msgstr ""
 
 #: simulation/data/auras/units/catafalques/mace_catafalque.jsonauraName
@@ -395,7 +393,7 @@ msgstr "Penjarah Kota"
 #: simulation/data/auras/units/catafalques/mace_catafalque.jsonauraDescription
 msgid ""
 "During the First Macedonian War, Philip and his troops sacked Thermum, the religious and political center of Aetolia.\n"
-"+5 food and wood for every enemy unit killed or structure destroyed."
+"Humans, Siege Engines, Ships, and Structures gain +5 food and wood loot."
 msgstr ""
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_1.jsonauraName
@@ -405,8 +403,8 @@ msgstr "Konsolidator Kerajaan"
 #: simulation/data/auras/units/catafalques/maur_catafalque_1.jsonauraDescription
 msgid ""
 "Son of Chandragupta Maurya, Bindusara consolidated the empire, creating a stable state for his son Ashoka to inherit.\n"
-"+20% territory influence."
-msgstr "Anak dari Candragupta Maurya, Bindusara mengkonsolidasikan kerajaannya, membuat keadaan stabil untuk dipimpin anaknya Asoka.\n+20% pengaruh wilayah."
+"Structures +20% territory influence radius."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/maur_catafalque_2.jsonauraName
 msgid "Vamba Moriyar"
@@ -415,8 +413,8 @@ msgstr "Vamba Moriyar"
 #: simulation/data/auras/units/catafalques/maur_catafalque_2.jsonauraDescription
 msgid ""
 "Bindusara is said to have conquered lands to the south of the empire.\n"
-"+15% unit capture rate."
-msgstr "Bindusara dikatakan berhasil menguasai tanah di selatan kerajaan.\n+15% tingkat ambil alih unit."
+"Soldiers +15% capture attack strength."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/pers_catafalque.jsonauraName
 msgid "Great Builder"
@@ -425,8 +423,8 @@ msgstr "Pembangun Hebat"
 #: simulation/data/auras/units/catafalques/pers_catafalque.jsonauraDescription
 msgid ""
 "Throughout his reign, much of Artaxerxes' wealth was spent on building projects. He restored the Palace of Darius I at Susa and restored the ancient city of Ecbatana.\n"
-"+5% health and -10% resource cost for all buildings."
-msgstr "Selama pemerintahannya, kebanyakan dari kekayaan Artahsasta dipakai untuk proyek pembangunan. Dia mengembalikan Istana Darius I di Susan dan mengembalikan kota kuno Ekbatana.\n+5% nyawa dan -10% biaya sumber daya untuk semua bangunan."
+"Structures −10% resource costs and +5% health."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/ptol_catafalque.jsonauraName
 msgid "Great Librarian"
@@ -435,8 +433,8 @@ msgstr "Pustakawan Hebat"
 #: simulation/data/auras/units/catafalques/ptol_catafalque.jsonauraDescription
 msgid ""
 "Continuing his predecessors' work on the Great Library of Alexandria, he seized every book brought to the city, thus leaving to his people a vast amount of hoarded wisdom.\n"
-"-10% resource cost for all technologies."
-msgstr "Mengikuti jejak pendahulunya bekerja di Perpustakaan Alexandria, dia menahan semua buku yang dibawa ke kota, sehingga meninggalkan timbunan kebijakan berjumlah banyak untuk rakyatnya.\n-10% biaya sumber daya semua teknologi."
+"Structure technologies −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/rome_catafalque_1.jsonauraName
 msgid "Avenger of Lucretia"
@@ -445,8 +443,8 @@ msgstr "Pembalas Lucretia"
 #: simulation/data/auras/units/catafalques/rome_catafalque_1.jsonauraDescription
 msgid ""
 "After the rape of Lucretia by the son of King Tarquinius Superbus and her subsequent suicide, Brutus vowed to avenge her and overthrow the monarchy.\n"
-"Female citizens cost 20% less and work 10% faster."
-msgstr "Setelah pemerkosaan Lucretia oleh anak Raja Tarquinius Superbus dan menyusul dengan bunuh diri Lucreita, Brutus bersumpah untuk membalas dendam dan melempar monarki.\nBiaya rakyat perempuan 20% lebih murah dan bekerja 10% lebih cepat."
+"Female Citizens −20% food cost and +10% gather speed."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/rome_catafalque_2.jsonauraName
 msgid "Founder and Defender of the Republic"
@@ -455,8 +453,8 @@ msgstr "Pembentuk dan Penjaga Republik"
 #: simulation/data/auras/units/catafalques/rome_catafalque_2.jsonauraDescription
 msgid ""
 "Brutus was one of the key figures in the overthrow of the monarchy and the founding of the Roman Republic. Later, as consul he led a Roman army to victory against the Etruscan King Tarquinius who sought to retake the throne.\n"
-"+1 armor for all units and siege engines."
-msgstr "Brutus adalah salah satu tokoh penting dalam melempar monarki dan pembentukan Republik Roma. Nantinya, sebagai konsul dia memimpin pasukan Romawi ke kemenangan melawan orang Etruskan pimpinan Raja Tarquinius yang ingin mengambil kembali tahta.\n+1 zirah untuk semua unit dan senjata kepung."
+"Humans and Siege Engines +1 armor."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_1.jsonauraName
 msgid "Founder of the Ezida Temple"
@@ -465,8 +463,8 @@ msgstr "Pembuat Kuil Ezida"
 #: simulation/data/auras/units/catafalques/sele_catafalque_1.jsonauraDescription
 msgid ""
 "Antiochus I laid the foundation for the Ezida Temple in Borsippa.\n"
-"-10% resource cost for temples and temple technologies."
-msgstr "Antiochus I membuat fondasi dari Kuil Ezida di Borsippa.\n-10% biaya sumber daya untuk kuil dan teknologi kuil."
+"Temples −10% resource costs; Temple technologies −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_2.jsonauraName
 msgid "Immigration"
@@ -475,8 +473,8 @@ msgstr "Imigrasi"
 #: simulation/data/auras/units/catafalques/sele_catafalque_2.jsonauraDescription
 msgid ""
 "Antiochus encouraged Greek immigration to his realm and established many new cities in Asia Minor to serve as counterweights to the Gauls.\n"
-"+5% maximum population."
-msgstr "Antiochus mendorong imigrasi bangsa Yunani ke kerajaannya dan membuat banyak kota baru di Asia Kecil untuk mengimbangi bangsa Galia.\n+5% populasi maksimal."
+"+5% maximum population limit."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/sele_catafalque_3.jsonauraName
 msgid "Basileus Megas"
@@ -485,7 +483,7 @@ msgstr "Basileus Megas"
 #: simulation/data/auras/units/catafalques/sele_catafalque_3.jsonauraDescription
 msgid ""
 "Son of Seleucus Nicator, Antiochus succeeded in the formidable task of keeping the empire together, meanwhile founding temples and defeating the invading Gauls with war elephants.\n"
-"-10% cost for War Elephants."
+"Champion Elephants −10% resource costs."
 msgstr ""
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_1.jsonauraName
@@ -496,12 +494,12 @@ msgstr "Reformasi Militer Lycurgus"
 #: simulation/data/auras/units/catafalques/spart_catafalque_1.jsonauraDescription
 msgid ""
 "Lycurgus instituted several military reforms, thus the complete and undivided allegiance to Sparta from its citizens was implemented under his form of government.\n"
-"-10% resource cost for citizen spear infantry."
-msgstr "Lycurgus memulai beberapa reformasi militer, dengan demikian menyelesaikan dan kesetiaan tak terpisahkan ke Sparta dari rakyatnya berhasil diimplementasikan dibawah bentuk kepemimpinannya.\n-10% biaya sumber daya untuk infanteri rakyat bertombak."
+"Citizen-Soldier Infantry Spearmen −10% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_2.jsonauraDescription
-msgid "-5% resource cost for spear infantry champions."
-msgstr "-5% biaya sumber daya untuk jawara infanteri bertombak."
+msgid "Champion Infantry Spearmen −5% resource costs."
+msgstr ""
 
 #: simulation/data/auras/units/catafalques/spart_catafalque_3.jsonauraName
 msgid "Iron Pelanors"
@@ -510,8 +508,8 @@ msgstr "Pelanor Besi"
 #: simulation/data/auras/units/catafalques/spart_catafalque_3.jsonauraDescription
 msgid ""
 "To further support equality, Lycurgus forbade the use of gold and silver, introducing a new iron currency called pelanors.\n"
-"+15% metal gather rate for workers."
-msgstr "Untuk mendukung kesamaan derajat, Lycurgus melarang penggunaan emas dan perak, mengenalkan sebuah mata uang besi baru bernama pelanor.\n+15% tingkat pengumpulan logam untuk pekerja."
+"Workers +15% metal gather rate."
+msgstr ""
 
 #: simulation/data/auras/units/heroes/athen_hero_iphicrates_1.jsonauraName
 msgid "Formation Reforms"
@@ -809,7 +807,7 @@ msgstr "Guru"
 msgid ""
 "Empower a building with -20% cost and -50% research time for technologies "
 "while he is garrisoned in it."
-msgstr ""
+msgstr "Memperkuat bangunan dengan -20% biaya dan -50% waktu meneliti selama dia didalamnya. "
 
 #: simulation/data/auras/units/heroes/maur_hero_chanakya_2.jsonauraName
 msgid "Regeneration"
@@ -820,8 +818,8 @@ msgid "Forefront Leader"
 msgstr "Pemimpin Garis Terdepan"
 
 #: simulation/data/auras/units/heroes/pers_hero_cyrus.jsonauraDescription
-msgid "+20% attack and +1 capture for cavalry soldiers."
-msgstr "+20% serangan dan +1 ambil alih untuk prajurit kavaleri."
+msgid "+20% attack and +1 capture for cavalry."
+msgstr ""
 
 #: simulation/data/auras/units/heroes/pers_hero_darius.jsonauraName
 msgid "Leadership"

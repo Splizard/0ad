@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -30,6 +30,7 @@
 #include "graphics/TerritoryTexture.h"
 #include "gui/GUI.h"
 #include "gui/GUIManager.h"
+#include "gui/GUIMatrix.h"
 #include "lib/bits.h"
 #include "lib/external_libraries/libsdl.h"
 #include "lib/ogl.h"
@@ -42,6 +43,7 @@
 #include "ps/World.h"
 #include "ps/XML/Xeromyces.h"
 #include "renderer/Renderer.h"
+#include "renderer/RenderingOptions.h"
 #include "renderer/WaterManager.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "simulation2/Simulation2.h"
@@ -62,14 +64,14 @@ static unsigned int ScaleColor(unsigned int color, float x)
 	return (0xff000000 | b | g<<8 | r<<16);
 }
 
-CMiniMap::CMiniMap() :
+CMiniMap::CMiniMap(CGUI& pGUI) :
+	IGUIObject(pGUI),
 	m_TerrainTexture(0), m_TerrainData(0), m_MapSize(0), m_Terrain(0), m_TerrainDirty(true), m_MapScale(1.f),
 	m_EntitiesDrawn(0), m_IndexArray(GL_STATIC_DRAW), m_VertexArray(GL_DYNAMIC_DRAW),
 	m_NextBlinkTime(0.0), m_PingDuration(25.0), m_BlinkState(false), m_WaterHeight(0.0)
 {
-	AddSetting(GUIST_CColor,	"fov_wedge_color");
-	AddSetting(GUIST_CStrW,		"tooltip");
-	AddSetting(GUIST_CStr,		"tooltip_style");
+	AddSetting<CStrW>("tooltip");
+	AddSetting<CStr>("tooltip_style");
 	m_Clicking = false;
 	m_MouseHovering = false;
 
@@ -187,10 +189,10 @@ void CMiniMap::HandleMessage(SGUIMessage& Message)
 	}
 }
 
-bool CMiniMap::MouseOver()
+bool CMiniMap::IsMouseOver() const
 {
 	// Get the mouse position.
-	CPos mousePos = GetMousePos();
+	const CPos& mousePos = m_pGUI.GetMousePos();
 	// Get the position of the center of the minimap.
 	CPos minimapCenter = CPos(m_CachedActualSize.left + m_CachedActualSize.GetWidth() / 2.0, m_CachedActualSize.bottom - m_CachedActualSize.GetHeight() / 2.0);
 	// Take the magnitude of the difference of the mouse position and minimap center.
@@ -202,11 +204,11 @@ bool CMiniMap::MouseOver()
 		return false;
 }
 
-void CMiniMap::GetMouseWorldCoordinates(float& x, float& z)
+void CMiniMap::GetMouseWorldCoordinates(float& x, float& z) const
 {
 	// Determine X and Z according to proportion of mouse position and minimap
 
-	CPos mousePos = GetMousePos();
+	const CPos& mousePos = m_pGUI.GetMousePos();
 
 	float px = (mousePos.x - m_CachedActualSize.left) / m_CachedActualSize.GetWidth();
 	float py = (m_CachedActualSize.bottom - mousePos.y) / m_CachedActualSize.GetHeight();
@@ -228,7 +230,7 @@ void CMiniMap::SetCameraPos()
 	g_Game->GetView()->MoveCameraTarget(target);
 }
 
-float CMiniMap::GetAngle()
+float CMiniMap::GetAngle() const
 {
 	CVector3D cameraIn = m_Camera->m_Orientation.GetIn();
 	return -atan2(cameraIn.X, cameraIn.Z);
@@ -243,15 +245,17 @@ void CMiniMap::FireWorldClickEvent(int UNUSED(button), int UNUSED(clicks))
 	GetMouseWorldCoordinates(x, z);
 
 	JS::RootedValue coords(cx);
-	g_GUI->GetActiveGUI()->GetScriptInterface()->Eval("({})", &coords);
-	g_GUI->GetActiveGUI()->GetScriptInterface()->SetProperty(coords, "x", x, false);
-	g_GUI->GetActiveGUI()->GetScriptInterface()->SetProperty(coords, "z", z, false);
-	ScriptEvent("worldclick", coords);
+	g_GUI->GetActiveGUI()->GetScriptInterface()->CreateObject(&coords, "x", x, "z", z);
+
+	JS::AutoValueVector paramData(cx);
+	paramData.append(coords);
+
+	ScriptEvent("worldclick", paramData);
 }
 
 // This sets up and draws the rectangle on the minimap
 //  which represents the view of the camera in the world.
-void CMiniMap::DrawViewRect(CMatrix3D transform)
+void CMiniMap::DrawViewRect(CMatrix3D transform) const
 {
 	// Compute the camera frustum intersected with a fixed-height plane.
 	// Use the water height as a fixed base height, which should be the lowest we can go
@@ -312,6 +316,7 @@ void CMiniMap::DrawViewRect(CMatrix3D transform)
 
 struct MinimapUnitVertex
 {
+	// This struct is copyable for convenience and because to move is to copy for primitives.
 	u8 r, g, b, a;
 	float x, y;
 };
@@ -334,7 +339,7 @@ static void inline addVertex(const MinimapUnitVertex& v,
 }
 
 
-void CMiniMap::DrawTexture(CShaderProgramPtr shader, float coordMax, float angle, float x, float y, float x2, float y2, float z)
+void CMiniMap::DrawTexture(CShaderProgramPtr shader, float coordMax, float angle, float x, float y, float x2, float y2, float z) const
 {
 	// Rotate the texture coordinates (0,0)-(coordMax,coordMax) around their center point (m,m)
 	// Scale square maps to fit in circular minimap area
@@ -379,7 +384,7 @@ void CMiniMap::Draw()
 
 	// The terrain isn't actually initialized until the map is loaded, which
 	// happens when the game is started, so abort until then.
-	if (!(GetGUI() && g_Game && g_Game->IsGameStarted()))
+	if (!g_Game || !g_Game->IsGameStarted())
 		return;
 
 	CSimulation2* sim = g_Game->GetSimulation2();
@@ -571,7 +576,7 @@ void CMiniMap::Draw()
 	if (m_EntitiesDrawn > 0)
 	{
 #if !CONFIG2_GLES
-		if (g_Renderer.GetRenderPath() == CRenderer::RP_SHADER)
+		if (g_RenderingOptions.GetRenderPath() == RenderPath::SHADER)
 			glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 #endif
 
@@ -590,7 +595,7 @@ void CMiniMap::Draw()
 		CVertexBuffer::Unbind();
 
 #if !CONFIG2_GLES
-		if (g_Renderer.GetRenderPath() == CRenderer::RP_SHADER)
+		if (g_RenderingOptions.GetRenderPath() == RenderPath::SHADER)
 			glDisable(GL_VERTEX_PROGRAM_POINT_SIZE);
 #endif
 	}

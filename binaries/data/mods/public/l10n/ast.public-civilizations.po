@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:07+0200\n"
-"PO-Revision-Date: 2019-04-04 17:51+0000\n"
-"Last-Translator: David Sowa <isithere2@yahoo.com>\n"
+"POT-Creation-Date: 2019-08-23 07:08+0000\n"
+"PO-Revision-Date: 2019-08-23 15:27+0000\n"
+"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Asturian (http://www.transifex.com/wildfire-games/0ad/language/ast/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,8 +60,8 @@ msgid ""
 msgstr "Los griegos helenizaron con gran ésitu estremaos foriatos. Nel periodu alexandrín, el griegu foi la llingua franca del mundu antiguu, falao dende la península ibérica a la India."
 
 #: simulation/data/civs/athen.jsonTeamBonuses[0].Description
-msgid "Allied warships −25% construction time."
-msgstr "Barcos de guerra aliaos −25% de tiempu de construcción."
+msgid "Allied Warships −25% construction time."
+msgstr ""
 
 #: simulation/data/civs/athen.jsonTeamBonuses[0].Name
 msgid "Delian League"
@@ -264,7 +264,7 @@ msgstr "Allista héroes y investiga la teunoloxía que-yos pertenez."
 msgid ""
 "The Prytaneion is the meeting place for the city elders to dine and to make "
 "swift decisions."
-msgstr "El prytaneion ye'l llugar d'aconceyamientu de los vieyos de la ciudá pa cenar y tomar decisiones rápides."
+msgstr "El prytaneion ye l'aruelu de los vieyos de la ciudá onde cenen y tomen decisiones rápides."
 
 #: simulation/data/civs/athen.jsonHistory
 msgid ""
@@ -310,8 +310,8 @@ msgid "Celtic religion and druidry inspired their warlike mindset. "
 msgstr "La relixón celta y el druidismu inspiraron la so mentalidá guerrera."
 
 #: simulation/data/civs/brit.jsonTeamBonuses[0].Description
-msgid "Allied healers −20% resource costs."
-msgstr "Curadores aliaos −20% de costu en recursos."
+msgid "Allied Healers −20% resource costs."
+msgstr ""
 
 #: simulation/data/civs/brit.jsonTeamBonuses[0].Name
 msgid "Druids"
@@ -417,7 +417,7 @@ msgid ""
 "displays to celebrate. Karatakos was brought before the Emperor and Senate "
 "at his request to explain himself. What he said is not known for certainty, "
 "but Tacitus applies to him a famous speech…"
-msgstr "Caractacus, la forma romana, ye un simple tracamundiu de Karatakos, el so nome de verdá, que s'atopa imprentáu nes permunches monedes de so. Por esti nome sigue na alcordanza como un firme defensor de Britania contra los romanos tres la so invasión en 43 a.C. Fíu del Rei Cunobelín de la confederación tribal de los catuvellaunos, Karatakos lluchó nueve años escontra los romanos con pocu ésitu, fuxendo finalmente a Gales, u lu derrotaron dafechu. A lo último se coló nel norte de Britania, onde lu entregaron a los romanos. Lleváu a Roma y permitíu vivir pol emperador, Claudiu, Karatakos finó n'Italia. Según la lleenda, él convirtióse al cristianismu al empar que la muyer, pero d'ello nada nun se tien confirmao. Ye tamién de notar que los romanos lu dexaron vivir una vegada cativu. La política romana solía esixir la execución pública de homes talos pa festexar. A pidimientu propiu, Karatakos compaeció énte l'emperador y el senáu pa esplicase. Nun se sabe de segures lo que dixo, pero Tácitu atribúi-y un famosu discursu..."
+msgstr "Caractacus, la forma romana, ye un simple tracamundiu de Karatakos, el so nome de verdá, que s'atopa imprentáu nes permunches monedes de so. Por esti nome sigue na alcordanza como un firme defensor de Britania contra los romanos tres la so invasión en 43 a.C. Fíu del Rei Cunobelín de la confederación tribal de los catuvellaunos, Karatakos lluchó nueve años escontra los romanos con pocu ésitu, fuxendo finalmente a Gales, u lu vencieron dafechu. A lo último se coló nel norte de Britania, onde lu entregaron a los romanos. Lleváu a Roma y permitíu vivir pol emperador, Claudiu, Karatakos finó n'Italia. Según la lleenda, él convirtióse al cristianismu al empar que la muyer, pero d'ello nada nun se tien confirmao. Ye tamién de notar que los romanos lu dexaron vivir una vegada cativu. La política romana solía esixir la execución pública de homes talos pa festexar. A pidimientu propiu, Karatakos compaeció énte l'emperador y el senáu pa esplicase. Nun se sabe de segures lo que dixo, pero Tácitu atribúi-y un famosu discursu..."
 
 #: simulation/data/civs/brit.jsonFactions[0].Heroes[1].History
 msgid ""
@@ -452,7 +452,7 @@ msgid ""
 "their British allies, and Kunobelinos was held up by the post-Roman Britons "
 "as one of their great heroes; a conqueror and uniter of petty kingdoms, "
 "something the post-Roman Britons or Romano-British sorely needed."
-msgstr "Kunobelinos, (meyor conocíu pola forma llatina de Cunobelinus), foi un puxante gobernante de los catuvellaunos. Los romanos llamáronlu «el rei de los britanos». El dominiu de so abarcó la ciudá y redolada de Kamulodunon (Camulodunum en llatín), el Cólchester d'anguaño. La derrota romana na batalla de la viesca de Teutoburgu (Xermania Magna) permitió a Kunobelinos conquistar una tribu vecina, los trinovantes, que yeren aliaos de Roma, pero nun podíen recibir sofitu romanu. Abuita que Kunobelinos sentía indiferencia polos romanos. Negociaba llibremente con ellos, pero nun tarrecía sopiar los conocíos aliaos de Roma, y mesmamente unvió al so fíu menor, Adminiu, a la Galia romana como neñu acoyíu pa educacase. Ye por ello qu'Adminiu s'amigó colos romanos. Adminiu recibió de so pá'l señoríu de los cantiacos, qu'habitaben Kent. Esa fastera yera'l focu de la influyencia romana y el comerciu en Britania, y Kunobelinos decatóse de que les amistaes del fíu menor con políticos y comerciantes romanos y galorromanos de potestá podríen valir p'alministrar la rexón. Por embargu, a los sos otros fíos los romanos nun-yos prestaben un res. Poro, en morriendo Kunobelinos d'una malura, el fíu que lu socedió, Togodumnu, prindó, executó o espuxó a numberosos simpatizantes romanos. Ente estos atopábense Adminiu, el so propiu hermanu, y Verica, el rei depuestu de los atrebates, que pidieron a los sos contautos n'Imperiu Romanu que los ayudaren a recobrar les sos tierres. Togodumnu finó na batalla colos romanos y darréu lu sustituyó Karatakos, el so hermanu. Ye irónico que fore'l tercer fíu de Kunobelinos que provocare la venganza romana. Sicasí, na so dómina Kunobelinos yera ente los mayores de tolos reis britanos. Llogró conquistar la gran mayoría de la metada meridional de Britania, (les sos monedes acuñábense fasta les llendes de lo que sedría Gales). Entamó'l so reináu gobernando una confederación de cuatro tribus menores, los catuvellaunos, y acabó consiguiendo que lu reconocieren como'l rei de Britania. Tan grande yera esta reconocencia qu'unes tribus de Cambria vinieron a sofitar a los sos fíos na llucha escontra los romanos y los sos aliaos britanos, y que los britanos posromanos lu tuvieron por ún de los sos mayores héroes; un conquistador y unificador de reinucos, dalgo de que los britanos posromanos, o romano-británicos, tanto precisaben."
+msgstr "Kunobelinos, (meyor conocíu pola forma llatina de Cunobelinus), foi un puxante gobernante de los catuvellaunos. Los romanos llamáronlu «el rei de los britanos». El dominiu de so abarcó la ciudá y redolada de Kamulodunon (Camulodunum en llatín), el Cólchester d'anguaño. La derrota romana na batalla de la viesca de Teutoburgu (Xermania Magna) permitió a Kunobelinos conquistar una tribu vecina, los trinovantes, que yeren aliaos de Roma, pero nun podíen recibir sofitu romanu. Abuita que Kunobelinos sentía indiferencia polos romanos. Negociaba llibremente con ellos, pero nun tarrecía sopiar los conocíos aliaos de Roma, y mesmamente unvió al so fíu menor, Adminiu, a la Galia romana como neñu acoyíu pa educacase. Ye por ello qu'Adminiu s'amigó colos romanos. Adminiu recibió de so pá'l señoríu de los cantiacos, qu'habitaben Kent. Esa fastera yera'l focu de la influyencia romana y el comerciu en Britania, y Kunobelinos decatóse de que les amistaes del fíu menor con políticos y comerciantes romanos y galorromanos de potestá podríen valir p'alministrar la rexón. Por embargu, a los sos otros fíos los romanos nun-yos prestaben un res. Poro, en morriendo Kunobelinos d'una malura, el fíu que lu socedió, Togodumnu, prindó, executó o espuxó a numberosos simpatizantes romanos. Ente estos taben Adminiu, el so propiu hermanu, y Verica, el rei depuestu de los atrebates, que pidieron a los sos contautos n'Imperiu Romanu que los ayudaren a recobrar les sos tierres. Togodumnu finó na batalla colos romanos y darréu lu sustituyó Karatakos, el so hermanu. Ye irónico que fore'l tercer fíu de Kunobelinos que provocare la venganza romana. Sicasí, na so dómina Kunobelinos yera ente los mayores de tolos reis britanos. Llogró conquistar la gran mayoría de la metada meridional de Britania, (les sos monedes acuñábense fasta les llendes de lo que sedría Gales). Entamó'l so reináu gobernando una confederación de cuatro tribus menores, los catuvellaunos, y acabó consiguiendo que lu reconocieren como'l rei de Britania. Tan grande yera esta reconocencia qu'unes tribus de Cambria vinieron a sofitar a los sos fíos na llucha escontra los romanos y los sos aliaos britanos, y que los britanos posromanos lu tuvieron por ún de los sos mayores héroes; un conquistador y unificador de reinucos, dalgo de que los britanos posromanos, o romano-británicos, tanto precisaben."
 
 #: simulation/data/civs/brit.jsonFactions[0].Heroes[2].History
 msgid ""
@@ -495,7 +495,7 @@ msgid ""
 "slaughtered as they could not withdraw to safety. Boudicca herself escaped, "
 "and then slew her daughters, and then herself, to avoid further shame at "
 "Roman hands."
-msgstr "Amianu Marcelín cuntó lo difícil que sedría a una banda de foriatos ocupase d'un celta si esti llamare a la muyer p'ayudalu. Porque ella yera más fuerte qu'elli y podía reflundia-yos güelpes y pataes cola fuercia de tiros de catapulta. Díxose de Boudica, reina de los icenos, que yera de cuerpu enforma grande y de pinta tarrecible; tenía una voz áspera y munchísimu pelo perroxo cayía-y enriba los costazos; usaba una túnica d'estremaos colores, sobre la que llevaba abrocháu un mantu espesu. En primeres Boudica fore una aliada romana, xunto col so home, Prasutagu, el rei de los icenos. Prasutagu, que se ficiera un aliáu lleal de Roma tres un llevantamientu curtiu, y que llograra'l respetu de los de so ya mesmamente de los sos antiguos enemigos por antemanase, tevo llibre de gobernar el reinu según la tradición nativa, sacante nun casu. Prasutagu, sabiendo que diba morrer, alcordó una manda cola muyer y los súbditos; les sos fíes heredaríen l'alministración del territoriu, baxo la direición de Boudica fasta que foren adultes, pero l'emperador de Roma tendría la soberanía, pudiendo recaldar impuestos y pidir aida militar; efeutivamente, los mesmos privilexos de que yá gociare. El problema anició en que los romanos nun reconocíen a herederes, conque, en morriendo Prasutagu, afirmaron que namái l'emperador yera quien a reclamar el reinu d'Icenia. Apuntaron, amás, que la norma romana permitía la independencia de los reinos clientes fasta la muerte del rei inicial, como asocediera en Galacia. L'Imperiu agregó formalmente'l reinu, y entamó darréu a cargalu con impuestos, alegando que Prasutagu-y debía dineru, porque recibiere diferentes empréstamos que nun pagare. Cuando Boudica se quexó del maltratu y del incumplimientu de la voluntá del so maríu los romanos respondieron con brutalidá; los soldaos azotáronla, y a les fíes, los sos únicos fíos, esforciáronles. Boudica y los sos suxetos enraxonáronse pola desgracia de la reina y les fíes. Tando'l gobernador romanu ocupáu colos druides de Cambria, agora Gales, Boudica llogró atrayer más siguidores de fuera de los icenos, como yeren malpenes la única tribu britana qu'aína se desilusionaba de los romanos. Boudica y el so exércitu afararon trés ciudaes, derrotaron una llexón romana y apellaron a la memoria d'Arminiu, un xermanu qu'espuxare a los romanos de les sos tierres, y a la de los sos propios antepasaos, qu'escorrieren a César mediu sieglu enantes. Los romanos vencieron a Boudica pol gran tracamundiu tácticu que cometiera na batalla de Watling Street, el qu'empobinó a la matancia de les sos fuercies, yá que nun podíen retirase a un llugar seguru. Boudica escapó y, n'amortiendo a les fíes, suicidóse a sigo mesma pa quitase de más vergoña a manes romanes."
+msgstr "Amianu Marcelín cuntó lo difícil que sedría a una banda de foriatos ocupase d'un celta si esti llamare a la muyer p'ayudalu. Porque ella yera más fuerte qu'elli y podía reflundia-yos güelpes y pataes cola fuercia de tiros de catapulta. Díxose de Boudica, reina de los icenos, que yera de cuerpu enforma grande y de pinta tarrecible; tenía una voz áspera y munchísimu pelo perroxo cayía-y enriba los costazos; usaba una túnica d'estremaos colores, sobre la que llevaba abrocháu un mantu espesu. En primeres Boudica fore una aliada romana, xunto col so home, Prasutagu, el rei de los icenos. Prasutagu, que se ficiera un aliáu lleal de Roma tres un llevantamientu curtiu, y que llograra'l respetu de los de so ya mesmamente de los sos antiguos enemigos por antemanase, tevo llibre de gobernar el reinu según la tradición nativa, sacante nun casu. Prasutagu, sabiendo que diba morrer, alcordó una manda cola muyer y los súbditos; les sos fíes heredaríen l'alministración del territoriu, baxo la direición de Boudica fasta que foren adultes, pero l'emperador de Roma tendría la soberanía, pudiendo recaldar impuestos y pidir aida militar; efeutivamente, los mesmos privilexos de que yá gociare. El problema anició en que los romanos nun reconocíen a herederes, conque, en morriendo Prasutagu, afirmaron que namái l'emperador yera quien a reclamar el reinu d'Icenia. Apuntaron, amás, que la norma romana permitía la independencia de los reinos clientes fasta la muerte del rei inicial, como asocediera en Galacia. L'Imperiu agregó formalmente'l reinu, y entamó darréu a cargalu con impuestos, alegando que Prasutagu-y debía dineru, porque recibiere diferentes empréstamos que nun pagare. Cuando Boudica se quexó del maltratu y del incumplimientu de la voluntá del so maríu los romanos respondieron con brutalidá; los soldaos azotáronla, y a les fíes, los sos únicos fíos, esforciáronles. Boudica y los sos suxetos enraxonáronse pola desgracia de la reina y les fíes. Tando'l gobernador romanu ocupáu colos druides de Cambria, agora Gales, Boudica llogró atrayer más siguidores de fuera de los icenos, como yeren malpenes la única tribu britana qu'aína se desilusionaba de los romanos. Boudica y el so exércitu afararon trés ciudaes, derrotaron una llexón romana y apellaron a la memoria d'Arminiu, un xermanu qu'espuxare a los romanos de les sos tierres, y a la de los sos propios antepasaos, qu'escorrieren a César mediu sieglu enantes. Los romanos vencieron a Boudica pol gran tracamundiu táuticu que cometiera na batalla de Watling Street, el qu'empobinó a la matancia de les sos fuercies, yá que nun podíen retirase a un llugar seguru. Boudica escapó y, n'amortiendo a les fíes, suicidóse a sigo mesma pa quitase de más vergoña a manes romanes."
 
 #: simulation/data/civs/brit.jsonFactions[0].Description
 msgid "The Celts of the British Isles."
@@ -515,7 +515,7 @@ msgid ""
 "longswordsmen and powerful melee soldiers, they staged fearsome revolts "
 "against Rome to protect their customs and interests. Also, they built "
 "thousands of unique structures such as hill forts, crannogs and brochs."
-msgstr "Los britanos yeren les tribus celtes de les islles britániques. Con carros, espadonaos y la fuercia de soldaos cuerpu a cuerpu, sacaron alantre llevantamientos llerciosos contra Roma pa protexer los sos vezos y porgüeyos. Tamién, facíen milenta construcciones úniques como castros, «cránnogs» y «brochs»."
+msgstr "Los britanos yeren les tribus celtes de les islles britániques. Con carros, espadoneros y la fuercia de soldaos cuerpu a cuerpu, sacaron alantre llevantamientos llerciosos contra Roma pa protexer los sos vezos y porgüeyos. Tamién, facíen milenta construcciones úniques como castros, «cránnogs» y «brochs»."
 
 #: simulation/data/civs/cart.jsonName
 msgid "Carthaginians"
@@ -555,8 +555,8 @@ msgid ""
 msgstr "Neto que la península ibérica, l'África del Norte tevo fama de ser una tierra de caballos, capaz de producir fasta 100,000 montures nueves al añu. Tamién foi'l llar del elefante cartaxinés."
 
 #: simulation/data/civs/cart.jsonTeamBonuses[0].Description
-msgid "Allied markets +10% international trade bonus."
-msgstr "Mercaos aliaos +10% de bonificación nel comerciu internacional."
+msgid "Allied Markets +10% international trade bonus."
+msgstr ""
 
 #: simulation/data/civs/cart.jsonTeamBonuses[0].Name
 msgid "Trademasters"
@@ -671,7 +671,7 @@ msgid ""
 "B.C. While he ultimately lost the Second Punic War his victories at Trebia, "
 "Lake Trasimene, and Cannae, and the feat of crossing the Alps have secured "
 "his position as among the best tacticians and strategists in history."
-msgstr "El fíu más famosu de Cartagu. Haníbal Barca foi'l mayorazu d'Hamílcar Barca y clisó a so pá como comandante. Vivió 247-182 a.C. Si bien últimamente perdió la segunda guerra púnica, les sos victories nel Trebia, el Llagu Trasimenu y Cannae, arriendes de la fazaña de cruciar los Alpes, tiénen-y asegurao un puestu ente los meyores tácticos y estrategues de la historia."
+msgstr "El fíu más famosu de Cartagu. Haníbal Barca foi'l mayorazu d'Hamílcar Barca y clisó a so pá como comandante. Vivió 247-182 a.C. Si bien últimamente perdió la segunda guerra púnica, les sos victories nel Trebia, el Llagu Trasimenu y Cannae, arriendes de la fazaña de cruciar los Alpes, tiénen-y asegurao un puestu ente los meyores táuticos y estrategues de la historia."
 
 #: simulation/data/civs/cart.jsonFactions[0].Heroes[1].History
 msgid ""
@@ -731,7 +731,7 @@ msgid ""
 "When Hannibal invaded Italy and defeated the Romans in a series of battles, "
 "many of the Italian peoples subject to Rome, including the Italian Greeks "
 "and powerful Samnites, revolted and joined the Carthaginian cause."
-msgstr "Cuando Haníbal invadió Italia y derrotó a los romanos nuna riestra de batalles, bien del pueblu italiano que taba suxeto a Roma, inclusive los griegos italianos y samnites poderosos, llevantáronse y xuniéronse a la causa de Cartagu."
+msgstr "Cuando Haníbal invadió Italia y venció a los romanos nuna riestra de batalles, bien del pueblu italiano que taba suxeto a Roma, incluyíos los griegos italianos y samnites poderosos, llevantáronse y xuniéronse a la causa de Cartagu."
 
 #: simulation/data/civs/cart.jsonStructures[3].Name
 msgid "Iberian Embassy"
@@ -762,8 +762,8 @@ msgid "Gauls"
 msgstr "Galos"
 
 #: simulation/data/civs/gaul.jsonTeamBonuses[0].Description
-msgid "Allied structures −20% technology research time."
-msgstr "Construcciones aliaes −20% de tiempu d'investigación de teunoloxía."
+msgid "Allied Structures −20% technology research time."
+msgstr ""
 
 #: simulation/data/civs/gaul.jsonTeamBonuses[0].Name
 msgid "Druidic Wisdom"
@@ -962,8 +962,8 @@ msgid ""
 msgstr "Neto que Numidia nel África del Norte, la península ibérica tevo fama de ser «una tierra de caballos», capaz de producir fasta 100,000 montures nueves al añu."
 
 #: simulation/data/civs/iber.jsonTeamBonuses[0].Description
-msgid "Allied citizen-soldier javelinists −20% resource costs."
-msgstr "Xavalineros miliciano-populares aliaos −20% de costu en recursos."
+msgid "Allied Citizen-Soldier Javelinists −20% resource costs."
+msgstr ""
 
 #: simulation/data/civs/iber.jsonTeamBonuses[0].Name
 msgid "Saripeko"
@@ -971,11 +971,11 @@ msgstr "Saripeko"
 
 #: simulation/data/civs/iber.jsonTeamBonuses[0].History
 msgid ""
-"The Iberians were long known to provide mercenary soldiers to other nations "
-"to serve as auxiliaries to their armies in foreign wars. Carthage is the "
-"most well known example, and we have evidence of them serving in such a "
-"capacity in Aquitania."
-msgstr "Los íberos tuvieron fama dende peronia de fornir otres naciones de soldaos mercenarios pa encontar los sos exércitos en guerres estranxeres. Cartagu ye l'exemplu meyor conocíu, y hai nicios de que sirvieron como talos n'Aquitania."
+"The Iberians were long known to provide mercenaries to other nations to "
+"serve as auxiliaries to their armies in foreign wars. Carthage is the most "
+"well known example, and we have evidence of them serving in such a capacity "
+"in Aquitania."
+msgstr ""
 
 #: simulation/data/civs/iber.jsonAINames[0]
 #: simulation/data/civs/iber.jsonAINames[1]
@@ -1055,7 +1055,7 @@ msgid ""
 "losses in some requiring retreat). He succumbed instead to another treachery"
 " arranged by a later Roman commander, Q. Servilius Caepio, to have him "
 "assassinated by three comrades that were close to him."
-msgstr "Viriatu, como Vercinxétorix pente los galos, foi'l más famosu de los caudiellos tribales íberos. Dirixó pelo menos 7 campañes escontra los romanos na metada sureña de la península nes «guerres lusitanes» de 147-139 a.C. Remaneció como sobreviviente de la masacre llaceriosa de 9.000 homes y la venta como esclavos de 21.000 vieyos, muyeres y neños de los lusitanos. Ellos roblaren un tratáu de paz colos romanos que Serviu Sulpiciu Galba, gobernador de la Hispania Ulterior, plantegare como la «igua final» al emburuyáu de los lusitanos. Elli surdió d'entamos humildes en 151 a.C. pa facese caudiellu de los lusitanos. Tevo calter y xeitu pa la táctica; enxamás nun lu vencieron daveres n'alcuentru dengún, (masque sufrió baxes en dalgunos que lu angariyaron a retirase). Lo que lu finó foi otra traidoría entamada por un comandante romanu posterior, Q. Serviliu Cepiu, na que lu asesinaren trés collacios que taben apegaos a elli."
+msgstr "Viriatu, como Vercinxétorix pente los galos, foi'l más famosu de los caudiellos tribales íberos. Dirixó pelo menos 7 campañes escontra los romanos na metada sureña de la península nes «guerres lusitanes» de 147-139 a.C. Remaneció como sobreviviente de la masacre llaceriosa de 9.000 homes y la venta como esclavos de 21.000 vieyos, muyeres y neños de los lusitanos. Ellos roblaren un tratáu de paz colos romanos que Serviu Sulpiciu Galba, gobernador de la Hispania Ulterior, plantegare como la «igua final» al emburuyáu de los lusitanos. Elli surdió d'entamos humildes en 151 a.C. pa facese caudiellu de los lusitanos. Tevo calter y xeitu pa la táutica; enxamás nun lu vencieron daveres n'alcuentru dengún, (masque sufrió baxes en dalgunos que lu angariyaron a retirase). Lo que lu finó foi otra traidoría entamada por un comandante romanu posterior, Q. Serviliu Cepiu, na que lu asesinaren trés collacios que taben apegaos a elli."
 
 #: simulation/data/civs/iber.jsonFactions[0].Heroes[1].History
 msgid ""
@@ -1071,7 +1071,7 @@ msgid ""
 " a battle on the 23rd of August. Karos was wounded in an after battle small "
 "cavalry action the same evening and soon died thereafter, but he had carried"
 " off one of the most humiliating defeats that Rome ever suffered."
-msgstr "Karos foi un xefe de la tribu de los belos, allugada xusto al este de los celtíberos, (los numantinos metanos). Dirixendo la confederación tribal de la meseta central, despintó 20.000 soldaos d'a pie y 5.000 soldaos a caballu a lo llargo d'un trechu bien arboláu. Quintu Fulviu Nobilior nun lu reconoció a xeitu y llevó a la trampa'l so exércitu, estendíu nuna columna allongada. Dalgunos 10.000 de los 15.000 llexonarios romanos cayeron na enceladona. Foi'l 23 d'agostu de 153 a.C., el día cuando Roma celebraba la fiesta de Vulcanu. Más sero, per degredu del senáu, el día 23 d'agostu llegó a conocese como «dies ater», el día aciagu, y Roma enxamás nun volvió a lluchar nelli. Karos mancóse aquella mesma tarde nuna maniobra a caballu dempués de la batalla y llueu morrió, pero en llevando darréu una de les derrotes más grandes que Roma nunca nun sufrió."
+msgstr "Karos foi un xefe de la tribu de los belos, allugada xusto al este de los celtíberos, (los numantinos metanos). Dirixendo la confederación tribal de la meseta central, despintó 20.000 soldaos d'a pie y 5.000 soldaos d'a caballu a lo llargo d'un trechu bien arboláu. Quintu Fulviu Nobilior nun lu reconoció a xeitu y llevó a la trampa'l so exércitu, estendíu nuna columna allongada. Dalgunos 10.000 de los 15.000 llexonarios romanos cayeron na enceladona. Foi'l 23 d'agostu de 153 a.C., el día cuando Roma celebraba la fiesta de Vulcanu. Más sero, per degredu del senáu, el día 23 d'agostu llegó a conocese como «dies ater», el día aciagu, y Roma enxamás nun volvió a lluchar nelli. Karos mancóse aquella mesma tarde nuna maniobra a caballu dempués de la batalla y llueu morrió, pero en llevando darréu una de les derrotes más grandes que Roma nunca nun sufrió."
 
 #: simulation/data/civs/iber.jsonFactions[0].Heroes[2].History
 msgid ""
@@ -1119,7 +1119,7 @@ msgid ""
 "proved tenacious when Rome sought to take their land and freedom from them, "
 "and employed pioneering guerrilla tactics and flaming javelins as they "
 "fought back."
-msgstr "Los íberos foron un pueblu d'oríxenes y llingua escuros, con una llarga tradición d'equitación y metalurxa. De cultura relativamente pacífica, solieron lluchar en batalles estranxeres como mercenarios. Sicasí, amosáronse aporfiaos cuando Roma buscó quita-yos les tierres y la llibertá, y emplegaron táctiques guerrilleres anovadores y xavalines flamíxeres al resistir. "
+msgstr "Los íberos foron un pueblu d'oríxenes y llingua escuros, con una llarga tradición d'equitación y metalurxa. De cultura relativamente pacífica, solieron lluchar en batalles estranxeres como mercenarios. Sicasí, amosáronse aporfiaos cuando Roma buscó quita-yos les tierres y la llibertá, y emplegaron táutiques guerrilleres anovadores y xavelines flamíxeres al resistir. "
 
 #: simulation/data/civs/kush.jsonName
 msgid "Kushites"
@@ -1137,7 +1137,7 @@ msgstr "Construyir una pirámide cuxina aumenta la influyencia territorial del c
 
 #: simulation/data/civs/kush.jsonCivBonuses[1].Name
 msgid "Mineral Deposits"
-msgstr "Depósitos minerales"
+msgstr "Xacees minerales"
 
 #: simulation/data/civs/kush.jsonCivBonuses[1].Description
 msgid ""
@@ -1161,8 +1161,8 @@ msgid "Elephant Suppliers"
 msgstr "Suministradores d'elefantes"
 
 #: simulation/data/civs/kush.jsonTeamBonuses[0].Description
-msgid "Allied elephants −20% resource costs and training time."
-msgstr "Elefantes aliaos −20% de costu en recursos y muera d'allistamientu."
+msgid "Allied Elephants −20% resource costs and training time."
+msgstr ""
 
 #: simulation/data/civs/kush.jsonAINames[0]
 msgid "Kashta"
@@ -1322,7 +1322,7 @@ msgid ""
 "Meroitic kingdom was known as Aethiopia. The Kushite kingdom persisted until"
 " the 4th century AD, when it weakened and disintegrated due to internal "
 "rebellion, eventually succumbing to the rising power of Axum."
-msgstr "El reinu de Cux yera un antiguu reinu africanu asitiáu nes miestes del Nilu Azul, Nilu Blancu y Ríu Atbara no qu'anguaño ye la República del Sudán. El dominiu cuxín queda afitada na rexón tres l'esbarrumbu del nuevu reinu d'Exiptu na Edá del Bronce, y centrábase en Napata na fas temprana. Invadieron Exiptu nel sielgu VIII a.C., y los emperadores cuxinos gobernaron como faraones de la dinastía XXV d'Exiptu demientres un sieglu, fasta que los asirios los espuxaron. La cultura cuxina bebía de la de los exipcios; entá hai per ende enforma d'arquiteutura de pirámides y templos monumentales cuxinos. Los cuxinos fasta adoraben a munchos dioses exipcios, mesmamente a Amón. Na antigüedá clásica, la capital imperial cuxina taba en Meroe. Na xeografía temprana griega, el reinu meroíticu conocíase como Etiopía. El reinu cuxín duró fasta'l sieglu IV d.C., cuando decayó y s'esbrugó por culpa de llevantamientos internos, agachando finalmente énte'l poder xorreciente d'Acsún."
+msgstr "El reinu de Cux yera un antiguu reinu africanu asitiáu nes miestes del Nilu Azul, Nilu Blancu y Ríu Atbara no qu'anguaño ye la República del Sudán. El dominiu cuxín queda afitada na rexón tres l'esbarrumbu del nuevu reinu d'Exiptu na Edá del Bronce, y centrábase en Napata na fas temprana. Invadieron Exiptu nel sielgu VIII a.C., y los emperadores cuxinos gobernaron como faraones de la dinastía XXV d'Exiptu demientres un sieglu, fasta que los asirios los espuxaron. La cultura cuxina bebía de la de los exipcios; entá hai per ende enforma d'arquiteutura de pirámides y templos monumentales cuxinos. Los cuxinos mesmamente adoraben a munchos dioses exipcios, incluyíu Amón. Na antigüedá clásica, la capital imperial cuxina taba en Meroe. Na xeografía temprana griega, el reinu meroíticu conocíase como Etiopía. El reinu cuxín duró fasta'l sieglu IV d.C., cuando decayó y s'esbrugó por culpa de llevantamientos internos, agachando finalmente énte'l poder xorreciente d'Acsún."
 
 #: simulation/data/civs/mace.jsonName
 #: simulation/data/civs/mace.jsonFactions[0].Name
@@ -1482,7 +1482,7 @@ msgstr "Na India escontra fines del so llargu anábasis, Alexandru regaló al cu
 #: simulation/data/civs/ptol.jsonFactions[0].Technologies[0].Description
 #: simulation/data/civs/sele.jsonFactions[0].Technologies[0].Description
 msgid "Civic Centers have double Health and double default arrows."
-msgstr "Los centros civiles tienen el doblu de salú y el doblu de les fleches por defeutu."
+msgstr "Los centros civiles tienen el doblu de salú y el doblu de fleches por defeutu."
 
 #: simulation/data/civs/mace.jsonFactions[0].Technologies[2].Name
 #: simulation/data/civs/ptol.jsonFactions[0].Technologies[0].Name
@@ -1497,7 +1497,7 @@ msgid ""
 "Beginning with Alexander, the Hellenistic monarchs founded many cities "
 "throughout their empires, where Greek culture and art blended with local "
 "customs to create the motley Hellenistic civilization."
-msgstr "Entamando con Alexandru, los monarques helenistes fundaron munches ciudaes per tolos sos imperios, u l'arte y cultura griegos s'entevenaben con costumes llocales pa criar el mecigayu de la civilización helenista."
+msgstr "Entamando con Alexandru, los monarques helenistes fundaron munches ciudaes per tolos sos imperios, u l'arte y cultura griegos s'entevenaben con costumes llocales pa producir el mecigayu de la civilización helenista."
 
 #: simulation/data/civs/mace.jsonFactions[0].Heroes[0].History
 msgid ""
@@ -1522,7 +1522,7 @@ msgid ""
 "India, he defeated king Porus at Hydaspes (326 B.C.), but his weary troops "
 "made him halt. Died in Babylon at the age of 33 while planning a campaign "
 "against Arabia."
-msgstr "El más fuerte de tolos héroes - fíu de Felipe II, rei de Macedonia (336-323 a.C.). En conquistando'l restu de los tracios y apanguando'l malestar de los griegos, Alexandru embarcóse nuna marcha pa conquistar el mundu. Derrotando les fuercies perses a Gránicu (334 a.C.), Isu (333 a.C.) y Gaugamela (331 a.C.), adueñóse del imperiu persa. Entrando na India, venció al rei Poru n'Hidaspe (326 a.C.), pero los soldaos galdíos ficieron qu'aparare. Morrió con 33 años en Babilonia mentanto planiaba una campaña contra Arabia. "
+msgstr "El más fuerte de tolos héroes - fíu de Felipe II, rei de Macedonia (336-323 a.C.). En conquistando'l restu de los tracios y apanguando'l malestar de los griegos, Alexandru embarcóse nuna marcha pa conquistar el mundu. Venciendo les fuercies perses a Gránicu (334 a.C.), Isu (333 a.C.) y Gaugamela (331 a.C.), adueñóse del imperiu persa. Entrando na India, venció al rei Poru n'Hidaspe (326 a.C.), pero los soldaos galdíos ficieron qu'aparare. Morrió con 33 años en Babilonia mentanto planiaba una campaña contra Arabia. "
 
 #: simulation/data/civs/mace.jsonFactions[0].Heroes[2].History
 msgid ""
@@ -1589,7 +1589,7 @@ msgid ""
 "Macedonian forces and allies took over most of the world they knew, "
 "including Egypt, Persia and parts of the Indian subcontinent, allowing a "
 "diffusion of Hellenic and eastern cultures for years to come."
-msgstr "Macedonia yera un antiguu reinu griegu, centráu al nordeste de la península griega. Baxo la direición d'Alexandru'l Grande, les fuercies y aliaos macedonios apoderáronse de la mayor parte del mundiu que conocíen, mesmamente Exiptu, Persia y seiciones del socontinente indiu, permitiendo que les cultures heléniques y orientales s'espardieren demientres munchos años.  "
+msgstr "Macedonia yera un antiguu reinu griegu, centráu al nordeste de la península griega. Baxo la direición d'Alexandru'l Grande, les fuercies y aliaos macedonios apoderáronse de la mayor parte del mundiu que conocíen, incluyíu Exiptu, Persia y seiciones del socontinente indiu, permitiendo que les cultures heléniques y orientales s'espardieren demientres munchos años.  "
 
 #: simulation/data/civs/maur.jsonName
 msgid "Mauryas"
@@ -1613,7 +1613,7 @@ msgid ""
 "commanded a standing army of 600,000 infantry, 9000 elephants, 8000 "
 "chariots, and 30,000 cavalry, making it arguably the largest army of its "
 "time."
-msgstr "L'imperiu mauria abarcaba docenes de reinos anteriormente independientes a lo llargo d'un área de 5 millones de quilómetros cuadraos y tenía una población d'aproximao 60 millones de persones. Los gobernadores mauria llevaben el títulu d'emperador d'emperadores y mandaben un exércitu de 600.000 soldaos d'a pie, 9000 elefantes, 8000 carros y 30.000 xinetes, faciendo d'él, al meyor, l'exércitu más grande de la dómina."
+msgstr "L'imperiu maurián abarcaba docenes de reinos anteriormente independientes a lo llargo d'un área de 5 millones de quilómetros cuadraos y tenía una población d'aproximao 60 millones de persones. Los gobernadores maurianos llevaben el títulu d'emperador d'emperadores y mandaben un exércitu de 600.000 soldaos d'a pie, 9000 elefantes, 8000 carros y 30.000 xinetes, faciendo d'él, al meyor, l'exércitu más grande de la dómina."
 
 #: simulation/data/civs/maur.jsonCivBonuses[1].Description
 msgid "The Mauryas enjoy access to 4 champions."
@@ -1633,9 +1633,9 @@ msgstr "El «Kṣatriya» o «Kaṣtriya», que significa guerreru, ye ún de lo
 
 #: simulation/data/civs/maur.jsonTeamBonuses[0].Description
 msgid ""
-"Allied temples −50% resource costs and building time; temple technologies "
+"Allied Temples −50% resource costs and building time; Temple technologies "
 "−50% resource costs and research time."
-msgstr "Templos aliaos −50% de costu en recursos y tiempu de construcción; teunoloxíes de templos −50% de costu en recursos y tiempu d'investigación."
+msgstr ""
 
 #: simulation/data/civs/maur.jsonTeamBonuses[0].Name
 msgid "Ashoka's Religious Support"
@@ -1808,8 +1808,8 @@ msgid ""
 msgstr "Los perses podíen llevantar y llevantaben bien d'infantería en tiempos de guerra por mor del tamañu escomanáu del Imperiu aqueménida y el mou nel que se configuraba. Polo xeneral, la infantería persa salía bien trallao y lluchaba con tesón. Sicasí, la infantería yera ruino combatiendo cuerpu a cuerpu. Pa enriba, sacantes los reximientos d'élite, la infantería persa nun yera una fuercia profesional permanente."
 
 #: simulation/data/civs/pers.jsonTeamBonuses[0].Description
-msgid "Allied land traders +15% trade gain."
-msgstr "Comerciantes terrestres aliaos +15% a les ganancies comerciales."
+msgid "Allied Land Traders +15% trade gain."
+msgstr ""
 
 #: simulation/data/civs/pers.jsonTeamBonuses[0].Name
 msgid "Royal Road"
@@ -1830,7 +1830,7 @@ msgstr "Cúrux II el Grande"
 #: simulation/data/civs/pers.jsonAINames[1]
 #: simulation/data/civs/pers.jsonFactions[0].Heroes[1].Name
 msgid "Darayavahush I"
-msgstr "Darayávahux I"
+msgstr "Darayávaḥux I"
 
 #: simulation/data/civs/pers.jsonAINames[2]
 msgid "Cambyses II"
@@ -1851,11 +1851,11 @@ msgstr "Artáxacha I"
 
 #: simulation/data/civs/pers.jsonAINames[6]
 msgid "Darayavahush II"
-msgstr "Darayávahux II"
+msgstr "Darayávaḥux II"
 
 #: simulation/data/civs/pers.jsonAINames[7]
 msgid "Darayavahush III"
-msgstr "Darayávahux III"
+msgstr "Darayávaḥux III"
 
 #: simulation/data/civs/pers.jsonAINames[8]
 msgid "Artaxshacha II"
@@ -1874,8 +1874,8 @@ msgid "Xsayarsa II"
 msgstr "Xayarxa II"
 
 #: simulation/data/civs/pers.jsonFactions[0].Technologies[0].Description
-msgid "Phoenician triremes gain the unique ability to train cavalry units."
-msgstr "Les trirremes fenicies ganen la capacidá única p'allistar unidaes de caballería."
+msgid "Phoenician triremes gain the unique ability to train cavalry."
+msgstr ""
 
 #: simulation/data/civs/pers.jsonFactions[0].Technologies[0].Name
 msgid "Naval Craftsmanship"
@@ -1890,7 +1890,7 @@ msgid ""
 "example, a canal was built in Egypt and a Persian navy was sent exploring "
 "the Indus river. According to Herodotus, some 300 ships in the Persian navy "
 "were retrofitted to carry horses and their riders."
-msgstr "Los primeros gobernadores aqueménides tomaben determín pa facer de Persia el primer gran imperiu asiáticu que dominare la mar. El gran rei trataba bien la xente de la mar al envís de cuntar col so arimu, pero tamién llevaba alantre estremaes iniciatives marines. Nel reináu de Daríu'l Grande, por exemplu, construyeron una canal n'Exiptu y unviaron una armada persa pa esplorar el ríu Indu. Según Heródotu, remocicaron unos 300 barcos na armada persa pa llevar caballos y xinetes. "
+msgstr "Los primeros gobernadores aqueménides tomaben determín pa facer de Persia el primer gran imperiu asiáticu que dominare la mar. El gran rei trataba la xente de la mar bien al envís de cuntar col so arimu, pero tamién llevaba alantre estremaes iniciatives marines. Nel reináu de Daríu'l Grande, por casu, construyeron una canal n'Exiptu y unviaron una armada persa pa esplorar el ríu Indu. Según Heródotu, remocicaron unos 300 barcos na armada persa pa llevar caballos y xinetes. "
 
 #: simulation/data/civs/pers.jsonFactions[0].Technologies[1].Description
 msgid ""
@@ -1942,11 +1942,11 @@ msgid ""
 "Empire. He was also renown as a benevolent conqueror. (OP - Kurush). "
 "Technically the second ruler of the Persians by that name, and so appears as"
 " Kurush II on his documents and coins. Kurush I was his grandfather."
-msgstr "Ciru (reinó ente 559-530 a.C.) El fíu d'una princesa media y el gobernador d'Anxán; llamáu con razón el «padre del Imperiu», Ciru'l Grande conquistó Media, Lidia, Babilonia y Bactria, afitando asina l'Imperiu persa. Tamién tenía nomada de ser un conquistador benevolente. (OP - Cúrux). Yera téunicamente'l segundu gobernador de los perses con esi nome, conque nos documentos y monedes de so apaez como Cúrux II. Cúrux I yera so güelu."
+msgstr "Ciru (reinó ente 559-530 a.C.) El fíu d'una princesa media y el gobernador d'Anxán; llamáu con razón el «padre del Imperiu», Ciru'l Grande conquistó Media, Lidia, Babilonia y Bactria, afitando asina l'Imperiu persa. Tamién tenía nomada de ser un conquistador benevolente. (OP - Kurush). Yera téunicamente'l segundu gobernador de los perses con esi nome, conque nos documentos y monedes de so apaez como Cúrux II. Cúrux I yera so güelu."
 
 #: simulation/data/civs/pers.jsonFactions[0].Heroes[0].Name
 msgid "Kurush II"
-msgstr "Cúrux II"
+msgstr "Kurush II"
 
 #: simulation/data/civs/pers.jsonFactions[0].Heroes[1].History
 msgid ""
@@ -1972,7 +1972,7 @@ msgstr "Corte de caballería"
 
 #: simulation/data/civs/pers.jsonStructures[0].Special
 msgid "Train Cavalry citizen-soldiers."
-msgstr "Allista milicianos populares a caballu."
+msgstr "Allista milicianos populares d'a caballu."
 
 #: simulation/data/civs/pers.jsonStructures[0].History
 msgid "The Persian Empire's best soldiers were Eastern horsemen."
@@ -2015,8 +2015,8 @@ msgstr "Ptolemaicos"
 #: simulation/data/civs/ptol.jsonCivBonuses[0].Description
 msgid ""
 "The Ptolemies receive the Mercenary Camp, a Barracks that is constructed in "
-"neutral territory and trains mercenary soldiers."
-msgstr "Los ptolemaicos reciben el campamentu mercencariu, un cuartel que se constrúi en territoriu neutral y allista soldaos mercencarios."
+"neutral territory and trains mercenaries."
+msgstr ""
 
 #: simulation/data/civs/ptol.jsonCivBonuses[0].Name
 msgid "Mercenary Army"
@@ -2170,7 +2170,7 @@ msgstr "Los exipcios ptolemaicos reciben 3 teunoloxíes agrícoles penriba del n
 msgid ""
 "The Nile Delta had rich soil for farming, due to centuries of seasonal "
 "floods from the Nile depositing rich silt across the landscape."
-msgstr "El delta del Nilu tenía tierra granible pa l'agricultura, por mor de la balsa vicioso que sieglos d'hinchentes estacionales del Nilu aneyare a lo llargo del terrén."
+msgstr "El delta del Nilu tenía tierra granible pa l'agricultura, por mor de la balsa vicioso que sieglos d'inchentes estacionales del Nilu aneyare a lo llargo del terrén."
 
 #: simulation/data/civs/ptol.jsonFactions[0].Heroes[0].Name
 msgid "Ptolemaios A' Soter"
@@ -2207,8 +2207,8 @@ msgstr "Stratópedo Misthophóron"
 #: simulation/data/civs/ptol.jsonStructures[1].Special
 msgid ""
 "Must be constructed in neutral territory. Has no territory radius effect. "
-"Trains all 'mercenary' units."
-msgstr "Tien de construyise en territoriu neutral. Nun tien dal efeutu radial nel territoriu. Allista a toles unidaes «mercenaries»."
+"Trains mercenaries."
+msgstr ""
 
 #: simulation/data/civs/ptol.jsonStructures[2].Name
 msgid "Lighthouse"
@@ -2275,8 +2275,8 @@ msgid ""
 msgstr "La ciudadanía romana yera cobiciada en mundu antiguu. Los ciudadanos romanos gociaben de drechos y privilexos básicos qu'a otra xente conquistao-yos faltaben. Dicíase qu'amocar a un ciudadanu romanu yera neto qu'amocar a Roma, y fadría que tola pudencia de Roma cayere sobro l'ofendedor. "
 
 #: simulation/data/civs/rome.jsonTeamBonuses[0].Description
-msgid "Allied citizen-soldier infantry −20% training time."
-msgstr "infantería miliciano-popular aliao −20% de muera d'allistamientu."
+msgid "Allied Citizen-Soldier Infantry −20% training time."
+msgstr ""
 
 #: simulation/data/civs/rome.jsonTeamBonuses[0].Name
 msgid "Conscription"
@@ -2399,7 +2399,7 @@ msgid ""
 "His campaigns in Spain and Africa helped to bring Carthage to its knees "
 "during the Second Punic War. He defeated Hannibal at the Battle of Zama in "
 "202 B.C."
-msgstr "Yera'l primer xeneral romanu que tevo abondu ésitu escontra los cartaxineses. Les sos campañes n'España y África axudaron a defitar a Cartagu na segunda guerra púnica. Derrotó a Haníbal na batalla de Zama en 202 a.C."
+msgstr "Yera'l primer xeneral romanu que tevo abondu ésitu escontra los cartaxineses. Les sos campañes n'España y África aidaron a defitar a Cartagu na segunda guerra púnica. Venció a Haníbal na batalla de Zama en 202 a.C."
 
 #: simulation/data/civs/rome.jsonFactions[0].Heroes[2].Name
 msgid "Scipio Africanus"
@@ -2448,7 +2448,7 @@ msgid ""
 "nations on earth for almost 800 years. The Romans were the supreme builders "
 "of the ancient world, excelled at siege warfare and had an exquisite "
 "infantry and navy."
-msgstr "Los romanos alministraben ún de los imperios más grandes del mundu antiguu. Espurríase nel so cumal del sur d'Escocia al ermu del Sáḥara, y tenía ente 60 y 80 millones d'habitantes, un cuartu de la población de la tierra d'aquella dómina. Roma tamién siguió siendo una de les ñaciones más fuertes na tierra cuasi 800 años. Los romanos yeren los constructores supremos del mundu antiguu, teníen xeitu pal asediu y una infantería y armada estraordinaries."
+msgstr "Los romanos alministraben ún de los imperios más grandes del mundu antiguu. Espurríase nel so cumal del sur d'Escocia al desiertu del Sáḥara, y tenía ente 60 y 80 millones d'habitantes, un cuartu de la población de la tierra d'aquella dómina. Roma tamién siguió siendo una de les ñaciones más fuertes na tierra cuasi 800 años. Los romanos yeren los constructores supremos del mundu antiguu, teníen xeitu pal asediu y una infantería y armada estraordinaries."
 
 #: simulation/data/civs/sele.jsonName
 #: simulation/data/civs/sele.jsonFactions[0].Name
@@ -2482,11 +2482,11 @@ msgid ""
 " the cavalry arm. War with the Romans from the West and invasions from the "
 "Galatians also forced the Seleucids to reform their infantry regiments to be"
 " more flexible."
-msgstr "La milicia de los seléucides, y al endefechu de los socesores, camudó a lo llargo de los sieglos II y III. El contautu colos advenedizos orientales talos como los partos y les revueltes constantes de les satrapíes perifériques tales como Bactria llevaron los seléucides a reformar l'exércitu y cambiar la táctica, en concreto, nel cuerpu de caballería. La guerra colos romanos del oeste y invasiones de los gálates forciaron los seléucides a reformar tamién los reximientos d'infantería pa que foren más flexibles."
+msgstr "La milicia de los seléucides, y al endefechu de los socesores, camudó a lo llargo de los sieglos II y III. El contautu colos advenedizos orientales talos como los partos y les revueltes constantes de les satrapíes perifériques tales como Bactria llevaron los seléucides a reformar l'exércitu y cambiar la táutica, en concreto, nel cuerpu de caballería. La guerra colos romanos del oeste y invasiones de los gálates forciaron los seléucides a reformar tamién los reximientos d'infantería pa que foren más flexibles."
 
 #: simulation/data/civs/sele.jsonTeamBonuses[0].Description
-msgid "Allied civil centers −20% resource costs."
-msgstr "Centros civiles aliaos −20% de costu en recursos."
+msgid "Allied Civil Centers −20% resource costs."
+msgstr ""
 
 #: simulation/data/civs/sele.jsonTeamBonuses[0].Name
 msgid "Syrian Tetrapolis"
@@ -2619,7 +2619,7 @@ msgstr "Felipe II Filorroméu"
 msgid ""
 "Traditional Army unlocks Silver Shields and Scythed Chariots, Reform Army "
 "unlocks Romanized Heavy Swordsmen and Cataphracts."
-msgstr "L'exércitu tradicional desbloquia a los escudos de plata y carros falcaos, l'exércitu reformáu desbloquia a los espadaos pesaos romanizaos y catafractos."
+msgstr "L'exércitu tradicional desbloquia a los escudos de plata y carros falcaos, l'exércitu reformáu desbloquia a los espaderos pesaos romanizaos y catafrautos."
 
 #: simulation/data/civs/sele.jsonFactions[0].Technologies[1].Name
 msgid "Traditional Army vs. Reform Army"
@@ -2679,7 +2679,7 @@ msgid ""
 "Achaean League and the Kingdom of Pergamon banded together with the Romans "
 "to defeat him at the Battle of Magnesia, forever burying the dream of "
 "reuniting Alexander's empire."
-msgstr "Antíocu heredó un reinu plagáu de problemes al facese cargu del gobiernu. Dende l'antoxana del esbarrumbu llogró recomponer l'imperiu que Seleucu I esbrexare tan duro por fundar. Defitó a los sátrapes orientales rabalbos de Bactria y Partia, asegurando temporalmente les fronteres orientales. Darréu reparó na madre Grecia y quixo facer real el suañu de los sos predecesores invadiéndola cola xida de lliberala. La Lliga Aquea y el reinu de Pérgamu axuntáronse colos romanos pa derrotalu na batalla de Magnesia, enterrando de fincia'l suañu de volver a xunir l'imperiu d'Alexandru."
+msgstr "Antíocu heredó un reinu plagáu de problemes al facese cargu del gobiernu. Dende l'antoxana del esbarrumbu llogró recomponer l'imperiu que Seleucu I esbrexare tan duro por fundar. Defitó a los sátrapes orientales rabalbos de Bactria y Partia, asegurando temporalmente les fronteres orientales. Darréu reparó na madre Grecia y quixo facer real el suañu de los sos predecesores invadiéndola cola xida de lliberala. La Lliga Aquea y el reinu de Pérgamu axuntáronse colos romanos pa vencelu na batalla de Magnesia, enterrando de fincia'l suañu de volver a xunir l'imperiu d'Alexandru."
 
 #: simulation/data/civs/sele.jsonFactions[0].Heroes[1].Name
 msgid "Antiokhos G' Megas"
@@ -2694,7 +2694,7 @@ msgid ""
 "conquest of Egypt (twice), which was halted by the threat of Roman "
 "intervention, and the beginning of the Jewish revolt of the Maccabees. He "
 "died of sudden illness while fighting off a Parthian invasion from the East."
-msgstr "Antíocu IV Epífanes yera fíu d'Antíocu III el Grande y hermanu de Seleucu IV Filópator. Inicialmente nomáu Mitrídates, tomó'l nome d'Antíocu o al llegar al tronu o depués de la muerte del so hermanu mayor, Antíocu. Ente los acontecimientos del so reináu espunten la cuasi conquista d'Exiptu (dos vegaes), que quedó parada pola amenaza d'intervención romana, y l'entamu de la revuelta xudía de los macabeos. Morrió d'una malura repentina mentanto tornaba una invasión parta del Este. "
+msgstr "Antíocu IV Epífanes yera fíu d'Antíocu III el Grande y hermanu de Seleucu IV Filópator. Inicialmente nomáu Mitrídates, tomó'l nome d'Antíocu o al llegar al tronu o depués de la muerte del so hermanu mayor, Antíocu. Nos acontecimientos del so reináu inxérense la cuasi conquista d'Exiptu (dos vegaes), que quedó parada pola amenaza d'intervención romana, y l'entamu de la revuelta xudía de los macabeos. Morrió d'una malura repentina mentanto tornaba una invasión parta del Este. "
 
 #: simulation/data/civs/sele.jsonFactions[0].Heroes[2].Name
 msgid "Antiokhos D' Epiphanes"
@@ -2707,8 +2707,8 @@ msgid ""
 msgstr "La dinastía griego-macedonia que dominaba la parte oriental del antiguu imperiu d'Alexandru."
 
 #: simulation/data/civs/sele.jsonStructures[1].Special
-msgid "Trains all cavalry units except Citizen-Militia Cavalry."
-msgstr "Allista a toles unidaes de caballería sacante caballería miliciano-popular."
+msgid "Trains all cavalry except citizen-soldier cavalry."
+msgstr ""
 
 #: simulation/data/civs/sele.jsonStructures[2].Name
 msgid "Military Colony"
@@ -2733,7 +2733,7 @@ msgid ""
 "manpower for the imperial Seleucid army. A side effect of this system was "
 "that it drained the Greek homeland of military-aged men, a contributing "
 "factor to Greece's eventual conquest by Rome."
-msgstr "Los reis seléucides convidaron griegos, macedonios, gálates (galos), cretenses y tracios a afincar nes tierres del Imperiu. Ellos asitiáronse en colonies militares llamaes cleruquíes (klēroukhia). Baxo esti atroxu, los colonos recibíen una finca, o kleros, y empara d'ello teníen de sirvir nel exércitu del gran rei cuando los llamare al serviciu. Eso crió una clas media de colonos que debíen el pan y la facienda a los reis sirios y qu'axudaben a ameter la mano d'obra disponible al exércitu imperial seléucida. Un efeutu secundariu d'esi sistema yera qu'escosaba la patria griega de rapazos, un factor contribuyente a la conquista final de Grecia por Roma.  "
+msgstr "Los reis seléucides convidaron griegos, macedonios, gálates (galos), cretenses y tracios a afincar nes tierres del Imperiu. Ellos asitiáronse en colonies militares llamaes cleruquíes (klēroukhia). Baxo esti atroxu, los colonos recibíen una finca, o kleros, y empara d'ello teníen de sirvir nel exércitu del gran rei cuando los llamare al serviciu. Eso crió una clas media de colonos que debíen el pan y la facienda a los reis sirios y qu'aidaben a ameter la mano d'obra disponible al exércitu imperial seléucida. Un efeutu secundariu d'esi sistema yera qu'escosaba la patria griega de rapazos, un factor contribuyente a la conquista final de Grecia por Roma.  "
 
 #: simulation/data/civs/sele.jsonHistory
 msgid ""
@@ -2775,8 +2775,8 @@ msgid ""
 msgstr "So la constitución qu'escribió'l míticu llexislador Licurgu, afitóse la institución de la «agogá», onde los espartanos se trallaben dende los 6 años pa ser guerreros superiores en defensa del estáu espartanu."
 
 #: simulation/data/civs/spart.jsonTeamBonuses[0].Description
-msgid "Allied citizen-soldier infantry spearmen +10% health."
-msgstr "Llanceros d'a pie miliciano-populares aliaos +10% de salú."
+msgid "Allied Citizen-Soldier Infantry Spearmen +10% health."
+msgstr ""
 
 #: simulation/data/civs/spart.jsonTeamBonuses[0].Name
 msgid "Peloponnesian League"
@@ -2855,7 +2855,7 @@ msgid ""
 "lost battle against Pyrrhus of Epirus they overnight built an earthen "
 "rampart to protect the city while their men slept in preparation for the "
 "next day's siege."
-msgstr "Les espartanes yeren ente les muyeres más llibres del mundu antiguu. Podíen poseyer tierres y esclavos y mesmamente exercitar desnudes como los espartanos. Dizse que namái les espartanes paríen homes de verdá. Tales muyeres dures ayudaron más d'una vegada a salvar la ciudá del desastre, por exemplu, en perdiendo la batalla escontra Pirru d'Epiru construyeron de nueche un reparu de tierra pa protexer la ciudá mentanto dormíen los homes pa preparase pal asediu del otru día."
+msgstr "Les espartanes yeren ente les muyeres más llibres del mundu antiguu. Podíen poseyer tierres y esclavos y mesmamente exercitar desnudes como los espartanos. Dizse que namái les espartanes paríen homes de verdá. Tales muyeres dures ayudaron más d'una vegada a salvar la ciudá del desastre, por casu, en perdiendo la batalla escontra Pirru d'Epiru construyeron de nueche un reparu de tierra pa protexer la ciudá mentanto dormíen los homes pa preparase pal asediu del otru día."
 
 #: simulation/data/civs/spart.jsonFactions[0].Technologies[1].Description
 msgid "Units in phalanx formation move faster."

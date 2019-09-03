@@ -75,13 +75,11 @@ function getMapDescriptionAndPreview(mapType, mapName, gameAttributes = undefine
  * Sets the mappreview image correctly.
  * It needs to be cropped as the engine only allows loading square textures.
  *
- * @param {string} guiObject
  * @param {string} filename
  */
-function setMapPreviewImage(guiObject, filename)
+function getMapPreviewImage(filename)
 {
-	Engine.GetGUIObjectByName(guiObject).sprite =
-		"cropped:" + 400 / 512 + "," + 300 / 512 + ":" +
+	return "cropped:" + 400 / 512 + "," + 300 / 512 + ":" +
 		g_MapPreviewPath + filename;
 }
 
@@ -385,10 +383,10 @@ function getGameDescription()
 
 	if (g_GameAttributes.settings.TriggerDifficulty !== undefined)
 	{
-		let difficulty = g_Settings.TriggerDifficulties.find(difficulty => difficulty.Difficulty == g_GameAttributes.settings.TriggerDifficulty);
+		let triggerDifficulty = g_Settings.TriggerDifficulties.find(difficulty => difficulty.Difficulty == g_GameAttributes.settings.TriggerDifficulty);
 		titles.push({
-			"label": difficulty.Title,
-			"value": difficulty.Tooltip
+			"label": triggerDifficulty.Title,
+			"value": triggerDifficulty.Tooltip
 		});
 	}
 

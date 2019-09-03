@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -75,7 +75,7 @@ public:
 	{
 		TS_ASSERT(server.SetupConnection(PS_DEFAULT_PORT));
 		for (size_t j = 0; j < clients.size(); ++j)
-			TS_ASSERT(clients[j]->SetupConnection("127.0.0.1", PS_DEFAULT_PORT));
+			TS_ASSERT(clients[j]->SetupConnection("127.0.0.1", PS_DEFAULT_PORT, nullptr));
 
 		for (size_t i = 0; ; ++i)
 		{
@@ -144,9 +144,9 @@ public:
 
 		std::vector<CNetClient*> clients;
 
-		CGame client1Game(true);
-		CGame client2Game(true);
-		CGame client3Game(true);
+		CGame client1Game(false);
+		CGame client2Game(false);
+		CGame client3Game(false);
 
 		CNetServer server;
 
@@ -209,9 +209,9 @@ public:
 
 		std::vector<CNetClient*> clients;
 
-		CGame client1Game(true);
-		CGame client2Game(true);
-		CGame client3Game(true);
+		CGame client1Game(false);
+		CGame client2Game(false);
+		CGame client3Game(false);
 
 		CNetServer server;
 
@@ -270,12 +270,12 @@ public:
 
 		debug_printf("==== Connecting client 2B\n");
 
-		CGame client2BGame(true);
+		CGame client2BGame(false);
 		CNetClient client2B(&client2BGame, false);
 		client2B.SetUserName(L"bob");
 		clients.push_back(&client2B);
 
-		TS_ASSERT(client2B.SetupConnection("127.0.0.1", PS_DEFAULT_PORT));
+		TS_ASSERT(client2B.SetupConnection("127.0.0.1", PS_DEFAULT_PORT, nullptr));
 
 		for (size_t i = 0; ; ++i)
 		{

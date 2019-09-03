@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,8 +19,7 @@
 
 #include "GUIManager.h"
 
-#include "CGUI.h"
-
+#include "gui/CGUI.h"
 #include "lib/timer.h"
 #include "ps/Filesystem.h"
 #include "ps/CLogger.h"
@@ -83,26 +82,31 @@ void CGUIManager::SwitchPage(const CStrW& pageName, ScriptInterface* srcScriptIn
 {
 	// The page stack is cleared (including the script context where initData came from),
 	// therefore we have to clone initData.
+
 	shared_ptr<ScriptInterface::StructuredClone> initDataClone;
 	if (!initData.isUndefined())
-	{
 		initDataClone = srcScriptInterface->WriteStructuredClone(initData);
-	}
+
 	m_PageStack.clear();
-	PushPage(pageName, initDataClone);
+
+	PushPage(pageName, initDataClone, JS::UndefinedHandleValue);
 }
 
-void CGUIManager::PushPage(const CStrW& pageName, shared_ptr<ScriptInterface::StructuredClone> initData)
+void CGUIManager::PushPage(const CStrW& pageName, shared_ptr<ScriptInterface::StructuredClone> initData, JS::HandleValue callbackFunction)
 {
-	m_PageStack.push_back(SGUIPage());
-	m_PageStack.back().name = pageName;
-	m_PageStack.back().initData = initData;
-	LoadPage(m_PageStack.back());
+	// Store the callback handler in the current GUI page before opening the new one
+	if (!m_PageStack.empty() && !callbackFunction.isUndefined())
+		m_PageStack.back().SetCallbackFunction(*m_ScriptInterface, callbackFunction);
+
+	// Push the page prior to loading its contents, because that may push
+	// another GUI page on init which should be pushed on top of this new page.
+	m_PageStack.emplace_back(pageName, initData);
+	m_PageStack.back().LoadPage(m_ScriptRuntime);
 
 	ResetCursor();
 }
 
-void CGUIManager::PopPage()
+void CGUIManager::PopPage(shared_ptr<ScriptInterface::StructuredClone> args)
 {
 	if (m_PageStack.size() < 2)
 	{
@@ -111,63 +115,21 @@ void CGUIManager::PopPage()
 	}
 
 	m_PageStack.pop_back();
+	m_PageStack.back().PerformCallbackFunction(args);
 }
 
-void CGUIManager::PopPageCB(shared_ptr<ScriptInterface::StructuredClone> args)
+CGUIManager::SGUIPage::SGUIPage(const CStrW& pageName, const shared_ptr<ScriptInterface::StructuredClone> initData)
+	: name(pageName), initData(initData), inputs(), gui(), callbackFunction()
 {
-	shared_ptr<ScriptInterface::StructuredClone> initDataClone = m_PageStack.back().initData;
-	PopPage();
-
-	shared_ptr<ScriptInterface> scriptInterface = m_PageStack.back().gui->GetScriptInterface();
-	JSContext* cx = scriptInterface->GetContext();
-	JSAutoRequest rq(cx);
-
-	JS::RootedValue initDataVal(cx);
-	if (!initDataClone)
-	{
-		LOGERROR("Called PopPageCB when initData (which should contain the callback function name) isn't set!");
-		return;
-	}
-
-	scriptInterface->ReadStructuredClone(initDataClone, &initDataVal);
-
-	if (!scriptInterface->HasProperty(initDataVal, "callback"))
-	{
-		LOGERROR("Called PopPageCB when the callback function name isn't set!");
-		return;
-	}
-
-	std::string callback;
-	if (!scriptInterface->GetProperty(initDataVal, "callback", callback))
-	{
-		LOGERROR("Failed to get the callback property as a string from initData in PopPageCB!");
-		return;
-	}
-
-	JS::RootedValue global(cx, scriptInterface->GetGlobalObject());
-	if (!scriptInterface->HasProperty(global, callback.c_str()))
-	{
-		LOGERROR("The specified callback function %s does not exist in the page %s", callback, utf8_from_wstring(m_PageStack.back().name));
-		return;
-	}
-
-	JS::RootedValue argVal(cx);
-	if (args)
-		scriptInterface->ReadStructuredClone(args, &argVal);
-	if (!scriptInterface->CallFunctionVoid(global, callback.c_str(), argVal))
-	{
-		LOGERROR("Failed to call the callback function %s in the page %s", callback, utf8_from_wstring(m_PageStack.back().name));
-		return;
-	}
 }
 
-void CGUIManager::LoadPage(SGUIPage& page)
+void CGUIManager::SGUIPage::LoadPage(shared_ptr<ScriptRuntime> scriptRuntime)
 {
 	// If we're hotloading then try to grab some data from the previous page
 	shared_ptr<ScriptInterface::StructuredClone> hotloadData;
-	if (page.gui)
+	if (gui)
 	{
-		shared_ptr<ScriptInterface> scriptInterface = page.gui->GetScriptInterface();
+		shared_ptr<ScriptInterface> scriptInterface = gui->GetScriptInterface();
 		JSContext* cx = scriptInterface->GetContext();
 		JSAutoRequest rq(cx);
 
@@ -177,13 +139,13 @@ void CGUIManager::LoadPage(SGUIPage& page)
 		hotloadData = scriptInterface->WriteStructuredClone(hotloadDataVal);
 	}
 
-	page.inputs.clear();
-	page.gui.reset(new CGUI(m_ScriptRuntime));
+	inputs.clear();
+	gui.reset(new CGUI(scriptRuntime));
 
-	page.gui->Initialize();
+	gui->Initialize();
 
-	VfsPath path = VfsPath("gui") / page.name;
-	page.inputs.insert(path);
+	VfsPath path = VfsPath("gui") / name;
+	inputs.insert(path);
 
 	CXeromyces xero;
 	if (xero.Load(g_VFS, path, "gui_page") != PSRETURN_OK)
@@ -197,7 +159,7 @@ void CGUIManager::LoadPage(SGUIPage& page)
 
 	if (root.GetNodeName() != elmt_page)
 	{
-		LOGERROR("GUI page '%s' must have root element <page>", utf8_from_wstring(page.name));
+		LOGERROR("GUI page '%s' must have root element <page>", utf8_from_wstring(name));
 		return;
 	}
 
@@ -205,7 +167,7 @@ void CGUIManager::LoadPage(SGUIPage& page)
 	{
 		if (node.GetNodeName() != elmt_include)
 		{
-			LOGERROR("GUI page '%s' must only have <include> elements inside <page>", utf8_from_wstring(page.name));
+			LOGERROR("GUI page '%s' must only have <include> elements inside <page>", utf8_from_wstring(name));
 			continue;
 		}
 
@@ -222,22 +184,18 @@ void CGUIManager::LoadPage(SGUIPage& page)
 			VfsPaths pathnames;
 			vfs::GetPathnames(g_VFS, directory, L"*.xml", pathnames);
 			for (const VfsPath& path : pathnames)
-				page.gui->LoadXmlFile(path, page.inputs);
+				gui->LoadXmlFile(path, inputs);
 		}
 		else
 		{
 			VfsPath path = VfsPath("gui") / nameW;
-			page.gui->LoadXmlFile(path, page.inputs);
+			gui->LoadXmlFile(path, inputs);
 		}
 	}
 
-	// Remember this GUI page, in case the scripts call FindObjectByName
-	shared_ptr<CGUI> oldGUI = m_CurrentGUI;
-	m_CurrentGUI = page.gui;
+	gui->SendEventToAll("load");
 
-	page.gui->SendEventToAll("load");
-
-	shared_ptr<ScriptInterface> scriptInterface = page.gui->GetScriptInterface();
+	shared_ptr<ScriptInterface> scriptInterface = gui->GetScriptInterface();
 	JSContext* cx = scriptInterface->GetContext();
 	JSAutoRequest rq(cx);
 
@@ -245,17 +203,61 @@ void CGUIManager::LoadPage(SGUIPage& page)
 	JS::RootedValue hotloadDataVal(cx);
 	JS::RootedValue global(cx, scriptInterface->GetGlobalObject());
 
-	if (page.initData)
-		scriptInterface->ReadStructuredClone(page.initData, &initDataVal);
+	if (initData)
+		scriptInterface->ReadStructuredClone(initData, &initDataVal);
 
 	if (hotloadData)
 		scriptInterface->ReadStructuredClone(hotloadData, &hotloadDataVal);
 
 	if (scriptInterface->HasProperty(global, "init") &&
 	    !scriptInterface->CallFunctionVoid(global, "init", initDataVal, hotloadDataVal))
-		LOGERROR("GUI page '%s': Failed to call init() function", utf8_from_wstring(page.name));
+		LOGERROR("GUI page '%s': Failed to call init() function", utf8_from_wstring(name));
+}
 
-	m_CurrentGUI = oldGUI;
+void CGUIManager::SGUIPage::SetCallbackFunction(ScriptInterface& scriptInterface, JS::HandleValue callbackFunc)
+{
+	if (!callbackFunc.isObject())
+	{
+		LOGERROR("Given callback handler is not an object!");
+		return;
+	}
+
+	// Does not require JSAutoRequest
+	if (!JS_ObjectIsFunction(scriptInterface.GetContext(), &callbackFunc.toObject()))
+	{
+		LOGERROR("Given callback handler is not a function!");
+		return;
+	}
+
+	callbackFunction = std::make_shared<JS::PersistentRootedValue>(scriptInterface.GetJSRuntime(), callbackFunc);
+}
+
+void CGUIManager::SGUIPage::PerformCallbackFunction(shared_ptr<ScriptInterface::StructuredClone> args)
+{
+	if (!callbackFunction)
+		return;
+
+	shared_ptr<ScriptInterface> scriptInterface = gui->GetScriptInterface();
+	JSContext* cx = scriptInterface->GetContext();
+	JSAutoRequest rq(cx);
+
+	JS::RootedObject globalObj(cx, &scriptInterface->GetGlobalObject().toObject());
+
+	JS::RootedValue funcVal(cx, *callbackFunction);
+
+	// Delete the callback function, so that it is not called again
+	callbackFunction.reset();
+
+	JS::RootedValue argVal(cx);
+	if (args)
+		scriptInterface->ReadStructuredClone(args, &argVal);
+
+	JS::AutoValueVector paramData(cx);
+	paramData.append(argVal);
+
+	JS::RootedValue result(cx);
+
+	JS_CallFunctionValue(cx, globalObj, funcVal, paramData, &result);
 }
 
 Status CGUIManager::ReloadChangedFile(const VfsPath& path)
@@ -264,7 +266,7 @@ Status CGUIManager::ReloadChangedFile(const VfsPath& path)
 		if (p.inputs.count(path))
 		{
 			LOGMESSAGE("GUI file '%s' changed - reloading page '%s'", path.string8(), utf8_from_wstring(p.name));
-			LoadPage(p);
+			p.LoadPage(m_ScriptRuntime);
 			// TODO: this can crash if LoadPage runs an init script which modifies the page stack and breaks our iterators
 		}
 
@@ -275,7 +277,7 @@ Status CGUIManager::ReloadAllPages()
 {
 	// TODO: this can crash if LoadPage runs an init script which modifies the page stack and breaks our iterators
 	for (SGUIPage& p : m_PageStack)
-		LoadPage(p);
+		p.LoadPage(m_ScriptRuntime);
 
 	return INFO::OK;
 }
@@ -318,7 +320,7 @@ InReaction CGUIManager::HandleEvent(const SDL_Event_* ev)
 	// to capture all mouse events until a mouseup after dragging).
 	// So we call two separate handler functions:
 
-	bool handled;
+	bool handled = false;
 
 	{
 		PROFILE("handleInputBeforeGui");
@@ -352,25 +354,14 @@ InReaction CGUIManager::HandleEvent(const SDL_Event_* ev)
 	return IN_PASS;
 }
 
-
-bool CGUIManager::GetPreDefinedColor(const CStr& name, CColor& output) const
-{
-	return top()->GetPreDefinedColor(name, output);
-}
-
-IGUIObject* CGUIManager::FindObjectByName(const CStr& name) const
-{
-	// This can be called from scripts run by TickObjects,
-	// and we want to return it the same GUI page as is being ticked
-	if (m_CurrentGUI)
-		return m_CurrentGUI->FindObjectByName(name);
-	else
-		return top()->FindObjectByName(name);
-}
-
 void CGUIManager::SendEventToAll(const CStr& eventName) const
 {
 	top()->SendEventToAll(eventName);
+}
+
+void CGUIManager::SendEventToAll(const CStr& eventName, JS::HandleValueArray paramData) const
+{
+	top()->SendEventToAll(eventName, paramData);
 }
 
 void CGUIManager::TickObjects()
@@ -385,14 +376,10 @@ void CGUIManager::TickObjects()
 	PageStackType pageStack = m_PageStack;
 
 	for (const SGUIPage& p : pageStack)
-	{
-		m_CurrentGUI = p.gui;
 		p.gui->TickObjects();
-	}
-	m_CurrentGUI.reset();
 }
 
-void CGUIManager::Draw()
+void CGUIManager::Draw() const
 {
 	PROFILE3_GPU("gui");
 
@@ -407,11 +394,9 @@ void CGUIManager::UpdateResolution()
 
 	for (const SGUIPage& p : pageStack)
 	{
-		m_CurrentGUI = p.gui;
 		p.gui->UpdateResolution();
 		p.gui->SendEventToAll("WindowResized");
 	}
-	m_CurrentGUI.reset();
 }
 
 bool CGUIManager::TemplateExists(const std::string& templateName) const

@@ -128,8 +128,8 @@ function GetModifiedTemplateDataValue(template, value_path, mod_key, player, mod
 
 	if (player)
 		current_value = ApplyValueModificationsToTemplate(mod_key, current_value, player, template);
-	else if (modifiers)
-		current_value = GetTechModifiedProperty(modifiers, GetIdentityClasses(template.Identity), mod_key, current_value);
+	else if (modifiers && modifiers[mod_key])
+		current_value = GetTechModifiedProperty(modifiers[mod_key], GetIdentityClasses(template.Identity), current_value);
 
 	// Using .toFixed() to get around spidermonkey's treatment of numbers (3 * 1.1 = 3.3000000000000003 for instance).
 	return +current_value.toFixed(8);
@@ -165,9 +165,26 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 	if (template.Armour)
 	{
 		ret.armour = {};
-		for (let damageType of damageTypes.GetTypes())
-			ret.armour[damageType] = getEntityValue("Armour/" + damageType);
+		for (let damageType in template.Armour)
+			if (damageType != "Foundation")
+				ret.armour[damageType] = getEntityValue("Armour/" + damageType);
 	}
+
+	let getAttackEffects = (temp, path) => {
+		let effects = {};
+		if (temp.Capture)
+			effects.Capture = getEntityValue(path + "/Capture");
+
+		if (temp.Damage)
+		{
+			effects.Damage = {};
+			for (let damageType in temp.Damage)
+				effects.Damage[damageType] = getEntityValue(path + "/Damage/" + damageType);
+		}
+
+		// TODO: status effects
+		return effects;
+	};
 
 	if (template.Attack)
 	{
@@ -178,34 +195,27 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 				return getEntityValue("Attack/" + type + "/" + stat);
 			};
 
-			if (type == "Capture")
-				ret.attack.Capture = {
-					"value": getAttackStat("Value")
-				};
-			else
-			{
-				ret.attack[type] = {
-					"minRange": getAttackStat("MinRange"),
-					"maxRange": getAttackStat("MaxRange"),
-					"elevationBonus": getAttackStat("ElevationBonus")
-				};
-				for (let damageType of damageTypes.GetTypes())
-					ret.attack[type][damageType] = getAttackStat(damageType);
+			ret.attack[type] = {
+				"minRange": getAttackStat("MinRange"),
+				"maxRange": getAttackStat("MaxRange"),
+				"elevationBonus": getAttackStat("ElevationBonus"),
+			};
 
-				ret.attack[type].elevationAdaptedRange = Math.sqrt(ret.attack[type].maxRange *
-					(2 * ret.attack[type].elevationBonus + ret.attack[type].maxRange));
-			}
+			ret.attack[type].elevationAdaptedRange = Math.sqrt(ret.attack[type].maxRange *
+				(2 * ret.attack[type].elevationBonus + ret.attack[type].maxRange));
+
 			ret.attack[type].repeatTime = getAttackStat("RepeatTime");
+
+			Object.assign(ret.attack[type], getAttackEffects(template.Attack[type], "Attack/" + type));
 
 			if (template.Attack[type].Splash)
 			{
 				ret.attack[type].splash = {
 					// true if undefined
 					"friendlyFire": template.Attack[type].Splash.FriendlyFire != "false",
-					"shape": template.Attack[type].Splash.Shape
+					"shape": template.Attack[type].Splash.Shape,
 				};
-				for (let damageType of damageTypes.GetTypes())
-					ret.attack[type].splash[damageType] = getAttackStat("Splash/" + damageType);
+				Object.assign(ret.attack[type].splash, getAttackEffects(template.Attack[type].Splash, "Attack/" + type + "/Splash"));
 			}
 		}
 	}
@@ -213,10 +223,10 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 	if (template.DeathDamage)
 	{
 		ret.deathDamage = {
-			"friendlyFire": template.DeathDamage.FriendlyFire != "false"
+			"friendlyFire": template.DeathDamage.FriendlyFire != "false",
 		};
-		for (let damageType of damageTypes.GetTypes())
-			ret.deathDamage[damageType] = getEntityValue("DeathDamage/" + damageType);
+
+		Object.assign(ret.deathDamage, getAttackEffects(template.DeathDamage, "DeathDamage"));
 	}
 
 	if (template.Auras && auraTemplates)
@@ -226,10 +236,10 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 		{
 			let aura = auraTemplates[auraID];
 			ret.auras[auraID] = {
-					"name": aura.auraName,
-					"description": aura.auraDescription || null,
-					"radius": aura.radius || null
-				};
+				"name": aura.auraName,
+				"description": aura.auraDescription || null,
+				"radius": aura.radius || null
+			};
 		}
 	}
 
@@ -398,8 +408,9 @@ function GetTemplateDataHelper(template, player, auraTemplates, resources, damag
 		ret.speed = {
 			"walk": getEntityValue("UnitMotion/WalkSpeed"),
 		};
-		if (template.UnitMotion.Run)
-			ret.speed.run = getEntityValue("UnitMotion/Run/Speed");
+		ret.speed.run = getEntityValue("UnitMotion/WalkSpeed");
+		if (template.UnitMotion.RunMultiplier)
+			ret.speed.run *= getEntityValue("UnitMotion/RunMultiplier");
 	}
 
 	if (template.Upgrade)

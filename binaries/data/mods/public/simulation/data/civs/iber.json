@@ -70,8 +70,8 @@
 	[
 		{
 			"Name": "Saripeko",
-			"History": "The Iberians were long known to provide mercenary soldiers to other nations to serve as auxiliaries to their armies in foreign wars. Carthage is the most well known example, and we have evidence of them serving in such a capacity in Aquitania.",
-			"Description": "Allied citizen-soldier javelinists −20% resource costs."
+			"History": "The Iberians were long known to provide mercenaries to other nations to serve as auxiliaries to their armies in foreign wars. Carthage is the most well known example, and we have evidence of them serving in such a capacity in Aquitania.",
+			"Description": "Allied Citizen Javelinists −20% resource costs."
 		}
 	],
 	"Structures":
@@ -88,7 +88,7 @@
 	],
 	"WallSets":
 	[
-		"other/wallset_palisade",
+		"structures/wallset_palisade",
 		"structures/iber_wallset_stone"
 	],
 	"StartEntities":

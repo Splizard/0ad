@@ -11,14 +11,14 @@
 # pilino1234 <pilino1234@zoho.eu>, 2015-2016
 # Mattias Münster <mattiasmun@gmail.com>, 2019
 # pilino1234 <pilino1234@zoho.eu>, 2016-2017
-# pilino1234 <pilino1234@zoho.eu>, 2017-2018
+# pilino1234 <pilino1234@zoho.eu>, 2017-2019
 # Sam Johnsson <johnsson.sam@gmail.com>, 2015
 # Ted Svendsen <tad.hopp@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-03-24 14:12+0000\n"
+"POT-Creation-Date: 2019-05-24 09:43+0200\n"
+"PO-Revision-Date: 2019-06-16 17:37+0000\n"
 "Last-Translator: Mattias Münster <mattiasmun@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/wildfire-games/0ad/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -244,7 +244,7 @@ msgstr "%(_player_)s, du måste skicka mig en tribut av %(_amount_)s %(_resource
 #, javascript-format
 msgid ""
 "Unless you send me %(_amount_)s %(_resource_)s, an alliance won’t be formed,"
-" %(_player_)s,"
+" %(_player_)s."
 msgstr "Om du inte skickar mig %(_amount_)s %(_resource_)s så kommer en allians inte bildas, %(_player_)s."
 
 #: simulation/ai/petra/chatHelper.js:88
@@ -609,7 +609,7 @@ msgstr "Kan inte ogarnisonera enhet(er)"
 msgid "Some unit(s) can't go back to work"
 msgstr "Några enhet(er) kan ej gå tillbaka till arbetet"
 
-#: simulation/helpers/Commands.js:1114
+#: simulation/helpers/Commands.js:1112
 msgid "The building's technology requirements are not met."
 msgstr "Byggnadens teknologikrav är inte uppfyllda"
 
@@ -889,4 +889,4 @@ msgid ""
 "Petra is the default 0 A.D. AI bot. Please report issues to Wildfire Games (see the link in the main menu).\n"
 "\n"
 "The AI's resource gathering rate and trade gain depend on the difficulty level (Sandbox −58%, Very Easy −44%, Easy −25%, Medium ±0%, Hard +25%, Very Hard +56%). The easiest levels also have a slower research, training, and building rate. In addition, the Sandbox level does not expand nor attack."
-msgstr "Petra är standard 0 A.D. AI bot. Var god rapportera problem till Wildfire Games (se länken i huvudmenyn).\n\nAI: s insamlingsfrekvens och handelsvinst beror på svårighetsgraden (Sandlåda –58%, Väldigt lätt –44%, Lätt –25%, Mellan ±0%, Svår +25%, Mycket svår +56%). De enklaste nivåerna har också en långsammare forskning, träning och bygghastighet. Dessutom expanderar inte Sandbox-nivån eller angriper."
+msgstr "Petra är standard 0 A.D. AI bot. Var god rapportera problem till Wildfire Games (se länken i huvudmenyn).\n\nAI: s insamlingsfrekvens och handelsvinst beror på svårighetsgraden (Sandlåda –58%, Väldigt lätt –44%, Lätt –25%, Mellan ±0%, Svår +25%, Mycket svår +56%). De enklaste nivåerna har också en långsammare forsknings, tränings och bygghastighet. Dessutom expanderar inte Sandbox-nivån eller angriper."

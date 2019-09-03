@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 14:26+0000\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 16:07+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/wildfire-games/0ad/language/fa/)\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,33 @@ msgid ""
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
 msgstr "نیروها ارتقا پیدا می کنند به کلاس پیشرفته تر و کیفیت آنها افزایش پیدا می کند: 20% سلامت بیشتر،  افزایش زره به مقدار 1 واحد برای تمام انواع زره ، 20% غنیمت بیشتر، 20% قدرت حمله بیشتر برای نیروهای نزدیکزن، 4 متر شعاع حمله بیشتر و دقت بیشتر برای نیروهای دورزن، برای نیروهای درمانگر سرعت حرکت، سرعت درمان و شعاع درمان بیشتر."
+
+#: simulation/data/technologies/archery_tradition.jsondescription
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.jsontooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and "
+"-20% train time, but also -20% health."
+msgstr "شعاع حمله +10 متر برای نیروهای کماندار. نیروهای کماندار دقت بهتری پیدا می کنند و -20% زمان پرورش کاهش می یابد اما سلامت آنها نیز -20%."
+
+#: simulation/data/technologies/archery_tradition.jsongenericName
+msgid "Archery Tradition"
+msgstr "سنت کمانداری"
+
+#: simulation/data/technologies/archery_tradition.jsonrequirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
+#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
+#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
+msgid "Unlocked in Village Phase."
+msgstr "قفل آن در فاز روستایی باز خواهد شد."
 
 #: simulation/data/technologies/armor_cav_01.jsondescription
 #: simulation/data/technologies/armor_cav_chamfron.jsondescription
@@ -455,18 +482,6 @@ msgstr "تیرک های تقویت شده ی چوبی برای بدنه ی کش�
 msgid "Reinforced hull"
 msgstr "بدنه ی تقویت شده"
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
-#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
-#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsonrequirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsonrequirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr "قفل آن در فاز روستایی باز خواهد شد."
-
 #: simulation/data/technologies/attack_cav_lance.jsondescription
 msgid "A long spear made specifically for cavalry."
 msgstr "یک نیزه بلند که مخصوص سواره نظام ساخته شده است"
@@ -632,8 +647,8 @@ msgstr "استفاده از آهن به جای برنز به اسلحه ها ق�
 #: simulation/data/technologies/attack_infantry_ranged_01.jsondescription
 #: simulation/data/technologies/attack_infantry_ranged_02.jsondescription
 #: simulation/data/technologies/ranged_inf_irregulars.jsondescription
-msgid "Training increases damage of ranged infantry units."
-msgstr "آموزش برای افزایش میزان ضربه نیروی پیاده دورزن"
+msgid "Training increases damage of ranged infantry."
+msgstr ""
 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsontooltip
 #: simulation/data/technologies/attack_infantry_ranged_02.jsontooltip
@@ -1441,72 +1456,72 @@ msgid "Amentum"
 msgstr "Amentum"
 
 #: simulation/data/technologies/siege_armor.jsondescription
-msgid "Increased armor on siege weapons"
-msgstr "افزایش زره سلاح های دژکوب"
+msgid "Increased armor on siege engines."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsontooltip
-msgid "All Siege weapons +2 Hack armor levels."
-msgstr "تمام ادوات محاصره +2 افزایش زره برشی."
+msgid "Siege Engines +2 hack armor."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsongenericName
 msgid "Armor plating"
 msgstr "آبکاری فلزی زره"
 
 #: simulation/data/technologies/siege_attack.jsondescription
-msgid "Advanced technologies improve siege efficiency"
-msgstr "فناوری های پیشرفته برای بهبود بهره وری دژکوب ها"
+msgid "Advanced technologies improve siege efficiency."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsontooltip
-msgid "All siege weapons +25% Crush damage."
-msgstr "تمام سلاح های دژکوب +25% ضربه لهیدن"
+msgid "Siege Engines +25% attack crush damage."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsongenericName
 msgid "Advanced Siege"
 msgstr "دژکوب پیشرفته"
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsondescription
-msgid "Improvement to projectile accuracy"
-msgstr "تقویت دقت پرتابه ها"
+msgid "Improvement to projectile accuracy."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsontooltip
-msgid "Bolt shooter increased accuracy."
-msgstr "افزایش دقت پیچ انداز"
+msgid "Bolt Shooters −20% ranged attack spread."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsongenericName
 msgid "Bolt Accuracy"
 msgstr "دقت پرتابه"
 
 #: simulation/data/technologies/siege_cost_metal.jsondescription
-msgid "Siege weapons require less metal resource"
-msgstr "ادوات دژکوب فلز کمتری برای ساخت نیاز خواند داشت."
+msgid "Siege engines require less metal."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsontooltip
-msgid "Siege weapons cost 20% less metal"
-msgstr "ادوات دژکوب 20% فلز کمتر برای ساخت نیاز دارند."
+msgid "Siege Engines −20% metal cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsongenericName
 msgid "Metalworker"
 msgstr "فلزکار"
 
 #: simulation/data/technologies/siege_cost_wood.jsondescription
-msgid "Siege weapons cost less wood"
-msgstr "ادوات دژکوب چوب کمتری نیاز خواهند داشت."
+msgid "Siege engines require less wood."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsontooltip
-msgid "Siege weapons cost 20% less wood"
-msgstr "ادوات دژکوب 20% چوب کمتر نیاز خواهند داشت."
+msgid "Siege Engines −20% wood cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsongenericName
 msgid "Artillery Instructors"
 msgstr "آموزش دهندگان دژکوب های پرتابی"
 
 #: simulation/data/technologies/siege_packing.jsondescription
-msgid "Immobile siege weapons are assembled and disassembled faster"
-msgstr "ادوات دژکوب نامتحرک زودتر سرهم و باز می شوند."
+msgid "Immobile siege engines are assembled and disassembled faster."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsontooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
-msgstr "-25% زمان سرهم کردن و جدا کردن سلاح های دژکوب غیر قابل حمل"
+msgid "Siege Engines −25% pack and unpack time."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsongenericName
 msgid "Military Engineers"
@@ -2444,24 +2459,6 @@ msgstr "پرورش درمانگرهای زبده"
 msgid "Divine Instruction"
 msgstr "دستور الهی"
 
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsondescription
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr "هندی ها بصورت سنتی دارای کمانداران بسیار ماهری بودند و تمایل عجیبی برای استفاده گسترده از کمانداران در نبرد ها داشتند"
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsontooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsontooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and "
-"-20% train time, but also -20% health."
-msgstr "شعاع حمله +10 متر برای نیروهای کماندار. نیروهای کماندار دقت بهتری پیدا می کنند و -20% زمان پرورش کاهش می یابد اما سلامت آنها نیز -20%."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsongenericName
-#: simulation/data/technologies/persians/special_archery_tradition.jsongenericName
-msgid "Archery Tradition"
-msgstr "سنت کمانداری"
-
 #: simulation/data/technologies/persians/immortals.jsondescription
 msgid ""
 "The Anusiya champion infantry train twice as fast, but lose a little max "
@@ -2494,12 +2491,6 @@ msgstr "تمام سازه های ایرانی ها +25% سلامت و امتیا
 msgid "Persian Architecture"
 msgstr "معماری پارسیان"
 
-#: simulation/data/technologies/persians/special_archery_tradition.jsondescription
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed"
-" archers in battle."
-msgstr "پارسیان سنتی دیرینه در کمانداری دارند و علاقه ی زیادی به استفاده از انبوهی از کمانداران در نبرد داشتند."
-
 #: simulation/data/technologies/persians/special_equine_transports.jsondescription
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2512,8 +2503,8 @@ msgid ""
 msgstr "حکمرانان اولیه هخامنشی تلاش کردند تا امپراتوری ایران تبدیل به اولین امپراتوری آسیا شود که بر دریاها حکمرانی میکند. پادشاهان بزرگ ایران در این دوران توجه خاصی به مرد ساحلی داشتند تا نیازهای آنها براورده شود اما لشگرکشی های بسیاری را نیز به آنجا انجام دادند. در دوران حکومت داریوش بزرگ برای مثال یک کانال در مصر حفر شد تا مسیر آبی دریای مدیترانه و سرخ شود که این دستور به دنبال فرمان داریوش به اکتشافات دریایی داده شد که از سمت شرق و رود سن آغاز شد و تا به سمت شرق و مصر ادامه پیدا کرد. بر اساس نوشته های هرودوت در حدود 300 کشتی در نیروی دریایی ایران وجود داشت که سواره نظام ایران را جابه جا می کرد."
 
 #: simulation/data/technologies/persians/special_equine_transports.jsontooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
-msgstr "ناو های فنیقی توانایی تربیت سواران را پیدا خواهند کرد."
+msgid "Phoenician Triremes gain the ability to train cavalry."
+msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.jsongenericName
 msgid "Equine Transports"
@@ -2602,9 +2593,9 @@ msgstr "کلان شهرهای یونانی"
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsondescription
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
-msgstr "افزایش چشمگیر سرعت پرورش سلحشور ها و سلاح های دژکوب در قلعه نظامی با ساخت آنها در دسته ها یا گردان ها"
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
+msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsontooltip
 msgid "Faster batch training speed for the Fortress."

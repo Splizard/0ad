@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -63,10 +63,10 @@ CGame *g_Game=NULL;
  * Constructor
  *
  **/
-CGame::CGame(bool disableGraphics, bool replayLog):
+CGame::CGame(bool replayLog):
 	m_World(new CWorld(this)),
 	m_Simulation2(new CSimulation2(&m_World->GetUnitManager(), g_ScriptRuntime, m_World->GetTerrain())),
-	m_GameView(disableGraphics ? NULL : new CGameView(this)),
+	m_GameView(CRenderer::IsInitialised() ? new CGameView(this) : nullptr),
 	m_GameStarted(false),
 	m_Paused(false),
 	m_SimRate(1.0f),
@@ -409,12 +409,7 @@ void CGame::Update(const double deltaRealTime, bool doInterpolate)
 	}
 
 	if (doInterpolate)
-	{
 		m_TurnManager->Interpolate(deltaSimTime, deltaRealTime);
-
-		if ( g_SoundManager )
-			g_SoundManager->IdleTask();
-	}
 }
 
 void CGame::Interpolate(float simFrameLength, float realFrameLength)

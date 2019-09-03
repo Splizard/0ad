@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 14:26+0000\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 16:07+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Irish (http://www.transifex.com/wildfire-games/0ad/language/ga/)\n"
 "MIME-Version: 1.0\n"
@@ -26,6 +26,33 @@ msgid ""
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
 msgstr "Faigh aonaid ardaithe go an rang fórasach bónais go leor: sláinte 20% sa bhreis, +1 léibheal do gach cineál armúir, creach 20% níos mó, ionsaí 20% sa bhreis d'aonaid throda, raon 4m sa bhreis is cruinneas níos fearr d'aonaid raonta, luas gluaiseachta níos tapa agus luas is raon leighis sa bhreis do chneasaithe."
+
+#: simulation/data/technologies/archery_tradition.jsondescription
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
+msgstr "Tá nós saighdeoireachta iontach ag na hIndiaigh is na Peirsigh, agus béim ar úsáid a bhaint as olldhream saighdeoirí sna catha."
+
+#: simulation/data/technologies/archery_tradition.jsontooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and "
+"-20% train time, but also -20% health."
+msgstr "Raon +10 méadar do boghdóirí. Cruinneas níos fearr ag saighdeoirí, agus am traenála -20%, ach sláinte -20% freisin."
+
+#: simulation/data/technologies/archery_tradition.jsongenericName
+msgid "Archery Tradition"
+msgstr "Nós Saighdeoireachta"
+
+#: simulation/data/technologies/archery_tradition.jsonrequirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
+#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
+#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
+msgid "Unlocked in Village Phase."
+msgstr "Díghlasáilte sa Chéim Sráidbhaile."
 
 #: simulation/data/technologies/armor_cav_01.jsondescription
 #: simulation/data/technologies/armor_cav_chamfron.jsondescription
@@ -454,18 +481,6 @@ msgstr "Bíomaí adhmaid treisithe do chabhlacha long. Leibheál +2 i ngach cine
 msgid "Reinforced hull"
 msgstr "Chabhail Treisithe"
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
-#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
-#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsonrequirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsonrequirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr "Díghlasáilte sa Chéim Sráidbhaile."
-
 #: simulation/data/technologies/attack_cav_lance.jsondescription
 msgid "A long spear made specifically for cavalry."
 msgstr "Sleá fada déanta ar son na marcraí."
@@ -631,8 +646,8 @@ msgstr "D'fhaigh an úsáid iarainn in áit chré-umha neart sa bhreis don airm 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsondescription
 #: simulation/data/technologies/attack_infantry_ranged_02.jsondescription
 #: simulation/data/technologies/ranged_inf_irregulars.jsondescription
-msgid "Training increases damage of ranged infantry units."
-msgstr "Méadaíonn traenáil ionsaí na gcoisithe raonta."
+msgid "Training increases damage of ranged infantry."
+msgstr ""
 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsontooltip
 #: simulation/data/technologies/attack_infantry_ranged_02.jsontooltip
@@ -1440,72 +1455,72 @@ msgid "Amentum"
 msgstr "Amentum"
 
 #: simulation/data/technologies/siege_armor.jsondescription
-msgid "Increased armor on siege weapons"
-msgstr "Armúr méadaithe ar uirlisí léigir."
+msgid "Increased armor on siege engines."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsontooltip
-msgid "All Siege weapons +2 Hack armor levels."
-msgstr "Leibheál armúir Teasctha +2 do gach uirlis léigir."
+msgid "Siege Engines +2 hack armor."
+msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsongenericName
 msgid "Armor plating"
 msgstr "Plátáil Armúir"
 
 #: simulation/data/technologies/siege_attack.jsondescription
-msgid "Advanced technologies improve siege efficiency"
-msgstr "Feabhsaigh teicneolaíochtaí forásacha ar an éifeachtúlacht léigir."
+msgid "Advanced technologies improve siege efficiency."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsontooltip
-msgid "All siege weapons +25% Crush damage."
-msgstr "Damáiste Basctha +25% do gach uirlis léigir."
+msgid "Siege Engines +25% attack crush damage."
+msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsongenericName
 msgid "Advanced Siege"
 msgstr "Léigear Forásach"
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsondescription
-msgid "Improvement to projectile accuracy"
-msgstr "Feabhsúchán ar an gcruinneas diúracáin."
+msgid "Improvement to projectile accuracy."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsontooltip
-msgid "Bolt shooter increased accuracy."
-msgstr "Cruinneas méadaithe do lámhachóir boltaí."
+msgid "Bolt Shooters −20% ranged attack spread."
+msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsongenericName
 msgid "Bolt Accuracy"
 msgstr "Cruinneas Boltaí"
 
 #: simulation/data/technologies/siege_cost_metal.jsondescription
-msgid "Siege weapons require less metal resource"
-msgstr "Téastaíonn miotail níos lú ar uirlisí léigir."
+msgid "Siege engines require less metal."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsontooltip
-msgid "Siege weapons cost 20% less metal"
-msgstr "Costas miotail 20% níos lú d'uirlisí léigir"
+msgid "Siege Engines −20% metal cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsongenericName
 msgid "Metalworker"
 msgstr "Gaibhneoir"
 
 #: simulation/data/technologies/siege_cost_wood.jsondescription
-msgid "Siege weapons cost less wood"
-msgstr "Costas adhmaid níos lú d'uirlisí léigir"
+msgid "Siege engines require less wood."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsontooltip
-msgid "Siege weapons cost 20% less wood"
-msgstr "Costas adhmaid 20% níos lú d'uirlisí léigir"
+msgid "Siege Engines −20% wood cost."
+msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsongenericName
 msgid "Artillery Instructors"
 msgstr "Teagascóirí Airtléire"
 
 #: simulation/data/technologies/siege_packing.jsondescription
-msgid "Immobile siege weapons are assembled and disassembled faster"
-msgstr "Is féidir le huirlisí léigir doghluaiste a chóimeáil agus díchóimeáil níos tapa"
+msgid "Immobile siege engines are assembled and disassembled faster."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsontooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
-msgstr "Am pacála is dÍ-phacála -25% d'uirlisí léigir doghluaiste."
+msgid "Siege Engines −25% pack and unpack time."
+msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsongenericName
 msgid "Military Engineers"
@@ -2423,7 +2438,7 @@ msgstr "Ballaí Fada Aithneacha"
 msgid ""
 "+25% HP and -50% build time for Civic Centers, Temples, Pyramids and "
 "Wonders."
-msgstr ""
+msgstr "AS +25% agus am tógála -50% d'Ionaid Cathartha, Teampaill, Pirimidí agus Iontais."
 
 #: simulation/data/technologies/kushites/monumental_architecture.jsongenericName
 msgid "Monumental Architecture"
@@ -2442,24 +2457,6 @@ msgstr ".Traenáil cneasaithe éilite."
 #: simulation/data/technologies/kushites/upgrade_rank_elite_healer.jsongenericName
 msgid "Divine Instruction"
 msgstr "Teagasc Diaga"
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsondescription
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr "Tá nós saighdeoireachta iontach ag na hIndiaigh, agus béim ar úsáid a bhaint as olldhream saighdeoirí sna catha."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsontooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsontooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and "
-"-20% train time, but also -20% health."
-msgstr "Raon +10 méadar do boghdóirí. Cruinneas níos fearr ag saighdeoirí, agus am traenála -20%, ach sláinte -20% freisin."
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsongenericName
-#: simulation/data/technologies/persians/special_archery_tradition.jsongenericName
-msgid "Archery Tradition"
-msgstr "Nós Saighdeoireachta"
 
 #: simulation/data/technologies/persians/immortals.jsondescription
 msgid ""
@@ -2493,12 +2490,6 @@ msgstr "Tá sláinte is pointí gabhála +25% níos mó do gach foirgneamh, ach 
 msgid "Persian Architecture"
 msgstr "Ailtireacht Pheirseach"
 
-#: simulation/data/technologies/persians/special_archery_tradition.jsondescription
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed"
-" archers in battle."
-msgstr "Tá nós saighdeoireachta iontach ag na Peirsigh, agus béim ar úsáid a bhaint as olldhream saighdeoirí sna catha."
-
 #: simulation/data/technologies/persians/special_equine_transports.jsondescription
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2511,8 +2502,8 @@ msgid ""
 msgstr "Gníomhaigh na chéad rialtóirí Acaeiméanacha i dtreo do Pheirs a dhéanamh mar an phríomh-impireacht Áiseach a bheidh ina thiarna ar na mara. D'iompair an Rí Mór éisean féin go maith chuig pobail na mara éagsúla i dtreo a seirbhísí a chur ar fáil, agus chruthaigh sé roinnt tionscnaimh mhara freisin. Mar shampla, sa rith ríochta Dairiúis Mhóir, tógadh canáil san Éigipt agus sheoladh cabhlach Peirseach don Iondúis a thaiscéaladh. Dar le Héaradatas, Aisfheistíodh roinnt le 300 long sa chabhlach Peirseach iad a chur ábalta capaill agus a ridirí a iompar."
 
 #: simulation/data/technologies/persians/special_equine_transports.jsontooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
-msgstr "Faigh tríréimí Féiníceacha an cumas d'aonaid marcra a thraenáil."
+msgid "Phoenician Triremes gain the ability to train cavalry."
+msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.jsongenericName
 msgid "Equine Transports"
@@ -2601,9 +2592,9 @@ msgstr "Ardchathair Heilléineach"
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsondescription
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
-msgstr "Méadaigh luas traenála go mór do churaidh is innill léigir sna dúnta trí iad a thraenáil i ndream mór nó i gcathlán."
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
+msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsontooltip
 msgid "Faster batch training speed for the Fortress."

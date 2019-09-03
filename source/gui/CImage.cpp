@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,12 +23,13 @@
 
 #include "lib/ogl.h"
 
-CImage::CImage()
+CImage::CImage(CGUI& pGUI)
+	: IGUIObject(pGUI)
 {
-	AddSetting(GUIST_CGUISpriteInstance,	"sprite");
-	AddSetting(GUIST_int,					"cell_id");
-	AddSetting(GUIST_CStrW,					"tooltip");
-	AddSetting(GUIST_CStr,					"tooltip_style");
+	AddSetting<CGUISpriteInstance>("sprite");
+	AddSetting<i32>("cell_id");
+	AddSetting<CStrW>("tooltip");
+	AddSetting<CStr>("tooltip_style");
 }
 
 CImage::~CImage()
@@ -37,15 +38,9 @@ CImage::~CImage()
 
 void CImage::Draw()
 {
-	if (!GetGUI())
-		return;
-
-	float bz = GetBufferedZ();
-
-	CGUISpriteInstance* sprite;
-	int cell_id;
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite", sprite);
-	GUI<int>::GetSetting(this, "cell_id", cell_id);
-
-	GetGUI()->DrawSprite(*sprite, cell_id, bz, m_CachedActualSize);
+	m_pGUI.DrawSprite(
+		GetSetting<CGUISpriteInstance>("sprite"),
+		GetSetting<i32>("cell_id"),
+		GetBufferedZ(),
+		m_CachedActualSize);
 }

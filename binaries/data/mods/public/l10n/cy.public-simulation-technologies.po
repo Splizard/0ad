@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-04-01 10:10+0200\n"
-"PO-Revision-Date: 2019-04-01 14:26+0000\n"
+"POT-Creation-Date: 2019-08-26 07:09+0000\n"
+"PO-Revision-Date: 2019-08-26 16:07+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Welsh (http://www.transifex.com/wildfire-games/0ad/language/cy/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,33 @@ msgid ""
 "health, 1 extra armor level of every type, 20% extra loot, 20% extra attack "
 "for melee units, 4m extra range and better precision for ranged units, "
 "faster movement speeds and extra heal speed and range for healers."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.jsondescription
+msgid ""
+"The Indian and Iranian peoples had a tradition of fine archery and a "
+"penchant for using massed archers in battle."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.jsontooltip
+msgid ""
+"Range +10 meters for bow-wielding units. Archer units better accuracy and "
+"-20% train time, but also -20% health."
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.jsongenericName
+msgid "Archery Tradition"
+msgstr ""
+
+#: simulation/data/technologies/archery_tradition.jsonrequirementsTooltip
+#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
+#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
+#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
+#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
+msgid "Unlocked in Village Phase."
 msgstr ""
 
 #: simulation/data/technologies/armor_cav_01.jsondescription
@@ -451,18 +478,6 @@ msgstr ""
 msgid "Reinforced hull"
 msgstr ""
 
-#: simulation/data/technologies/armor_ship_reinforcedhull.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_capacity_basket.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_farming_plows.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_fishing_net.jsonrequirementsTooltip
-#: simulation/data/technologies/gather_lumbering_ironaxes.jsonrequirementsTooltip
-#: simulation/data/technologies/health_females_01.jsonrequirementsTooltip
-#: simulation/data/technologies/tower_watch.jsonrequirementsTooltip
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsonrequirementsTooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsonrequirementsTooltip
-msgid "Unlocked in Village Phase."
-msgstr ""
-
 #: simulation/data/technologies/attack_cav_lance.jsondescription
 msgid "A long spear made specifically for cavalry."
 msgstr ""
@@ -628,7 +643,7 @@ msgstr ""
 #: simulation/data/technologies/attack_infantry_ranged_01.jsondescription
 #: simulation/data/technologies/attack_infantry_ranged_02.jsondescription
 #: simulation/data/technologies/ranged_inf_irregulars.jsondescription
-msgid "Training increases damage of ranged infantry units."
+msgid "Training increases damage of ranged infantry."
 msgstr ""
 
 #: simulation/data/technologies/attack_infantry_ranged_01.jsontooltip
@@ -1437,11 +1452,11 @@ msgid "Amentum"
 msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsondescription
-msgid "Increased armor on siege weapons"
+msgid "Increased armor on siege engines."
 msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsontooltip
-msgid "All Siege weapons +2 Hack armor levels."
+msgid "Siege Engines +2 hack armor."
 msgstr ""
 
 #: simulation/data/technologies/siege_armor.jsongenericName
@@ -1449,11 +1464,11 @@ msgid "Armor plating"
 msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsondescription
-msgid "Advanced technologies improve siege efficiency"
+msgid "Advanced technologies improve siege efficiency."
 msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsontooltip
-msgid "All siege weapons +25% Crush damage."
+msgid "Siege Engines +25% attack crush damage."
 msgstr ""
 
 #: simulation/data/technologies/siege_attack.jsongenericName
@@ -1461,11 +1476,11 @@ msgid "Advanced Siege"
 msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsondescription
-msgid "Improvement to projectile accuracy"
+msgid "Improvement to projectile accuracy."
 msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsontooltip
-msgid "Bolt shooter increased accuracy."
+msgid "Bolt Shooters −20% ranged attack spread."
 msgstr ""
 
 #: simulation/data/technologies/siege_bolt_accuracy.jsongenericName
@@ -1473,11 +1488,11 @@ msgid "Bolt Accuracy"
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsondescription
-msgid "Siege weapons require less metal resource"
+msgid "Siege engines require less metal."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsontooltip
-msgid "Siege weapons cost 20% less metal"
+msgid "Siege Engines −20% metal cost."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_metal.jsongenericName
@@ -1485,11 +1500,11 @@ msgid "Metalworker"
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsondescription
-msgid "Siege weapons cost less wood"
+msgid "Siege engines require less wood."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsontooltip
-msgid "Siege weapons cost 20% less wood"
+msgid "Siege Engines −20% wood cost."
 msgstr ""
 
 #: simulation/data/technologies/siege_cost_wood.jsongenericName
@@ -1497,11 +1512,11 @@ msgid "Artillery Instructors"
 msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsondescription
-msgid "Immobile siege weapons are assembled and disassembled faster"
+msgid "Immobile siege engines are assembled and disassembled faster."
 msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsontooltip
-msgid "-25% pack and unpack time for immobile siege weapons."
+msgid "Siege Engines −25% pack and unpack time."
 msgstr ""
 
 #: simulation/data/technologies/siege_packing.jsongenericName
@@ -2440,24 +2455,6 @@ msgstr ""
 msgid "Divine Instruction"
 msgstr ""
 
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsondescription
-msgid ""
-"The Indians had a tradition of fine archery and a penchant for using massed "
-"archers in battle."
-msgstr ""
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsontooltip
-#: simulation/data/technologies/persians/special_archery_tradition.jsontooltip
-msgid ""
-"Range +10 meters for bow-wielding units. Archer units better accuracy and "
-"-20% train time, but also -20% health."
-msgstr ""
-
-#: simulation/data/technologies/mauryas/special_archery_tradition.jsongenericName
-#: simulation/data/technologies/persians/special_archery_tradition.jsongenericName
-msgid "Archery Tradition"
-msgstr ""
-
 #: simulation/data/technologies/persians/immortals.jsondescription
 msgid ""
 "The Anusiya champion infantry train twice as fast, but lose a little max "
@@ -2490,12 +2487,6 @@ msgstr ""
 msgid "Persian Architecture"
 msgstr ""
 
-#: simulation/data/technologies/persians/special_archery_tradition.jsondescription
-msgid ""
-"The Persians had a tradition of fine archery and a penchant for using massed"
-" archers in battle."
-msgstr ""
-
 #: simulation/data/technologies/persians/special_equine_transports.jsondescription
 msgid ""
 "Early Achaemenid rulers acted towards making Persia the first great Asian "
@@ -2508,7 +2499,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.jsontooltip
-msgid "Phoenician Triremes gain the ability to train cavalry units."
+msgid "Phoenician Triremes gain the ability to train cavalry."
 msgstr ""
 
 #: simulation/data/technologies/persians/special_equine_transports.jsongenericName
@@ -2598,8 +2589,8 @@ msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsondescription
 msgid ""
-"Significantly increase training speed of champions and siege weapons at the "
-"fortress by training them in large batches or battalions."
+"Significantly increase training speed of champions and siege engines at the "
+"fortress when training them in large batches."
 msgstr ""
 
 #: simulation/data/technologies/successors/special_parade_of_daphne.jsontooltip

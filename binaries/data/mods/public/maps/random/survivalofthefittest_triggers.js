@@ -72,7 +72,7 @@ var disabledTemplates = (civ) => [
 	// Walls
 	"structures/" + civ + "_wallset_stone",
 	"structures/rome_wallset_siege",
-	"other/wallset_palisade",
+	"structures/wallset_palisade",
 
 	// Shoreline
 	"structures/" + civ + "_dock",
@@ -152,7 +152,7 @@ Trigger.prototype.InitStartingUnits = function()
 	{
 		this.playerCivicCenter[playerID] = TriggerHelper.GetPlayerEntitiesByClass(playerID, "CivilCentre")[0];
 		this.treasureFemale[playerID] = TriggerHelper.GetPlayerEntitiesByClass(playerID, "FemaleCitizen")[0];
-		Engine.QueryInterface(this.treasureFemale[playerID], IID_DamageReceiver).SetInvulnerability(true);
+		Engine.QueryInterface(this.treasureFemale[playerID], IID_Resistance).SetInvulnerability(true);
 	}
 };
 
@@ -270,8 +270,7 @@ Trigger.prototype.StartAnEnemyWave = function()
 
 Trigger.prototype.PlaceTreasures = function()
 {
-	let point = pickRandom(["B", "C", "D"]);
-	let triggerPoints = this.GetTriggerPoints(point);
+	let triggerPoints = this.GetTriggerPoints(pickRandom(["B", "C", "D"]));
 	for (let point of triggerPoints)
 		TriggerHelper.SpawnUnits(point, pickRandom(treasures), 1, 0);
 

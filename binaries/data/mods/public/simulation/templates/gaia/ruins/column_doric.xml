@@ -5,13 +5,11 @@
     <Height>2.5</Height>
   </Footprint>
   <Identity>
-    <GenericName>Ruins</GenericName>
     <SpecificName>Ancient Ruins</SpecificName>
     <Icon>gaia/special_fence.png</Icon>
   </Identity>
   <ResourceSupply>
     <Amount>500</Amount>
-    <Type>stone.ruins</Type>
   </ResourceSupply>
   <VisualActor>
     <Actor>props/special/eyecandy/column_doric_fallen.xml</Actor>

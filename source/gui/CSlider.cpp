@@ -21,22 +21,22 @@
 #include "lib/ogl.h"
 #include "ps/CLogger.h"
 
-
-CSlider::CSlider()
-	: m_IsPressed(false), m_ButtonSide(0)
+CSlider::CSlider(CGUI& pGUI)
+	: IGUIObject(pGUI), m_IsPressed(false), m_ButtonSide(0)
 {
-	AddSetting(GUIST_float, "value");
-	AddSetting(GUIST_float, "min_value");
-	AddSetting(GUIST_float, "max_value");
-	AddSetting(GUIST_int, "cell_id");
-	AddSetting(GUIST_CGUISpriteInstance, "sprite");
-	AddSetting(GUIST_CGUISpriteInstance, "sprite_bar");
-	AddSetting(GUIST_float, "button_width");
+	AddSetting<float>("value");
+	AddSetting<float>("min_value");
+	AddSetting<float>("max_value");
+	AddSetting<i32>("cell_id");
+	AddSetting<CGUISpriteInstance>("sprite");
+	AddSetting<CGUISpriteInstance>("sprite_bar");
+	AddSetting<float>("button_width");
 
-	GUI<float>::GetSetting(this, "value", m_Value);
-	GUI<float>::GetSetting(this, "min_value", m_MinValue);
-	GUI<float>::GetSetting(this, "max_value", m_MaxValue);
-	GUI<float>::GetSetting(this, "button_width", m_ButtonSide);
+	m_Value = GetSetting<float>("value");
+	m_MinValue = GetSetting<float>("min_value");
+	m_MaxValue = GetSetting<float>("max_value");
+	m_ButtonSide = GetSetting<float>("button_width");
+
 	m_Value = Clamp(m_Value, m_MinValue, m_MaxValue);
 }
 
@@ -61,10 +61,11 @@ void CSlider::HandleMessage(SGUIMessage& Message)
 	{
 	case GUIM_SETTINGS_UPDATED:
 	{
-		GUI<float>::GetSetting(this, "value", m_Value);
-		GUI<float>::GetSetting(this, "min_value", m_MinValue);
-		GUI<float>::GetSetting(this, "max_value", m_MaxValue);
-		GUI<float>::GetSetting(this, "button_width", m_ButtonSide);
+		m_Value = GetSetting<float>("value");
+		m_MinValue = GetSetting<float>("min_value");
+		m_MaxValue = GetSetting<float>("max_value");
+		m_ButtonSide = GetSetting<float>("button_width");
+
 		m_Value = Clamp(m_Value, m_MinValue, m_MaxValue);
 		break;
 	}
@@ -84,7 +85,7 @@ void CSlider::HandleMessage(SGUIMessage& Message)
 	}
 	case GUIM_MOUSE_PRESS_LEFT:
 	{
-		m_Mouse = GetMousePos();
+		m_Mouse = m_pGUI.GetMousePos();
 		m_IsPressed = true;
 
 		IncrementallyChangeValue((m_Mouse.x - GetButtonRect().CenterPoint().x) * GetSliderRatio());
@@ -97,12 +98,12 @@ void CSlider::HandleMessage(SGUIMessage& Message)
 	}
 	case GUIM_MOUSE_MOTION:
 	{
-		if (!MouseOver())
+		if (!IsMouseOver())
 			m_IsPressed = false;
 		if (m_IsPressed)
 		{
-			float difference = float(GetMousePos().x - m_Mouse.x) * GetSliderRatio();
-			m_Mouse = GetMousePos();
+			float difference = float(m_pGUI.GetMousePos().x - m_Mouse.x) * GetSliderRatio();
+			m_Mouse = m_pGUI.GetMousePos();
 			IncrementallyChangeValue(difference);
 		}
 		break;
@@ -114,31 +115,25 @@ void CSlider::HandleMessage(SGUIMessage& Message)
 
 void CSlider::Draw()
 {
-	if (!GetGUI())
-		return;
-
-	CGUISpriteInstance* sprite;
-	CGUISpriteInstance* sprite_button;
-	int cell_id;
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite_bar", sprite);
-	GUI<CGUISpriteInstance>::GetSettingPointer(this, "sprite", sprite_button);
-	GUI<int>::GetSetting(this, "cell_id", cell_id);
+	CGUISpriteInstance& sprite = GetSetting<CGUISpriteInstance>("sprite_bar");
+	CGUISpriteInstance& sprite_button = GetSetting<CGUISpriteInstance>("sprite");
+	const int cell_id = GetSetting<i32>("cell_id");
 
 	CRect slider_line(m_CachedActualSize);
 	slider_line.left += m_ButtonSide / 2.0f;
 	slider_line.right -= m_ButtonSide / 2.0f;
 	float bz = GetBufferedZ();
-	GetGUI()->DrawSprite(*sprite, cell_id, bz, slider_line);
-	GetGUI()->DrawSprite(*sprite_button, cell_id, bz, GetButtonRect());
+	m_pGUI.DrawSprite(sprite, cell_id, bz, slider_line);
+	m_pGUI.DrawSprite(sprite_button, cell_id, bz, GetButtonRect());
 }
 
 void CSlider::UpdateValue()
 {
-	GUI<float>::SetSetting(this, "value", m_Value);
+	SetSetting<float>("value", m_Value, true);
 	ScriptEvent("valuechange");
 }
 
-CRect CSlider::GetButtonRect()
+CRect CSlider::GetButtonRect() const
 {
 	float ratio = m_MaxValue > m_MinValue ? (m_Value - m_MinValue) / (m_MaxValue - m_MinValue) : 0.0f;
 	float x = m_CachedActualSize.left + ratio * (m_CachedActualSize.GetWidth() - m_ButtonSide);

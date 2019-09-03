@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -78,8 +78,13 @@
 #ifndef INCLUDED_PROFILER2
 #define INCLUDED_PROFILER2
 
+#include <map>
+#include <thread>
+
 #include "lib/timer.h"
 #include "ps/ThreadUtil.h"
+
+#include <mutex>
 
 struct mg_context;
 
@@ -107,7 +112,7 @@ public:
 		ITEM_ATTRIBUTE = 5, // arbitrary string associated with current region, or latest event (if the previous item was an event)
 	};
 
-	static const size_t MAX_ATTRIBUTE_LENGTH = 256; // includes null terminator, which isn't stored
+	static const size_t MAX_ATTRIBUTE_LENGTH; // includes null terminator, which isn't stored
 
 	/// An arbitrary number to help resyncing with the item stream when parsing.
 	static const u8 RESYNC_MAGIC[8];
@@ -122,10 +127,9 @@ public:
 	};
 
 private:
-	// TODO: what's a good size?
 	// TODO: different threads might want different sizes
-	static const size_t BUFFER_SIZE = 4*1024*1024;
-	static const size_t HOLD_BUFFER_SIZE = 128 * 1024;
+	static const size_t BUFFER_SIZE;
+	static const size_t HOLD_BUFFER_SIZE;
 
 	/**
 	 * Class instantiated in every registered thread.
@@ -434,13 +438,10 @@ public:
 private:
 	void InitialiseGPU();
 
-	static void TLSDtor(void* data);
-
 	ThreadStorage& GetThreadStorage()
 	{
-		ThreadStorage* storage = (ThreadStorage*)pthread_getspecific(m_TLS);
-		ASSERT(storage);
-		return *storage;
+		ENSURE(m_CurrentStorage);
+		return *m_CurrentStorage;
 	}
 
 	bool m_Initialised;
@@ -449,12 +450,12 @@ private:
 
 	mg_context* m_MgContext;
 
-	pthread_key_t m_TLS;
-
 	CProfiler2GPU* m_GPU;
 
-	CMutex m_Mutex;
-	std::vector<ThreadStorage*> m_Threads; // thread-safe; protected by m_Mutex
+	std::mutex m_Mutex;
+
+	static thread_local ThreadStorage* m_CurrentStorage;
+	std::vector<std::unique_ptr<ThreadStorage>> m_Threads; // thread-safe; protected by m_Mutex
 };
 
 extern CProfiler2 g_Profiler2;

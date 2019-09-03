@@ -5,20 +5,21 @@
 # Translators:
 # Cheng-Chia Tseng <pswo10680@gmail.com>, 2015
 # ethan lin <ethan@tscc.tp.edu.tw>, 2018
-# Hsu Karinsu <m80126colin@gmail.com>, 2018
+# Karinsu Hsu <m80126colin@gmail.com>, 2018
 # Yuan <daan0014119@gmail.com>, 2017
-# Jeff Huang <s8321414@gmail.com>, 2014-2017
+# 黃柏諺 <s8321414@gmail.com>, 2014-2017
 # JerryShen <jerry82422@gmail.com>, 2018
 # Mysterelee <8161525@qq.com>, 2014
 # Shoichi Chou <shoichi.chou@gmail.com>, 2018
 # You-Ruei Tzeng <e222et@gmail.com>, 2014
 # 又齊 劉 <bill19981002@gmail.com>, 2018
+# 可邦 陳 <bensoncat99@gmail.com>, 2019
 # 張峻瑜 <a728728728@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-03-22 09:45+0100\n"
-"PO-Revision-Date: 2019-03-22 16:01+0000\n"
+"POT-Creation-Date: 2019-08-23 07:09+0000\n"
+"PO-Revision-Date: 2019-08-23 15:28+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/wildfire-games/0ad/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -120,7 +121,7 @@ msgstr "阿登森林"
 msgid ""
 "A rugged land with small room for buildings with scarce wood. Represents the"
 " mountain range in the Northwest Africa."
-msgstr ""
+msgstr "一片高低不平的土地，只有很少的木頭可以用來建造建築。模擬西北非洲的山脈區。"
 
 #: maps/random/atlas_mountains.jsonsettings.Name
 msgid "Atlas Mountains"
@@ -316,16 +317,16 @@ msgstr "休眠火山"
 
 #: maps/random/fields_of_meroe.jsonsettings.Description
 msgid ""
-"The \"Island of Meroe\", a vast peninsula flanked by the Nile and Atbarah "
+"The \"Island of Meroë\", a vast peninsula flanked by the Nile and Atbarah "
 "rivers, formed the heartland of ancient Kush. Where the harsh deserts start "
 "making way for the semi-arid savannahs and small acacia forests dot the "
 "landscape. The area is rich in resources and the ever-present Nile brings "
 "life, but grave threats loom on the opposite riverbank."
-msgstr "美羅埃島是一個巨大的半島，兩側是尼羅河和阿特巴拉河，形成了古老的庫施中心地帶，那裡的乾旱沙漠為半乾旱的大草原和小相思樹林開闢了道路。 這個區域富含資源和永恆的尼羅河帶來生命，但嚴重的威脅在對岸出現。"
+msgstr ""
 
 #: maps/random/fields_of_meroe.jsonsettings.Name
-msgid "Fields of Meroe"
-msgstr "美羅埃的領域"
+msgid "Fields of Meroë"
+msgstr ""
 
 #: maps/random/flood.jsonsettings.Description
 msgid ""
@@ -808,7 +809,7 @@ msgstr ""
 
 #: maps/random/scythian_rivulet.jsonsettings.Name
 msgid "Scythian Rivulet"
-msgstr ""
+msgstr "斯基泰小河"
 
 #: maps/random/snowflake_searocks.jsonsettings.Description
 msgid "Many small islands connected to each other by narrow passages."
@@ -1577,10 +1578,10 @@ msgstr ""
 
 #: maps/scenarios/Necropolis.xml:Description:39
 msgid ""
-"4 players duke it out over the vast Nile Delta. Each city starts out nestled atop a large acropolis, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
+"Four players duke it out over the vast Nile Delta. Each city starts out nestled atop a large plateau, but resources are scarce, forcing each player to expand their resource operations into the surrounding lands.\n"
 "\n"
 "Scouts say the nearby branches of the Nile River are shallow and fordable in multiple locations, so should only serve as a minor barrier between enemy factions."
-msgstr "4 位玩家於廣闊的尼羅河三角洲一較高下。每個城市都位於大型的衛城中開始遊戲，但資源量稀少，迫使每一個玩家都必須將他們採集資源的動作擴展到週邊的土地。\n\n斥候回報，附近的尼羅河支流皆相當淺，且多處皆可涉水而過，因此只是敵方進攻的輕微障礙。"
+msgstr ""
 
 #: maps/scenarios/Necropolis.xml:Name:39
 msgid "Necropolis"
@@ -2046,7 +2047,7 @@ msgstr "遊戲裡的每一個單位。"
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27
+#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
 msgid "Give an interesting description of your map."
 msgstr "給您的地圖個有趣的描述。"
 
@@ -2071,6 +2072,7 @@ msgid "A quick battle demo map using Roman legionnaires."
 msgstr "使用羅馬軍團進行快速戰鬥的展示地圖。"
 
 #: maps/scenarios/_default.xml:Name:28
+#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "未命名的地圖"
 
@@ -2102,12 +2104,24 @@ msgstr "船的教學戰役"
 msgid "Base Temperate Map"
 msgstr "基礎溫帶地圖"
 
+#: maps/scenarios/unit_motion_integration_test.xml:Description:40
+msgid ""
+"This map is designed to test some basic unit movement cases. It will involve"
+" unitAI, unitMotion and the relevant pathfinders and thus acts as an "
+"integrated test map. Look for things such as stuck units, wrong animations, "
+"and weird pathing."
+msgstr ""
+
+#: maps/scenarios/unit_motion_integration_test.xml:Name:40
+msgid "Unit Motion Integration Test"
+msgstr ""
+
 #: maps/skirmishes/Acropolis Bay (2).xml:Description:39
 msgid ""
-"Each player starts the match atop a large flat plateau, otherwise known as an acropolis.\n"
+"Each player starts the match atop a large flat plateau.\n"
 "\n"
-"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed acropolis commanding the valley below."
-msgstr "每個玩家都在一個大型平臺，又稱衛城，之上開始遊戲。\n\n東部是一個大型的海灣，可能會有一些漁獲。西邊則是一片崎嶇的腹地及一個控制底下的山谷的無主衛城。"
+"To the East lies a large bay with fishing opportunities. To the West is a rugged hinterland with an unclaimed plateau commanding the valley below."
+msgstr ""
 
 #: maps/skirmishes/Acropolis Bay (2).xml:Name:39
 msgid "Acropolis Bay (2)"
@@ -2184,7 +2198,7 @@ msgstr "東部玩家"
 
 #: maps/skirmishes/Butana Steppe (2).xml:Name:40
 msgid "Butana Steppe (2)"
-msgstr ""
+msgstr "布塔納大草原 (2)"
 
 #: maps/skirmishes/Caspian Sea (2v2).xml:Description:39
 msgid ""
@@ -2327,6 +2341,14 @@ msgid ""
 "- Western desert: Oasis Charga and Siwa, Qattara Depression\n"
 msgstr ""
 
+#: maps/skirmishes/Farmland (2).xml:Description:40
+msgid "Farmland in Eastern Europe."
+msgstr ""
+
+#: maps/skirmishes/Farmland (2).xml:Name:40
+msgid "Farmland (2)"
+msgstr ""
+
 #: maps/skirmishes/Forest Battle (4).xml:Description:40
 msgid ""
 "A forest battle map where all players fight for supremacy and control over "
@@ -2364,8 +2386,8 @@ msgstr "甘比亞河 (3)"
 #: maps/skirmishes/Golden Island (2).xml:Description:40
 msgid ""
 "A ring of land borders a resource-rich island in the Mediterranean. Players "
-"can access the center via a narrow strip of land or via boat."
-msgstr "地中海中資源豐富的環狀島嶼。玩家可以透過狹長的陸地或是船隻造訪地圖中心。"
+"can access the center via a narrow strip of shallow water or via boat."
+msgstr ""
 
 #: maps/skirmishes/Golden Island (2).xml:Name:40
 msgid "Golden Island (2)"
@@ -2385,10 +2407,10 @@ msgstr "黃金綠洲 (2)"
 #: maps/skirmishes/Greek Acropolis (2).xml:Description:39
 #: maps/skirmishes/Greek Acropolis Night (2).xml:Description:39
 msgid ""
-"Two factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Two factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "雙方皆發現自己安全的位於一個大型的岩石高原，或稱衛城，之上。\n\n探索這片土地，尋找無主的寶藏及爭奪新的資源。"
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (2).xml:Name:39
 msgid "Greek Acropolis (2)"
@@ -2396,10 +2418,10 @@ msgstr "雅典衛城 (2)"
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Description:39
 msgid ""
-"Three factions find themselves perched safely atop large rocky plateaus, or acropolises, whereas the fourth one is separated from their foes by a river branch.\n"
+"Three factions find themselves perched safely atop large rocky plateaus, whereas the fourth one is separated from their foes by a river branch.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources.."
-msgstr "其中三方會發現自己安全的位於一個大型的岩石高原，或稱衛城，之上，而第四個則會被一條河流的分支隔開來。\n\n探索這片土地，尋找無主的寶藏及爭奪新的資源。"
+msgstr ""
 
 #: maps/skirmishes/Greek Acropolis (4).xml:Name:39
 msgid "Greek Acropolis (4)"
@@ -2511,6 +2533,14 @@ msgstr "被困在寒冷的北方，2 個玩家相互爭取征服島嶼的機會�
 msgid "Northern Island (2)"
 msgstr "北方之島 (2)"
 
+#: maps/skirmishes/Oceanside (2).xml:Description:40
+msgid "A Lush temperate biome along an ocean. "
+msgstr ""
+
+#: maps/skirmishes/Oceanside (2).xml:Name:40
+msgid "Oceanside (2)"
+msgstr ""
+
 #: maps/skirmishes/Persian Highlands (4).xml:Description:39
 msgid ""
 "A dry central basin rich in minerals surrounded by rocky hills and "
@@ -2614,12 +2644,20 @@ msgstr "被群山及沙漠環繞的綠洲。在水邊的農田提供了所需的
 msgid "Team Oasis (2v2)"
 msgstr "團隊綠洲 (2v2)"
 
+#: maps/skirmishes/Temperate Roadway (2).xml:Description:40
+msgid "Temperate zone map with plentiful resources. Map Size: Small"
+msgstr ""
+
+#: maps/skirmishes/Temperate Roadway (2).xml:Name:40
+msgid "Temperate Roadway (2)"
+msgstr ""
+
 #: maps/skirmishes/Thessalian Plains (4).xml:Description:39
 msgid ""
 "The rolling Thessalian plain is traversed with narrow streams, easily "
 "forded. Wide-open spaces allow for massive expansion, while each player "
-"starts the match safe atop a large acropolis."
-msgstr "許多易於穿過的狹窄細流穿過綿延起伏的色薩利平原。有著可以大舉擴張的開闊地圖，每個玩家都在安全的大型雅典衛城上開始遊戲。"
+"starts the match safe atop a large plateau."
+msgstr ""
 
 #: maps/skirmishes/Thessalian Plains (4).xml:Name:39
 msgid "Thessalian Plains (4)"
@@ -2627,10 +2665,10 @@ msgstr "色薩利平原 (4)"
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Description:40
 msgid ""
-"Four factions find themselves perched safely atop large rocky plateaus, or acropolises.\n"
+"Four factions find themselves perched safely atop large rocky plateaus.\n"
 "\n"
 "Scout the lands to find free treasures and to secure new resources."
-msgstr "四個文明皆發現自己安全的位於一個大型的岩石高原，或稱衛城，之上。\n\n探索這片土地，尋找無主的寶藏及爭奪新的資源。"
+msgstr ""
 
 #: maps/skirmishes/Tuscan Acropolis (4).xml:Name:40
 msgid "Tuscan Acropolis (4)"

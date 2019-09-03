@@ -128,13 +128,7 @@ var g_ReplaySelectionData;
  */
 var g_PlayerAssignments;
 
-/**
- * Cache dev-mode settings that are frequently or widely used.
- */
-var g_DevSettings = {
-	"changePerspective": false,
-	"controlAll": false
-};
+var g_DeveloperOverlay;
 
 /**
  * Whether the entire UI should be hidden (useful for promotional screenshots).
@@ -188,7 +182,7 @@ var g_PanelEntityOrder = ["Hero", "Relic"];
 /**
  * Unit classes to be checked for the idle-worker-hotkey.
  */
-var g_WorkerTypes = ["FemaleCitizen", "Trader", "FishingBoat", "CitizenSoldier"];
+var g_WorkerTypes = ["FemaleCitizen", "Trader", "FishingBoat", "Citizen"];
 
 /**
  * Unit classes to be checked for the military-only-selection modifier and for the idle-warrior-hotkey.
@@ -276,6 +270,7 @@ function init(initData, hotloadData)
 			restoreSavedGameData(initData.savedGUIData);
 	}
 
+	g_DeveloperOverlay = new DeveloperOverlay();
 	LoadModificationTemplates();
 	updatePlayerData();
 	initializeMusic(); // before changing the perspective
@@ -444,6 +439,14 @@ function updateHotkeyTooltips()
 		colorizeHotkey("%(hotkey)s" + " ", "session.diplomacycolors") +
 		translate("Toggle Diplomacy Colors");
 
+	Engine.GetGUIObjectByName("diplomacyButton").tooltip =
+		colorizeHotkey("%(hotkey)s" + " ", "session.gui.diplomacy.toggle") +
+		translate("Diplomacy");
+
+	Engine.GetGUIObjectByName("tradeButton").tooltip =
+		colorizeHotkey("%(hotkey)s" + " ", "session.gui.barter.toggle") +
+		translate("Barter & Trade");
+
 	Engine.GetGUIObjectByName("tradeHelp").tooltip = colorizeHotkey(
 		translate("Select one type of goods you want to modify by clicking on it, and then use the arrows of the other types to modify their shares. You can also press %(hotkey)s while selecting one type of goods to bring its share to 100%%."),
 		"session.fulltradeswap");
@@ -454,6 +457,10 @@ function updateHotkeyTooltips()
 			"hotkey": colorizeHotkey("%(hotkey)s", "session.massbarter"),
 			"multiplier": g_BarterMultiplier
 		});
+
+	Engine.GetGUIObjectByName("objectivesButton").tooltip =
+		colorizeHotkey("%(hotkey)s" + " ", "session.gui.objectives.toggle") +
+		translate("Objectives");
 }
 
 function initPanelEntities()
@@ -520,12 +527,6 @@ function updateViewedPlayerDropdown()
 	));
 }
 
-function toggleChangePerspective(enabled)
-{
-	g_DevSettings.changePerspective = enabled;
-	selectViewPlayer(g_ViewedPlayer);
-}
-
 /**
  * Change perspective tool.
  * Shown to observers or when enabling the developers option.
@@ -540,14 +541,14 @@ function selectViewPlayer(playerID)
 
 	g_IsObserver = isPlayerObserver(Engine.GetPlayerID());
 
-	if (g_IsObserver || g_DevSettings.changePerspective)
+	if (g_IsObserver || g_DeveloperOverlay.isChangePerspective())
 	{
 		if (g_ViewedPlayer != playerID)
 			clearSelection();
 		g_ViewedPlayer = playerID;
 	}
 
-	if (g_DevSettings.changePerspective)
+	if (g_DeveloperOverlay.isChangePerspective())
 	{
 		Engine.SetPlayerID(g_ViewedPlayer);
 		g_IsObserver = isPlayerObserver(g_ViewedPlayer);
@@ -587,10 +588,10 @@ function controlsPlayer(playerID)
 {
 	let playerStates = GetSimState().players;
 
-	return playerStates[Engine.GetPlayerID()] &&
+	return !!playerStates[Engine.GetPlayerID()] &&
 		playerStates[Engine.GetPlayerID()].controlsAll ||
 		Engine.GetPlayerID() == playerID &&
-		playerStates[playerID] &&
+		!!playerStates[playerID] &&
 		playerStates[playerID].state != "defeated";
 }
 
@@ -662,7 +663,7 @@ function updateTopPanel()
 	Engine.GetGUIObjectByName("optionFollowPlayer").hidden = !g_IsObserver || g_ViewedPlayer == -1;
 
 	let viewPlayer = Engine.GetGUIObjectByName("viewPlayer");
-	viewPlayer.hidden = !g_IsObserver && !g_DevSettings.changePerspective;
+	viewPlayer.hidden = !g_IsObserver && !g_DeveloperOverlay.isChangePerspective();
 
 	let followPlayerLabel = Engine.GetGUIObjectByName("followPlayerLabel");
 	followPlayerLabel.hidden = Engine.GetTextWidth(followPlayerLabel.font, followPlayerLabel.caption + "  ") +
@@ -939,7 +940,6 @@ function updateGUIObjects()
 	displayPanelEntities();
 
 	updateGroups();
-	updateDebug();
 	updatePlayerDisplay();
 	updateResearchDisplay();
 	updateSelectionDetails();
@@ -956,8 +956,7 @@ function updateGUIObjects()
 	if (g_ViewedPlayer > 0)
 	{
 		let playerState = GetSimState().players[g_ViewedPlayer];
-		g_DevSettings.controlAll = playerState && playerState.controlsAll;
-		Engine.GetGUIObjectByName("devControlAll").checked = g_DevSettings.controlAll;
+		g_DeveloperOverlay.setControlAll(playerState && playerState.controlsAll);
 	}
 
 	if (!g_IsObserver)
@@ -970,6 +969,12 @@ function updateGUIObjects()
 
 	updateViewedPlayerDropdown();
 	updateDiplomacy();
+	g_DeveloperOverlay.update();
+}
+
+function saveResPopTooltipSort()
+{
+	Engine.ConfigDB_CreateAndWriteValueToFile("user", "gui.session.respoptooltipsort", String((+Engine.ConfigDB_GetValue("user", "gui.session.respoptooltipsort") + 2) % 3 - 1), "config/user.cfg");
 }
 
 function onReplayFinished()
@@ -1160,39 +1165,6 @@ function updateGroups()
 	}
 }
 
-function updateDebug()
-{
-	let debug = Engine.GetGUIObjectByName("debugEntityState");
-
-	if (!Engine.GetGUIObjectByName("devDisplayState").checked)
-	{
-		debug.hidden = true;
-		return;
-	}
-
-	debug.hidden = false;
-
-	let conciseSimState = clone(GetSimState());
-	conciseSimState.players = "<<<omitted>>>";
-	let text = "simulation: " + uneval(conciseSimState);
-
-	let selection = g_Selection.toList();
-	if (selection.length)
-	{
-		let entState = GetEntityState(selection[0]);
-		if (entState)
-		{
-			let template = GetTemplateData(entState.template);
-			text += "\n\nentity: {\n";
-			for (let k in entState)
-				text += "  " + k + ":" + uneval(entState[k]) + "\n";
-			text += "}\n\ntemplate: " + uneval(template);
-		}
-	}
-
-	debug.caption = text.replace(/\[/g, "\\[");
-}
-
 /**
  * Create ally player stat tooltip.
  * @param {string} resource - Resource type, on which values will be sorted.
@@ -1366,7 +1338,8 @@ function recalculateStatusBarDisplay(remove = false)
 	Engine.GuiInterfaceCall("SetStatusBars", {
 		"entities": entities,
 		"enabled": g_ShowAllStatusBars && !remove,
-		"showRank": Engine.ConfigDB_GetValue("user", "gui.session.rankabovestatusbar") == "true"
+		"showRank": Engine.ConfigDB_GetValue("user", "gui.session.rankabovestatusbar") == "true",
+		"showExperience": Engine.ConfigDB_GetValue("user", "gui.session.experiencestatusbar") == "true"
 	});
 }
 
@@ -1377,7 +1350,7 @@ function recalculateStatusBarDisplay(remove = false)
 function toggleConfigBool(configName)
 {
 	let enabled = Engine.ConfigDB_GetValue("user", configName) != "true";
-	saveSettingAndWriteToUserConfig(configName, String(enabled));
+	Engine.ConfigDB_CreateAndWriteValueToFile("user", configName, String(enabled), "config/user.cfg");
 	return enabled;
 }
 
@@ -1460,15 +1433,6 @@ function updateAdditionalHighlight()
 function playAmbient()
 {
 	Engine.PlayAmbientSound(pickRandom(g_Ambient), true);
-}
-
-function showTimeWarpMessageBox()
-{
-	messageBox(
-		500, 250,
-		translate("Note: time warp mode is a developer option, and not intended for use over long periods of time. Using it incorrectly may cause the game to run out of memory or crash."),
-		translate("Time warp mode")
-	);
 }
 
 /**

@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -16,22 +16,8 @@
  */
 
 /*
-A GUI Sprite
-
---Overview--
-
 	A GUI Sprite, which is actually a collage of several
 	sprites.
-
---Usage--
-
-	Used internally and declared in XML files, read documentations
-	on how.
-
---More info--
-
-	Check GUI.h
-
 */
 
 #ifndef INCLUDED_CGUISPRITE
@@ -39,13 +25,16 @@ A GUI Sprite
 
 #include "GUIbase.h"
 
+#include "gui/GUIRenderer.h"
 #include "lib/res/graphics/ogl_tex.h"
+
+#include <memory>
 
 struct SGUIImageEffects
 {
 	SGUIImageEffects() : m_Greyscale(false) {}
-	CColor m_AddColor;
-	CColor m_SolidColor;
+	CGUIColor m_AddColor;
+	CGUIColor m_SolidColor;
 	bool m_Greyscale;
 };
 
@@ -59,13 +48,8 @@ struct SGUIImage
 public:
 	SGUIImage() :
 		m_FixedHAspectRatio(0.f), m_RoundCoordinates(true), m_WrapMode(GL_REPEAT),
-		m_Effects(NULL), m_Border(false), m_DeltaZ(0.f)
+		m_Effects(), m_Border(false), m_DeltaZ(0.f)
 	{
-	}
-
-	~SGUIImage()
-	{
-		delete m_Effects;
 	}
 
 	// Filename of the texture
@@ -106,11 +90,11 @@ public:
 	GLint			m_WrapMode;
 
 	// Visual effects (e.g. color modulation)
-	SGUIImageEffects* m_Effects;
+	std::shared_ptr<SGUIImageEffects> m_Effects;
 
 	// Color
-	CColor			m_BackColor;
-	CColor			m_BorderColor;
+	CGUIColor m_BackColor;
+	CGUIColor m_BorderColor;
 
 	// 0 or 1 pixel border is the only option
 	bool			m_Border;
@@ -150,22 +134,45 @@ public:
 	std::vector<SGUIImage*> m_Images;
 };
 
-#include "GUIRenderer.h"
-
 // An instance of a sprite, usually stored in IGUIObjects - basically a string
 // giving the sprite's name, but with some extra data to cache rendering
 // calculations between draw calls.
 class CGUISpriteInstance
 {
 public:
+	NONCOPYABLE(CGUISpriteInstance);
+	MOVABLE(CGUISpriteInstance);
+
 	CGUISpriteInstance();
 	CGUISpriteInstance(const CStr& SpriteName);
-	CGUISpriteInstance(const CGUISpriteInstance& Sprite);
-	CGUISpriteInstance& operator=(const CStr& SpriteName);
-	void Draw(CRect Size, int CellID, std::map<CStr, CGUISprite*>& Sprites, float Z) const;
-	void Invalidate();
-	bool IsEmpty() const;
-	const CStr& GetName() { return m_SpriteName; }
+
+	void Draw(CGUI& pGUI, const CRect& Size, int CellID, std::map<CStr, const CGUISprite*>& Sprites, float Z) const;
+
+	/**
+	 * Whether this Sprite has no texture name set.
+	 */
+	operator bool() const { return !m_SpriteName.empty(); };
+
+	/**
+	 * Returns this sprite if it has been set, otherwise the given fallback sprite.
+	 */
+	const CGUISpriteInstance& operator||(const CGUISpriteInstance& fallback) const
+	{
+		if (*this)
+			return *this;
+		return fallback;
+	}
+
+	/**
+	 * Returns the sprite texture name.
+	 */
+	const CStr& GetName() const { return m_SpriteName; }
+
+	/**
+	 * Changes the texture name.
+	 * Use as rarely as possible, because it clears the draw cache.
+	 */
+	void SetName(const CStr& SpriteName);
 
 private:
 	CStr m_SpriteName;
