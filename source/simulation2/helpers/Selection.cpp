@@ -80,6 +80,8 @@ entity_id_t EntitySelection::PickEntityAtPoint(CSimulation2& simulation, const C
 			continue;
 
 		// Ignore entities hidden by LOS (or otherwise hidden, e.g. when not IsInWorld)
+		if (cmpRangeManager->GetLosVisibility(handle, player) == ICmpRangeManager::VIS_HIDDEN)
+			continue;
 		if (cmpRangeManager->GetLosVisibility(handle, player) == ICmpRangeManager::VIS_FOGGED)
 			continue;
 

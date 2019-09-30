@@ -33,7 +33,7 @@
     <WalkSpeed op="mul">0.7</WalkSpeed>
   </UnitMotion>
   <Visibility>
-    <RetainInFog>true</RetainInFog>
+    <RetainInFog>false</RetainInFog>
   </Visibility>
   <Vision>
     <Range>0</Range>
