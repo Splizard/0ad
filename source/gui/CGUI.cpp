@@ -17,10 +17,7 @@
 
 #include "precompiled.h"
 
-#include <stdarg.h>
-#include <string>
-
-#include "GUI.h"
+#include "CGUI.h"
 
 // Types - when including them into the engine.
 #include "CButton.h"
@@ -38,8 +35,7 @@
 #include "CTooltip.h"
 #include "MiniMap.h"
 
-#include "graphics/FontMetrics.h"
-#include "graphics/ShaderManager.h"
+#include "gui/IGUIScrollBar.h"
 #include "i18n/L10n.h"
 #include "lib/bits.h"
 #include "lib/input.h"
@@ -58,6 +54,8 @@
 #include "scripting/ScriptFunctions.h"
 #include "scriptinterface/ScriptInterface.h"
 
+#include <string>
+
 extern int g_yres;
 
 const double SELECT_DBLCLICK_RATE = 0.5;
@@ -71,19 +69,25 @@ InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 	{
 		const char* hotkey = static_cast<const char*>(ev->ev.user.data1);
 
+		if (m_GlobalHotkeys.find(hotkey) != m_GlobalHotkeys.end() && ev->ev.type == SDL_HOTKEYDOWN)
+		{
+			ret = IN_HANDLED;
+
+			JSContext* cx = m_ScriptInterface->GetContext();
+			JSAutoRequest rq(cx);
+			JS::RootedObject globalObj(cx, &GetGlobalObject().toObject());
+			JS::RootedValue result(cx);
+			JS_CallFunctionValue(cx, globalObj, m_GlobalHotkeys[hotkey], JS::HandleValueArray::empty(), &result);
+		}
+
 		std::map<CStr, std::vector<IGUIObject*> >::iterator it = m_HotkeyObjects.find(hotkey);
 		if (it != m_HotkeyObjects.end())
 			for (IGUIObject* const& obj : it->second)
 			{
-				// Update hotkey status before sending the event,
-				// else the status will be outdated when processing the GUI event.
-				HotkeyInputHandler(ev);
-				ret = IN_HANDLED;
-
 				if (ev->ev.type == SDL_HOTKEYDOWN)
-					obj->SendEvent(GUIM_PRESSED, "press");
+					ret = obj->SendEvent(GUIM_PRESSED, "press");
 				else
-					obj->SendEvent(GUIM_RELEASED, "release");
+					ret = obj->SendEvent(GUIM_RELEASED, "release");
 			}
 	}
 
@@ -95,7 +99,7 @@ InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 		m_MousePos = CPos((float)ev->ev.motion.x / g_GuiScale, (float)ev->ev.motion.y / g_GuiScale);
 
 		SGUIMessage msg(GUIM_MOUSE_MOTION);
-		m_BaseObject->RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::HandleMessage, msg);
+		m_BaseObject.RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::HandleMessage, msg);
 	}
 
 	// Update m_MouseButtons. (BUTTONUP is handled later.)
@@ -121,7 +125,7 @@ InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 	}
 
 	// Only one object can be hovered
-	IGUIObject* pNearest = NULL;
+	IGUIObject* pNearest = nullptr;
 
 	// TODO Gee: (2004-09-08) Big TODO, don't do the below if the SDL_Event is something like a keypress!
 	try
@@ -130,13 +134,13 @@ InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 		// TODO Gee: Optimizations needed!
 		//  these two recursive function are quite overhead heavy.
 
-		// pNearest will after this point at the hovered object, possibly NULL
+		// pNearest will after this point at the hovered object, possibly nullptr
 		pNearest = FindObjectUnderMouse();
 
 		// Now we'll call UpdateMouseOver on *all* objects,
 		//  we'll input the one hovered, and they will each
 		//  update their own data and send messages accordingly
-		m_BaseObject->RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::UpdateMouseOver, static_cast<IGUIObject* const&>(pNearest));
+		m_BaseObject.RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::UpdateMouseOver, static_cast<IGUIObject* const&>(pNearest));
 
 		if (ev->ev.type == SDL_MOUSEBUTTONDOWN)
 		{
@@ -197,10 +201,10 @@ InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 			}
 
 			// Reset all states on all visible objects
-			m_BaseObject->RecurseObject(&IGUIObject::IsHidden, &IGUIObject::ResetStates);
+			m_BaseObject.RecurseObject(&IGUIObject::IsHidden, &IGUIObject::ResetStates);
 
 			// Since the hover state will have been reset, we reload it.
-			m_BaseObject->RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::UpdateMouseOver, static_cast<IGUIObject* const&>(pNearest));
+			m_BaseObject.RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::UpdateMouseOver, static_cast<IGUIObject* const&>(pNearest));
 		}
 	}
 	catch (PSERROR_GUI& e)
@@ -253,7 +257,7 @@ InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 void CGUI::TickObjects()
 {
 	const CStr action = "tick";
-	m_BaseObject->RecurseObject(nullptr, &IGUIObject::ScriptEvent, action);
+	m_BaseObject.RecurseObject(nullptr, &IGUIObject::ScriptEvent, action);
 
 	m_Tooltip.Update(FindObjectUnderMouse(), m_MousePos, *this);
 }
@@ -268,39 +272,39 @@ void CGUI::SendEventToAll(const CStr& EventName)
 	// leading to a similar problem.
 	// now fixed; case is irrelevant since all are converted to lower.
 	const CStr EventNameLower = EventName.LowerCase();
-	m_BaseObject->RecurseObject(nullptr, &IGUIObject::ScriptEvent, EventNameLower);
+	m_BaseObject.RecurseObject(nullptr, &IGUIObject::ScriptEvent, EventNameLower);
 }
 
 void CGUI::SendEventToAll(const CStr& EventName, const JS::HandleValueArray& paramData)
 {
 	const CStr EventNameLower = EventName.LowerCase();
-	m_BaseObject->RecurseObject(nullptr, &IGUIObject::ScriptEvent, EventNameLower, paramData);
+	m_BaseObject.RecurseObject(nullptr, &IGUIObject::ScriptEvent, EventNameLower, paramData);
 }
 
 CGUI::CGUI(const shared_ptr<ScriptRuntime>& runtime)
-	: m_MouseButtons(0), m_FocusedObject(NULL), m_InternalNameNumber(0)
+	: m_MouseButtons(0), m_FocusedObject(nullptr), m_InternalNameNumber(0), m_BaseObject(*this)
 {
 	m_ScriptInterface.reset(new ScriptInterface("Engine", "GUIPage", runtime));
 	m_ScriptInterface->SetCallbackData(this);
 
 	GuiScriptingInit(*m_ScriptInterface);
 	m_ScriptInterface->LoadGlobalScripts();
-
-	m_BaseObject = new CGUIDummyObject(*this);
 }
 
 CGUI::~CGUI()
 {
-	Destroy();
+	for (const std::pair<CStr, IGUIObject*>& p : m_pAllObjects)
+		delete p.second;
 
-	if (m_BaseObject)
-		delete m_BaseObject;
+	for (const std::pair<CStr, const CGUISprite*>& p : m_Sprites)
+		delete p.second;
 }
 
 IGUIObject* CGUI::ConstructObject(const CStr& str)
 {
-	if (m_ObjectTypes.count(str) > 0)
-		return (*m_ObjectTypes[str])(*this);
+	std::map<CStr, ConstructObjectFunction>::iterator it = m_ObjectTypes.find(str);
+	if (it != m_ObjectTypes.end())
+		return (*it->second)(*this);
 
 	// Error reporting will be handled with the nullptr return.
 	return nullptr;
@@ -336,7 +340,7 @@ void CGUI::Draw()
 
 	try
 	{
-		m_BaseObject->RecurseObject(&IGUIObject::IsHidden, &IGUIObject::Draw);
+		m_BaseObject.RecurseObject(&IGUIObject::IsHidden, &IGUIObject::Draw);
 	}
 	catch (PSERROR_GUI& e)
 	{
@@ -355,44 +359,17 @@ void CGUI::DrawSprite(const CGUISpriteInstance& Sprite, int CellID, const float&
 	Sprite.Draw(*this, Rect, CellID, m_Sprites, Z);
 }
 
-void CGUI::Destroy()
-{
-	// We can use the map to delete all
-	//  now we don't want to cancel all if one Destroy fails
-	for (const std::pair<CStr, IGUIObject*>& p : m_pAllObjects)
-	{
-		try
-		{
-			p.second->Destroy();
-		}
-		catch (PSERROR_GUI& e)
-		{
-			UNUSED2(e);
-			debug_warn(L"CGUI::Destroy error");
-			// TODO Gee: Handle
-		}
-
-		delete p.second;
-	}
-	m_pAllObjects.clear();
-
-	for (const std::pair<CStr, const CGUISprite*>& p : m_Sprites)
-		delete p.second;
-	m_Sprites.clear();
-	m_Icons.clear();
-}
-
 void CGUI::UpdateResolution()
 {
 	// Update ALL cached
-	m_BaseObject->RecurseObject(nullptr, &IGUIObject::UpdateCachedSize);
+	m_BaseObject.RecurseObject(nullptr, &IGUIObject::UpdateCachedSize);
 }
 
 void CGUI::AddObject(IGUIObject* pObject)
 {
 	try
 	{
-		m_BaseObject->AddChild(pObject);
+		m_BaseObject.AddChild(pObject);
 
 		// Cache tree
 		pObject->RecurseObject(nullptr, &IGUIObject::UpdateCachedSize);
@@ -414,7 +391,7 @@ void CGUI::UpdateObjects()
 	try
 	{
 		// Fill freshly
-		m_BaseObject->RecurseObject(nullptr, &IGUIObject::AddToPointersMap, AllObjects);
+		m_BaseObject.RecurseObject(nullptr, &IGUIObject::AddToPointersMap, AllObjects);
 	}
 	catch (PSERROR_GUI&)
 	{
@@ -427,22 +404,23 @@ void CGUI::UpdateObjects()
 
 bool CGUI::ObjectExists(const CStr& Name) const
 {
-	return m_pAllObjects.count(Name) != 0;
+	return m_pAllObjects.find(Name) != m_pAllObjects.end();
 }
 
 IGUIObject* CGUI::FindObjectByName(const CStr& Name) const
 {
 	map_pObjects::const_iterator it = m_pAllObjects.find(Name);
+
 	if (it == m_pAllObjects.end())
-		return NULL;
-	else
-		return it->second;
+		return nullptr;
+
+	return it->second;
 }
 
-IGUIObject* CGUI::FindObjectUnderMouse() const
+IGUIObject* CGUI::FindObjectUnderMouse()
 {
-	IGUIObject* pNearest = NULL;
-	m_BaseObject->RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::ChooseMouseOverAndClosest, pNearest);
+	IGUIObject* pNearest = nullptr;
+	m_BaseObject.RecurseObject(&IGUIObject::IsHiddenOrGhost, &IGUIObject::ChooseMouseOverAndClosest, pNearest);
 	return pNearest;
 }
 
@@ -464,6 +442,54 @@ void CGUI::SetFocusedObject(IGUIObject* pObject)
 		SGUIMessage msg(GUIM_GOT_FOCUS);
 		m_FocusedObject->HandleMessage(msg);
 	}
+}
+
+void CGUI::SetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag)
+{
+	if (!hotkeyTag.empty())
+		m_HotkeyObjects[hotkeyTag].push_back(pObject);
+}
+
+void CGUI::UnsetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag)
+{
+	if (hotkeyTag.empty())
+		return;
+
+	std::vector<IGUIObject*>& assignment = m_HotkeyObjects[hotkeyTag];
+
+	assignment.erase(
+		std::remove_if(
+			assignment.begin(),
+			assignment.end(),
+			[&pObject](const IGUIObject* hotkeyObject)
+				{ return pObject == hotkeyObject; }),
+		assignment.end());
+}
+
+void CGUI::SetGlobalHotkey(const CStr& hotkeyTag, JS::HandleValue function)
+{
+	JSContext* cx = m_ScriptInterface->GetContext();
+	JSAutoRequest rq(cx);
+
+	if (hotkeyTag.empty())
+	{
+		JS_ReportError(cx, "Cannot assign a function to an empty hotkey identifier!");
+		return;
+	}
+
+	if (!function.isObject() || !JS_ObjectIsFunction(cx, &function.toObject()))
+	{
+		JS_ReportError(cx, "Cannot assign non-function value to global hotkey '%s'", hotkeyTag.c_str());
+		return;
+	}
+
+	UnsetGlobalHotkey(hotkeyTag);
+	m_GlobalHotkeys[hotkeyTag].init(cx, function);
+}
+
+void CGUI::UnsetGlobalHotkey(const CStr& hotkeyTag)
+{
+	m_GlobalHotkeys.erase(hotkeyTag);
 }
 
 const SGUIScrollBarStyle* CGUI::GetScrollBarStyle(const CStr& style) const
@@ -533,7 +559,7 @@ void CGUI::Xeromyces_ReadRootObjects(XMBElement Element, CXeromyces* pFile, boos
 			Xeromyces_ReadScript(child, pFile, Paths);
 		else
 			// Read in this whole object into the GUI
-			Xeromyces_ReadObject(child, pFile, m_BaseObject, subst, Paths, 0);
+			Xeromyces_ReadObject(child, pFile, &m_BaseObject, subst, Paths, 0);
 	}
 }
 
@@ -603,7 +629,6 @@ void CGUI::Xeromyces_ReadObject(XMBElement Element, CXeromyces* pFile, IGUIObjec
 	ATTR(style);
 	ATTR(type);
 	ATTR(name);
-	ATTR(hotkey);
 	ATTR(z);
 	ATTR(on);
 	ATTR(file);
@@ -620,12 +645,12 @@ void CGUI::Xeromyces_ReadObject(XMBElement Element, CXeromyces* pFile, IGUIObjec
 	//
 	CStr argStyle(attributes.GetNamedItem(attr_style));
 
-	if (m_Styles.count("default") == 1)
+	if (m_Styles.find("default") != m_Styles.end())
 		object->LoadStyle("default");
 
 	if (!argStyle.empty())
 	{
-		if (m_Styles.count(argStyle) == 0)
+		if (m_Styles.find(argStyle) == m_Styles.end())
 			LOGERROR("GUI: Trying to use style '%s' that doesn't exist.", argStyle.c_str());
 		else
 			object->LoadStyle(argStyle);
@@ -635,7 +660,6 @@ void CGUI::Xeromyces_ReadObject(XMBElement Element, CXeromyces* pFile, IGUIObjec
 	bool ManuallySetZ = false;
 
 	CStrW inclusionPath;
-	CStr hotkeyTag;
 
 	for (XMBAttribute attr : attributes)
 	{
@@ -659,17 +683,10 @@ void CGUI::Xeromyces_ReadObject(XMBElement Element, CXeromyces* pFile, IGUIObjec
 			continue;
 		}
 
-		if (attr.Name == attr_hotkey)
-			hotkeyTag = attr.Value;
-
 		if (attr.Name == attr_z)
 			ManuallySetZ = true;
 
-		const CStr settingName = pFile->GetAttributeString(attr.Name);
-		if (object->SettingExists(settingName))
-			object->SetSettingFromString(settingName, attr.Value.FromUTF8(), false);
-		else
-			LOGERROR("GUI: (object: %s) Can't set \"%s\" to \"%s\"", object->GetPresentableName(), settingName, attr.Value);
+		object->SetSettingFromString(pFile->GetAttributeString(attr.Name), attr.Value.FromUTF8(), false);
 	}
 
 	// Check if name isn't set, generate an internal name in that case.
@@ -678,9 +695,6 @@ void CGUI::Xeromyces_ReadObject(XMBElement Element, CXeromyces* pFile, IGUIObjec
 		object->SetName("__internal(" + CStr::FromInt(m_InternalNameNumber) + ")");
 		++m_InternalNameNumber;
 	}
-
-	if (!hotkeyTag.empty())
-		m_HotkeyObjects[hotkeyTag].push_back(object);
 
 	CStrW caption(Element.GetText().FromUTF8());
 	if (!caption.empty())
@@ -860,10 +874,12 @@ void CGUI::Xeromyces_ReadObject(XMBElement Element, CXeromyces* pFile, IGUIObjec
 		}
 	}
 
+	object->AdditionalChildrenHandled();
+
 	if (!ManuallySetZ)
 	{
 		// Set it automatically to 10 plus its parents
-		if (object->GetSetting<bool>("absolute"))
+		if (object->m_Absolute)
 			// If the object is absolute, we'll have to get the parent's Z buffered,
 			// and add to that!
 			object->SetSetting<float>("z", pParent->GetBufferedZ() + 10.f, false);
@@ -874,7 +890,7 @@ void CGUI::Xeromyces_ReadObject(XMBElement Element, CXeromyces* pFile, IGUIObjec
 
 	try
 	{
-		if (pParent == m_BaseObject)
+		if (pParent == &m_BaseObject)
 			AddObject(object);
 		else
 			pParent->AddChild(object);

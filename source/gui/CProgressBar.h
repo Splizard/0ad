@@ -18,12 +18,11 @@
 #ifndef INCLUDED_CPROGRESSBAR
 #define INCLUDED_CPROGRESSBAR
 
-#include "GUI.h"
+#include "gui/IGUIObject.h"
+#include "gui/CGUISprite.h"
 
 /**
  * Object used to draw a value (e.g. progress) from 0 to 100 visually.
- *
- * @see IGUIObject
  */
 class CProgressBar : public IGUIObject
 {
@@ -44,6 +43,11 @@ protected:
 	 * @see IGUIObject#HandleMessage()
 	 */
 	void HandleMessage(SGUIMessage& Message);
+
+	// Settings
+	CGUISpriteInstance m_SpriteBackground;
+	CGUISpriteInstance m_SpriteBar;
+	float m_Caption;
 };
 
 #endif // INCLUDED_CPROGRESSBAR

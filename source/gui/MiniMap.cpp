@@ -17,8 +17,6 @@
 
 #include "precompiled.h"
 
-#include <math.h>
-
 #include "MiniMap.h"
 
 #include "graphics/GameView.h"
@@ -28,7 +26,7 @@
 #include "graphics/TerrainTextureEntry.h"
 #include "graphics/TerrainTextureManager.h"
 #include "graphics/TerritoryTexture.h"
-#include "gui/GUI.h"
+#include "gui/CGUI.h"
 #include "gui/GUIManager.h"
 #include "gui/GUIMatrix.h"
 #include "lib/bits.h"
@@ -46,9 +44,11 @@
 #include "renderer/RenderingOptions.h"
 #include "renderer/WaterManager.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpMinimap.h"
+#include "simulation2/Simulation2.h"
 #include "simulation2/system/ParamNode.h"
+
+#include <math.h>
 
 extern bool g_GameRestarted;
 
@@ -70,8 +70,6 @@ CMiniMap::CMiniMap(CGUI& pGUI) :
 	m_EntitiesDrawn(0), m_IndexArray(GL_STATIC_DRAW), m_VertexArray(GL_DYNAMIC_DRAW),
 	m_NextBlinkTime(0.0), m_PingDuration(25.0), m_BlinkState(false), m_WaterHeight(0.0)
 {
-	AddSetting<CStrW>("tooltip");
-	AddSetting<CStr>("tooltip_style");
 	m_Clicking = false;
 	m_MouseHovering = false;
 
@@ -245,7 +243,7 @@ void CMiniMap::FireWorldClickEvent(int UNUSED(button), int UNUSED(clicks))
 	GetMouseWorldCoordinates(x, z);
 
 	JS::RootedValue coords(cx);
-	g_GUI->GetActiveGUI()->GetScriptInterface()->CreateObject(&coords, "x", x, "z", z);
+	ScriptInterface::CreateObject(cx, &coords, "x", x, "z", z);
 
 	JS::AutoValueVector paramData(cx);
 	paramData.append(coords);

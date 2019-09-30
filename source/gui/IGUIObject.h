@@ -25,24 +25,16 @@
 #ifndef INCLUDED_IGUIOBJECT
 #define INCLUDED_IGUIOBJECT
 
-#include "IGUIObject.h"
-
-#include "gui/CGUI.h"
 #include "gui/GUIbase.h"
 #include "gui/scripting/JSInterface_IGUIObject.h"
 #include "lib/input.h" // just for IN_PASS
 #include "ps/XML/Xeromyces.h"
 
+#include <map>
 #include <string>
 #include <vector>
 
-struct SGUIStyle;
-class JSObject;
 class IGUISetting;
-
-template <typename T> class GUI;
-
-ERROR_TYPE(GUI, UnableToParse);
 
 /**
  * GUI object such as a button or an input-box.
@@ -51,8 +43,6 @@ ERROR_TYPE(GUI, UnableToParse);
 class IGUIObject
 {
 	friend class CGUI;
-	friend class IGUIScrollBar;
-	friend class GUITooltip;
 
 	// Allow getProperty to access things like GetParent()
 	friend bool JSI_IGUIObject::getProperty(JSContext* cx, JS::HandleObject obj, JS::HandleId id, JS::MutableHandleValue vp);
@@ -238,18 +228,14 @@ protected:
 	//@{
 
 	/**
-	 * Add a setting to m_Settings
+	 * Registers the given setting variables with the GUI object.
+	 * Enable XML and JS to modify the given variable.
 	 *
 	 * @param Type Setting type
 	 * @param Name Setting reference name
 	 */
-	template<typename T> void AddSetting(const CStr& Name);
-
-	/**
-	 * Calls Destroy on all children, and deallocates all memory.
-	 * MEGA TODO Should it destroy it's children?
-	 */
-	virtual void Destroy();
+	template<typename T>
+	void RegisterSetting(const CStr& Name, T& Value);
 
 public:
 	/**
@@ -268,7 +254,7 @@ public:
 	template<typename... Args>
 	void RecurseObject(bool(IGUIObject::*isRestricted)() const, void(IGUIObject::*callbackFunction)(Args... args), Args&&... args)
 	{
-		if (this != m_pGUI.GetBaseObject())
+		if (!IsBaseObject())
 		{
 			if (isRestricted && (this->*isRestricted)())
 				return;
@@ -347,7 +333,7 @@ protected:
 	 * <b>NOTE!</b> This will not just return m_pParent, when that is
 	 * need use it! There is one exception to it, when the parent is
 	 * the top-node (the object that isn't a real object), this
-	 * will return NULL, so that the top-node's children are
+	 * will return nullptr, so that the top-node's children are
 	 * seemingly parentless.
 	 *
 	 * @return Pointer to parent
@@ -366,6 +352,12 @@ protected:
 	{
 		return false;
 	}
+
+	/**
+	 * Allow the GUI object to process after all child items were handled.
+	 * Useful to avoid iterator invalidation with push_back calls.
+	 */
+	virtual void AdditionalChildrenHandled() {}
 
 	/**
 	 * Cached size, real size m_Size is actually dependent on resolution
@@ -408,15 +400,14 @@ protected:
 	 * updates this object accordingly (i.e. if it's the object
 	 * being inputted one thing happens, and not, another).
 	 *
-	 * @param pMouseOver	Object that is currently hovered,
-	 *						can OF COURSE be NULL too!
+	 * @param pMouseOver Object that is currently hovered, can be nullptr too!
 	 */
 	void UpdateMouseOver(IGUIObject* const& pMouseOver);
 
 	/**
 	 * Retrieves the configured sound filename from the given setting name and plays that once.
 	 */
-	void PlaySound(const CStr& settingName) const;
+	void PlaySound(const CStrW& soundPath) const;
 
 	//@}
 private:
@@ -428,6 +419,7 @@ private:
 	/**
 	 * Updates some internal data depending on the setting changed.
 	 */
+	void PreSettingChange(const CStr& Setting);
 	void SettingChanged(const CStr& Setting, const bool SendMessage);
 
 	/**
@@ -435,18 +427,23 @@ private:
 	 * if hovered, if so, then check if this's Z value is greater
 	 * than the inputted object... If so then the object is closer
 	 * and we'll replace the pointer with this.
-	 * Also Notice input can be NULL, which means the Z value demand
-	 *  is out. NOTICE you can't input NULL as const so you'll have
-	 * to set an object to NULL.
+	 * Also Notice input can be nullptr, which means the Z value demand
+	 *  is out. NOTICE you can't input nullptr as const so you'll have
+	 * to set an object to nullptr.
 	 *
 	 * @param pObject	Object pointer, can be either the old one, or
 	 *					the new one.
 	 */
 	void ChooseMouseOverAndClosest(IGUIObject*& pObject);
 
-	// Is the object a Root object, in philosophy, this means it
-	//  has got no parent, and technically, it's got the m_BaseObject
-	//  as parent.
+	/**
+	 * Returns whether this is the object all other objects are descendants of.
+	 */
+	bool IsBaseObject() const;
+
+	/**
+	 * Returns whether this object is a child of the base object.
+	 */
 	bool IsRootObject() const;
 
 	static void Trace(JSTracer* trc, void* data)
@@ -456,18 +453,16 @@ private:
 
 	void TraceMember(JSTracer* trc);
 
-	// Variables
-
+// Variables
 protected:
 	// Name of object
-	CStr									m_Name;
+	CStr m_Name;
 
-	// Constructed on the heap, will be destroyed along with the the object
-	// TODO Gee: really the above?
-	vector_pObjects							m_Children;
+	// Constructed on the heap, will be destroyed along with the the CGUI
+	vector_pObjects m_Children;
 
 	// Pointer to parent
-	IGUIObject								*m_pParent;
+	IGUIObject* m_pParent;
 
 	//This represents the last click time for each mouse button
 	double m_LastClickTime[6];
@@ -487,7 +482,7 @@ protected:
 	// More variables
 
 	// Is mouse hovering the object? used with the function IsMouseOver()
-	bool									m_MouseHovering;
+	bool m_MouseHovering;
 
 	/**
 	 * Settings pool, all an object's settings are located here
@@ -505,27 +500,23 @@ protected:
 	CGUI& m_pGUI;
 
 	// Internal storage for registered script handlers.
-	std::map<CStr, JS::Heap<JSObject*> >	m_ScriptHandlers;
+	std::map<CStr, JS::Heap<JSObject*> > m_ScriptHandlers;
 
 	// Cached JSObject representing this GUI object
-	JS::PersistentRootedObject				m_JSObject;
-};
+	JS::PersistentRootedObject m_JSObject;
 
-
-/**
- * Dummy object used primarily for the root object
- * or objects of type 'empty'
- */
-class CGUIDummyObject : public IGUIObject
-{
-	GUI_OBJECT(CGUIDummyObject)
-
-public:
-	CGUIDummyObject(CGUI& pGUI) : IGUIObject(pGUI) {}
-
-	virtual void Draw() {}
-	// Empty can never be hovered. It is only a category.
-	virtual bool IsMouseOver() const { return false; }
+	// Cache references to settings for performance
+	bool m_Enabled;
+	bool m_Hidden;
+	CClientArea m_Size;
+	CStr m_Style;
+	CStr m_Hotkey;
+	float m_Z;
+	bool m_Absolute;
+	bool m_Ghost;
+	float m_AspectRatio;
+	CStrW m_Tooltip;
+	CStr m_TooltipStyle;
 };
 
 #endif // INCLUDED_IGUIOBJECT

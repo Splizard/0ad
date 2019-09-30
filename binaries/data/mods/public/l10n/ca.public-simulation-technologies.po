@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-08-26 07:09+0000\n"
-"PO-Revision-Date: 2019-08-26 16:07+0000\n"
+"POT-Creation-Date: 2019-09-16 07:11+0000\n"
+"PO-Revision-Date: 2019-09-16 14:21+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/wildfire-games/0ad/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -756,34 +756,39 @@ msgid ""
 msgstr "Les unitat ascendides a la classe d'elit guanyen molta qualitat: 20% de vida extra, 1 nivell extra d'armadura de cada tipus, 20% extra en atac en unitats cos a cos, 4 metres més d'abast i més precisió per unitats a distància, velocitat de moviment més ràpida, velocitat extra en guarició i abast per a guaridors."
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsondescription
-msgid "Breeding livestock for food."
-msgstr "Criar bestiar per a menjar."
+msgid "Breed livestock (sheep, goats, cattle, etc.) for food."
+msgstr ""
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsontooltip
-msgid "Breed time -25% for domestic animals (sheep, goats, cattle, etc.)."
-msgstr "El temps de cria dels animals domèstics (ovelles, cabres, vaques, etc.) es redueix en un 25%."
+msgid "Domestic Animals −25% breeding time."
+msgstr ""
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsongenericName
 msgid "Stockbreeding"
 msgstr "Ramaderia"
 
 #: simulation/data/technologies/gather_capacity_basket.jsondescription
-#: simulation/data/technologies/gather_capacity_carts.jsondescription
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
-msgid "Increases shuttling capacity for all resources."
-msgstr "Augmenta la capacitat de transport de tots els recursos."
+msgid "Workers use baskets. Increases shuttling capacity for all resources."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_basket.jsontooltip
-msgid "Workers use baskets. +5 shuttle capacity for all resources."
-msgstr "Els treballadors utilitzen cabassos. +5 en capacitat de transport per a tots els recursos."
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
+msgid "Workers +5 resource capacity."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_basket.jsongenericName
 msgid "Baskets"
 msgstr "Cabassos"
 
+#: simulation/data/technologies/gather_capacity_carts.jsondescription
+msgid ""
+"Workers use horse-drawn carts. Increases shuttling capacity for all "
+"resources."
+msgstr ""
+
 #: simulation/data/technologies/gather_capacity_carts.jsontooltip
-msgid "Workers use horse-drawn carts. +10 shuttle capacity for all resources."
-msgstr "Els treballadors utilitzen carros tirats per cavalls. +10 en capacitat de transport per a tots els recursos."
+msgid "Workers +10 resource capacity."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_carts.jsongenericName
 msgid "Horse-drawn Carts"
@@ -805,9 +810,10 @@ msgstr "Salaó del peix"
 msgid "Unlocked in Town Phase. Requires Fishing Net."
 msgstr "Es desbloqueja a la Fase Vila. Es necessita xarxa de pescar."
 
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
-msgid "Workers use wheelbarrows. +5 shuttle capacity for all resources."
-msgstr "Els treballadors fan servir carretons. +5 de capacitat de transport per a tots els recursos."
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
+msgid ""
+"Workers use wheelbarrows. Increases shuttling capacity for all resources."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_wheelbarrow.jsongenericName
 msgid "Wheelbarrow"
@@ -818,20 +824,23 @@ msgid "Extra nutrients for farms."
 msgstr "Més nutrients per als horts."
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsontooltip
-msgid "Workers +25% farming rate."
-msgstr "+25% de velocitat de producció dels horts."
+msgid "Workers +25% grain gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsongenericName
 msgid "Fertilizer"
 msgstr "Fertilitzant"
 
 #: simulation/data/technologies/gather_farming_plows.jsondescription
-msgid "A horse drawn instrument to turn the sod."
-msgstr "Un instrument tirat per cavalls per a llaurar la terra."
+msgid ""
+"Equip your workers with iron plows, animal-drawn instruments to turn the "
+"sod."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_plows.jsontooltip
-msgid "Equip your workers with iron plows. +15% farming rate."
-msgstr "Equipeu els treballadors amb arades. +15% en l'índex de agricultura."
+#: simulation/data/technologies/gather_farming_training.jsontooltip
+msgid "Workers +15% grain gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_plows.jsongenericName
 msgid "Iron Plow"
@@ -841,22 +850,17 @@ msgstr "Arada de ferro"
 msgid "Training for workers to increase farm gathering speed."
 msgstr "Formeu els treballadors perquè augmentin la velocitat de recol·lecció de la granja."
 
-#: simulation/data/technologies/gather_farming_training.jsontooltip
-msgid "Workers +15% farming rate."
-msgstr "+15% en l'índex d'agricultura per als treballadors."
-
 #: simulation/data/technologies/gather_farming_training.jsongenericName
 msgid "Gather Training"
 msgstr "Formació agrícola"
 
 #: simulation/data/technologies/gather_fishing_net.jsondescription
-msgid "Nets improve the productivity of fishing boats."
-msgstr "Les xarxes milloren la productivitat dels pesquers."
+msgid "Use nets to improve the productivity of fishing boats."
+msgstr ""
 
 #: simulation/data/technologies/gather_fishing_net.jsontooltip
-msgid ""
-"Use nets on your Fishing Boats. +30% fishing rate. Unlocks Salting Fish."
-msgstr "Utilitzeu xarxes a les barques de pesca. +30% de l'índex de pesca. Desbloca el salaó del peix."
+msgid "Fishing Boats +30% fish gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_fishing_net.jsongenericName
 msgid "Fishing Net"
@@ -870,16 +874,16 @@ msgstr "Augmenta la velocitat de recollida de fusta dels arbres."
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsontooltip
 #: simulation/data/technologies/gather_lumbering_strongeraxes.jsontooltip
-msgid "Workers +15% lumbering rate for trees."
-msgstr "Els treballadors recullen fusta dels arbres un +15% més ràpid."
+msgid "Workers +15% wood gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsongenericName
 msgid "Iron Ax Heads"
 msgstr "Destrals amb cap de ferro"
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsontooltip
-msgid "Workers +50% lumbering rate for trees."
-msgstr "Els treballadors recullen fusta dels arbres un +50% més ràpid."
+msgid "Workers +50% wood gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsongenericName
 msgid "Sharp Ax Heads"
@@ -890,15 +894,15 @@ msgid "Stronger Ax"
 msgstr "Destral més forta"
 
 #: simulation/data/technologies/gather_mining_serfs.jsondescription
-#: simulation/data/technologies/gather_mining_servants.jsondescription
-#: simulation/data/technologies/gather_mining_slaves.jsondescription
-msgid "Increases stone gathering rates."
-msgstr "Augmenta la velocitat de recollida de pedra."
+msgid ""
+"Compel serfs to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_serfs.jsontooltip
-msgid ""
-"Compel serfs to help your workers mine stone. +15% stone gathering rate."
-msgstr "Obligueu els serfs a ajudar als treballadors a les mines de pedra. +15% en l'índex de recol·lecció de pedra."
+#: simulation/data/technologies/gather_mining_servants.jsontooltip
+msgid "Workers +15% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_serfs.jsongenericName
 msgid "Serfs"
@@ -910,9 +914,9 @@ msgstr "Serfs"
 msgid "Heílōtes"
 msgstr "Heílōtes"
 
-#: simulation/data/technologies/gather_mining_servants.jsontooltip
-msgid "Hire servants to help mine stone. +15% stone gathering rate."
-msgstr "Contracteu servents perquè ajudin a la mina de pedra. +15% en l'índex de recol·lecció de pedra."
+#: simulation/data/technologies/gather_mining_servants.jsondescription
+msgid "Hire servants to help quarry stone. Increases stone gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_servants.jsongenericName
 msgid "Servants"
@@ -925,22 +929,25 @@ msgid "Doûloi"
 msgstr "Doûloi"
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsondescription
-#: simulation/data/technologies/gather_mining_silvermining.jsondescription
-#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
-msgid "Increases metal gathering rates."
-msgstr "Augmenta la velocitat de recollida de metall."
+msgid "Develop shaft mining. Increases metal gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsontooltip
-msgid "Develop shaft mining. +15% metal gathering rate."
-msgstr "Desenvolupeu pous miners. +15% en l'índex de recol·lecció de metall."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
+msgid "Workers +15% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsongenericName
 msgid "Shaft Mining"
 msgstr "Pous miners"
 
+#: simulation/data/technologies/gather_mining_silvermining.jsondescription
+msgid "Strike a vein of precious silver. Increases metal gathering rates."
+msgstr ""
+
 #: simulation/data/technologies/gather_mining_silvermining.jsontooltip
-msgid "Strike a vein of precious silver. +50% metal gathering rate."
-msgstr "Exploteu una vena de preciosa plata. +50% en l'índex de recol·lecció de metall."
+msgid "Workers +50% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_silvermining.jsongenericName
 msgid "Silver Mining"
@@ -954,10 +961,15 @@ msgstr "Mines de Crènides"
 msgid "Mines of Laureion"
 msgstr "Mines de Laureion"
 
-#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+#: simulation/data/technologies/gather_mining_slaves.jsondescription
 msgid ""
-"Buy slaves to help your workers mine for stone. +50% stone gathering rate."
-msgstr "Compreu esclaus perquè ajudin als treballadors a excavar la pedra. +50% en l'índex de recol·lecció de pedra."
+"Buy slaves to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr ""
+
+#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+msgid "Workers +50% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_slaves.jsongenericName
 msgid "Slaves"
@@ -969,21 +981,22 @@ msgstr "Esclaus"
 msgid "Andrápoda"
 msgstr "Andrápoda"
 
-#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
-msgid "Equip your workers with helpful tools. +15% metal gathering rate."
-msgstr "Equipeu els treballadors amb eines útils. +15% en l'índex de recol·lecció de metall."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
+msgid ""
+"Equip your workers with helpful tools. Increases metal gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_wedgemallet.jsongenericName
 msgid "Wedge and Mallet"
 msgstr "Mall i falca"
 
 #: simulation/data/technologies/gather_wicker_baskets.jsondescription
-msgid "Baskets for foraging."
-msgstr "Cistells per a recol·lectar."
+msgid "Equip your foragers with wicker baskets for foraging."
+msgstr ""
 
 #: simulation/data/technologies/gather_wicker_baskets.jsontooltip
-msgid "Equip your foragers with wicker baskets. +50% fruit foraging rate."
-msgstr "Equipeu els recol·lectors amb cistells de vímet. +50% en l'índex de recol·lecció de fusta."
+msgid "Workers +50% fruit gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_wicker_baskets.jsongenericName
 msgid "Wicker Baskets"
@@ -1251,9 +1264,9 @@ msgstr "Avança d'una vila bulliciosa a una veritable metròpoli, plena de les m
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by another +50%. Silver Owls civ bonus "
-"grants an extra +10% metal gather rate to all workers. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
-msgstr "Avanceu cap a la Fase Ciutat, la qual desbloca més estructures i unitats. El radi de territori dels Centres Cívics augmenta en un +50%. La bonificació de les Òlibes de plata concedeix +10% en l'índex de recol·lecció de metall per a tots els treballadors. Augmenta un +10% la capacitat màxima de salut dels soldats ciutadà. +9 en l'índex de regeneració d'estructures protegides."
+"grants an extra +10% metal gather rate to all workers. Citizen Soldiers +10%"
+" health. All structures +9 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_city_athen.jsonrequirementsTooltip
 #: simulation/data/technologies/phase_city_generic.jsonrequirementsTooltip
@@ -1275,9 +1288,9 @@ msgstr "Avança d'una vila bulliciosa a una veritable metròpoli, plena de les m
 #: simulation/data/technologies/phase_city_generic.jsontooltip
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by another +50%. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
-msgstr "Avanceu cap a la Fase Ciutat, la qual desbloca més estructures i unitats. El radi de territori dels Centres Cívics augmenta en un +50%. Augmenta un +10% la capacitat màxima de salut dels soldats ciutadà. +9 en l'índex de regeneració d'estructures protegides."
+"radius for Civic Centers increased by another +50%. Citizen Soldiers +10% "
+"health. All structures +9 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_town.jsongenericName
 #: simulation/data/technologies/phase_town_athen.jsongenericName
@@ -1302,9 +1315,9 @@ msgstr "Avanceu d'un petit poblat a una vila bulliciosa, preparada per a créixe
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by +30%. 'Silver Owls' civ bonus grants "
-"an extra +10% metal gather rate to all workers. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
-msgstr "Avanceu cap a la Fase Vila, la qual desbloca més estructures i unitats. El radi de territori dels Centres Cívics augmenta en un +30%. La binificació de les Òlibes de plata concedeix +10% en l'índex de recol·lecció de metall per a tots els treballadors. Augmenta un +20% la capacitat màxima de salut dels soldats ciutadà. +7 en l'índex de regeneració d'estructures protegides."
+"an extra +10% metal gather rate to all workers. Citizen Soldiers +20% "
+"health. All structures +7 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_town_athen.jsonrequirementsTooltip
 #: simulation/data/technologies/phase_town_generic.jsonrequirementsTooltip
@@ -1326,9 +1339,9 @@ msgstr "Avanceu d'un petit poblat a una vila bulliciosa, preparada per a créixe
 #: simulation/data/technologies/phase_town_generic.jsontooltip
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by +30%. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
-msgstr "Avanceu cap a la Fase Vila, la qual desbloca més estructures i unitats. El radi de territori dels Centres Cívics augmenta en un +30%. Augmenta un +20% la capacitat màxima de salut dels soldats ciutadà. +7 en l'índex de regeneració d'estructures protegides."
+"radius for Civic Centers increased by +30%. Citizen Soldiers +20% health. "
+"All structures +7 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_village.jsongenericName
 msgid "Village Phase"
@@ -2276,9 +2289,8 @@ msgstr "Els cartaginesos van construir les seves muralles en tres cercles concè
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsontooltip
 msgid ""
-"Carthaginian walls, gates, and wall towers have 3x the health of a standard "
-"wall, but also cost twice as much and take twice as long to build."
-msgstr "Les muralles, portes i torres de muralla cartagineses tenen 3 cops la salut d'una muralla normal, però també costen el doble de recursos i es construeixen dues vegades més lentes."
+"Carthaginian Walls +100% build time, +100% stone cost, and  +200% health."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsongenericName
 msgid "Triple Walls"
@@ -2290,9 +2302,9 @@ msgstr "Les estructures celtes estaven majoritàriament fetes de fusta amb fonam
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsontooltip
 msgid ""
-"Celtic buildings have 20% less health, but are also 20% cheaper and faster "
-"to construct."
-msgstr "Els edificis celtes tenen un -20% menys de salut, però són un +20% més barats i fàcils de construir."
+"Briton and Gaulish Structures −20% build time, −20% health, and −20% capture"
+" points."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsongenericName
 msgid "Wooden Construction"
@@ -2304,9 +2316,9 @@ msgstr "Els grecs feien construccions de pedra des dels temps micènics primeren
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsontooltip
 msgid ""
-"All structures have 10% more health and capture points, but also take 10% "
-"longer to build."
-msgstr "Totes les estructures perses guanyen un +10% de salut i de punts de captura, però també es construeixen un 10% més lentament."
+"Athenian, Macedonian, and Spartan Structures +10% build time, +10% health, "
+"and +10% capture points."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsongenericName
 msgid "Hellenic Architecture"
@@ -2323,8 +2335,8 @@ msgid ""
 msgstr "L'imperi Màuria abastava dotzenes de regnes independents anteriors sobre una superfície de 5 milions de quilòmetres quadrats, amb una població propera als 60 milions de persones. Els seus regents van ocupar el títol d'Emperador d'emperadors i van comandar un exèrcit permanent de 600.000 homes d'infanteria, 9000 elefants, 8000 carros i 30.000 cavallers, el que és possiblement l'exèrcit més gran del seu temps."
 
 #: simulation/data/technologies/civbonuses/maur_population.jsontooltip
-msgid "Mauryas have a 10% higher maximum population limit."
-msgstr "Màuria té el màxim límit de població un 10% més alt."
+msgid "Mauryas +10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_population.jsongenericName
 msgid "Emperor of Emperors"
@@ -2341,8 +2353,8 @@ msgid ""
 msgstr "Els Màuria van construir les muralles de la ciutat amb fusta, un recurs natural molt abundant a l'Índia."
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsontooltip
-msgid "Mauryan city walls have -20% less health and -20% less build time."
-msgstr "Les muralles de la ciutat de l'imperi Màuria tenen -20% dde salut i un -20% menys de temps de construcció."
+msgid "Mauryan City Walls −20% build time and −20% health."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsongenericName
 msgid "Wooden Walls"
@@ -2359,8 +2371,8 @@ msgid ""
 msgstr "Els perses van imposar una gran quantitat d'infanteria durant temps de guerra a causa de la grandària de l'Imperi aquemènida i la forma en què va ser creat. En general, la infanteria persa estava ben formada i va lluitar amb gran tenacitat. Tanmateix, si bé això era cert, la infanteria era pobra en el combat cos a cos. A més, a excepció dels regiments d'elit, la infanteria persa no era una força professional permanent."
 
 #: simulation/data/technologies/civbonuses/pers_population.jsontooltip
-msgid "Persians have a 10% higher maximum population limit."
-msgstr "Els perses tenen el màxim límit de població un 10% més alt."
+msgid "Persians +10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/pers_population.jsongenericName
 msgid "Great King's Levy"
@@ -2375,8 +2387,8 @@ msgid ""
 msgstr "Els espartans no tenien l'exèrcit més gran del món però sí el millor del seu temps. La falta de quantitat la compensaven amb la qualitat. Es deia que Esparta no necessitava muralles perquè per això ja tenia els seus homes."
 
 #: simulation/data/technologies/civbonuses/spart_population.jsontooltip
-msgid "Spartans have 10% less maximum population."
-msgstr "Els espartans tenen el màxim límit de població un 10% més alt."
+msgid "Spartans −10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/spart_population.jsongenericName
 msgid "Underdogs"

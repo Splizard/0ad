@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-08-26 07:09+0000\n"
-"PO-Revision-Date: 2019-08-26 16:07+0000\n"
+"POT-Creation-Date: 2019-09-16 07:11+0000\n"
+"PO-Revision-Date: 2019-09-16 14:21+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/wildfire-games/0ad/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -756,34 +756,39 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsondescription
-msgid "Breeding livestock for food."
-msgstr "تربية المواشي من أجل الطعام"
+msgid "Breed livestock (sheep, goats, cattle, etc.) for food."
+msgstr ""
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsontooltip
-msgid "Breed time -25% for domestic animals (sheep, goats, cattle, etc.)."
-msgstr "فترة التربية -25% للحيوانات الأليفة (الخراف، والماعز، والماشية، إلخ)."
+msgid "Domestic Animals −25% breeding time."
+msgstr ""
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsongenericName
 msgid "Stockbreeding"
 msgstr "تربية الماشية"
 
 #: simulation/data/technologies/gather_capacity_basket.jsondescription
-#: simulation/data/technologies/gather_capacity_carts.jsondescription
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
-msgid "Increases shuttling capacity for all resources."
-msgstr "تزيد من سعة النقل لجميع الموارد"
+msgid "Workers use baskets. Increases shuttling capacity for all resources."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_basket.jsontooltip
-msgid "Workers use baskets. +5 shuttle capacity for all resources."
-msgstr "تجعل العمال يستخدون السلال. +5 لسعة النقل لجميع الموارد"
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
+msgid "Workers +5 resource capacity."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_basket.jsongenericName
 msgid "Baskets"
 msgstr "سلال"
 
+#: simulation/data/technologies/gather_capacity_carts.jsondescription
+msgid ""
+"Workers use horse-drawn carts. Increases shuttling capacity for all "
+"resources."
+msgstr ""
+
 #: simulation/data/technologies/gather_capacity_carts.jsontooltip
-msgid "Workers use horse-drawn carts. +10 shuttle capacity for all resources."
-msgstr "تجعل العمال يستخدمون عربات تجرها الخيول. +10 لسعة النقل لجميع الموارد."
+msgid "Workers +10 resource capacity."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_carts.jsongenericName
 msgid "Horse-drawn Carts"
@@ -805,9 +810,10 @@ msgstr "تمليح السمك"
 msgid "Unlocked in Town Phase. Requires Fishing Net."
 msgstr "يزال قفله في طور البلدة. يحتاج شبكة الصيد."
 
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
-msgid "Workers use wheelbarrows. +5 shuttle capacity for all resources."
-msgstr "العمال يستخدمون عربات اليد. +5 لسعة النقل لجميع الموارد."
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
+msgid ""
+"Workers use wheelbarrows. Increases shuttling capacity for all resources."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_wheelbarrow.jsongenericName
 msgid "Wheelbarrow"
@@ -818,20 +824,23 @@ msgid "Extra nutrients for farms."
 msgstr "مغذيات إضافية للمزارع."
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsontooltip
-msgid "Workers +25% farming rate."
-msgstr "زيادة انتاج الزراعة 25%"
+msgid "Workers +25% grain gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsongenericName
 msgid "Fertilizer"
 msgstr "سماد"
 
 #: simulation/data/technologies/gather_farming_plows.jsondescription
-msgid "A horse drawn instrument to turn the sod."
-msgstr "أداة يسحبها حصان من أجل حرث الأرض العشبية."
+msgid ""
+"Equip your workers with iron plows, animal-drawn instruments to turn the "
+"sod."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_plows.jsontooltip
-msgid "Equip your workers with iron plows. +15% farming rate."
-msgstr "زود عمالك بمحارث حديدية. +15% لمعدل الزراعة."
+#: simulation/data/technologies/gather_farming_training.jsontooltip
+msgid "Workers +15% grain gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_plows.jsongenericName
 msgid "Iron Plow"
@@ -841,22 +850,17 @@ msgstr "محراث حديدي"
 msgid "Training for workers to increase farm gathering speed."
 msgstr "تدريب للعمال من أجل زيادة سرعة الجمع من المزارع."
 
-#: simulation/data/technologies/gather_farming_training.jsontooltip
-msgid "Workers +15% farming rate."
-msgstr "زيادة انتاج الزراعة 15%"
-
 #: simulation/data/technologies/gather_farming_training.jsongenericName
 msgid "Gather Training"
 msgstr "التّدرّب على الجمع"
 
 #: simulation/data/technologies/gather_fishing_net.jsondescription
-msgid "Nets improve the productivity of fishing boats."
+msgid "Use nets to improve the productivity of fishing boats."
 msgstr ""
 
 #: simulation/data/technologies/gather_fishing_net.jsontooltip
-msgid ""
-"Use nets on your Fishing Boats. +30% fishing rate. Unlocks Salting Fish."
-msgstr "استخدم الشباك في قوارب الصيد خاصتك. +30% على معدل الصيد. تزيل قفل تمليح السمك."
+msgid "Fishing Boats +30% fish gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_fishing_net.jsongenericName
 msgid "Fishing Net"
@@ -870,16 +874,16 @@ msgstr "تزيد معدّلات جمع خشب الأشجار."
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsontooltip
 #: simulation/data/technologies/gather_lumbering_strongeraxes.jsontooltip
-msgid "Workers +15% lumbering rate for trees."
-msgstr "+15% للعمال على معدل قطع الشجر."
+msgid "Workers +15% wood gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsongenericName
 msgid "Iron Ax Heads"
 msgstr "رؤوس حديدة للفؤوس"
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsontooltip
-msgid "Workers +50% lumbering rate for trees."
-msgstr "+50% للعمال على معدل قطع الأشجار."
+msgid "Workers +50% wood gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsongenericName
 msgid "Sharp Ax Heads"
@@ -890,15 +894,15 @@ msgid "Stronger Ax"
 msgstr "فأس قوية"
 
 #: simulation/data/technologies/gather_mining_serfs.jsondescription
-#: simulation/data/technologies/gather_mining_servants.jsondescription
-#: simulation/data/technologies/gather_mining_slaves.jsondescription
-msgid "Increases stone gathering rates."
-msgstr "يزيد من معدلات جمع الحجارة."
+msgid ""
+"Compel serfs to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_serfs.jsontooltip
-msgid ""
-"Compel serfs to help your workers mine stone. +15% stone gathering rate."
-msgstr "أرغم العبيد أن يساعدوا عمالك على استخراج الحجارة. +15% على معدل جمع الحجارة."
+#: simulation/data/technologies/gather_mining_servants.jsontooltip
+msgid "Workers +15% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_serfs.jsongenericName
 msgid "Serfs"
@@ -910,9 +914,9 @@ msgstr "عبيد"
 msgid "Heílōtes"
 msgstr "هيلوتيس"
 
-#: simulation/data/technologies/gather_mining_servants.jsontooltip
-msgid "Hire servants to help mine stone. +15% stone gathering rate."
-msgstr "استأجر عمالاً لكى يساعدوا فى استخراج الحجارة. +15% معدل استخراج الحجارة."
+#: simulation/data/technologies/gather_mining_servants.jsondescription
+msgid "Hire servants to help quarry stone. Increases stone gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_servants.jsongenericName
 msgid "Servants"
@@ -925,22 +929,25 @@ msgid "Doûloi"
 msgstr "دويلوا"
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsondescription
-#: simulation/data/technologies/gather_mining_silvermining.jsondescription
-#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
-msgid "Increases metal gathering rates."
-msgstr "تزيد من معدلات جمع المعدن."
+msgid "Develop shaft mining. Increases metal gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsontooltip
-msgid "Develop shaft mining. +15% metal gathering rate."
-msgstr "'طور التعدين العمودي. +15% على معدل جمع المعدن."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
+msgid "Workers +15% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsongenericName
 msgid "Shaft Mining"
 msgstr "التعدين العمودي"
 
+#: simulation/data/technologies/gather_mining_silvermining.jsondescription
+msgid "Strike a vein of precious silver. Increases metal gathering rates."
+msgstr ""
+
 #: simulation/data/technologies/gather_mining_silvermining.jsontooltip
-msgid "Strike a vein of precious silver. +50% metal gathering rate."
-msgstr "اضرب منبعًا للفضة الثمينة. +50% على معدل جمع المعدن."
+msgid "Workers +50% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_silvermining.jsongenericName
 msgid "Silver Mining"
@@ -954,10 +961,15 @@ msgstr "مناجم كرينيديس"
 msgid "Mines of Laureion"
 msgstr "مناجم  لاوريون"
 
-#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+#: simulation/data/technologies/gather_mining_slaves.jsondescription
 msgid ""
-"Buy slaves to help your workers mine for stone. +50% stone gathering rate."
-msgstr "اشتر خدمًا ليساعدوا عمالك على تعدين الحجارة. +50% على معدل جمع الحجارة."
+"Buy slaves to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr ""
+
+#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+msgid "Workers +50% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_slaves.jsongenericName
 msgid "Slaves"
@@ -969,21 +981,22 @@ msgstr "عبيد"
 msgid "Andrápoda"
 msgstr "اندروبيدا"
 
-#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
-msgid "Equip your workers with helpful tools. +15% metal gathering rate."
-msgstr "زود عمالك بالأدوات المساعدة. +15% معدل استخراج المعدن."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
+msgid ""
+"Equip your workers with helpful tools. Increases metal gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_wedgemallet.jsongenericName
 msgid "Wedge and Mallet"
 msgstr "وتد ومطرقة"
 
 #: simulation/data/technologies/gather_wicker_baskets.jsondescription
-msgid "Baskets for foraging."
-msgstr "سلة لجمع الفواكه."
+msgid "Equip your foragers with wicker baskets for foraging."
+msgstr ""
 
 #: simulation/data/technologies/gather_wicker_baskets.jsontooltip
-msgid "Equip your foragers with wicker baskets. +50% fruit foraging rate."
-msgstr "زود جامعينك بـ سلة من القش. +50% معدل جمع الفواكه."
+msgid "Workers +50% fruit gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_wicker_baskets.jsongenericName
 msgid "Wicker Baskets"
@@ -1251,8 +1264,8 @@ msgstr ""
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by another +50%. Silver Owls civ bonus "
-"grants an extra +10% metal gather rate to all workers. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
+"grants an extra +10% metal gather rate to all workers. Citizen Soldiers +10%"
+" health. All structures +9 garrisoned regeneration rate."
 msgstr ""
 
 #: simulation/data/technologies/phase_city_athen.jsonrequirementsTooltip
@@ -1275,9 +1288,9 @@ msgstr "تقدم من مدينة هايجة إلى مدينة حقيقية، م�
 #: simulation/data/technologies/phase_city_generic.jsontooltip
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by another +50%. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
-msgstr "تقدم الى طور المدينة، حيث انه يفتح مبانى وجنود أكثر. مجال سيطرة المبنى الرئيسي يزداد بـ +50% أخرى. الجنود المواطنين نقاط حياتهم القصوى تزداد بـ +10%. كل المبانى +9 نقاط معالجة للجنود بداخلها."
+"radius for Civic Centers increased by another +50%. Citizen Soldiers +10% "
+"health. All structures +9 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_town.jsongenericName
 #: simulation/data/technologies/phase_town_athen.jsongenericName
@@ -1302,8 +1315,8 @@ msgstr ""
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by +30%. 'Silver Owls' civ bonus grants "
-"an extra +10% metal gather rate to all workers. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
+"an extra +10% metal gather rate to all workers. Citizen Soldiers +20% "
+"health. All structures +7 garrisoned regeneration rate."
 msgstr ""
 
 #: simulation/data/technologies/phase_town_athen.jsonrequirementsTooltip
@@ -1326,8 +1339,8 @@ msgstr ""
 #: simulation/data/technologies/phase_town_generic.jsontooltip
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by +30%. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
+"radius for Civic Centers increased by +30%. Citizen Soldiers +20% health. "
+"All structures +7 garrisoned regeneration rate."
 msgstr ""
 
 #: simulation/data/technologies/phase_village.jsongenericName
@@ -2276,8 +2289,7 @@ msgstr ""
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsontooltip
 msgid ""
-"Carthaginian walls, gates, and wall towers have 3x the health of a standard "
-"wall, but also cost twice as much and take twice as long to build."
+"Carthaginian Walls +100% build time, +100% stone cost, and  +200% health."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsongenericName
@@ -2290,8 +2302,8 @@ msgstr ""
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsontooltip
 msgid ""
-"Celtic buildings have 20% less health, but are also 20% cheaper and faster "
-"to construct."
+"Briton and Gaulish Structures −20% build time, −20% health, and −20% capture"
+" points."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsongenericName
@@ -2304,8 +2316,8 @@ msgstr ""
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsontooltip
 msgid ""
-"All structures have 10% more health and capture points, but also take 10% "
-"longer to build."
+"Athenian, Macedonian, and Spartan Structures +10% build time, +10% health, "
+"and +10% capture points."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsongenericName
@@ -2323,7 +2335,7 @@ msgid ""
 msgstr "شملت الإمبراطوريّة الماوريّة عشرات الممالك المستقلّة (سابقًا) وأخذت حوالي ٥ ملايين كيلومتر مربّع، حيث بلغ عدد السكّان حوالي ٦٠ مليون نسمة. لُقّب حاكم الماوريّة بلقب ”إمبراطور الأباطرة“ وقاد جيشًا يتألّف من ٦٠٠٬٠٠٠ جندي مشاة، و٩٠٠٠ فيل، و٨٠٠٠ عربة، و٣٠٬٠٠٠ خيّالة، ما يمكّننا من القول أنّه كان أكبر جيش في تلك الفترة."
 
 #: simulation/data/technologies/civbonuses/maur_population.jsontooltip
-msgid "Mauryas have a 10% higher maximum population limit."
+msgid "Mauryas +10% maximum population limit."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_population.jsongenericName
@@ -2341,7 +2353,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsontooltip
-msgid "Mauryan city walls have -20% less health and -20% less build time."
+msgid "Mauryan City Walls −20% build time and −20% health."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsongenericName
@@ -2359,7 +2371,7 @@ msgid ""
 msgstr "استطاع الفُرس تجنيد عدد ضخم من الخيّالة أثناء الحروب وذلك بسبب الحجم الكبير للإمبراطوريّة الأخمينيّة والطريقة التي كانت تقوم عليها. يمكن القول بشكل عام أنّ الخيّالة الفارسيّة كانت مدرّبة جيّدًا وقد حاربت بصلابة عالية، إلّا أن (ورغم صحّة ما قيل) الخيّالة كانت ضعيفة إن تحدّثنا عن القتال اليدويّ أو القتال بالاشتباك. كما وأنّ الخيّالة الفارسيّة (وباستثناء أفواج النخبة) لم تكن قوّة احترافيّة ذات مكانة."
 
 #: simulation/data/technologies/civbonuses/pers_population.jsontooltip
-msgid "Persians have a 10% higher maximum population limit."
+msgid "Persians +10% maximum population limit."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/pers_population.jsongenericName
@@ -2375,7 +2387,7 @@ msgid ""
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/spart_population.jsontooltip
-msgid "Spartans have 10% less maximum population."
+msgid "Spartans −10% maximum population limit."
 msgstr ""
 
 #: simulation/data/technologies/civbonuses/spart_population.jsongenericName

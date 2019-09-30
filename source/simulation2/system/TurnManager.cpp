@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,6 +22,8 @@
 #include "gui/GUIManager.h"
 #include "maths/MathUtil.h"
 #include "ps/Pyrogenesis.h"
+#include "ps/Profile.h"
+#include "ps/CLogger.h"
 #include "ps/Replay.h"
 #include "ps/Util.h"
 #include "scriptinterface/ScriptInterface.h"
@@ -41,7 +43,8 @@ const int COMMAND_DELAY = 2;
 CTurnManager::CTurnManager(CSimulation2& simulation, u32 defaultTurnLength, int clientId, IReplayLogger& replay)
 	: m_Simulation2(simulation), m_CurrentTurn(0), m_ReadyTurn(1), m_TurnLength(defaultTurnLength),
 	m_PlayerId(-1), m_ClientId(clientId), m_DeltaSimTime(0), m_HasSyncError(false), m_Replay(replay),
-	m_FinalTurn(std::numeric_limits<u32>::max()), m_TimeWarpNumTurns(0)
+	m_FinalTurn(std::numeric_limits<u32>::max()), m_TimeWarpNumTurns(0),
+	m_QuickSaveMetadata(m_Simulation2.GetScriptInterface().GetContext())
 {
 	// When we are on turn n, we schedule new commands for n+2.
 	// We know that all other clients have finished scheduling commands for n (else we couldn't have got here).
@@ -214,7 +217,7 @@ void CTurnManager::Interpolate(float simFrameLength, float realFrameLength)
 	// TODO: using m_TurnLength might be a bit dodgy when length changes - maybe
 	// we need to save the previous turn length?
 
-	float offset = clamp(m_DeltaSimTime / (m_TurnLength / 1000.f) + 1.0, 0.0, 1.0);
+	float offset = Clamp(m_DeltaSimTime / (m_TurnLength / 1000.f) + 1.0, 0.0, 1.0);
 
 	// Stop animations while still updating the selection highlight
 	if (m_CurrentTurn > m_FinalTurn)
@@ -288,7 +291,7 @@ void CTurnManager::RewindTimeWarp()
 	ResetState(0, 1);
 }
 
-void CTurnManager::QuickSave()
+void CTurnManager::QuickSave(JS::HandleValue GUIMetadata)
 {
 	TIMER(L"QuickSave");
 
@@ -300,13 +303,21 @@ void CTurnManager::QuickSave()
 	}
 
 	m_QuickSaveState = stream.str();
-	if (g_GUI)
-		m_QuickSaveMetadata = g_GUI->GetSavedGameData();
+
+	JSContext* cx = m_Simulation2.GetScriptInterface().GetContext();
+	JSAutoRequest rq(cx);
+
+	if (JS_StructuredClone(cx, GUIMetadata, &m_QuickSaveMetadata, nullptr, nullptr))
+	{
+		m_Simulation2.GetScriptInterface().FreezeObject(m_QuickSaveMetadata, true);
+	}
 	else
-		m_QuickSaveMetadata = std::string();
+	{
+		LOGERROR("Could not copy savegame GUI metadata");
+		m_QuickSaveMetadata = JS::UndefinedValue();
+	}
 
 	LOGMESSAGERENDER("Quicksaved game");
-
 }
 
 void CTurnManager::QuickLoad()
@@ -326,11 +337,18 @@ void CTurnManager::QuickLoad()
 		return;
 	}
 
-	if (g_GUI && !m_QuickSaveMetadata.empty())
-		g_GUI->RestoreSavedGameData(m_QuickSaveMetadata);
-
-	LOGMESSAGERENDER("Quickloaded game");
-
 	// See RewindTimeWarp
 	ResetState(0, 1);
+
+	if (!g_GUI)
+		return;
+
+	JSContext* cx = m_Simulation2.GetScriptInterface().GetContext();
+	JSAutoRequest rq(cx);
+
+	JS::AutoValueArray<1> paramData(cx);
+	paramData[0].set(m_QuickSaveMetadata);
+	g_GUI->SendEventToAll("SavegameLoaded", paramData);
+
+	LOGMESSAGERENDER("Quickloaded game");
 }

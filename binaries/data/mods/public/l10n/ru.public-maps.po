@@ -28,8 +28,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-08-23 07:09+0000\n"
-"PO-Revision-Date: 2019-08-26 10:22+0000\n"
+"POT-Creation-Date: 2019-09-06 07:09+0000\n"
+"PO-Revision-Date: 2019-09-09 16:13+0000\n"
 "Last-Translator: Boris Karalnik <eyesucker@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/wildfire-games/0ad/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -254,7 +254,7 @@ msgid ""
 "amongst themselves, but also beat back these ruthless invaders. Ultimately, "
 "the Boii were defeated by the rising power of the Dacians, hence leading to "
 "the reemergence of the Geto-Dacian Confederation under King Burebista."
-msgstr "Игроки начинают игру на берегах реки Дунай в период после вторжения кельтского племени бойев в Паннонию. Стремясь укрепить свою власть на этой территории, кельты занялись искоренением чуждых им культур. Игрокам предстоит не только соперничать за власть между собой, но и отражать нападения этих безжалостных захватчиков. В конечном итоге бойи были побеждены укрепившимися племенами даков, что привело к возрождению союза гето-даков под властью короля Буребисты."
+msgstr "Игроки начинают игру на берегах реки Дунай в период после вторжения кельтского племени бойев в Паннонию. Стремясь укрепить свою власть на этой территории, кельты занялись искоренением чуждых им культур. Игрокам предстоит не только соперничать за власть между собой, но и отражать нападения этих безжалостных захватчиков. В конечном итоге бойи были побеждены укрепившимися племенами даков, что привело к возрождению союза гето-даков под властью царя Буребисты."
 
 #: maps/random/danubius.jsonsettings.Name
 msgid "Danubius"
@@ -945,7 +945,7 @@ msgstr "Первая волна начнётся через %(time)s!"
 msgid "An enemy wave is attacking!"
 msgstr "Волна вражеской атаки!"
 
-#: maps/random/survivalofthefittest_triggers.js:289
+#: maps/random/survivalofthefittest_triggers.js:288
 #, javascript-format
 msgid "%(player)s has been defeated (lost civic center)."
 msgstr "%(player)s потерпел поражение (городской Центр разрушен)."
@@ -2063,7 +2063,7 @@ msgstr "Каждая единица в игре."
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
+#: map.xml:Description:27
 msgid "Give an interesting description of your map."
 msgstr "Впишите описание вашей карты."
 
@@ -2084,11 +2084,10 @@ msgid "We Are Legion"
 msgstr "Имя нам — легион"
 
 #: maps/scenarios/We are Legion.xml:Description:27
-msgid "A quick battle demo map using Roman legionnaires."
-msgstr "Быстрая карта демонстрационного примера сражения, используя римских легионеров."
+msgid "A quick battle demo map using Roman legionaries."
+msgstr "Быстрая демонстрационная карта применения римских легионеров."
 
 #: maps/scenarios/_default.xml:Name:28
-#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "Безымянная карта"
 
@@ -2119,6 +2118,16 @@ msgstr "Корабли Демо"
 #: maps/scenarios/temperate map.xml:Name:27
 msgid "Base Temperate Map"
 msgstr "Основная карта умеренного климата"
+
+#: maps/scenarios/test-foundation.xml:Description:40
+msgid ""
+"This map is designed to help artists and modders find the adequate "
+"foundation for a specific building. This map is not meant to be playable."
+msgstr "Эта карта предназначена для того, чтобы помочь дизайнерам и моддерам найти подходящий фундамент для конкретного здания. Эта карта не предназначена для игры."
+
+#: maps/scenarios/test-foundation.xml:Name:40
+msgid "Foundation Testing Map"
+msgstr "Карта испытания фундаментов"
 
 #: maps/scenarios/unit_motion_integration_test.xml:Description:40
 msgid ""

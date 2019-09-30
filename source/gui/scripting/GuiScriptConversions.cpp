@@ -27,6 +27,8 @@
 #include "ps/Hotkey.h"
 #include "scriptinterface/ScriptConversions.h"
 
+#include <string>
+
 #define SET(obj, name, value) STMT(JS::RootedValue v_(cx); AssignOrToJSVal(cx, &v_, (value)); JS_SetProperty(cx, obj, (name), v_))
 	// ignore JS_SetProperty return value, because errors should be impossible
 	// and we can't do anything useful in the case of errors anyway
@@ -121,7 +123,7 @@ template<> void ScriptInterface::ToJSVal<SDL_Event_>(JSContext* cx, JS::MutableH
 
 template<> void ScriptInterface::ToJSVal<IGUIObject*>(JSContext* UNUSED(cx), JS::MutableHandleValue ret, IGUIObject* const& val)
 {
-	if (val == NULL)
+	if (val == nullptr)
 		ret.setNull();
 	else
 		ret.setObject(*val->GetJSObject());
@@ -157,25 +159,28 @@ template<> bool ScriptInterface::FromJSVal<CGUIColor>(JSContext* cx, JS::HandleV
 
 template<> void ScriptInterface::ToJSVal<CSize>(JSContext* cx, JS::MutableHandleValue ret, const CSize& val)
 {
-	ScriptInterface::GetScriptInterfaceAndCBData(cx)->pScriptInterface->CreateObject(ret, "width", val.cx, "height", val.cy);
+	CreateObject(cx, ret, "width", val.cx, "height", val.cy);
 }
 
 template<> bool ScriptInterface::FromJSVal<CSize>(JSContext* cx, JS::HandleValue v, CSize& out)
 {
 	if (!v.isObject())
 	{
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "CSize value must be an object!");
 		return false;
 	}
 
 	if (!FromJSProperty(cx, v, "width", out.cx))
 	{
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Failed to get CSize.cx property");
 		return false;
 	}
 
 	if (!FromJSProperty(cx, v, "height", out.cy))
 	{
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Failed to get CSize.cy property");
 		return false;
 	}
@@ -185,30 +190,44 @@ template<> bool ScriptInterface::FromJSVal<CSize>(JSContext* cx, JS::HandleValue
 
 template<> void ScriptInterface::ToJSVal<CPos>(JSContext* cx, JS::MutableHandleValue ret, const CPos& val)
 {
-	ScriptInterface::GetScriptInterfaceAndCBData(cx)->pScriptInterface->CreateObject(ret, "x", val.x, "y", val.y);
+	CreateObject(cx, ret, "x", val.x, "y", val.y);
 }
 
 template<> bool ScriptInterface::FromJSVal<CPos>(JSContext* cx, JS::HandleValue v, CPos& out)
 {
 	if (!v.isObject())
 	{
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "CPos value must be an object!");
 		return false;
 	}
 
 	if (!FromJSProperty(cx, v, "x", out.x))
 	{
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Failed to get CPos.x property");
 		return false;
 	}
 
 	if (!FromJSProperty(cx, v, "y", out.y))
 	{
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Failed to get CPos.y property");
 		return false;
 	}
 
 	return true;
+}
+
+template<> void ScriptInterface::ToJSVal<CRect>(JSContext* cx, JS::MutableHandleValue ret, const CRect& val)
+{
+	CreateObject(
+		cx,
+		ret,
+		"left", val.left,
+		"right", val.right,
+		"top", val.top,
+		"bottom", val.bottom);
 }
 
 template<> void ScriptInterface::ToJSVal<CClientArea>(JSContext* cx, JS::MutableHandleValue ret, const CClientArea& val)
@@ -260,6 +279,7 @@ template<> void ScriptInterface::ToJSVal<EVAlign>(JSContext* cx, JS::MutableHand
 
 	default:
 		word = "error";
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Invalid EVAlign");
 		break;
 	}
@@ -280,6 +300,7 @@ template<> bool ScriptInterface::FromJSVal<EVAlign>(JSContext* cx, JS::HandleVal
 	else
 	{
 		out = EVAlign_Top;
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Invalid alignment (should be 'left', 'right' or 'center')");
 		return false;
 	}
@@ -302,6 +323,7 @@ template<> void ScriptInterface::ToJSVal<EAlign>(JSContext* cx, JS::MutableHandl
 		break;
 	default:
 		word = "error";
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Invalid alignment (should be 'left', 'right' or 'center')");
 		break;
 	}
@@ -322,6 +344,7 @@ template<> bool ScriptInterface::FromJSVal<EAlign>(JSContext* cx, JS::HandleValu
 	else
 	{
 		out = EAlign_Left;
+		JSAutoRequest rq(cx);
 		JS_ReportError(cx, "Invalid alignment (should be 'left', 'right' or 'center')");
 		return false;
 	}

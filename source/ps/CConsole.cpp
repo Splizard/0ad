@@ -385,7 +385,7 @@ void CConsole::InsertChar(const int szChar, const wchar_t cooked)
 			std::lock_guard<std::mutex> lock(m_Mutex); // needed for safe access to m_deqMsgHistory
 
 			int linesShown = (int)m_fHeight/m_iFontHeight - 4;
-			m_iMsgHistPos = clamp((int)m_deqMsgHistory.size() - linesShown, 1, (int)m_deqMsgHistory.size());
+			m_iMsgHistPos = Clamp(static_cast<int>(m_deqMsgHistory.size()) - linesShown, 1, static_cast<int>(m_deqMsgHistory.size()));
 		}
 		else
 		{
@@ -635,6 +635,9 @@ static bool isUnprintableChar(SDL_Keysym key)
 
 InReaction conInputHandler(const SDL_Event_* ev)
 {
+	if (!g_Console)
+		return IN_PASS;
+
 	if ((int)ev->ev.type == SDL_HOTKEYDOWN)
 	{
 		std::string hotkey = static_cast<const char*>(ev->ev.user.data1);

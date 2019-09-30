@@ -18,22 +18,17 @@
 #ifndef INCLUDED_GUIMANAGER
 #define INCLUDED_GUIMANAGER
 
-#include <boost/unordered_set.hpp>
-#include <set>
-
-#include "lib/input.h"
 #include "lib/file/vfs/vfs_path.h"
-#include "ps/CLogger.h"
+#include "lib/input.h"
 #include "ps/CStr.h"
 #include "ps/TemplateLoader.h"
-#include "scriptinterface/ScriptVal.h"
 #include "scriptinterface/ScriptInterface.h"
 
+#include <boost/unordered_set.hpp>
+#include <string>
+#include <set>
+
 class CGUI;
-class JSObject;
-class IGUIObject;
-struct CGUIColor;
-struct SGUIIcon;
 
 /**
  * External interface to the GUI system.
@@ -59,9 +54,9 @@ public:
 	shared_ptr<CGUI> GetActiveGUI() { return top(); }
 
 	/**
-	 * Returns whether there are any current pages.
+	 * Returns the number of currently open GUI pages.
 	 */
-	bool HasPages();
+	size_t GetPageCount() const;
 
 	/**
 	 * Load a new GUI page and make it active. All current pages will be destroyed.
@@ -123,13 +118,6 @@ public:
 	 */
 	void UpdateResolution();
 
- 	/**
- 	 * Calls the current page's script function getSavedGameData() and returns the result.
- 	 */
-	std::string GetSavedGameData();
-
-	void RestoreSavedGameData(const std::string& jsonData);
-
 	/**
 	 * Check if a template with this name exists
 	 */
@@ -183,7 +171,7 @@ private:
 	shared_ptr<ScriptRuntime> m_ScriptRuntime;
 	shared_ptr<ScriptInterface> m_ScriptInterface;
 
-	typedef std::vector<SGUIPage> PageStackType;
+	using PageStackType = std::vector<SGUIPage>;
 	PageStackType m_PageStack;
 
 	CTemplateLoader m_TemplateLoader;

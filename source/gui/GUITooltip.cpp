@@ -19,9 +19,8 @@
 
 #include "GUITooltip.h"
 
-#include "CGUI.h"
-#include "IGUIObject.h"
-
+#include "gui/CGUI.h"
+#include "gui/IGUIObject.h"
 #include "lib/timer.h"
 #include "ps/CLogger.h"
 
@@ -76,7 +75,7 @@ enum
 };
 
 GUITooltip::GUITooltip()
-: m_State(ST_IN_MOTION), m_PreviousObject(NULL), m_PreviousTooltipName()
+: m_State(ST_IN_MOTION), m_PreviousObject(nullptr), m_PreviousTooltipName()
 {
 }
 

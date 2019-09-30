@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Allan Nordhøy <epost@anotheragency.no>, 2016
+# Filip Bengtsson, 2019
 # Henrik Mattsson-Mårn <h@reglage.net>, 2016
 # Jacob Carlsson <yejcob@gmail.com>, 2015-2016
 # Jonatan Nyberg, 2016
@@ -20,8 +21,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-08-26 07:09+0000\n"
-"PO-Revision-Date: 2019-09-01 13:28+0000\n"
+"POT-Creation-Date: 2019-09-16 07:11+0000\n"
+"PO-Revision-Date: 2019-09-26 12:41+0000\n"
 "Last-Translator: pilino1234 <pilino1234@zoho.eu>\n"
 "Language-Team: Swedish (http://www.transifex.com/wildfire-games/0ad/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -757,34 +758,39 @@ msgid ""
 msgstr "Enheter som befordrats till elitrangen får en ökad kvalitet: 20% extra hälsa, 1 extra rustningsnivå av varje typ, 20% extra byte, 20% extra attack för närstridsenheter, 4m extra räckvidd och 5% bättre precision för distansattackenheter, snabbare rörelsehastighet och extra läkningstakt och räckvidd för läkare."
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsondescription
-msgid "Breeding livestock for food."
-msgstr "Föd upp boskap för mat."
+msgid "Breed livestock (sheep, goats, cattle, etc.) for food."
+msgstr "Föd upp boskap (får, getter, kor m.m.) för mat."
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsontooltip
-msgid "Breed time -25% for domestic animals (sheep, goats, cattle, etc.)."
-msgstr "Uppfödningstid -25% för boskap (får, getter, kossor, osv.)."
+msgid "Domestic Animals −25% breeding time."
+msgstr "Tamdjur −25% uppfödningstid."
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsongenericName
 msgid "Stockbreeding"
 msgstr "Djuruppfödning"
 
 #: simulation/data/technologies/gather_capacity_basket.jsondescription
-#: simulation/data/technologies/gather_capacity_carts.jsondescription
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
-msgid "Increases shuttling capacity for all resources."
-msgstr "Ökar transportkapaciteten för alla resurser."
+msgid "Workers use baskets. Increases shuttling capacity for all resources."
+msgstr "Arbetare använder korgar. Ökar förflyttningskapaciteten för samtliga resurser."
 
 #: simulation/data/technologies/gather_capacity_basket.jsontooltip
-msgid "Workers use baskets. +5 shuttle capacity for all resources."
-msgstr "Arbetare använder korgar. +5 transportkapacitet för alla resurser."
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
+msgid "Workers +5 resource capacity."
+msgstr "Arbetare +5 resurskapacitet."
 
 #: simulation/data/technologies/gather_capacity_basket.jsongenericName
 msgid "Baskets"
 msgstr "Korgar"
 
+#: simulation/data/technologies/gather_capacity_carts.jsondescription
+msgid ""
+"Workers use horse-drawn carts. Increases shuttling capacity for all "
+"resources."
+msgstr "Arbetare använder hästdragna vagnar. Ökar förflyttningskapaciteten för samtliga resurser."
+
 #: simulation/data/technologies/gather_capacity_carts.jsontooltip
-msgid "Workers use horse-drawn carts. +10 shuttle capacity for all resources."
-msgstr "Arbetare använder häst och vagn. +10 transportkapacitet för alla resurser."
+msgid "Workers +10 resource capacity."
+msgstr "Arbetare +10 resurskapacitet."
 
 #: simulation/data/technologies/gather_capacity_carts.jsongenericName
 msgid "Horse-drawn Carts"
@@ -806,9 +812,10 @@ msgstr "Saltad Fisk"
 msgid "Unlocked in Town Phase. Requires Fishing Net."
 msgstr "Låses upp i stadsfas. Kräver Fiskenät."
 
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
-msgid "Workers use wheelbarrows. +5 shuttle capacity for all resources."
-msgstr "Arbetare använder skottkärror. +5 transportkapacitet för alla resurser."
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
+msgid ""
+"Workers use wheelbarrows. Increases shuttling capacity for all resources."
+msgstr "Arbetare använder skottkärror. Ökar förflyttningskapaciteten för samtliga resurser."
 
 #: simulation/data/technologies/gather_capacity_wheelbarrow.jsongenericName
 msgid "Wheelbarrow"
@@ -819,20 +826,23 @@ msgid "Extra nutrients for farms."
 msgstr "Extra näringsämnen för åkrar."
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsontooltip
-msgid "Workers +25% farming rate."
-msgstr "Arbetare +25% odlingstakt."
+msgid "Workers +25% grain gather rate."
+msgstr "Arbetare +25% insamlingstakt för spannmål."
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsongenericName
 msgid "Fertilizer"
 msgstr "Gödsel"
 
 #: simulation/data/technologies/gather_farming_plows.jsondescription
-msgid "A horse drawn instrument to turn the sod."
-msgstr "Ett hästdraget verktyg för att vända jorden."
+msgid ""
+"Equip your workers with iron plows, animal-drawn instruments to turn the "
+"sod."
+msgstr "Utrusta dina arbetare med järnplogar, djurdragna redskap för att bereda jorden."
 
 #: simulation/data/technologies/gather_farming_plows.jsontooltip
-msgid "Equip your workers with iron plows. +15% farming rate."
-msgstr "Utrusta dina arbetare med järnplogar.  +15% odlingstakt."
+#: simulation/data/technologies/gather_farming_training.jsontooltip
+msgid "Workers +15% grain gather rate."
+msgstr "Arbetare +15% insamlingstakt för spannmål."
 
 #: simulation/data/technologies/gather_farming_plows.jsongenericName
 msgid "Iron Plow"
@@ -842,22 +852,17 @@ msgstr "Järnplog"
 msgid "Training for workers to increase farm gathering speed."
 msgstr "Träning för arbetare för att öka matinsamlingstakten för fält."
 
-#: simulation/data/technologies/gather_farming_training.jsontooltip
-msgid "Workers +15% farming rate."
-msgstr "Arbetare +15% odlingstakt."
-
 #: simulation/data/technologies/gather_farming_training.jsongenericName
 msgid "Gather Training"
 msgstr "Skörd träning"
 
 #: simulation/data/technologies/gather_fishing_net.jsondescription
-msgid "Nets improve the productivity of fishing boats."
-msgstr "Nät förbättrar produktiviteten hos fiskebåtar."
+msgid "Use nets to improve the productivity of fishing boats."
+msgstr "Använd nät för att öka produktiviteten från fiskebåtar."
 
 #: simulation/data/technologies/gather_fishing_net.jsontooltip
-msgid ""
-"Use nets on your Fishing Boats. +30% fishing rate. Unlocks Salting Fish."
-msgstr "Använd nät i dina fiskebåtar. +30% fisketakt. Låser upp Saltad Fisk."
+msgid "Fishing Boats +30% fish gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_fishing_net.jsongenericName
 msgid "Fishing Net"
@@ -871,16 +876,16 @@ msgstr "Ökar trä samlingstakt för träd."
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsontooltip
 #: simulation/data/technologies/gather_lumbering_strongeraxes.jsontooltip
-msgid "Workers +15% lumbering rate for trees."
-msgstr "Arbetare +15% takt för att hugga ner träd."
+msgid "Workers +15% wood gather rate."
+msgstr "Arbetare +15% hastighet för att samla trä."
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsongenericName
 msgid "Iron Ax Heads"
 msgstr "Yxhuvud i järn"
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsontooltip
-msgid "Workers +50% lumbering rate for trees."
-msgstr "Arbetare +50% takt för att hugga ner träd."
+msgid "Workers +50% wood gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsongenericName
 msgid "Sharp Ax Heads"
@@ -891,15 +896,15 @@ msgid "Stronger Ax"
 msgstr "Starkare Yxa"
 
 #: simulation/data/technologies/gather_mining_serfs.jsondescription
-#: simulation/data/technologies/gather_mining_servants.jsondescription
-#: simulation/data/technologies/gather_mining_slaves.jsondescription
-msgid "Increases stone gathering rates."
-msgstr "Ökar sten samlingstakt."
+msgid ""
+"Compel serfs to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr "Pressa livegna till att hjälpa dina arbetare bryta sten. Ökar insamlingstakten för sten."
 
 #: simulation/data/technologies/gather_mining_serfs.jsontooltip
-msgid ""
-"Compel serfs to help your workers mine stone. +15% stone gathering rate."
-msgstr "Tvinga livegna att hjälpa dina arbetare i gruvor. +15% sten samlingstakt."
+#: simulation/data/technologies/gather_mining_servants.jsontooltip
+msgid "Workers +15% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_serfs.jsongenericName
 msgid "Serfs"
@@ -911,9 +916,9 @@ msgstr "Livegna"
 msgid "Heílōtes"
 msgstr "Heílōtes"
 
-#: simulation/data/technologies/gather_mining_servants.jsontooltip
-msgid "Hire servants to help mine stone. +15% stone gathering rate."
-msgstr "Anställ tjänare för att hjälpa i gruvorna. +15% sten samlingstakt."
+#: simulation/data/technologies/gather_mining_servants.jsondescription
+msgid "Hire servants to help quarry stone. Increases stone gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_servants.jsongenericName
 msgid "Servants"
@@ -926,22 +931,25 @@ msgid "Doûloi"
 msgstr "Doûloi"
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsondescription
-#: simulation/data/technologies/gather_mining_silvermining.jsondescription
-#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
-msgid "Increases metal gathering rates."
-msgstr "Öka metall samlingstakt."
+msgid "Develop shaft mining. Increases metal gathering rates."
+msgstr "Utveckla schaktgruvor. Ökar insamlingstakten för metall."
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsontooltip
-msgid "Develop shaft mining. +15% metal gathering rate."
-msgstr "Utveckla schaktgruvor. +15% metall samlingstakt."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
+msgid "Workers +15% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsongenericName
 msgid "Shaft Mining"
 msgstr "Schaktgruvor"
 
+#: simulation/data/technologies/gather_mining_silvermining.jsondescription
+msgid "Strike a vein of precious silver. Increases metal gathering rates."
+msgstr ""
+
 #: simulation/data/technologies/gather_mining_silvermining.jsontooltip
-msgid "Strike a vein of precious silver. +50% metal gathering rate."
-msgstr "Hitta en ven av ädelt silver. +50% metall insamlingstakt."
+msgid "Workers +50% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_silvermining.jsongenericName
 msgid "Silver Mining"
@@ -955,10 +963,15 @@ msgstr "Krenides gruvor"
 msgid "Mines of Laureion"
 msgstr "Laureions gruvor"
 
-#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+#: simulation/data/technologies/gather_mining_slaves.jsondescription
 msgid ""
-"Buy slaves to help your workers mine for stone. +50% stone gathering rate."
-msgstr "Köp slavar för att hjälpa dina arbetare i gruvor. +50% stensamlings takt."
+"Buy slaves to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr ""
+
+#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+msgid "Workers +50% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_slaves.jsongenericName
 msgid "Slaves"
@@ -970,21 +983,22 @@ msgstr "Slavar"
 msgid "Andrápoda"
 msgstr "Andrápoda"
 
-#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
-msgid "Equip your workers with helpful tools. +15% metal gathering rate."
-msgstr "Utrusta dina arbetare med användbara verktyg. +15% metall insamlingstakt."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
+msgid ""
+"Equip your workers with helpful tools. Increases metal gathering rates."
+msgstr "Utrusta dina arbetare med användbara verktyg. Ökar hastigheten för metallsamling."
 
 #: simulation/data/technologies/gather_mining_wedgemallet.jsongenericName
 msgid "Wedge and Mallet"
 msgstr "Kil och Hammare"
 
 #: simulation/data/technologies/gather_wicker_baskets.jsondescription
-msgid "Baskets for foraging."
-msgstr "Korgar för matsamling."
+msgid "Equip your foragers with wicker baskets for foraging."
+msgstr "Utrusta dina samlare med korgar."
 
 #: simulation/data/technologies/gather_wicker_baskets.jsontooltip
-msgid "Equip your foragers with wicker baskets. +50% fruit foraging rate."
-msgstr "Utrusta dina samlare med korgar. +50% matsamlings takt."
+msgid "Workers +50% fruit gather rate."
+msgstr "Arbetare +50% takt för att plocka frukt."
 
 #: simulation/data/technologies/gather_wicker_baskets.jsongenericName
 msgid "Wicker Baskets"
@@ -1252,9 +1266,9 @@ msgstr "Avancera från en livlig stad till en veritabel metropol, full av modern
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by another +50%. Silver Owls civ bonus "
-"grants an extra +10% metal gather rate to all workers. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
-msgstr "Avancera till Storstadsfasen, som låser upp fler strukturer och enheter. Territorieradien för samhällscenter ökar med ytterligare +50%. 'Silverugglor' civilisationsbonusen ger +10% metall samlingstakt för alla arbetare. Max hälsa för medborgarsoldater ökad med +10%. Alla strukturer +9 garnisonerad regenerationstakt."
+"grants an extra +10% metal gather rate to all workers. Citizen Soldiers +10%"
+" health. All structures +9 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_city_athen.jsonrequirementsTooltip
 #: simulation/data/technologies/phase_city_generic.jsonrequirementsTooltip
@@ -1276,9 +1290,9 @@ msgstr "Avancera från en livlig stad till en veritabel metropol, full av modern
 #: simulation/data/technologies/phase_city_generic.jsontooltip
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by another +50%. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
-msgstr "Avancera till Storstadsfasen, som låser upp fler strukturer och enheter. Territorieradien för samhällscentrum ökar med ytterligare +50%. Max hälsa för medborgarsoldater ökad med +10%. Alla strukturer +9 garnisonerad regenereringstakt."
+"radius for Civic Centers increased by another +50%. Citizen Soldiers +10% "
+"health. All structures +9 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_town.jsongenericName
 #: simulation/data/technologies/phase_town_athen.jsongenericName
@@ -1303,9 +1317,9 @@ msgstr "Avancerar från en liten by till en livlig stad, redo att expandera fort
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by +30%. 'Silver Owls' civ bonus grants "
-"an extra +10% metal gather rate to all workers. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
-msgstr "Avancera till Stadsfasen, som låser upp fler strukturer och enheter. Territorieradien för samhällscentrum ökar med +30%. 'Silverugglor' civilisationsbonusen ger ytterligare +10% metall samlingstakt för alla arbetare. Max hälsa för medborgarsoldater ökad med +20%. Alla strukturer +7 garnisonerad regenerationstakt."
+"an extra +10% metal gather rate to all workers. Citizen Soldiers +20% "
+"health. All structures +7 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_town_athen.jsonrequirementsTooltip
 #: simulation/data/technologies/phase_town_generic.jsonrequirementsTooltip
@@ -1327,9 +1341,9 @@ msgstr "Avancerar från en liten by till en livlig stad, redo att expandera fort
 #: simulation/data/technologies/phase_town_generic.jsontooltip
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by +30%. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
-msgstr "Avancera till Stadsfasen, som låser upp fler strukturer och enheter. Territorieradien för samhällscentrum ökar med +30%. Max hälsa för medborgarsoldater ökad med +20%. Alla strukturer +7 garnisonerad regenerationstakt."
+"radius for Civic Centers increased by +30%. Citizen Soldiers +20% health. "
+"All structures +7 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_village.jsongenericName
 msgid "Village Phase"
@@ -2277,9 +2291,8 @@ msgstr "Kartagerna byggde sina stadsmurar i tre koncentriska cirklar. Dessa väg
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsontooltip
 msgid ""
-"Carthaginian walls, gates, and wall towers have 3x the health of a standard "
-"wall, but also cost twice as much and take twice as long to build."
-msgstr "Kartagiska murar, portar och försvarstorn har 3x hälsan av en vanlig mur, men kostar också dubbelt så mycket och tar dubbelt så lång tid att byggas."
+"Carthaginian Walls +100% build time, +100% stone cost, and  +200% health."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsongenericName
 msgid "Triple Walls"
@@ -2291,9 +2304,9 @@ msgstr "Keltiska byggnader bestod oftast av trä med fundament av grus."
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsontooltip
 msgid ""
-"Celtic buildings have 20% less health, but are also 20% cheaper and faster "
-"to construct."
-msgstr "Keltiska byggnader har 20% mindre hälsa, men är även 20% billigare och snabbare att bygga."
+"Briton and Gaulish Structures −20% build time, −20% health, and −20% capture"
+" points."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsongenericName
 msgid "Wooden Construction"
@@ -2305,9 +2318,9 @@ msgstr "Grekerna använde sten för sina byggnader från början på den Mykensk
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsontooltip
 msgid ""
-"All structures have 10% more health and capture points, but also take 10% "
-"longer to build."
-msgstr "Alla strukturer har 10% mer hälsa och erövringspoäng, men tar 10% längre att byggas."
+"Athenian, Macedonian, and Spartan Structures +10% build time, +10% health, "
+"and +10% capture points."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsongenericName
 msgid "Hellenic Architecture"
@@ -2324,8 +2337,8 @@ msgid ""
 msgstr "Mauryariket omfattade tiotals tidigare självständiga riken över ett område på 5 miljoner kvadratkilometer, med en befolkning på närmare 60 miljoner människor. Mauryanska regenter höll titeln Kejsaren av Kejsare och befallde en stående armé på 600.000 infanteri, 9000 elefanter, 8000 vagnar och 30.000 kavalleri, vilket utan tvekan gör den till största armén av sin tid."
 
 #: simulation/data/technologies/civbonuses/maur_population.jsontooltip
-msgid "Mauryas have a 10% higher maximum population limit."
-msgstr "Mauryaner har en 10% högre maximal befolkningsgräns."
+msgid "Mauryas +10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_population.jsongenericName
 msgid "Emperor of Emperors"
@@ -2342,8 +2355,8 @@ msgid ""
 msgstr "Mauryanerna byggde sina stadsmurar av trä, en riklig naturresurs i Indien."
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsontooltip
-msgid "Mauryan city walls have -20% less health and -20% less build time."
-msgstr "Mauryanska stadsmurar har -20% mindre hälsa, men även -20% mindre byggtid."
+msgid "Mauryan City Walls −20% build time and −20% health."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsongenericName
 msgid "Wooden Walls"
@@ -2360,8 +2373,8 @@ msgid ""
 msgstr "Perserna kunde och uppbådade faktiskt ett sort antal infanteri under krigstid på grund av den enorma storleken av Akemenidiska Riket och sättet på vilket det var organiserat. I allmänhet var persiska infanteriet välutbildat och slogs med stor uthållighet. Men de var också dåliga närstridskämpar. Med undantag av elitregementen, så var det Persiska infanteriet inte en stående professionell styrka."
 
 #: simulation/data/technologies/civbonuses/pers_population.jsontooltip
-msgid "Persians have a 10% higher maximum population limit."
-msgstr "Perser har en 10% högre maximal befolkningsgräns."
+msgid "Persians +10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/pers_population.jsongenericName
 msgid "Great King's Levy"
@@ -2376,8 +2389,8 @@ msgid ""
 msgstr "Spartanerna hade inte världens största armé, men de hade den bästa i världen i sin tid. Vad de inte hade i kvantitet, gjorde de upp med kvalitet. Det sades att Sparta inte behövde stora stadsmurar, för sina män var dess murar."
 
 #: simulation/data/technologies/civbonuses/spart_population.jsontooltip
-msgid "Spartans have 10% less maximum population."
-msgstr "Spartaner har 10% lägre maximal befolkning."
+msgid "Spartans −10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/spart_population.jsongenericName
 msgid "Underdogs"

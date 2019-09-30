@@ -169,7 +169,7 @@ JS::Value JSI_VFS::ReadFileLines(ScriptInterface::CxPrivate* pCxPrivate, const s
 	std::stringstream ss(contents);
 
 	JS::RootedValue line_array(cx);
-	scriptInterface.CreateArray(&line_array);
+	ScriptInterface::CreateArray(cx, &line_array);
 
 	std::string line;
 	int cur_line = 0;
@@ -228,10 +228,9 @@ bool JSI_VFS::PathRestrictionMet(ScriptInterface::CxPrivate* pCxPrivate, const s
 		allowedPaths += L"\"" + validPaths[i] + L"\"";
 	}
 
-	JS_ReportError(
-		pCxPrivate->pScriptInterface->GetContext(),
-		"This part of the engine may only read from %s!",
-		utf8_from_wstring(allowedPaths).c_str());
+	JSContext* cx = pCxPrivate->pScriptInterface->GetContext();
+	JSAutoRequest rq(cx);
+	JS_ReportError(cx, "This part of the engine may only read from %s!", utf8_from_wstring(allowedPaths).c_str());
 
 	return false;
 }

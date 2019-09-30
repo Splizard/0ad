@@ -81,6 +81,15 @@ var g_SenderFont = "sans-bold-13";
 var g_ChatCommandColor = "200 200 255";
 
 /**
+ * Color for the player count number in the games list.
+ */
+var g_PlayerCountTags = {
+	"CurrentPlayers": { "color": "0 160 160" },
+	"MaxPlayers": { "color": "0 160 160" },
+	"Observers": { "color": "0 128 128" }
+};
+
+/**
  * Indicates if the lobby is opened as a dialog or window.
  */
 var g_Dialog = false;
@@ -135,12 +144,12 @@ var g_AskedReconnect = false;
 var g_NetMessageTypes = {
 	"system": {
 		// Three cases are handled in prelobby.js
-		"registered": msg => false,
+		"registered": msg => {
+		},
 		"connected": msg => {
 
 			g_AskedReconnect = false;
 			updateConnectedState();
-			return false;
 		},
 		"disconnected": msg => {
 
@@ -153,12 +162,10 @@ var g_NetMessageTypes = {
 				addChatMessage({
 					"from": "system",
 					"time": msg.time,
-					"text": translate("Disconnected.") + " " + msg.reason
+					"text": translate("Disconnected.") + " " + msg.reason + msg.certificate_status
 				});
 				reconnectMessageBox();
 			}
-
-			return true;
 		},
 		"error": msg => {
 			addChatMessage({
@@ -166,7 +173,6 @@ var g_NetMessageTypes = {
 				"time": msg.time,
 				"text": msg.text
 			});
-			return false;
 		}
 	},
 	"chat": {
@@ -182,7 +188,6 @@ var g_NetMessageTypes = {
 					"time": msg.time,
 					"isSpecial": true
 				});
-			return false;
 		},
 		"join": msg => {
 			addChatMessage({
@@ -192,7 +197,6 @@ var g_NetMessageTypes = {
 				"time": msg.time,
 				"isSpecial": true
 			});
-			return true;
 		},
 		"leave": msg => {
 			addChatMessage({
@@ -205,21 +209,17 @@ var g_NetMessageTypes = {
 
 			if (msg.nick == g_Username)
 				Engine.DisconnectXmppClient();
-
-			return true;
 		},
-		"presence": msg => true,
 		"role": msg => {
 			Engine.GetGUIObjectByName("chatInput").hidden = Engine.LobbyGetPlayerRole(g_Username) == "visitor";
 
 			let me = g_Username == msg.nick;
-			let newrole = Engine.LobbyGetPlayerRole(msg.nick);
 			let txt =
-				newrole == "visitor" ?
+				msg.newrole == "visitor" ?
 					me ?
 						translate("You have been muted.") :
 						translate("%(nick)s has been muted.") :
-				newrole == "moderator" ?
+				msg.newrole == "moderator" ?
 					me ?
 						translate("You are now a moderator.") :
 						translate("%(nick)s is now a moderator.") :
@@ -239,8 +239,6 @@ var g_NetMessageTypes = {
 
 			if (g_SelectedPlayer == msg.nick)
 				updateUserRoleText(g_SelectedPlayer);
-
-			return false;
 		},
 		"nick": msg => {
 			addChatMessage({
@@ -251,15 +249,12 @@ var g_NetMessageTypes = {
 				"time": msg.time,
 				"isSpecial": true
 			});
-			return true;
 		},
 		"kicked": msg => {
 			handleKick(false, msg.nick, msg.reason, msg.time, msg.historic);
-			return true;
 		},
 		"banned": msg => {
 			handleKick(true, msg.nick, msg.reason, msg.time, msg.historic);
-			return true;
 		},
 		"room-message": msg => {
 			addChatMessage({
@@ -268,7 +263,6 @@ var g_NetMessageTypes = {
 				"time": msg.time,
 				"historic": msg.historic
 			});
-			return false;
 		},
 		"private-message": msg => {
 			// Announcements and the Message of the Day are sent by the server directly
@@ -276,8 +270,7 @@ var g_NetMessageTypes = {
 				messageBox(
 					400, 250,
 					msg.text.trim(),
-					translate("Notice")
-				);
+					translate("Notice"));
 
 			// We intend to not support private messages between users
 			if (!msg.from || Engine.LobbyGetPlayerRole(msg.from) == "moderator")
@@ -289,24 +282,19 @@ var g_NetMessageTypes = {
 					"historic": msg.historic,
 					"private": true
 				});
-			return false;
 		}
 	},
 	"game": {
 		"gamelist": msg => {
 			updateGameList();
-			return false;
 		},
 		"profile": msg => {
 			updateProfile();
-			return false;
 		},
 		"leaderboard": msg => {
 			updateLeaderboard();
-			return false;
 		},
 		"ratinglist": msg => {
-			return true;
 		}
 	}
 };
@@ -414,8 +402,6 @@ function init(attribs)
 
 	Engine.LobbySetPlayerPresence("available");
 
-	// When rejoining the lobby after a game, we don't need to process presence changes
-	Engine.LobbyClearPresenceUpdates();
 	updatePlayerList();
 	updateSubject(Engine.LobbyGetRoomSubject());
 	updateLobbyColumns();
@@ -996,6 +982,7 @@ function updateGameList()
 	g_GameList = Engine.GetGameList().map(game => {
 
 		game.hasBuddies = 0;
+		game.observerCount = 0;
 
 		// Compute average rating of participating players
 		let playerRatings = [];
@@ -1006,6 +993,8 @@ function updateGameList()
 
 			if (player.Team != "observer")
 				playerRatings.push(playerNickRating.rating || g_DefaultLobbyRating);
+			else
+				++game.observerCount;
 
 			// Sort games with playing buddies above games with spectating buddies
 			if (game.hasBuddies < 2 && g_Buddies.indexOf(playerNickRating.nick) != -1)
@@ -1087,7 +1076,18 @@ function updateGameList()
 		list_mapName.push(translateMapTitle(game.niceMapName));
 		list_mapSize.push(translateMapSize(game.mapSize));
 		list_mapType.push(g_MapTypes.Title[mapTypeIdx] || "");
-		list_nPlayers.push(game.nbp + "/" + game.maxnbp);
+		list_nPlayers.push(
+			sprintf(
+				game.observerCount ?
+					// Translation: The number of players and observers in this game
+					translate("%(current)s/%(max)s +%(observercount)s") :
+					// Translation: The number of players in this game
+					translate("%(current)s/%(max)s"),
+				{
+					"current": setStringTags(game.nbp, g_PlayerCountTags.CurrentPlayers),
+					"max": setStringTags(game.maxnbp, g_PlayerCountTags.MaxPlayers),
+					"observercount": setStringTags(game.observerCount, g_PlayerCountTags.Observers)
+				}));
 		list_gameRating.push(game.gameRating);
 		list.push(gameName);
 		list_data.push(i);
@@ -1309,13 +1309,10 @@ function onTick()
 			continue;
 		}
 
-		if (g_NetMessageTypes[msg.type][msg.level](msg))
-			updateList = true;
+		g_NetMessageTypes[msg.type][msg.level](msg);
 	}
 
-	// To improve performance, only update the playerlist GUI when
-	// the last update in the current stack is processed
-	if (updateList)
+	if (Engine.LobbyGuiPollHasPlayerListUpdate())
 		updatePlayerList();
 }
 

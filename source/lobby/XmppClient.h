@@ -60,8 +60,16 @@ private:
 
 public:
 	// Basic
-	XmppClient(const std::string& sUsername, const std::string& sPassword, const std::string& sRoom, const std::string& sNick, const int historyRequestSize = 0, const bool regOpt = false);
+	XmppClient(const ScriptInterface* scriptInterface, const std::string& sUsername, const std::string& sPassword, const std::string& sRoom, const std::string& sNick, const int historyRequestSize = 0, const bool regOpt = false);
 	virtual ~XmppClient();
+
+	// JS::Heap is better for GC performance than JS::PersistentRooted
+	static void Trace(JSTracer *trc, void *data)
+	{
+		static_cast<XmppClient*>(data)->TraceMember(trc);
+	}
+
+	void TraceMember(JSTracer *trc);
 
 	// Network
 	void connect();
@@ -80,9 +88,9 @@ public:
 	void kick(const std::string& nick, const std::string& reason);
 	void ban(const std::string& nick, const std::string& reason);
 	void SetPresence(const std::string& presence);
-	void GetPresence(const std::string& nickname, std::string& presence);
-	void GetRole(const std::string& nickname, std::string& role);
-	void GetSubject(std::string& subject);
+	const char* GetPresence(const std::string& nickname);
+	const char* GetRole(const std::string& nickname);
+	const std::wstring& GetSubject();
 
 	void GUIGetPlayerList(const ScriptInterface& scriptInterface, JS::MutableHandleValue ret);
 	void GUIGetGameList(const ScriptInterface& scriptInterface, JS::MutableHandleValue ret);
@@ -91,13 +99,24 @@ public:
 
 	void SendStunEndpointToHost(const StunClient::StunEndpoint& stunEndpoint, const std::string& hostJID);
 
+	/**
+	 * Convert gloox values to string or time.
+	 */
+	static const char* GetPresenceString(const gloox::Presence::PresenceType presenceType);
+	static const char* GetRoleString(const gloox::MUCRoomRole role);
+	static std::string StanzaErrorToString(gloox::StanzaError err);
+	static std::string RegistrationResultToString(gloox::RegistrationResult res);
+	static std::string ConnectionErrorToString(gloox::ConnectionError err);
+	static std::string CertificateErrorToString(gloox::CertStatus status);
+	static std::time_t ComputeTimestamp(const glooxwrapper::Message& msg);
+
 protected:
 	/* Xmpp handlers */
 	/* MUC handlers */
-	virtual void handleMUCParticipantPresence(glooxwrapper::MUCRoom*, const glooxwrapper::MUCRoomParticipant, const glooxwrapper::Presence&);
-	virtual void handleMUCError(glooxwrapper::MUCRoom*, gloox::StanzaError);
-	virtual void handleMUCMessage(glooxwrapper::MUCRoom* room, const glooxwrapper::Message& msg, bool priv);
-	virtual void handleMUCSubject(glooxwrapper::MUCRoom*, const glooxwrapper::string& nick, const glooxwrapper::string& subject);
+	virtual void handleMUCParticipantPresence(glooxwrapper::MUCRoom& room, const glooxwrapper::MUCRoomParticipant, const glooxwrapper::Presence&);
+	virtual void handleMUCError(glooxwrapper::MUCRoom& room, gloox::StanzaError);
+	virtual void handleMUCMessage(glooxwrapper::MUCRoom& room, const glooxwrapper::Message& msg, bool priv);
+	virtual void handleMUCSubject(glooxwrapper::MUCRoom& room, const glooxwrapper::string& nick, const glooxwrapper::string& subject);
 	/* MUC handlers not supported by glooxwrapper */
 	// virtual bool handleMUCRoomCreation(glooxwrapper::MUCRoom*) {return false;}
 	// virtual void handleMUCInviteDecline(glooxwrapper::MUCRoom*, const glooxwrapper::JID&, const std::string&) {}
@@ -130,57 +149,50 @@ protected:
 	virtual void handleSessionAction(gloox::Jingle::Action action, glooxwrapper::Jingle::Session& session, const glooxwrapper::Jingle::Session::Jingle& jingle);
 	virtual void handleSessionInitiation(glooxwrapper::Jingle::Session& session, const glooxwrapper::Jingle::Session::Jingle& jingle);
 
-	// Helpers
-	void GetPresenceString(const gloox::Presence::PresenceType p, std::string& presence) const;
-	void GetRoleString(const gloox::MUCRoomRole r, std::string& role) const;
-	std::string TLSErrorToString(gloox::CertStatus status) const;
-	std::string StanzaErrorToString(gloox::StanzaError err) const;
-	std::string ConnectionErrorToString(gloox::ConnectionError err) const;
-	std::string RegistrationResultToString(gloox::RegistrationResult res) const;
-	std::time_t ComputeTimestamp(const glooxwrapper::Message& msg) const;
-
 public:
-	/* Messages */
-	struct GUIMessage
-	{
-		std::string type;
-		std::string level;
-		std::string property1_name;
-		std::string property1_value;
-		std::string property2_name;
-		std::string property2_value;
-		std::time_t time;
-	};
-	JS::Value GuiMessageToJSVal(const ScriptInterface& scriptInterface, const GUIMessage& message, const bool historic);
 	JS::Value GuiPollNewMessage(const ScriptInterface& scriptInterface);
 	JS::Value GuiPollHistoricMessages(const ScriptInterface& scriptInterface);
+	bool GuiPollHasPlayerListUpdate();
 	void SendMUCMessage(const std::string& message);
-	void ClearPresenceUpdates();
+
 protected:
+	template<typename... Args>
 	void CreateGUIMessage(
 		const std::string& type,
-		const std::string& level = "",
-		const std::string& property1_name = "",
-		const std::string& property1_value = "",
-		const std::string& property2_name = "",
-		const std::string& property2_value = "",
-		const std::time_t time = std::time(nullptr));
+		const std::string& level,
+		const std::time_t time,
+		Args const&... args);
 
 private:
+	struct SPlayer {
+		SPlayer(const gloox::Presence::PresenceType presence, const gloox::MUCRoomRole role, const glooxwrapper::string& rating)
+		: m_Presence(presence), m_Role(role), m_Rating(rating)
+		{
+		}
+		gloox::Presence::PresenceType m_Presence;
+		gloox::MUCRoomRole m_Role;
+		glooxwrapper::string m_Rating;
+	};
+	using PlayerMap = std::map<glooxwrapper::string, SPlayer>;
+
 	/// Map of players
-	std::map<std::string, std::vector<std::string> > m_PlayerMap;
+	PlayerMap m_PlayerMap;
+	/// Whether or not the playermap has changed since the last time the GUI checked.
+	bool m_PlayerMapUpdate;
 	/// List of games
 	std::vector<const glooxwrapper::Tag*> m_GameList;
 	/// List of rankings
 	std::vector<const glooxwrapper::Tag*> m_BoardList;
 	/// Profile data
 	std::vector<const glooxwrapper::Tag*> m_Profile;
+	/// ScriptInterface to root the values
+	const ScriptInterface* m_ScriptInterface;
 	/// Queue of messages for the GUI
-	std::deque<GUIMessage> m_GuiMessageQueue;
+	std::deque<JS::Heap<JS::Value> > m_GuiMessageQueue;
 	/// Cache of all GUI messages received since the login
-	std::vector<GUIMessage> m_HistoricGuiMessages;
+	std::vector<JS::Heap<JS::Value> > m_HistoricGuiMessages;
 	/// Current room subject/topic.
-	std::string m_Subject;
+	std::wstring m_Subject;
 };
 
 #endif // XMPPCLIENT_H

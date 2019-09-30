@@ -19,11 +19,12 @@
 
 #include "CGUISetting.h"
 
-#include "gui/GUI.h"
+#include "gui/CGUI.h"
 
 template<typename T>
-CGUISetting<T>::CGUISetting(IGUIObject& pObject, const CStr& Name)
-	: m_pSetting(T()), m_Name(Name), m_pObject(pObject)
+
+CGUISetting<T>::CGUISetting(IGUIObject& pObject, const CStr& Name, T& Value)
+	: m_pSetting(Value), m_Name(Name), m_pObject(pObject)
 {
 }
 
@@ -51,6 +52,7 @@ bool CGUISetting<CGUIColor>::FromJSVal(JSContext* cx, JS::HandleValue Value, con
 
 		if (!settingValue.ParseString(m_pObject.GetGUI(), name))
 		{
+			JSAutoRequest rq(cx);
 			JS_ReportError(cx, "Invalid color '%s'", name.c_str());
 			return false;
 		}

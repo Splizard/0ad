@@ -18,8 +18,8 @@
 #ifndef INCLUDED_CSLIDER
 #define INCLUDED_CSLIDER
 
-#include "GUI.h"
-
+#include "gui/IGUIObject.h"
+#include "gui/CGUISprite.h"
 
 class CSlider : public IGUIObject
 {
@@ -52,14 +52,18 @@ protected:
 
 	void IncrementallyChangeValue(const float value);
 
-	float m_MinValue, m_MaxValue, m_Value;
+	// Settings
+	float m_ButtonSide;
+	i32 m_CellID;
+	float m_MinValue;
+	float m_MaxValue;
+	CGUISpriteInstance m_Sprite;
+	CGUISpriteInstance m_SpriteBar;
+	float m_Value;
 
 private:
 	bool m_IsPressed;
-
 	CPos m_Mouse;
-
-	float m_ButtonSide;
 };
 
 #endif // INCLUDED_CSLIDER

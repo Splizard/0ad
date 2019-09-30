@@ -6,13 +6,11 @@
 	<script directory="gui/loadgame/"/>
 
 	<!-- Add a translucent black background to fade out the menu page -->
-	<object type="image" z="0" sprite="BackgroundTranslucent"/>
+	<object type="image" sprite="BackgroundTranslucent"/>
 
 	<object type="image" style="ModernDialog" size="50%-460 50%-325 50%+460 50%+325">
 
-		<object type="text" style="TitleText" size="50%-128 -18 50%+128 14">
-			<translatableAttribute id="caption">Load Game</translatableAttribute>
-		</object>
+		<object name="title" type="text" style="TitleText" size="50%-128 -18 50%+128 14"/>
 
 		<object type="image" size="0 20 630 100%">
 			<object name="gameSelection"
@@ -24,10 +22,6 @@
 				type="olist"
 				auto_scroll="true"
 			>
-				<action on="SelectionChange">selectionChanged();</action>
-				<action on="SelectionColumnChange">init();</action>
-				<action on="MouseLeftDoubleClickItem">loadGame();</action>
-
 				<column id="date" color="255 255 255" width="25%">
 					<translatableAttribute id="heading" context="replay">Date / Time</translatableAttribute>
 				</column>
@@ -49,27 +43,21 @@
 				<translatableAttribute id="caption">No saved games found.</translatableAttribute>
 			</object>
 
-			<object type="button" size="0%+25 100%-60 33%+10 100%-32" style="StoneButton" hotkey="cancel">
+			<object name="saveGameDesc" size="24 100%-96 100%-24 100%-72" type="input" style="ModernInput" hidden="true"/>
+
+			<object name="cancel" type="button" size="0%+25 100%-60 33%+10 100%-32" style="StoneButton" hotkey="cancel">
 				<translatableAttribute id="caption">Cancel</translatableAttribute>
-				<action on="Press">Engine.PopGuiPage();</action>
 			</object>
 
-			<object name="deleteGameButton" type="button" size="33%+20 100%-60 66%-15 100%-32" style="StoneButton" hotkey="session.savedgames.delete">
+			<object name="deleteGameButton" type="button" size="33%+20 100%-60 66%-15 100%-32" style="StoneButton" enabled="false" hotkey="session.savedgames.delete">
 				<translatableAttribute id="caption">Delete</translatableAttribute>
-				<action on="Press">deleteGame();</action>
 			</object>
 
-			<object name="loadGameButton" type="button" style="StoneButton" size="66%-5 100%-60 100%-25 100%-32">
-				<translatableAttribute id="caption">Load</translatableAttribute>
-				<action on="Press">loadGame();</action>
-			</object>
-
+			<object name="confirmButton" type="button" style="StoneButton" size="66%-5 100%-60 100%-25 100%-32"/>
 		</object>
 
 		<object name="filterPanel" size="630 25 100%-20 60">
-			<object name="compatibilityFilter" type="checkbox" checked="true" style="ModernTickBox" size="0 0 20 20">
-				<action on="Press">init();</action>
-			</object>
+			<object name="compatibilityFilter" type="checkbox" checked="true" style="ModernTickBox" size="0 0 20 20"/>
 
 			<object type="text" size="25 0 100% 100%" text_align="left" textcolor="white">
 				<translatableAttribute id="caption">Filter compatible saved games</translatableAttribute>
@@ -79,7 +67,7 @@
 		<object name="validGame" type="image" size="630 60 100%-20 100%">
 			<object size="0 0 100%-15 1" type="image" sprite="ModernWhiteLine" z="25" />
 			<object name="savedMapName" size="0 0 100% 20" type="text" style="ModernLabelText" />
-			<object name="savedInfoPreview" size="20 20 240 240" type="image" sprite="" />
+			<object name="savedInfoPreview" size="0 30 260 218" type="image" />
 
 			<object size="0 250 50% 270" type="text" style="ModernLeftLabelText">
 				<translatableAttribute id="caption">Players:</translatableAttribute>

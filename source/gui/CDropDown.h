@@ -23,18 +23,15 @@ GUI Object - Drop Down (list)
 	Works just like a list-box, but it hides
 	all the elements that aren't selected. They
 	can be brought up by pressing the control.
-
---More info--
-
-	Check GUI.h
-
 */
 
 #ifndef INCLUDED_CDROPDOWN
 #define INCLUDED_CDROPDOWN
 
-#include "GUI.h"
-#include "CList.h"
+#include "gui/CGUISprite.h"
+#include "gui/CList.h"
+
+#include <string>
 
 /**
  * Drop Down
@@ -52,8 +49,6 @@ class CDropDown : public CList
 public:
 	CDropDown(CGUI& pGUI);
 	virtual ~CDropDown();
-
-//	virtual void ResetStates() { IGUIButtonBehavior::ResetStates(); }
 
 	/**
 	 * @see IGUIObject#HandleMessage()
@@ -125,6 +120,23 @@ protected:
 	// used to know if we want to restart anew or add to m_inputbuffer.
 	double m_TimeOfLastInput;
 
+	// Settings
+	float m_ButtonWidth;
+	float m_DropDownSize;
+	float m_DropDownBuffer;
+	u32 m_MinimumVisibleItems;
+	CStrW m_SoundClosed;
+	CStrW m_SoundEnter;
+	CStrW m_SoundLeave;
+	CStrW m_SoundOpened;
+	CGUISpriteInstance m_SpriteDisabled;
+	CGUISpriteInstance m_SpriteList;
+	CGUISpriteInstance m_Sprite2;
+	CGUISpriteInstance m_Sprite2Over;
+	CGUISpriteInstance m_Sprite2Pressed;
+	CGUISpriteInstance m_Sprite2Disabled;
+	CGUIColor m_TextColorDisabled;
+	EVAlign m_TextVAlign;
 };
 
 #endif // INCLUDED_CDROPDOWN

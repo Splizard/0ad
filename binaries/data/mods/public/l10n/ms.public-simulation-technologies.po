@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-08-26 07:09+0000\n"
-"PO-Revision-Date: 2019-08-26 16:07+0000\n"
+"POT-Creation-Date: 2019-09-16 07:11+0000\n"
+"PO-Revision-Date: 2019-09-16 14:21+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/wildfire-games/0ad/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -744,34 +744,39 @@ msgid ""
 msgstr "Unit dinaik pangkat ke kelas elit dengan kualiti lebih baik: 20% hayat tambahan, 1 aras perisai tambahan bagi setiap jenis, 20% rampasan perang tambahan, 20% serangan tambahan untuk unit tempur, 4m jangkauan tambahan dan kepersisan lebih baik untuk unit jarak jauh, kelajuan pergerakan lebih pantas dan kelajuan penyembuhan lebih baik serta jangkauan bomoh lebih jauh."
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsondescription
-msgid "Breeding livestock for food."
-msgstr "Menternak ternakan untuk makanan."
+msgid "Breed livestock (sheep, goats, cattle, etc.) for food."
+msgstr ""
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsontooltip
-msgid "Breed time -25% for domestic animals (sheep, goats, cattle, etc.)."
-msgstr "Masa ternak -25% untuk haiwan domestik (biri-biri, kambing, unda, lain-lain)."
+msgid "Domestic Animals −25% breeding time."
+msgstr ""
 
 #: simulation/data/technologies/gather_animals_stockbreeding.jsongenericName
 msgid "Stockbreeding"
 msgstr "Penternakan"
 
 #: simulation/data/technologies/gather_capacity_basket.jsondescription
-#: simulation/data/technologies/gather_capacity_carts.jsondescription
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
-msgid "Increases shuttling capacity for all resources."
-msgstr "Tingkatkan kapasiti ulang-alik untuk semua sumber."
+msgid "Workers use baskets. Increases shuttling capacity for all resources."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_basket.jsontooltip
-msgid "Workers use baskets. +5 shuttle capacity for all resources."
-msgstr "Pekerja guna bakul. +5 kapasiti ulang-alik untuk semua sumber."
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
+msgid "Workers +5 resource capacity."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_basket.jsongenericName
 msgid "Baskets"
 msgstr "Bakul"
 
+#: simulation/data/technologies/gather_capacity_carts.jsondescription
+msgid ""
+"Workers use horse-drawn carts. Increases shuttling capacity for all "
+"resources."
+msgstr ""
+
 #: simulation/data/technologies/gather_capacity_carts.jsontooltip
-msgid "Workers use horse-drawn carts. +10 shuttle capacity for all resources."
-msgstr "Pekerja guna kereta kuda. +10 kapasiti ulang-alik untuk semua sumber."
+msgid "Workers +10 resource capacity."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_carts.jsongenericName
 msgid "Horse-drawn Carts"
@@ -793,9 +798,10 @@ msgstr "Ikan Masin"
 msgid "Unlocked in Town Phase. Requires Fishing Net."
 msgstr "Dibuka dalam Fasa Pekan. Perlukan Pukat."
 
-#: simulation/data/technologies/gather_capacity_wheelbarrow.jsontooltip
-msgid "Workers use wheelbarrows. +5 shuttle capacity for all resources."
-msgstr "Pekerja guna kereta sorong. +5 kapasiti ulang-alik untuk semua sumber."
+#: simulation/data/technologies/gather_capacity_wheelbarrow.jsondescription
+msgid ""
+"Workers use wheelbarrows. Increases shuttling capacity for all resources."
+msgstr ""
 
 #: simulation/data/technologies/gather_capacity_wheelbarrow.jsongenericName
 msgid "Wheelbarrow"
@@ -806,20 +812,23 @@ msgid "Extra nutrients for farms."
 msgstr "Nutrisi tambahan untuk ladang."
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsontooltip
-msgid "Workers +25% farming rate."
-msgstr "Pekerja +25% kadar pertanian."
+msgid "Workers +25% grain gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_fertilizer.jsongenericName
 msgid "Fertilizer"
 msgstr "Baja"
 
 #: simulation/data/technologies/gather_farming_plows.jsondescription
-msgid "A horse drawn instrument to turn the sod."
-msgstr "Alat yang ditarik dengan kuda untuk mengemburkan tanah."
+msgid ""
+"Equip your workers with iron plows, animal-drawn instruments to turn the "
+"sod."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_plows.jsontooltip
-msgid "Equip your workers with iron plows. +15% farming rate."
-msgstr "Lengkapkan pekerja anda dengan bajak besi. +15% kadar perladangan."
+#: simulation/data/technologies/gather_farming_training.jsontooltip
+msgid "Workers +15% grain gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_farming_plows.jsongenericName
 msgid "Iron Plow"
@@ -829,22 +838,17 @@ msgstr "Bajak Besi"
 msgid "Training for workers to increase farm gathering speed."
 msgstr "Latihan untuk pekerja untuk tingkatkan kelajuan pengumpulan hasil ladang."
 
-#: simulation/data/technologies/gather_farming_training.jsontooltip
-msgid "Workers +15% farming rate."
-msgstr "Pekerja +15% kadar pertanian."
-
 #: simulation/data/technologies/gather_farming_training.jsongenericName
 msgid "Gather Training"
 msgstr "Latihan Mengumpul"
 
 #: simulation/data/technologies/gather_fishing_net.jsondescription
-msgid "Nets improve the productivity of fishing boats."
-msgstr "Pukat menambahbaik produktiviti bot nelayan."
+msgid "Use nets to improve the productivity of fishing boats."
+msgstr ""
 
 #: simulation/data/technologies/gather_fishing_net.jsontooltip
-msgid ""
-"Use nets on your Fishing Boats. +30% fishing rate. Unlocks Salting Fish."
-msgstr "Penggunaan pukat pada Bot Nelayan anda. +30% kadar tangkapan ikan. Buka Ikan Masin."
+msgid "Fishing Boats +30% fish gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_fishing_net.jsongenericName
 msgid "Fishing Net"
@@ -858,16 +862,16 @@ msgstr "Tingkatkan kadar pengumpulan kayu."
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsontooltip
 #: simulation/data/technologies/gather_lumbering_strongeraxes.jsontooltip
-msgid "Workers +15% lumbering rate for trees."
-msgstr "Pekerja +15% kadar penebangan pokok."
+msgid "Workers +15% wood gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_lumbering_ironaxes.jsongenericName
 msgid "Iron Ax Heads"
 msgstr "Kepala Kapak Besi"
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsontooltip
-msgid "Workers +50% lumbering rate for trees."
-msgstr "Pekerja +50% kadar penebangan pokok."
+msgid "Workers +50% wood gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_lumbering_sharpaxes.jsongenericName
 msgid "Sharp Ax Heads"
@@ -878,15 +882,15 @@ msgid "Stronger Ax"
 msgstr "Kapak Lebih Kuat"
 
 #: simulation/data/technologies/gather_mining_serfs.jsondescription
-#: simulation/data/technologies/gather_mining_servants.jsondescription
-#: simulation/data/technologies/gather_mining_slaves.jsondescription
-msgid "Increases stone gathering rates."
-msgstr "Tingkatkan kadar pengumpulan batu."
+msgid ""
+"Compel serfs to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_serfs.jsontooltip
-msgid ""
-"Compel serfs to help your workers mine stone. +15% stone gathering rate."
-msgstr "Paksa hamba bantu pekerja anda melombong batu. +15% kadar pengumpulan batu."
+#: simulation/data/technologies/gather_mining_servants.jsontooltip
+msgid "Workers +15% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_serfs.jsongenericName
 msgid "Serfs"
@@ -898,9 +902,9 @@ msgstr "Hamba"
 msgid "Heílōtes"
 msgstr "Heílōtes"
 
-#: simulation/data/technologies/gather_mining_servants.jsontooltip
-msgid "Hire servants to help mine stone. +15% stone gathering rate."
-msgstr "Upah pembantu untuk bantu melombong batu. +15% kadar pengumpulan batu."
+#: simulation/data/technologies/gather_mining_servants.jsondescription
+msgid "Hire servants to help quarry stone. Increases stone gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_servants.jsongenericName
 msgid "Servants"
@@ -913,22 +917,25 @@ msgid "Doûloi"
 msgstr "Doûloi"
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsondescription
-#: simulation/data/technologies/gather_mining_silvermining.jsondescription
-#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
-msgid "Increases metal gathering rates."
-msgstr "Tingkatkan kadar pengumpulan logam."
+msgid "Develop shaft mining. Increases metal gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsontooltip
-msgid "Develop shaft mining. +15% metal gathering rate."
-msgstr "Bangun perlombongan  syaf, +15% kadar pengumpulan logam."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
+msgid "Workers +15% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_shaftmining.jsongenericName
 msgid "Shaft Mining"
 msgstr "Perlombongan Syaf"
 
+#: simulation/data/technologies/gather_mining_silvermining.jsondescription
+msgid "Strike a vein of precious silver. Increases metal gathering rates."
+msgstr ""
+
 #: simulation/data/technologies/gather_mining_silvermining.jsontooltip
-msgid "Strike a vein of precious silver. +50% metal gathering rate."
-msgstr "Menemui sejalur logam perak yang berharga, +50% kadar pengumpulan logam."
+msgid "Workers +50% metal gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_silvermining.jsongenericName
 msgid "Silver Mining"
@@ -942,10 +949,15 @@ msgstr "Lombong Krenides"
 msgid "Mines of Laureion"
 msgstr "Lombong Laureion"
 
-#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+#: simulation/data/technologies/gather_mining_slaves.jsondescription
 msgid ""
-"Buy slaves to help your workers mine for stone. +50% stone gathering rate."
-msgstr "Beli hamba abdi untuk membantu pekerja anda di lombong batu. +50% kadar pengumpulan batu."
+"Buy slaves to help your workers quarry stone. Increases stone gathering "
+"rates."
+msgstr ""
+
+#: simulation/data/technologies/gather_mining_slaves.jsontooltip
+msgid "Workers +50% stone gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_slaves.jsongenericName
 msgid "Slaves"
@@ -957,21 +969,22 @@ msgstr "Hamba"
 msgid "Andrápoda"
 msgstr "Andrápoda"
 
-#: simulation/data/technologies/gather_mining_wedgemallet.jsontooltip
-msgid "Equip your workers with helpful tools. +15% metal gathering rate."
-msgstr "Lengkapkan pekerja anda dengan alatan yang berguna. +15% kadar pengumpulan logam."
+#: simulation/data/technologies/gather_mining_wedgemallet.jsondescription
+msgid ""
+"Equip your workers with helpful tools. Increases metal gathering rates."
+msgstr ""
 
 #: simulation/data/technologies/gather_mining_wedgemallet.jsongenericName
 msgid "Wedge and Mallet"
 msgstr "Baji dan Tukul"
 
 #: simulation/data/technologies/gather_wicker_baskets.jsondescription
-msgid "Baskets for foraging."
-msgstr "Bakul untuk mencari makanan."
+msgid "Equip your foragers with wicker baskets for foraging."
+msgstr ""
 
 #: simulation/data/technologies/gather_wicker_baskets.jsontooltip
-msgid "Equip your foragers with wicker baskets. +50% fruit foraging rate."
-msgstr "Lengkapkan pencari makanan anda dengan bakul anyaman. +50% kadar pencarian makanan."
+msgid "Workers +50% fruit gather rate."
+msgstr ""
 
 #: simulation/data/technologies/gather_wicker_baskets.jsongenericName
 msgid "Wicker Baskets"
@@ -1239,9 +1252,9 @@ msgstr "Lanjutan dari bandar yang berkembang maju menjadi metropolis yang hebat,
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by another +50%. Silver Owls civ bonus "
-"grants an extra +10% metal gather rate to all workers. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
-msgstr "Maju ke Fasa Bandar, yang membuka lagi banyak struktur dan unit. Jangkauan wilayah bagi Pusat Sivik meningkat sebanyak +50%. Bonus tamadun 'Burung Hantu Perak' menganugerahkan tambahan +10% kadar pengumpulan logam untuk semua pekerja. Hayat maksimum askar rakyat ditingkatkan sebanyak +10%. Semua sruktur +9 kadar penjanaan bergarison."
+"grants an extra +10% metal gather rate to all workers. Citizen Soldiers +10%"
+" health. All structures +9 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_city_athen.jsonrequirementsTooltip
 #: simulation/data/technologies/phase_city_generic.jsonrequirementsTooltip
@@ -1263,9 +1276,9 @@ msgstr "Lanjutan dari bandar yang berkembang maju menjadi metropolis yang hebat,
 #: simulation/data/technologies/phase_city_generic.jsontooltip
 msgid ""
 "Advance to City Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by another +50%. Citizen soldiers max "
-"health increased by +10%. All structures +9 garrisoned regeneration rate."
-msgstr "Maju ke Fasa Bandar, yang membuka lagi banyak struktur dan unit. Jangkauan wilayah bagi Pusat Sivik meningkat sebanyak +50%. Hayat maksimum askar rakyat ditingkatkan sebanyak +10%. Semua sruktur +9 kadar penjanaan bergarison."
+"radius for Civic Centers increased by another +50%. Citizen Soldiers +10% "
+"health. All structures +9 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_town.jsongenericName
 #: simulation/data/technologies/phase_town_athen.jsongenericName
@@ -1290,9 +1303,9 @@ msgstr "Lanjutan dari kampung kecil  menjadi pekan yang berkembang maju.  Ini ad
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
 "radius for Civic Centers increased by +30%. 'Silver Owls' civ bonus grants "
-"an extra +10% metal gather rate to all workers. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
-msgstr "Maju ke Fasa Pekan, yang membuka lagi banyak struktur dan unit. Jangkauan wilayah bagi Pusat Sivik meningkat sebanyak +30%. Bonus tamadun 'Burung Hantu Perak' menganugerahkan tambahan +10% kadar pengumpulan logam untuk semua pekerja. Hayat maksimum askar rakyat ditingkatkan sebanyak +20%. Semua sruktur +7 kadar penjanaan bergarison."
+"an extra +10% metal gather rate to all workers. Citizen Soldiers +20% "
+"health. All structures +7 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_town_athen.jsonrequirementsTooltip
 #: simulation/data/technologies/phase_town_generic.jsonrequirementsTooltip
@@ -1314,9 +1327,9 @@ msgstr "Maju dari kampung kecil menjadi pekan yang berkembang maju, sedia untuk 
 #: simulation/data/technologies/phase_town_generic.jsontooltip
 msgid ""
 "Advance to Town Phase, which unlocks more structures and units. Territory "
-"radius for Civic Centers increased by +30%. Citizen soldiers max health "
-"increased by +20%. All structures +7 garrisoned regeneration rate."
-msgstr "Maju ke Fasa Pekan, yang membuka lagi banyak struktur dan unit. Jangkauan wilayah bagi Pusat Sivik meningkat sebanyak +30%. Hayat maksimum askar rakyat ditingkatkan sebanyak +20%. Semua sruktur +7 kadar penjanaan bergarison."
+"radius for Civic Centers increased by +30%. Citizen Soldiers +20% health. "
+"All structures +7 garrisoned regeneration rate."
+msgstr ""
 
 #: simulation/data/technologies/phase_village.jsongenericName
 msgid "Village Phase"
@@ -2264,9 +2277,8 @@ msgstr "Puak Carthage membina tembok bandar mereka dalam tiga lingkaran sepusat.
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsontooltip
 msgid ""
-"Carthaginian walls, gates, and wall towers have 3x the health of a standard "
-"wall, but also cost twice as much and take twice as long to build."
-msgstr "Tembok, pintu pagar, dan menara Carthage mempunyai 3x hayat berbanding tembok biasa, juga masa pembinaan 2x ganda."
+"Carthaginian Walls +100% build time, +100% stone cost, and  +200% health."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/cart_walls.jsongenericName
 msgid "Triple Walls"
@@ -2278,9 +2290,9 @@ msgstr "Struktur Celt kebanyakannya diperbuat dari kayu dengan tapak puing."
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsontooltip
 msgid ""
-"Celtic buildings have 20% less health, but are also 20% cheaper and faster "
-"to construct."
-msgstr "Bangunan Celt kurang 20% hayat, tetapi 20% lebih murah dan pantas dibina."
+"Briton and Gaulish Structures −20% build time, −20% health, and −20% capture"
+" points."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/celt_structures.jsongenericName
 msgid "Wooden Construction"
@@ -2292,9 +2304,9 @@ msgstr "Yunani menggunakan pembinaan batu seawal zaman Mycenae"
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsontooltip
 msgid ""
-"All structures have 10% more health and capture points, but also take 10% "
-"longer to build."
-msgstr "Semua struktur mempunyai 10% lebih hayat dan mata tangkapan, tetapi perlu 10% lebih lama dibina."
+"Athenian, Macedonian, and Spartan Structures +10% build time, +10% health, "
+"and +10% capture points."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/greek_structures.jsongenericName
 msgid "Hellenic Architecture"
@@ -2311,8 +2323,8 @@ msgid ""
 msgstr "Empayar Maurya terdiri daripada berdozen-dozen kerajaan kecil yang meliputi kawasan sejumlah 5 juta kilometer persegi, dengan populasi hampir 60 juta orang. Pemangku raja Maurya memegang jawatan Maharaja bagi Maharaja dan mengetuai sejumlah 600,000 orang askar infantri, 9000 ekor gajah perang, 8000 kereta kuda perang dan 30,000 askar berkuda, menjadikannya ketumbukan tentera terbesar pada zaman tersebut."
 
 #: simulation/data/technologies/civbonuses/maur_population.jsontooltip
-msgid "Mauryas have a 10% higher maximum population limit."
-msgstr "Maurya memilik had populasi maksimum 10% lebih tinggi."
+msgid "Mauryas +10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_population.jsongenericName
 msgid "Emperor of Emperors"
@@ -2329,8 +2341,8 @@ msgid ""
 msgstr "Maurya membina tembok dari kayu, yang merupakan sumber asli paling banyak di India."
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsontooltip
-msgid "Mauryan city walls have -20% less health and -20% less build time."
-msgstr "Tembok bandar Maury kurang -20% hayat dan -20% tempoh pembinaan."
+msgid "Mauryan City Walls −20% build time and −20% health."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/maur_walls.jsongenericName
 msgid "Wooden Walls"
@@ -2347,8 +2359,8 @@ msgid ""
 msgstr "Puak Parsi pernah mengerahkan sejumlah besar askar infantri ketika perang kerana saiz empayar Achaemenid dan proses pengerahan yang sebegitu. Umumnya askar infantri Parsi terlatih dan berperang dengan semangat waja. Walaubagaimanapun askar Parsi lemah dari segi pertarungan tanpa senjata, perlawanan jarak dekat. Dan juga selain dari regimen elit, askar infantri Parsi bukanlah kuasa ketenteraan yang terhebat."
 
 #: simulation/data/technologies/civbonuses/pers_population.jsontooltip
-msgid "Persians have a 10% higher maximum population limit."
-msgstr "Parsi memilik had populasi maksimum 10% lebih tinggi."
+msgid "Persians +10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/pers_population.jsongenericName
 msgid "Great King's Levy"
@@ -2363,8 +2375,8 @@ msgid ""
 msgstr "Puak Sparta tidak mempunyai aksar yang terbesar di dunia, tetapi askar yang terbaik di dunia kerana komitmen mereka. Askar mereka kurang kuantitinya tetapi lebih berkualiti. Pernah disebut Sparta tidak memerlukan tembok bandar yang kuat, kerana tembok yang sebenar adalah penduduknya."
 
 #: simulation/data/technologies/civbonuses/spart_population.jsontooltip
-msgid "Spartans have 10% less maximum population."
-msgstr "Puak Sparta memiliki had populasi maksimum 10% lebih rendah."
+msgid "Spartans −10% maximum population limit."
+msgstr ""
 
 #: simulation/data/technologies/civbonuses/spart_population.jsongenericName
 msgid "Underdogs"

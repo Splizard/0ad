@@ -2,10 +2,9 @@
 <actor version="1">
   <castshadow/>
   <group>
-    <variant file="biped/base_swordsman_shieldarm_fast.xml">
+    <variant file="biped/base_swordsman_shieldarm_relax.xml">
       <mesh>skeletal/new/m_tunic_long.dae</mesh>
       <props>
-        <prop actor="props/units/helmets/hele_su2.xml" attachpoint="helmet"/>
         <prop actor="props/units/heads/new/head_hele_b.xml" attachpoint="head"/>
         <prop actor="props/units/shields/aspis_athen_m.xml" attachpoint="shield_arm"/>
         <prop actor="props/units/weapons/xiphos.xml" attachpoint="weapon_R"/>
@@ -22,11 +21,6 @@
     <variant frequency="1" name="Helmets-Thracian-Crested-02">
       <props>
         <prop actor="props/units/helmets/hele_thracian_b5_crested.xml" attachpoint="helmet"/>
-      </props>
-    </variant>
-    <variant frequency="1" name="Helmets-Illyrian-Crested-01">
-      <props>
-        <prop actor="props/units/helmets/hele_illyrian_crested.xml" attachpoint="helmet"/>
       </props>
     </variant>
     <variant frequency="1" name="Hele Chalcidean Helmet-01">
@@ -52,6 +46,21 @@
     <variant frequency="1" name="Hele Chalcidean Helmet-05">
       <props>
         <prop actor="props/units/helmets/hele_chalcidean_a5.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Hele Illyrian Helmet-01">
+      <props>
+        <prop actor="props/units/helmets/hele_illyrian_b1_crested.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Hele Illyrian Helmet-02">
+      <props>
+        <prop actor="props/units/helmets/hele_illyrian_b2_crested.xml" attachpoint="helmet"/>
+      </props>
+    </variant>
+    <variant frequency="1" name="Hele Illyrian Helmet-03">
+      <props>
+        <prop actor="props/units/helmets/hele_illyrian_b3_crested.xml" attachpoint="helmet"/>
       </props>
     </variant>
   </group>

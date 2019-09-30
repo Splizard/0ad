@@ -505,10 +505,11 @@ namespace
 			JSAutoRequest rq(cx);
 
 			JS::RootedValue t(cx);
-			JS::RootedValue rows(cx, DumpRows(table));
-			m_ScriptInterface.Eval(L"({})", &t);
-			m_ScriptInterface.SetProperty(t, "cols", DumpCols(table));
-			m_ScriptInterface.SetProperty(t, "data", rows);
+			ScriptInterface::CreateObject(
+				cx,
+				&t,
+				"cols", DumpCols(table),
+				"data", DumpRows(table));
 
 			m_ScriptInterface.SetProperty(m_Root, table->GetTitle().c_str(), t);
 		}
@@ -531,14 +532,14 @@ namespace
 			JSAutoRequest rq(cx);
 
 			JS::RootedValue data(cx);
-			m_ScriptInterface.CreateObject(&data);
+			ScriptInterface::CreateObject(cx, &data);
 
 			const std::vector<ProfileColumn>& columns = table->GetColumns();
 
 			for (size_t r = 0; r < table->GetNumberRows(); ++r)
 			{
 				JS::RootedValue row(cx);
-				m_ScriptInterface.CreateArray(&row);
+				ScriptInterface::CreateArray(cx, &row);
 
 				m_ScriptInterface.SetProperty(data, table->GetCellText(r, 0).c_str(), row);
 

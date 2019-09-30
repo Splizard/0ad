@@ -190,7 +190,8 @@ JS::HandleObject VisualReplay::ReloadReplayCache(const ScriptInterface& scriptIn
 				CFileInfo fileInfo;
 				GetFileInfo(replayFile, &fileInfo);
 
-				scriptInterface.CreateObject(
+				ScriptInterface::CreateObject(
+					cx,
 					&replayData,
 					"directory", directory.string(),
 					"fileSize", static_cast<double>(fileInfo.Size()));
@@ -235,7 +236,7 @@ JS::Value VisualReplay::GetReplays(const ScriptInterface& scriptInterface, bool 
 	JS::RootedObject replays(cx, ReloadReplayCache(scriptInterface, compareFiles));
 	// Only take entries with data
 	JS::RootedValue replaysWithoutNullEntries(cx);
-	scriptInterface.CreateArray(&replaysWithoutNullEntries);
+	ScriptInterface::CreateArray(cx, &replaysWithoutNullEntries);
 
 	u32 replaysLength = 0;
 	JS_GetArrayLength(cx, replays, &replaysLength);
@@ -405,11 +406,12 @@ JS::Value VisualReplay::LoadReplayData(const ScriptInterface& scriptInterface, c
 	// Return the actual data
 	JS::RootedValue replayData(cx);
 
-	scriptInterface.CreateObject(
+	ScriptInterface::CreateObject(
+		cx,
 		&replayData,
 		"directory", directory.string(),
 		"fileSize", static_cast<double>(fileSize),
-		"duration", static_cast<u32>(duration));
+		"duration", duration);
 
 	scriptInterface.SetProperty(replayData, "attribs", attribs);
 
@@ -431,7 +433,7 @@ JS::Value VisualReplay::GetReplayAttributes(ScriptInterface::CxPrivate* pCxPriva
 	JSContext* cx = pCxPrivate->pScriptInterface->GetContext();
 	JSAutoRequest rq(cx);
 	JS::RootedValue attribs(cx);
-	pCxPrivate->pScriptInterface->CreateObject(&attribs);
+	ScriptInterface::CreateObject(cx, &attribs);
 
 	// Return empty object if file doesn't exist
 	const OsPath replayFile = GetDirectoryPath() / directoryName / L"commands.txt";
@@ -469,30 +471,6 @@ void VisualReplay::AddReplayToCache(const ScriptInterface& scriptInterface, cons
 	JS_SetElement(cx, cachedReplaysObject, cacheLength, replayData);
 
 	StoreCacheFile(scriptInterface, cachedReplaysObject);
-}
-
-void VisualReplay::SaveReplayMetadata(ScriptInterface* scriptInterface)
-{
-	JSContext* cx = scriptInterface->GetContext();
-	JSAutoRequest rq(cx);
-
-	JS::RootedValue metadata(cx);
-	JS::RootedValue global(cx, scriptInterface->GetGlobalObject());
-
-	if (!scriptInterface->CallFunction(global, "getReplayMetadata", &metadata))
-	{
-		LOGERROR("Could not save replay metadata!");
-		return;
-	}
-
-	// Get the directory of the currently active replay
-	const OsPath fileName = g_Game->GetReplayLogger().GetDirectory() / L"metadata.json";
-	CreateDirectories(fileName.Parent(), 0700);
-
-	std::ofstream stream (OsString(fileName).c_str(), std::ofstream::out | std::ofstream::trunc);
-	stream << scriptInterface->StringifyJSON(&metadata, false);
-	stream.close();
-	debug_printf("Saved replay metadata to %s\n", fileName.string8().c_str());
 }
 
 bool VisualReplay::HasReplayMetadata(const OsPath& directoryName)

@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2019 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -33,22 +33,6 @@
 #include "simulation2/helpers/Selection.h"
 
 #include <fstream>
-
-JS::Value JSI_Simulation::GetInitAttributes(ScriptInterface::CxPrivate* pCxPrivate)
-{
-	if (!g_Game)
-		return JS::UndefinedValue();
-
-	JSContext* cx = g_Game->GetSimulation2()->GetScriptInterface().GetContext();
-	JSAutoRequest rq(cx);
-
-	JS::RootedValue initAttribs(cx);
-	g_Game->GetSimulation2()->GetInitAttributes(&initAttribs);
-
-	return pCxPrivate->pScriptInterface->CloneValueFromOtherContext(
-		g_Game->GetSimulation2()->GetScriptInterface(),
-		initAttribs);
-}
 
 JS::Value JSI_Simulation::GuiInterfaceCall(ScriptInterface::CxPrivate* pCxPrivate, const std::wstring& name, JS::HandleValue data)
 {
@@ -117,6 +101,19 @@ std::vector<entity_id_t> JSI_Simulation::PickNonGaiaEntitiesOnScreen(ScriptInter
 	return EntitySelection::PickNonGaiaEntitiesInRect(*g_Game->GetSimulation2(), *g_Game->GetView()->GetCamera(), 0, 0, g_xres, g_yres, false);
 }
 
+std::vector<entity_id_t> JSI_Simulation::GetEntitiesWithStaticObstructionOnScreen(ScriptInterface::CxPrivate* UNUSED(pCxPrivate))
+{
+	struct StaticObstructionFilter
+	{
+		bool operator()(IComponent* cmp)
+		{
+			ICmpObstruction* cmpObstruction = static_cast<ICmpObstruction*>(cmp);
+			return cmpObstruction->GetObstructionType() == ICmpObstruction::STATIC;
+		}
+	};
+	return EntitySelection::GetEntitiesWithComponentInRect<StaticObstructionFilter>(*g_Game->GetSimulation2(), IID_Obstruction, *g_Game->GetView()->GetCamera(), 0, 0, g_xres, g_yres);
+}
+
 std::vector<entity_id_t> JSI_Simulation::PickSimilarPlayerEntities(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), const std::string& templateName, bool includeOffScreen, bool matchRank, bool allowFoundations)
 {
 	return EntitySelection::PickSimilarEntities(*g_Game->GetSimulation2(), *g_Game->GetView()->GetCamera(), templateName, g_Game->GetViewedPlayerID(), includeOffScreen, matchRank, false, allowFoundations);
@@ -134,7 +131,6 @@ void JSI_Simulation::SetBoundingBoxDebugOverlay(ScriptInterface::CxPrivate* UNUS
 
 void JSI_Simulation::RegisterScriptFunctions(const ScriptInterface& scriptInterface)
 {
-	scriptInterface.RegisterFunction<JS::Value, &GetInitAttributes>("GetInitAttributes");
 	scriptInterface.RegisterFunction<JS::Value, std::wstring, JS::HandleValue, &GuiInterfaceCall>("GuiInterfaceCall");
 	scriptInterface.RegisterFunction<void, JS::HandleValue, &PostNetworkCommand>("PostNetworkCommand");
 	scriptInterface.RegisterFunction<void, &DumpSimState>("DumpSimState");
@@ -143,6 +139,7 @@ void JSI_Simulation::RegisterScriptFunctions(const ScriptInterface& scriptInterf
 	scriptInterface.RegisterFunction<std::vector<entity_id_t>, int, int, int, int, int, &PickPlayerEntitiesInRect>("PickPlayerEntitiesInRect");
 	scriptInterface.RegisterFunction<std::vector<entity_id_t>, int, &PickPlayerEntitiesOnScreen>("PickPlayerEntitiesOnScreen");
 	scriptInterface.RegisterFunction<std::vector<entity_id_t>, &PickNonGaiaEntitiesOnScreen>("PickNonGaiaEntitiesOnScreen");
+	scriptInterface.RegisterFunction<std::vector<entity_id_t>, &GetEntitiesWithStaticObstructionOnScreen>("GetEntitiesWithStaticObstructionOnScreen");
 	scriptInterface.RegisterFunction<std::vector<entity_id_t>, std::string, bool, bool, bool, &PickSimilarPlayerEntities>("PickSimilarPlayerEntities");
 	scriptInterface.RegisterFunction<void, bool, &SetBoundingBoxDebugOverlay>("SetBoundingBoxDebugOverlay");
 }

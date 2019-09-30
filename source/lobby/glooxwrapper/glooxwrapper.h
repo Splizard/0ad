@@ -161,6 +161,9 @@ namespace glooxwrapper
 			glooxwrapper_free(m_Data);
 		}
 
+		/**
+		 * Gloox strings are UTF encoded, so don't forget to decode it before passing it to the GUI!
+		 */
 		std::string to_string() const
 		{
 			return std::string(m_Data, m_Size);
@@ -184,6 +187,16 @@ namespace glooxwrapper
 		bool operator!=(const char* str) const
 		{
 			return strcmp(m_Data, str) != 0;
+		}
+
+		bool operator==(const string& str) const
+		{
+			return strcmp(m_Data, str.m_Data) == 0;
+		}
+
+		bool operator<(const string& str) const
+		{
+			return strcmp(m_Data, str.m_Data) < 0;
 		}
 	};
 
@@ -348,10 +361,10 @@ namespace glooxwrapper
 	{
 	public:
 		virtual ~MUCRoomHandler() {}
-		virtual void handleMUCParticipantPresence(MUCRoom* room, const MUCRoomParticipant participant, const Presence& presence) = 0; // MUCRoom not supported
-		virtual void handleMUCMessage(MUCRoom* room, const Message& msg, bool priv) = 0; // MUCRoom not supported
-		virtual void handleMUCError(MUCRoom* room, gloox::StanzaError error) = 0; // MUCRoom not supported
-		virtual void handleMUCSubject(MUCRoom* room, const string& nick, const string& subject) = 0; // MUCRoom not supported
+		virtual void handleMUCParticipantPresence(MUCRoom& room, const MUCRoomParticipant participant, const Presence& presence) = 0;
+		virtual void handleMUCMessage(MUCRoom& room, const Message& msg, bool priv) = 0;
+		virtual void handleMUCError(MUCRoom& room, gloox::StanzaError error) = 0;
+		virtual void handleMUCSubject(MUCRoom& room, const string& nick, const string& subject) = 0;
 	};
 
 	class GLOOXWRAPPER_API RegistrationHandler
@@ -495,7 +508,8 @@ namespace glooxwrapper
 	private:
 		gloox::Message* m_Wrapped;
 		bool m_Owned;
-		glooxwrapper::JID* m_From;
+		glooxwrapper::JID m_From;
+		glooxwrapper::DelayedDelivery* m_DelayedDelivery;
 	public:
 		Message(gloox::Message* wrapped, bool owned);
 		~Message();
@@ -513,10 +527,14 @@ namespace glooxwrapper
 	private:
 		gloox::MUCRoom* m_Wrapped;
 		MUCRoomHandlerWrapper* m_HandlerWrapper;
+		bool m_Owned;
 	public:
+		MUCRoom(gloox::MUCRoom* room, bool owned);
 		MUCRoom(Client* parent, const JID& nick, MUCRoomHandler* mrh, MUCRoomConfigHandler* mrch = 0);
 		~MUCRoom();
 		const string nick() const;
+		const string name() const;
+		const string service() const;
 		void join(gloox::Presence::PresenceType type = gloox::Presence::Available, const string& status = "", int priority = 0);
 		void leave(const string& msg = "");
 		void send(const string& message);

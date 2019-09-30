@@ -102,6 +102,9 @@ CGame::~CGame()
 	if (CProfileManager::IsInitialised())
 		g_Profiler.StructuralReset();
 
+	if (m_ReplayLogger && m_GameStarted)
+		m_ReplayLogger->SaveMetadata(*m_Simulation2);
+
 	delete m_TurnManager;
 	delete m_GameView;
 	delete m_Simulation2;
@@ -320,7 +323,7 @@ PSRETURN CGame::ReallyStartGame()
 		g_NetClient->LoadFinished();
 
 	// Call the reallyStartGame GUI function, but only if it exists
-	if (g_GUI && g_GUI->HasPages())
+	if (g_GUI && g_GUI->GetPageCount())
 	{
 		JS::RootedValue global(cx, g_GUI->GetActiveGUI()->GetGlobalObject());
 		if (g_GUI->GetActiveGUI()->GetScriptInterface()->HasProperty(global, "reallyStartGame"))

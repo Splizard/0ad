@@ -18,14 +18,12 @@
 #ifndef INCLUDED_CBUTTON
 #define INCLUDED_CBUTTON
 
-#include "GUI.h"
+#include "gui/IGUIButtonBehavior.h"
+#include "gui/IGUIObject.h"
+#include "gui/IGUITextOwner.h"
+#include "gui/CGUISprite.h"
+#include "gui/CGUIString.h"
 
-/**
- * Button
- *
- * @see IGUIObject
- * @see IGUIButtonBehavior
- */
 class CButton : public IGUIButtonBehavior, public IGUITextOwner
 {
 	GUI_OBJECT(CButton)
@@ -57,9 +55,30 @@ protected:
 	void SetupText();
 
 	/**
+	 * Picks the text color depending on current object settings.
+	 */
+	const CGUIColor& ChooseColor();
+
+	/**
 	 * Placement of text.
 	 */
 	CPos m_TextPos;
+
+	// Settings
+	float m_BufferZone;
+	i32 m_CellID;
+	CGUIString m_Caption;
+	CStrW m_Font;
+	CGUISpriteInstance m_Sprite;
+	CGUISpriteInstance m_SpriteOver;
+	CGUISpriteInstance m_SpritePressed;
+	CGUISpriteInstance m_SpriteDisabled;
+	EAlign m_TextAlign;
+	EVAlign m_TextVAlign;
+	CGUIColor m_TextColor;
+	CGUIColor m_TextColorOver;
+	CGUIColor m_TextColorPressed;
+	CGUIColor m_TextColorDisabled;
 };
 
 #endif // INCLUDED_CBUTTON

@@ -19,76 +19,49 @@
 
 #include "CCheckBox.h"
 
-#include "gui/CGUIColor.h"
-#include "graphics/FontMetrics.h"
-#include "ps/CLogger.h"
-#include "ps/CStrIntern.h"
+#include "gui/CGUI.h"
 
-/**
- * TODO: Since there is no call to DrawText, the checkbox won't render any text.
- * Thus the font, caption, textcolor and other settings have no effect.
- */
 CCheckBox::CCheckBox(CGUI& pGUI)
-	: IGUIObject(pGUI), IGUITextOwner(pGUI), IGUIButtonBehavior(pGUI)
+	: IGUIObject(pGUI),
+	  IGUIButtonBehavior(pGUI),
+	  m_CellID(),
+	  m_Checked(),
+	  m_SpriteUnchecked(),
+	  m_SpriteUncheckedOver(),
+	  m_SpriteUncheckedPressed(),
+	  m_SpriteUncheckedDisabled(),
+	  m_SpriteChecked(),
+	  m_SpriteCheckedOver(),
+	  m_SpriteCheckedPressed(),
+	  m_SpriteCheckedDisabled()
 {
-	AddSetting<float>("buffer_zone");
-	AddSetting<CGUIString>("caption");
-	AddSetting<i32>("cell_id");
-	AddSetting<bool>("checked");
-	AddSetting<CStrW>("font");
-	AddSetting<CStrW>("sound_disabled");
-	AddSetting<CStrW>("sound_enter");
-	AddSetting<CStrW>("sound_leave");
-	AddSetting<CStrW>("sound_pressed");
-	AddSetting<CStrW>("sound_released");
-	AddSetting<CGUISpriteInstance>("sprite");
-	AddSetting<CGUISpriteInstance>("sprite_over");
-	AddSetting<CGUISpriteInstance>("sprite_pressed");
-	AddSetting<CGUISpriteInstance>("sprite_disabled");
-	AddSetting<CGUISpriteInstance>("sprite2");
-	AddSetting<CGUISpriteInstance>("sprite2_over");
-	AddSetting<CGUISpriteInstance>("sprite2_pressed");
-	AddSetting<CGUISpriteInstance>("sprite2_disabled");
-	AddSetting<float>("square_side");
-	AddSetting<CGUIColor>("textcolor");
-	AddSetting<CGUIColor>("textcolor_over");
-	AddSetting<CGUIColor>("textcolor_pressed");
-	AddSetting<CGUIColor>("textcolor_disabled");
-	AddSetting<CStrW>("tooltip");
-	AddSetting<CStr>("tooltip_style");
-
-	AddText();
+	RegisterSetting("cell_id", m_CellID);
+	RegisterSetting("checked", m_Checked),
+	RegisterSetting("sprite", m_SpriteUnchecked);
+	RegisterSetting("sprite_over", m_SpriteUncheckedOver);
+	RegisterSetting("sprite_pressed", m_SpriteUncheckedPressed);
+	RegisterSetting("sprite_disabled", m_SpriteUncheckedDisabled);
+	RegisterSetting("sprite2", m_SpriteChecked);
+	RegisterSetting("sprite2_over", m_SpriteCheckedOver);
+	RegisterSetting("sprite2_pressed", m_SpriteCheckedPressed);
+	RegisterSetting("sprite2_disabled", m_SpriteCheckedDisabled);
 }
 
 CCheckBox::~CCheckBox()
 {
 }
 
-void CCheckBox::SetupText()
-{
-	ENSURE(m_GeneratedTexts.size() == 1);
-
-	m_GeneratedTexts[0] = CGUIText(
-		m_pGUI,
-		GetSetting<CGUIString>("caption"),
-		GetSetting<CStrW>("font"),
-		m_CachedActualSize.GetWidth() - GetSetting<float>("square_side"),
-		GetSetting<float>("buffer_zone"),
-		this);
-}
-
 void CCheckBox::HandleMessage(SGUIMessage& Message)
 {
 	// Important
 	IGUIButtonBehavior::HandleMessage(Message);
-	IGUITextOwner::HandleMessage(Message);
 
 	switch (Message.type)
 	{
 	case GUIM_PRESSED:
 	{
 		// Switch to opposite.
-		SetSetting<bool>("checked", !GetSetting<bool>("checked"), true);
+		SetSetting<bool>("checked", !m_Checked, true);
 		break;
 	}
 
@@ -99,22 +72,11 @@ void CCheckBox::HandleMessage(SGUIMessage& Message)
 
 void CCheckBox::Draw()
 {
-	if (GetSetting<bool>("checked"))
-		DrawButton(
-			m_CachedActualSize,
-			GetBufferedZ(),
-			GetSetting<CGUISpriteInstance>("sprite2"),
-			GetSetting<CGUISpriteInstance>("sprite2_over"),
-			GetSetting<CGUISpriteInstance>("sprite2_pressed"),
-			GetSetting<CGUISpriteInstance>("sprite2_disabled"),
-			GetSetting<i32>("cell_id"));
-	else
-		DrawButton(
-			m_CachedActualSize,
-			GetBufferedZ(),
-			GetSetting<CGUISpriteInstance>("sprite"),
-			GetSetting<CGUISpriteInstance>("sprite_over"),
-			GetSetting<CGUISpriteInstance>("sprite_pressed"),
-			GetSetting<CGUISpriteInstance>("sprite_disabled"),
-			GetSetting<i32>("cell_id"));
+	m_pGUI.DrawSprite(
+		m_Checked ?
+			GetButtonSprite(m_SpriteChecked, m_SpriteCheckedOver, m_SpriteCheckedPressed, m_SpriteCheckedDisabled) :
+			GetButtonSprite(m_SpriteUnchecked, m_SpriteUncheckedOver, m_SpriteUncheckedPressed, m_SpriteUncheckedDisabled),
+		m_CellID,
+		GetBufferedZ(),
+		m_CachedActualSize);
 }

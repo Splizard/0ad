@@ -27,7 +27,6 @@
 #include "gui/IGUIObject.h"
 #include "gui/IGUIScrollBar.h"
 #include "gui/scripting/JSInterface_GUITypes.h"
-#include "ps/CLogger.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptInterface.h"
 
@@ -103,7 +102,7 @@ bool JSI_IGUIObject::getProperty(JSContext* cx, JS::HandleObject obj, JS::Handle
 	}
 	else if (propName == "children")
 	{
-		pScriptInterface->CreateArray(vp);
+		ScriptInterface::CreateArray(cx, vp);
 
 		for (size_t i = 0; i < e->m_Children.size(); ++i)
 			pScriptInterface->SetPropertyInt(vp, i, e->m_Children[i]);
@@ -228,24 +227,7 @@ bool JSI_IGUIObject::getComputedSize(JSContext* cx, uint argc, JS::Value* vp)
 		return false;
 
 	e->UpdateCachedSize();
-	CRect size = e->m_CachedActualSize;
+	ScriptInterface::ToJSVal(cx, args.rval(), e->m_CachedActualSize);
 
-	JS::RootedValue objVal(cx);
-	try
-	{
-		ScriptInterface::GetScriptInterfaceAndCBData(cx)->pScriptInterface->CreateObject(
-			&objVal,
-			"left", size.left,
-			"right", size.right,
-			"top", size.top,
-			"bottom", size.bottom);
-	}
-	catch (PSERROR_Scripting_ConversionFailed&)
-	{
-		debug_warn(L"Error creating size object!");
-		return false;
-	}
-
-	args.rval().set(objVal);
 	return true;
 }

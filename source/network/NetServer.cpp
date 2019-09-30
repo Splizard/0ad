@@ -621,7 +621,7 @@ void CNetServerWorker::CheckClientConnections()
 void CNetServerWorker::HandleMessageReceive(const CNetMessage* message, CNetServerSession* session)
 {
 	// Handle non-FSM messages first
-	Status status = session->GetFileTransferer().HandleMessageReceive(message);
+	Status status = session->GetFileTransferer().HandleMessageReceive(*message);
 	if (status != INFO::SKIPPED)
 		return;
 
@@ -923,7 +923,7 @@ bool CNetServerWorker::OnClientHandshake(void* context, CFsmEvent* event)
 	{
 		if (++count > 100)
 		{
-			session->Disconnect(NDR_UNKNOWN);
+			session->Disconnect(NDR_GUID_FAILED);
 			return true;
 		}
 		guid = ps_generate_guid();

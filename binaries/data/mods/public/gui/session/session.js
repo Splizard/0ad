@@ -42,7 +42,7 @@ var g_Ambient = ["audio/ambient/dayscape/day_temperate_gen_03.ogg"];
 /**
  * Map, player and match settings set in gamesetup.
  */
-const g_GameAttributes = deepfreeze(Engine.GetInitAttributes());
+const g_GameAttributes = deepfreeze(Engine.GuiInterfaceCall("GetInitAttributes"));
 
 /**
  * True if this is a multiplayer game.
@@ -692,7 +692,8 @@ function updateTopPanel()
 
 	Engine.GetGUIObjectByName("population").hidden = !isPlayer;
 	Engine.GetGUIObjectByName("diplomacyButton").hidden = !isPlayer;
-	Engine.GetGUIObjectByName("tradeButton").hidden = !isPlayer;
+	Engine.GetGUIObjectByName("tradeButton").hidden = !isPlayer ||
+		(!g_ResourceData.GetTradableCodes().length && !g_ResourceData.GetBarterableCodes().length);
 	Engine.GetGUIObjectByName("observerText").hidden = isPlayer;
 
 	let alphaLabel = Engine.GetGUIObjectByName("alphaLabel");
@@ -732,7 +733,7 @@ function leaveGame(willRejoin)
 
 	// Before ending the game
 	let replayDirectory = Engine.GetCurrentReplayDirectory();
-	let simData = getReplayMetadata();
+	let simData = Engine.GuiInterfaceCall("GetReplayMetadata");
 	let playerID = Engine.GetPlayerID();
 
 	Engine.EndGame();

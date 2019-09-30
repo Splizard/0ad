@@ -23,15 +23,18 @@
 #ifndef INCLUDED_CGUI
 #define INCLUDED_CGUI
 
-#include "GUITooltip.h"
-#include "GUIbase.h"
-
+#include "gui/CGUIColor.h"
+#include "gui/CGUIDummyObject.h"
+#include "gui/GUIbase.h"
+#include "gui/GUITooltip.h"
 #include "lib/input.h"
 #include "ps/Shapes.h"
 #include "ps/XML/Xeromyces.h"
 #include "scriptinterface/ScriptInterface.h"
 
 #include <boost/unordered_set.hpp>
+#include <map>
+#include <vector>
 
 ERROR_TYPE(GUI, JSOpenFailed);
 
@@ -50,17 +53,10 @@ struct SGUIStyle
 	std::map<CStr, CStrW> m_SettingsDefaults;
 };
 
-class JSObject; // The GUI stores a JSObject*, so needs to know that JSObject exists
-class IGUIObject;
 class CGUISpriteInstance;
-struct CGUIColor;
-class CGUIText;
-struct SGUIIcon;
-class CGUIString;
 class CGUISprite;
 struct SGUIImageEffects;
 struct SGUIScrollBarStyle;
-class GUITooltip;
 
 /**
  * The main object that represents a whole GUI page.
@@ -124,12 +120,6 @@ public:
 	void DrawSprite(const CGUISpriteInstance& Sprite, int CellID, const float& Z, const CRect& Rect, const CRect& Clipping = CRect());
 
 	/**
-	 * Clean up, call this to clean up all memory allocated
-	 * within the GUI.
-	 */
-	void Destroy();
-
-	/**
 	 * The replacement of Process(), handles an SDL_Event_
 	 *
 	 * @param ev SDL Event, like mouse/keyboard input
@@ -148,9 +138,21 @@ public:
 	void LoadXmlFile(const VfsPath& Filename, boost::unordered_set<VfsPath>& Paths);
 
 	/**
+	 * Allows the JS side to modify the hotkey setting assigned to a GUI object.
+	 */
+	void SetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag);
+	void UnsetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag);
+
+	/**
+	 * Allows the JS side to add or remove global hotkeys.
+	 */
+	void SetGlobalHotkey(const CStr& hotkeyTag, JS::HandleValue function);
+	void UnsetGlobalHotkey(const CStr& hotkeyTag);
+
+	/**
 	 * Return the object which is an ancestor of every other GUI object.
 	 */
-	IGUIObject* GetBaseObject() const { return m_BaseObject; };
+	CGUIDummyObject& GetBaseObject() { return m_BaseObject; };
 
 	/**
 	 * Checks if object exists and return true or false accordingly
@@ -161,18 +163,18 @@ public:
 	bool ObjectExists(const CStr& Name) const;
 
 	/**
-	 * Returns the GUI object with the desired name, or NULL
+	 * Returns the GUI object with the desired name, or nullptr
 	 * if no match is found,
 	 *
 	 * @param Name String name of object
-	 * @return Matching object, or NULL
+	 * @return Matching object, or nullptr
 	 */
 	IGUIObject* FindObjectByName(const CStr& Name) const;
 
 	/**
-	 * Returns the GUI object under the mouse, or NULL if none.
+	 * Returns the GUI object under the mouse, or nullptr if none.
 	 */
-	IGUIObject* FindObjectUnderMouse() const;
+	IGUIObject* FindObjectUnderMouse();
 
 	/**
 	 * Returns the current screen coordinates of the cursor.
@@ -217,7 +219,7 @@ public:
 	/**
 	 * Check if an icon exists
 	 */
-	bool HasIcon(const CStr& name) const { return (m_Icons.count(name) != 0); }
+	bool HasIcon(const CStr& name) const { return (m_Icons.find(name) != m_Icons.end()); }
 
 	/**
 	 * Get Icon (a const reference, can never be changed)
@@ -227,7 +229,7 @@ public:
 	/**
 	 * Check if a style exists
 	 */
-	bool HasStyle(const CStr& name) const { return (m_Styles.count(name) != 0); }
+	bool HasStyle(const CStr& name) const { return (m_Styles.find(name) != m_Styles.end()); }
 
 	/**
 	 * Get Style if it exists, otherwise throws an exception.
@@ -237,7 +239,7 @@ public:
 	/**
 	 * Check if a predefined color of that name exists.
 	 */
-	bool HasPreDefinedColor(const CStr& name) const { return (m_PreDefinedColors.count(name) != 0); }
+	bool HasPreDefinedColor(const CStr& name) const { return (m_PreDefinedColors.find(name) != m_PreDefinedColors.end()); }
 
 	/**
 	 * Resolve the predefined color if it exists, otherwise throws an exception.
@@ -288,7 +290,7 @@ public:
 	/**
 	 * Change focus to new object.
 	 * Will send LOST_FOCUS/GOT_FOCUS messages as appropriate.
-	 * pObject can be NULL to remove all focus.
+	 * pObject can be nullptr to remove all focus.
 	 */
 	void SetFocusedObject(IGUIObject* pObject);
 
@@ -588,7 +590,7 @@ private:
 	 * Base Object, all its children are considered parentless
 	 * because this is not a real object per se.
 	 */
-	IGUIObject* m_BaseObject;
+	CGUIDummyObject m_BaseObject;
 
 	/**
 	 * Focused object!
@@ -619,16 +621,20 @@ private:
 	 * IGUIObjects by name... For instance m_ObjectTypes["button"]
 	 * is filled with a function that will "return new CButton();"
 	 */
-	std::map<CStr, ConstructObjectFunction>	m_ObjectTypes;
+	std::map<CStr, ConstructObjectFunction> m_ObjectTypes;
 
 	/**
 	 * Map from hotkey names to objects that listen to the hotkey.
 	 * (This is an optimisation to avoid recursing over the whole GUI
 	 * tree every time a hotkey is pressed).
-	 * Currently this is only set at load time - dynamic changes to an
-	 * object's hotkey property will be ignored.
 	 */
 	std::map<CStr, std::vector<IGUIObject*> > m_HotkeyObjects;
+
+	/**
+	 * Map from hotkey names to functions that are triggered if the hotkey is pressed.
+	 * Contrary to object hotkeys, this allows for only one global function per hotkey name.
+	 */
+	std::map<CStr, JS::PersistentRootedValue> m_GlobalHotkeys;
 
 	//--------------------------------------------------------
 	//	Databases

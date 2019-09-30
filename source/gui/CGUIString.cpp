@@ -20,7 +20,7 @@
 #include "CGUIString.h"
 
 #include "graphics/FontMetrics.h"
-#include "gui/GUI.h"
+#include "gui/CGUI.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
 

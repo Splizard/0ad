@@ -33,6 +33,11 @@
 
 extern void EndGame();
 
+bool JSI_Game::IsGameStarted(ScriptInterface::CxPrivate* UNUSED(pCxPrivate))
+{
+	return g_Game;
+}
+
 void JSI_Game::StartGame(ScriptInterface::CxPrivate* pCxPrivate, JS::HandleValue attribs, int playerID)
 {
 	ENSURE(!g_NetServer);
@@ -96,7 +101,9 @@ bool JSI_Game::IsPaused(ScriptInterface::CxPrivate* pCxPrivate)
 {
 	if (!g_Game)
 	{
-		JS_ReportError(pCxPrivate->pScriptInterface->GetContext(), "Game is not started");
+		JSContext* cx = pCxPrivate->pScriptInterface->GetContext();
+		JSAutoRequest rq(cx);
+		JS_ReportError(cx, "Game is not started");
 		return false;
 	}
 
@@ -107,7 +114,9 @@ void JSI_Game::SetPaused(ScriptInterface::CxPrivate* pCxPrivate, bool pause, boo
 {
 	if (!g_Game)
 	{
-		JS_ReportError(pCxPrivate->pScriptInterface->GetContext(), "Game is not started");
+		JSContext* cx = pCxPrivate->pScriptInterface->GetContext();
+		JSAutoRequest rq(cx);
+		JS_ReportError(cx, "Game is not started");
 		return;
 	}
 
@@ -162,6 +171,7 @@ void JSI_Game::DumpTerrainMipmap(ScriptInterface::CxPrivate* UNUSED(pCxPrivate))
 
 void JSI_Game::RegisterScriptFunctions(const ScriptInterface& scriptInterface)
 {
+	scriptInterface.RegisterFunction<bool, &IsGameStarted>("IsGameStarted");
 	scriptInterface.RegisterFunction<void, JS::HandleValue, int, &StartGame>("StartGame");
 	scriptInterface.RegisterFunction<void, &Script_EndGame>("EndGame");
 	scriptInterface.RegisterFunction<int, &GetPlayerID>("GetPlayerID");

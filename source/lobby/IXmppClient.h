@@ -28,7 +28,7 @@ namespace StunClient {
 class IXmppClient
 {
 public:
-	static IXmppClient* create(const std::string& sUsername, const std::string& sPassword, const std::string& sRoom, const std::string& sNick, const int historyRequestSize = 0, bool regOpt = false);
+	static IXmppClient* create(const ScriptInterface* scriptInterface, const std::string& sUsername, const std::string& sPassword, const std::string& sRoom, const std::string& sNick, const int historyRequestSize = 0, bool regOpt = false);
 	virtual ~IXmppClient() {}
 
 	virtual void connect() = 0;
@@ -47,16 +47,18 @@ public:
 	virtual void kick(const std::string& nick, const std::string& reason) = 0;
 	virtual void ban(const std::string& nick, const std::string& reason) = 0;
 	virtual void SetPresence(const std::string& presence) = 0;
-	virtual void GetPresence(const std::string& nickname, std::string& presence) = 0;
-	virtual void GetRole(const std::string& nickname, std::string& role) = 0;
-	virtual void GetSubject(std::string& subject) = 0;
+	virtual const char* GetPresence(const std::string& nickname) = 0;
+	virtual const char* GetRole(const std::string& nickname) = 0;
+	virtual const std::wstring& GetSubject() = 0;
 	virtual void GUIGetPlayerList(const ScriptInterface& scriptInterface, JS::MutableHandleValue ret) = 0;
-	virtual void ClearPresenceUpdates() = 0;
 	virtual void GUIGetGameList(const ScriptInterface& scriptInterface, JS::MutableHandleValue ret) = 0;
 	virtual void GUIGetBoardList(const ScriptInterface& scriptInterface, JS::MutableHandleValue ret) = 0;
 	virtual void GUIGetProfile(const ScriptInterface& scriptInterface, JS::MutableHandleValue ret) = 0;
+
 	virtual JS::Value GuiPollNewMessage(const ScriptInterface& scriptInterface) = 0;
 	virtual JS::Value GuiPollHistoricMessages(const ScriptInterface& scriptInterface) = 0;
+	virtual bool GuiPollHasPlayerListUpdate() = 0;
+
 	virtual void SendMUCMessage(const std::string& message) = 0;
 	virtual void SendStunEndpointToHost(const StunClient::StunEndpoint& stunEndpoint, const std::string& hostJID) = 0;
 };

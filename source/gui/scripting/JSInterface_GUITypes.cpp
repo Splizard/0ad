@@ -98,34 +98,28 @@ bool JSI_GUISize::toString(JSContext* cx, uint argc, JS::Value* vp)
 	JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 	CStr buffer;
 
-	try
-	{
-		ScriptInterface* pScriptInterface = ScriptInterface::GetScriptInterfaceAndCBData(cx)->pScriptInterface;
-		double val, valr;
+	ScriptInterface* pScriptInterface = ScriptInterface::GetScriptInterfaceAndCBData(cx)->pScriptInterface;
+	double val, valr;
+
 #define SIDE(side) \
 	pScriptInterface->GetProperty(args.thisv(), #side, val); \
 	pScriptInterface->GetProperty(args.thisv(), "r"#side, valr); \
 	buffer += ToPercentString(val, valr);
 
-		SIDE(left);
-		buffer += " ";
-		SIDE(top);
-		buffer += " ";
-		SIDE(right);
-		buffer += " ";
-		SIDE(bottom);
+	SIDE(left);
+	buffer += " ";
+	SIDE(top);
+	buffer += " ";
+	SIDE(right);
+	buffer += " ";
+	SIDE(bottom);
 #undef SIDE
-	}
-	catch (PSERROR_Scripting_ConversionFailed&)
-	{
-		ScriptInterface::ToJSVal(cx, args.rval(), std::string("<Error converting value to numbers>"));
-		return true;
-	}
+
 	ScriptInterface::ToJSVal(cx, args.rval(), buffer);
 	return true;
 }
 
 void JSI_GUITypes::init(ScriptInterface& scriptInterface)
 {
-	scriptInterface.DefineCustomObjectType(&JSI_GUISize::JSI_class,  JSI_GUISize::construct,  1, nullptr,  JSI_GUISize::JSI_methods,  NULL, NULL);
+	scriptInterface.DefineCustomObjectType(&JSI_GUISize::JSI_class,  JSI_GUISize::construct,  1, nullptr,  JSI_GUISize::JSI_methods, nullptr, nullptr);
 }

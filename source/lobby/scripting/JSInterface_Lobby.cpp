@@ -19,6 +19,7 @@
 
 #include "JSInterface_Lobby.h"
 
+#include "gui/GUIManager.h"
 #include "lib/utf8.h"
 #include "lobby/IXmppClient.h"
 #include "network/NetServer.h"
@@ -52,20 +53,20 @@ void JSI_Lobby::RegisterScriptFunctions(const ScriptInterface& scriptInterface)
 	scriptInterface.RegisterFunction<void, &JSI_Lobby::SendUnregisterGame>("SendUnregisterGame");
 	scriptInterface.RegisterFunction<void, std::wstring, std::wstring, &JSI_Lobby::SendChangeStateGame>("SendChangeStateGame");
 	scriptInterface.RegisterFunction<JS::Value, &JSI_Lobby::GetPlayerList>("GetPlayerList");
-	scriptInterface.RegisterFunction<void, &JSI_Lobby::LobbyClearPresenceUpdates>("LobbyClearPresenceUpdates");
 	scriptInterface.RegisterFunction<JS::Value, &JSI_Lobby::GetGameList>("GetGameList");
 	scriptInterface.RegisterFunction<JS::Value, &JSI_Lobby::GetBoardList>("GetBoardList");
 	scriptInterface.RegisterFunction<JS::Value, &JSI_Lobby::GetProfile>("GetProfile");
 	scriptInterface.RegisterFunction<JS::Value, &JSI_Lobby::LobbyGuiPollNewMessage>("LobbyGuiPollNewMessage");
 	scriptInterface.RegisterFunction<JS::Value, &JSI_Lobby::LobbyGuiPollHistoricMessages>("LobbyGuiPollHistoricMessages");
+	scriptInterface.RegisterFunction<bool, &JSI_Lobby::LobbyGuiPollHasPlayerListUpdate>("LobbyGuiPollHasPlayerListUpdate");
 	scriptInterface.RegisterFunction<void, std::wstring, &JSI_Lobby::LobbySendMessage>("LobbySendMessage");
 	scriptInterface.RegisterFunction<void, std::wstring, &JSI_Lobby::LobbySetPlayerPresence>("LobbySetPlayerPresence");
 	scriptInterface.RegisterFunction<void, std::wstring, &JSI_Lobby::LobbySetNick>("LobbySetNick");
 	scriptInterface.RegisterFunction<std::wstring, &JSI_Lobby::LobbyGetNick>("LobbyGetNick");
 	scriptInterface.RegisterFunction<void, std::wstring, std::wstring, &JSI_Lobby::LobbyKick>("LobbyKick");
 	scriptInterface.RegisterFunction<void, std::wstring, std::wstring, &JSI_Lobby::LobbyBan>("LobbyBan");
-	scriptInterface.RegisterFunction<std::wstring, std::wstring, &JSI_Lobby::LobbyGetPlayerPresence>("LobbyGetPlayerPresence");
-	scriptInterface.RegisterFunction<std::wstring, std::wstring, &JSI_Lobby::LobbyGetPlayerRole>("LobbyGetPlayerRole");
+	scriptInterface.RegisterFunction<const char*, std::wstring, &JSI_Lobby::LobbyGetPlayerPresence>("LobbyGetPlayerPresence");
+	scriptInterface.RegisterFunction<const char*, std::wstring, &JSI_Lobby::LobbyGetPlayerRole>("LobbyGetPlayerRole");
 	scriptInterface.RegisterFunction<std::wstring, std::wstring, std::wstring, &JSI_Lobby::EncryptPassword>("EncryptPassword");
 	scriptInterface.RegisterFunction<std::wstring, &JSI_Lobby::LobbyGetRoomSubject>("LobbyGetRoomSubject");
 #endif // CONFIG2_LOBBY
@@ -92,7 +93,7 @@ void JSI_Lobby::StartXmppClient(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), 
 {
 	ENSURE(!g_XmppClient);
 
-	g_XmppClient = IXmppClient::create(utf8_from_wstring(username), utf8_from_wstring(password),
+	g_XmppClient = IXmppClient::create(g_GUI->GetScriptInterface().get(), utf8_from_wstring(username), utf8_from_wstring(password),
 		utf8_from_wstring(room), utf8_from_wstring(nick), historyRequestSize);
 	g_rankedGame = true;
 }
@@ -101,7 +102,7 @@ void JSI_Lobby::StartRegisterXmppClient(ScriptInterface::CxPrivate* UNUSED(pCxPr
 {
 	ENSURE(!g_XmppClient);
 
-	g_XmppClient = IXmppClient::create(utf8_from_wstring(username), utf8_from_wstring(password),
+	g_XmppClient = IXmppClient::create(g_GUI->GetScriptInterface().get(), utf8_from_wstring(username), utf8_from_wstring(password),
 		"", "", 0, true);
 }
 
@@ -195,14 +196,6 @@ JS::Value JSI_Lobby::GetPlayerList(ScriptInterface::CxPrivate* pCxPrivate)
 	return playerList;
 }
 
-void JSI_Lobby::LobbyClearPresenceUpdates(ScriptInterface::CxPrivate* UNUSED(pCxPrivate))
-{
-	if (!g_XmppClient)
-		return;
-
-	g_XmppClient->ClearPresenceUpdates();
-}
-
 JS::Value JSI_Lobby::GetGameList(ScriptInterface::CxPrivate* pCxPrivate)
 {
 	if (!g_XmppClient)
@@ -243,6 +236,11 @@ JS::Value JSI_Lobby::GetProfile(ScriptInterface::CxPrivate* pCxPrivate)
 	g_XmppClient->GUIGetProfile(*(pCxPrivate->pScriptInterface), &profileFetch);
 
 	return profileFetch;
+}
+
+bool JSI_Lobby::LobbyGuiPollHasPlayerListUpdate(ScriptInterface::CxPrivate* UNUSED(pCxPrivate))
+{
+	return g_XmppClient && g_XmppClient->GuiPollHasPlayerListUpdate();
 }
 
 JS::Value JSI_Lobby::LobbyGuiPollNewMessage(ScriptInterface::CxPrivate* pCxPrivate)
@@ -311,24 +309,20 @@ void JSI_Lobby::LobbyBan(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), const s
 	g_XmppClient->ban(utf8_from_wstring(nick), utf8_from_wstring(reason));
 }
 
-std::wstring JSI_Lobby::LobbyGetPlayerPresence(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), const std::wstring& nickname)
+const char* JSI_Lobby::LobbyGetPlayerPresence(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), const std::wstring& nickname)
 {
 	if (!g_XmppClient)
-		return L"";
+		return "";
 
-	std::string presence;
-	g_XmppClient->GetPresence(utf8_from_wstring(nickname), presence);
-	return wstring_from_utf8(presence);
+	return g_XmppClient->GetPresence(utf8_from_wstring(nickname));
 }
 
-std::wstring JSI_Lobby::LobbyGetPlayerRole(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), const std::wstring& nickname)
+const char* JSI_Lobby::LobbyGetPlayerRole(ScriptInterface::CxPrivate* UNUSED(pCxPrivate), const std::wstring& nickname)
 {
 	if (!g_XmppClient)
-		return L"";
+		return "";
 
-	std::string role;
-	g_XmppClient->GetRole(utf8_from_wstring(nickname), role);
-	return wstring_from_utf8(role);
+	return g_XmppClient->GetRole(utf8_from_wstring(nickname));
 }
 
 // Non-public secure PBKDF2 hash function with salting and 1,337 iterations
@@ -383,9 +377,7 @@ std::wstring JSI_Lobby::LobbyGetRoomSubject(ScriptInterface::CxPrivate* UNUSED(p
 	if (!g_XmppClient)
 		return L"";
 
-	std::string subject;
-	g_XmppClient->GetSubject(subject);
-	return wstring_from_utf8(subject);
+	return g_XmppClient->GetSubject();
 }
 
 #endif

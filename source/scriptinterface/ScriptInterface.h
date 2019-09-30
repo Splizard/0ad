@@ -33,7 +33,6 @@ ERROR_SUBGROUP(Scripting, LoadFile);
 ERROR_TYPE(Scripting_LoadFile, OpenFailed);
 ERROR_TYPE(Scripting_LoadFile, EvalErrors);
 
-ERROR_TYPE(Scripting, ConversionFailed);
 ERROR_TYPE(Scripting, CallFunctionFailed);
 ERROR_TYPE(Scripting, RegisterFunctionFailed);
 ERROR_TYPE(Scripting, DefineConstantFailed);
@@ -133,16 +132,16 @@ public:
 
 	/**
 	 * Sets the given value to a new plain JS::Object, converts the arguments to JS::Values and sets them as properties.
+	 * This is static so that callers like ToJSVal can use it with the JSContext directly instead of having to obtain the instance using GetScriptInterfaceAndCBData.
 	 * Can throw an exception.
 	 */
 	template<typename... Args>
-	bool CreateObject(JS::MutableHandleValue objectValue, Args const&... args) const
+	static bool CreateObject(JSContext* cx, JS::MutableHandleValue objectValue, Args const&... args)
 	{
-		JSContext* cx = GetContext();
 		JSAutoRequest rq(cx);
 		JS::RootedObject obj(cx);
 
-		if (!CreateObject_(&obj, args...))
+		if (!CreateObject_(cx, &obj, args...))
 			return false;
 
 		objectValue.setObject(*obj);
@@ -152,7 +151,7 @@ public:
 	/**
 	 * Sets the given value to a new JS object or Null Value in case of out-of-memory.
 	 */
-	void CreateArray(JS::MutableHandleValue objectValue, size_t length = 0) const;
+	static void CreateArray(JSContext* cx, JS::MutableHandleValue objectValue, size_t length = 0);
 
 	JS::Value GetGlobalObject() const;
 
@@ -403,17 +402,16 @@ private:
 	/**
 	 * Careful, the CreateObject_ helpers avoid creation of the JSAutoRequest!
 	 */
-	bool CreateObject_(JS::MutableHandleObject obj) const;
+	static bool CreateObject_(JSContext* cx, JS::MutableHandleObject obj);
 
 	template<typename T, typename... Args>
-	bool CreateObject_(JS::MutableHandleObject obj, const char* propertyName, const T& propertyValue, Args const&... args) const
+	static bool CreateObject_(JSContext* cx, JS::MutableHandleObject obj, const char* propertyName, const T& propertyValue, Args const&... args)
 	{
 		// JSAutoRequest is the responsibility of the caller
-		JSContext* cx = GetContext();
 		JS::RootedValue val(cx);
 		AssignOrToJSVal(cx, &val, propertyValue);
 
-		return CreateObject_(obj, args...) && JS_DefineProperty(cx, obj, propertyName, val, JSPROP_ENUMERATE);
+		return CreateObject_(cx, obj, args...) && JS_DefineProperty(cx, obj, propertyName, val, JSPROP_ENUMERATE);
 	}
 
 	bool CallFunction_(JS::HandleValue val, const char* name, JS::HandleValueArray argv, JS::MutableHandleValue ret) const;
@@ -505,6 +503,12 @@ inline void ScriptInterface::AssignOrToJSVal(JSContext* cx, JS::MutableHandleVal
 
 template<>
 inline void ScriptInterface::AssignOrToJSVal<JS::PersistentRootedValue>(JSContext* UNUSED(cx), JS::MutableHandleValue handle, const JS::PersistentRootedValue& a)
+{
+	handle.set(a);
+}
+
+template<>
+inline void ScriptInterface::AssignOrToJSVal<JS::Heap<JS::Value> >(JSContext* UNUSED(cx), JS::MutableHandleValue handle, const JS::Heap<JS::Value>& a)
 {
 	handle.set(a);
 }

@@ -35,7 +35,7 @@
 #include "graphics/MapReader.h"
 #include "graphics/MaterialManager.h"
 #include "graphics/TerrainTextureManager.h"
-#include "gui/GUI.h"
+#include "gui/CGUI.h"
 #include "gui/GUIManager.h"
 #include "i18n/L10n.h"
 #include "maths/MathUtil.h"
@@ -520,18 +520,19 @@ void InitPsAutostart(bool networked, JS::HandleValue attrs)
 	JSAutoRequest rq(cx);
 
 	JS::RootedValue playerAssignments(cx);
-	scriptInterface.CreateObject(&playerAssignments);
+	ScriptInterface::CreateObject(cx, &playerAssignments);
 
 	if (!networked)
 	{
 		JS::RootedValue localPlayer(cx);
-		scriptInterface.CreateObject(&localPlayer, "player", g_Game->GetPlayerID());
+		ScriptInterface::CreateObject(cx, &localPlayer, "player", g_Game->GetPlayerID());
 		scriptInterface.SetProperty(playerAssignments, "local", localPlayer);
 	}
 
 	JS::RootedValue sessionInitData(cx);
 
-	scriptInterface.CreateObject(
+	ScriptInterface::CreateObject(
+		cx,
 		&sessionInitData,
 		"attribs", attrs,
 		"playerAssignments", playerAssignments);
@@ -540,7 +541,7 @@ void InitPsAutostart(bool networked, JS::HandleValue attrs)
 }
 
 
-static void InitInput()
+void InitInput()
 {
 	g_Joystick.Initialise();
 
@@ -568,6 +569,10 @@ static void InitInput()
 
 	// must be registered after (called before) the GUI which relies on these globals
 	in_add_handler(GlobalsInputHandler);
+
+	// Should be called first, this updates our hotkey press state
+	// so that js calls to HotkeyIsPressed are synched with events.
+	in_add_handler(HotkeyStateChange);
 }
 
 
@@ -696,10 +701,6 @@ static void ShutdownSDL()
 
 void EndGame()
 {
-	if (g_Game && g_Game->IsGameStarted() && !g_Game->IsVisualReplay() &&
-	    g_AtlasGameLoop && !g_AtlasGameLoop->running && CRenderer::IsInitialised())
-		VisualReplay::SaveReplayMetadata(g_GUI->GetActiveGUI()->GetScriptInterface().get());
-
 	SAFE_DELETE(g_NetClient);
 	SAFE_DELETE(g_NetServer);
 	SAFE_DELETE(g_Game);
@@ -1103,8 +1104,7 @@ void InitGraphics(const CmdLineArgs& args, int flags, const std::vector<CStr>& i
 			JS::RootedValue data(cx);
 			if (g_GUI)
 			{
-				scriptInterface->CreateObject(&data);
-				scriptInterface->SetProperty(data, "isStartup", true);
+				ScriptInterface::CreateObject(cx, &data, "isStartup", true);
 				if (!installedMods.empty())
 					scriptInterface->SetProperty(data, "installedMods", installedMods);
 			}
@@ -1266,9 +1266,9 @@ bool Autostart(const CmdLineArgs& args)
 	JS::RootedValue settings(cx);
 	JS::RootedValue playerData(cx);
 
-	scriptInterface.CreateObject(&attrs);
-	scriptInterface.CreateObject(&settings);
-	scriptInterface.CreateArray(&playerData);
+	ScriptInterface::CreateObject(cx, &attrs);
+	ScriptInterface::CreateObject(cx, &settings);
+	ScriptInterface::CreateArray(cx, &playerData);
 
 	// The directory in front of the actual map name indicates which type
 	// of map is being loaded. Drawback of this approach is the association
@@ -1324,7 +1324,7 @@ bool Autostart(const CmdLineArgs& args)
 
 			// We could load player_defaults.json here, but that would complicate the logic
 			// even more and autostart is only intended for developers anyway
-			scriptInterface.CreateObject(&player, "Civ", std::string("athen"));
+			ScriptInterface::CreateObject(cx, &player, "Civ", "athen");
 
 			scriptInterface.SetPropertyInt(playerData, i, player);
 		}
@@ -1354,7 +1354,7 @@ bool Autostart(const CmdLineArgs& args)
 	}
 
 	scriptInterface.SetProperty(attrs, "mapType", mapType);
-	scriptInterface.SetProperty(attrs, "map", std::string("maps/" + autoStartName));
+	scriptInterface.SetProperty(attrs, "map", "maps/" + autoStartName);
 	scriptInterface.SetProperty(settings, "mapType", mapType);
 	scriptInterface.SetProperty(settings, "CheatsEnabled", true);
 
@@ -1408,7 +1408,7 @@ bool Autostart(const CmdLineArgs& args)
 					LOGWARNING("Autostart: Invalid player %d in autostart-team option", playerID);
 					continue;
 				}
-				scriptInterface.CreateObject(&player);
+				ScriptInterface::CreateObject(cx, &player);
 			}
 
 			int teamID = civArgs[i].AfterFirst(":").ToInt() - 1;
@@ -1439,13 +1439,12 @@ bool Autostart(const CmdLineArgs& args)
 					LOGWARNING("Autostart: Invalid player %d in autostart-ai option", playerID);
 					continue;
 				}
-				scriptInterface.CreateObject(&player);
+				ScriptInterface::CreateObject(cx, &player);
 			}
 
-			CStr name = aiArgs[i].AfterFirst(":");
-			scriptInterface.SetProperty(player, "AI", std::string(name));
+			scriptInterface.SetProperty(player, "AI", aiArgs[i].AfterFirst(":"));
 			scriptInterface.SetProperty(player, "AIDiff", 3);
-			scriptInterface.SetProperty(player, "AIBehavior", std::string("balanced"));
+			scriptInterface.SetProperty(player, "AIBehavior", "balanced");
 			scriptInterface.SetPropertyInt(playerData, playerID-offset, player);
 		}
 	}
@@ -1467,11 +1466,10 @@ bool Autostart(const CmdLineArgs& args)
 					LOGWARNING("Autostart: Invalid player %d in autostart-aidiff option", playerID);
 					continue;
 				}
-				scriptInterface.CreateObject(&player);
+				ScriptInterface::CreateObject(cx, &player);
 			}
 
-			int difficulty = civArgs[i].AfterFirst(":").ToInt();
-			scriptInterface.SetProperty(player, "AIDiff", difficulty);
+			scriptInterface.SetProperty(player, "AIDiff", civArgs[i].AfterFirst(":").ToInt());
 			scriptInterface.SetPropertyInt(playerData, playerID-offset, player);
 		}
 	}
@@ -1495,11 +1493,10 @@ bool Autostart(const CmdLineArgs& args)
 						LOGWARNING("Autostart: Invalid player %d in autostart-civ option", playerID);
 						continue;
 					}
-					scriptInterface.CreateObject(&player);
+					ScriptInterface::CreateObject(cx, &player);
 				}
 
-				CStr name = civArgs[i].AfterFirst(":");
-				scriptInterface.SetProperty(player, "Civ", std::string(name));
+				scriptInterface.SetProperty(player, "Civ", civArgs[i].AfterFirst(":"));
 				scriptInterface.SetPropertyInt(playerData, playerID-offset, player);
 			}
 		}
@@ -1667,7 +1664,7 @@ void CancelLoad(const CStrW& message)
 	LDR_Cancel();
 
 	if (g_GUI &&
-	    g_GUI->HasPages() &&
+	    g_GUI->GetPageCount() &&
 	    pScriptInterface->HasProperty(global, "cancelOnLoadGameError"))
 		pScriptInterface->CallFunctionVoid(global, "cancelOnLoadGameError", message);
 }

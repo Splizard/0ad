@@ -18,12 +18,14 @@
 #ifndef INCLUDED_CCHART
 #define INCLUDED_CCHART
 
-#include "gui/GUI.h"
+#include "graphics/ShaderProgramPtr.h"
+#include "gui/CGUIColor.h"
+#include "gui/CGUIList.h"
+#include "gui/CGUISeries.h"
 #include "gui/IGUITextOwner.h"
 #include "maths/Vector2D.h"
 
 #include <vector>
-
 
 struct CChartData
 {
@@ -38,8 +40,6 @@ struct CChartData
 
 /**
  * Chart for a data visualization as lines or points
- *
- * @see IGUIObject
  */
 class CChart : public IGUITextOwner
 {
@@ -70,13 +70,20 @@ protected:
 
 	CVector2D m_LeftBottom, m_RightTop;
 
-	CStrW m_FormatX, m_FormatY;
-
 	std::vector<CPos> m_TextPositions;
 
-	float m_AxisWidth;
-
 	bool m_EqualX, m_EqualY;
+
+	// Settings
+	CGUIColor m_AxisColor;
+	float m_AxisWidth;
+	float m_BufferZone;
+	CStrW m_Font;
+	CStrW m_FormatX;
+	CStrW m_FormatY;
+	CGUIList m_SeriesColor;
+	CGUISeries m_SeriesSetting;
+	EAlign m_TextAlign;
 
 private:
 	/**

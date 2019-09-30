@@ -18,16 +18,10 @@
 #ifndef INCLUDED_CCHECKBOX
 #define INCLUDED_CCHECKBOX
 
-#include "GUI.h"
+#include "gui/CGUISprite.h"
+#include "gui/IGUIButtonBehavior.h"
 
-/**
- * CheckBox
- *
- * @see IGUIObject
- * @see IGUISettingsObject
- * @see IGUIButtonBehavior
- */
-class CCheckBox : public IGUIButtonBehavior, public IGUITextOwner
+class CCheckBox : public IGUIButtonBehavior
 {
 	GUI_OBJECT(CCheckBox)
 
@@ -51,11 +45,17 @@ public:
 	virtual void Draw();
 
 protected:
-	/**
-	 * Sets up text, should be called every time changes has been
-	 * made that can change the visual.
-	 */
-	void SetupText();
+	// Settings
+	i32 m_CellID;
+	bool m_Checked;
+	CGUISpriteInstance m_SpriteUnchecked;
+	CGUISpriteInstance m_SpriteUncheckedOver;
+	CGUISpriteInstance m_SpriteUncheckedPressed;
+	CGUISpriteInstance m_SpriteUncheckedDisabled;
+	CGUISpriteInstance m_SpriteChecked;
+	CGUISpriteInstance m_SpriteCheckedOver;
+	CGUISpriteInstance m_SpriteCheckedPressed;
+	CGUISpriteInstance m_SpriteCheckedDisabled;
 };
 
 #endif // INCLUDED_CCHECKBOX

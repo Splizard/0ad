@@ -21,15 +21,15 @@
 
 #include "gui/CGUI.h"
 #include "lib/timer.h"
-#include "ps/Filesystem.h"
 #include "ps/CLogger.h"
+#include "ps/Filesystem.h"
+#include "ps/GameSetup/Config.h"
 #include "ps/Profile.h"
 #include "ps/XML/Xeromyces.h"
-#include "ps/GameSetup/Config.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRuntime.h"
 
-CGUIManager* g_GUI = NULL;
+CGUIManager* g_GUI = nullptr;
 
 
 // General TODOs:
@@ -44,6 +44,9 @@ CGUIManager* g_GUI = NULL;
 // trampoline: we don't want to make the HandleEvent implementation static
 InReaction gui_handler(const SDL_Event_* ev)
 {
+	if (!g_GUI)
+		return IN_PASS;
+
 	PROFILE("GUI event handler");
 	return g_GUI->HandleEvent(ev);
 }
@@ -73,9 +76,9 @@ CGUIManager::~CGUIManager()
 	UnregisterFileReloadFunc(ReloadChangedFileCB, this);
 }
 
-bool CGUIManager::HasPages()
+size_t CGUIManager::GetPageCount() const
 {
-	return !m_PageStack.empty();
+	return m_PageStack.size();
 }
 
 void CGUIManager::SwitchPage(const CStrW& pageName, ScriptInterface* srcScriptInterface, JS::HandleValue initData)
@@ -263,7 +266,7 @@ void CGUIManager::SGUIPage::PerformCallbackFunction(shared_ptr<ScriptInterface::
 Status CGUIManager::ReloadChangedFile(const VfsPath& path)
 {
 	for (SGUIPage& p : m_PageStack)
-		if (p.inputs.count(path))
+		if (p.inputs.find(path) != p.inputs.end())
 		{
 			LOGMESSAGE("GUI file '%s' changed - reloading page '%s'", path.string8(), utf8_from_wstring(p.name));
 			p.LoadPage(m_ScriptRuntime);
@@ -285,30 +288,6 @@ Status CGUIManager::ReloadAllPages()
 void CGUIManager::ResetCursor()
 {
 	g_CursorName = g_DefaultCursor;
-}
-
-std::string CGUIManager::GetSavedGameData()
-{
-	shared_ptr<ScriptInterface> scriptInterface = top()->GetScriptInterface();
-	JSContext* cx = scriptInterface->GetContext();
-	JSAutoRequest rq(cx);
-
-	JS::RootedValue data(cx);
-	JS::RootedValue global(cx, top()->GetGlobalObject());
-	scriptInterface->CallFunction(global, "getSavedGameData", &data);
-	return scriptInterface->StringifyJSON(&data, false);
-}
-
-void CGUIManager::RestoreSavedGameData(const std::string& jsonData)
-{
-	shared_ptr<ScriptInterface> scriptInterface = top()->GetScriptInterface();
-	JSContext* cx = scriptInterface->GetContext();
-	JSAutoRequest rq(cx);
-
-	JS::RootedValue global(cx, top()->GetGlobalObject());
-	JS::RootedValue dataVal(cx);
-	scriptInterface->ParseJSON(jsonData, &dataVal);
-	scriptInterface->CallFunctionVoid(global, "restoreSavedGameData", dataVal);
 }
 
 InReaction CGUIManager::HandleEvent(const SDL_Event_* ev)

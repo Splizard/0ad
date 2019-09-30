@@ -22,8 +22,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-08-23 07:09+0000\n"
-"PO-Revision-Date: 2019-08-23 15:28+0000\n"
+"POT-Creation-Date: 2019-09-06 07:09+0000\n"
+"PO-Revision-Date: 2019-09-06 14:27+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/wildfire-games/0ad/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -939,14 +939,14 @@ msgstr "De eerste aanvalsgolf begint binnen %(time)s!"
 msgid "An enemy wave is attacking!"
 msgstr "Pas op! Een vijandelijke aanvalsgolf!"
 
-#: maps/random/survivalofthefittest_triggers.js:289
+#: maps/random/survivalofthefittest_triggers.js:288
 #, javascript-format
 msgid "%(player)s has been defeated (lost civic center)."
 msgstr "%(player)s is verslagen (beschavingscentrum verloren)"
 
 #: maps/scenarios/Cinema_Demo.js:6
 msgid "Cutscene starts after 5 seconds"
-msgstr ""
+msgstr "Scène start na 5 seconden"
 
 #: maps/scenarios/Triggers_demo.js:73
 msgid "Testing the yes-no dialog. Do you want to say sure or rather not?"
@@ -2053,7 +2053,7 @@ msgstr "Een demo met alle eenheden in het spel."
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
+#: map.xml:Description:27
 msgid "Give an interesting description of your map."
 msgstr "Geef een interessante beschrijving voor uw kaart."
 
@@ -2074,11 +2074,10 @@ msgid "We Are Legion"
 msgstr "We Are Legion"
 
 #: maps/scenarios/We are Legion.xml:Description:27
-msgid "A quick battle demo map using Roman legionnaires."
-msgstr "Een demokaart voor snelle gevechten met Romeinse legionairs."
+msgid "A quick battle demo map using Roman legionaries."
+msgstr ""
 
 #: maps/scenarios/_default.xml:Name:28
-#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "Onbekende kaart"
 
@@ -2109,6 +2108,16 @@ msgstr "Schepen demo"
 #: maps/scenarios/temperate map.xml:Name:27
 msgid "Base Temperate Map"
 msgstr "Basis matigeklimaatskaart"
+
+#: maps/scenarios/test-foundation.xml:Description:40
+msgid ""
+"This map is designed to help artists and modders find the adequate "
+"foundation for a specific building. This map is not meant to be playable."
+msgstr ""
+
+#: maps/scenarios/test-foundation.xml:Name:40
+msgid "Foundation Testing Map"
+msgstr ""
 
 #: maps/scenarios/unit_motion_integration_test.xml:Description:40
 msgid ""

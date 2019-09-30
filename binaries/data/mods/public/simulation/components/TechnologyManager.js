@@ -220,10 +220,7 @@ TechnologyManager.prototype.ResearchTechnology = function(tech)
 	if (template.modifications)
 	{
 		let cmpModifiersManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_ModifiersManager);
-		let derivedModifiers = DeriveModificationsFromTech(template);
-		for (let modifierPath in derivedModifiers)
-			for (let modifier of derivedModifiers[modifierPath])
-				cmpModifiersManager.AddModifier(modifierPath, "tech/" + tech, modifier, this.entity);
+		cmpModifiersManager.AddModifiers("tech/" + tech, DeriveModificationsFromTech(template), this.entity);
 	}
 
 	if (template.replaces && template.replaces.length > 0)
@@ -262,8 +259,19 @@ TechnologyManager.prototype.ResearchTechnology = function(tech)
 	if (cmpPlayerEntityLimits)
 		cmpPlayerEntityLimits.UpdateLimitsFromTech(tech);
 
-	// always send research finished message
-	Engine.PostMessage(this.entity, MT_ResearchFinished, {"player": playerID, "tech": tech});
+	// Always send research finished message.
+	Engine.PostMessage(this.entity, MT_ResearchFinished, { "player": playerID, "tech": tech });
+
+	if (tech.startsWith("phase") && !template.autoResearch)
+	{
+		let cmpGUIInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);
+		cmpGUIInterface.PushNotification({
+			"type": "phase",
+			"players": [playerID],
+			"phaseName": tech,
+			"phaseState": "completed"
+		});
+	}
 };
 
 /**

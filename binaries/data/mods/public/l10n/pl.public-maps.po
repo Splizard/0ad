@@ -34,8 +34,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0 A.D.\n"
-"POT-Creation-Date: 2019-08-23 07:09+0000\n"
-"PO-Revision-Date: 2019-08-24 15:54+0000\n"
+"POT-Creation-Date: 2019-09-06 07:09+0000\n"
+"PO-Revision-Date: 2019-09-09 14:35+0000\n"
 "Last-Translator: Przemysław Murach <moonshine133@vp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/wildfire-games/0ad/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -951,7 +951,7 @@ msgstr "Pierwsza fala rozpocznie się za %(time)s!"
 msgid "An enemy wave is attacking!"
 msgstr "Fala wrogich wojsk atakuje!"
 
-#: maps/random/survivalofthefittest_triggers.js:289
+#: maps/random/survivalofthefittest_triggers.js:288
 #, javascript-format
 msgid "%(player)s has been defeated (lost civic center)."
 msgstr "%(player)s został pokonany (utrata centrum osady)."
@@ -2069,7 +2069,7 @@ msgstr "Wszystkie jednostki w grze."
 
 #: maps/scenarios/WallTest.xml:Description:27
 #: maps/scenarios/_default.xml:Description:28 maps/scenarios/temperate
-#: map.xml:Description:27 maps/scenarios/test-foundation.xml:Description:40
+#: map.xml:Description:27
 msgid "Give an interesting description of your map."
 msgstr "Daj ciekawy opis swojej mapie."
 
@@ -2090,11 +2090,10 @@ msgid "We Are Legion"
 msgstr "My jesteśmy Legionem"
 
 #: maps/scenarios/We are Legion.xml:Description:27
-msgid "A quick battle demo map using Roman legionnaires."
-msgstr "Szybka, demonstracyjna bitwa z użyciem legionów rzymskich."
+msgid "A quick battle demo map using Roman legionaries."
+msgstr "Szybka, demonstracyjna mapa bitewna z udziałem rzymskich legionistów."
 
 #: maps/scenarios/_default.xml:Name:28
-#: maps/scenarios/test-foundation.xml:Name:40
 msgid "Unnamed map"
 msgstr "Nienazwana mapa"
 
@@ -2125,6 +2124,16 @@ msgstr "Okręty (demonstracja)"
 #: maps/scenarios/temperate map.xml:Name:27
 msgid "Base Temperate Map"
 msgstr "Podstawowa umiarkowana mapa"
+
+#: maps/scenarios/test-foundation.xml:Description:40
+msgid ""
+"This map is designed to help artists and modders find the adequate "
+"foundation for a specific building. This map is not meant to be playable."
+msgstr "Mapa została zaprojektowana tak, by pomóc artystom osobom tworzącym modyfikacje znaleźć odpowiednie fundamenty pod budowę. Mapa nie jest przeznaczona do grania."
+
+#: maps/scenarios/test-foundation.xml:Name:40
+msgid "Foundation Testing Map"
+msgstr "Mapa do testowania fundamentów"
 
 #: maps/scenarios/unit_motion_integration_test.xml:Description:40
 msgid ""

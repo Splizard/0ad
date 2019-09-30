@@ -16,26 +16,16 @@
  */
 
 /*
-GUI Object Base - Button Behavior
-
---Overview--
-
 	Interface class that enhance the IGUIObject with
 	 buttony behavior (click and release to click a button),
 	 and the GUI message GUIM_PRESSED.
 	When creating a class with extended settings and
 	 buttony behavior, just do a multiple inheritance.
-
---More info--
-
-	Check GUI.h
-
 */
 
 #ifndef INCLUDED_IGUIBUTTONBEHAVIOR
 #define INCLUDED_IGUIBUTTONBEHAVIOR
 
-#include "gui/GUI.h"
 #include "gui/IGUIObject.h"
 
 class CGUISpriteInstance;
@@ -44,8 +34,6 @@ class CGUISpriteInstance;
  * Appends button behaviours to the IGUIObject.
  * Can be used with multiple inheritance alongside
  * IGUISettingsObject and such.
- *
- * @see IGUIObject
  */
 class IGUIButtonBehavior : virtual public IGUIObject
 {
@@ -61,30 +49,13 @@ public:
 	/**
 	 * This is a function that lets a button being drawn,
 	 * it regards if it's over, disabled, pressed and such.
-	 * You input sprite names and area and it'll output
-	 * it accordingly.
 	 *
-	 * This class is meant to be used manually in Draw()
-	 *
-	 * @param rect Rectangle in which the sprite should be drawn
-	 * @param z Z-value
 	 * @param sprite Sprite drawn when not pressed, hovered or disabled
 	 * @param sprite_over Sprite drawn when m_MouseHovering is true
 	 * @param sprite_pressed Sprite drawn when m_Pressed is true
 	 * @param sprite_disabled Sprite drawn when "enabled" is false
-	 * @param cell_id Identifies the icon to be used (if the sprite contains
-	 *                cell-using images)
 	 */
-	void DrawButton(const CRect& rect, const float& z, CGUISpriteInstance& sprite, CGUISpriteInstance& sprite_over, CGUISpriteInstance& sprite_pressed, CGUISpriteInstance& sprite_disabled, int cell_id);
-
-	/**
-	 * Choosing which color of the following according to object enabled/hovered/pressed status:
-	 *		textcolor_disabled	-- disabled
-	 *		textcolor_pressed	-- pressed
-	 *		textcolor_over		-- hovered
-	 */
-	const CGUIColor& ChooseColor();
-
+	const CGUISpriteInstance& GetButtonSprite(const CGUISpriteInstance& sprite, const CGUISpriteInstance& sprite_over, const CGUISpriteInstance& sprite_pressed, const CGUISpriteInstance& sprite_disabled) const;
 
 protected:
 	/**
@@ -105,8 +76,15 @@ protected:
 	 * area, as long as you release it within the button area... Anyway
 	 * this lets us know we are done with step one (clicking).
 	 */
-	bool							m_Pressed;
-	bool							m_PressedRight;
+	bool m_Pressed;
+	bool m_PressedRight;
+
+	// Settings
+	CStrW m_SoundDisabled;
+	CStrW m_SoundEnter;
+	CStrW m_SoundLeave;
+	CStrW m_SoundPressed;
+	CStrW m_SoundReleased;
 };
 
 #endif // INCLUDED_IGUIBUTTONBEHAVIOR

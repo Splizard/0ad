@@ -18,8 +18,11 @@
 #ifndef INCLUDED_CINPUT
 #define INCLUDED_CINPUT
 
-#include "GUI.h"
+#include "gui/IGUIScrollBarOwner.h"
+#include "gui/CGUISprite.h"
 #include "lib/external_libraries/libsdl.h"
+
+#include <vector>
 
 /**
  * Text field where you can input and edit the text.
@@ -27,8 +30,6 @@
  * It doesn't use IGUITextOwner, because we don't need
  * any other features than word-wrapping, and we need to be
  * able to rapidly change the string.
- *
- * @see IGUIObject
  */
 class CInput : public IGUIScrollBarOwner
 {
@@ -68,12 +69,12 @@ protected:
 	/**
 	* Handle events manually to catch keys which change the text.
 	*/
-	virtual void ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW& pCaption);
+	virtual void ManuallyMutableHandleKeyDownEvent(const SDL_Keycode keyCode);
 
 	/**
 	* Handle events manually to catch keys which don't change the text.
 	*/
-	virtual void ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode, CStrW& pCaption);
+	virtual void ManuallyImmutableHandleKeyDownEvent(const SDL_Keycode keyCode);
 
 	/**
 	 * Handle hotkey events (called by ManuallyHandleEvent)
@@ -146,8 +147,11 @@ protected:
 	//  pointer should be placed when the input control is pressed.
 	struct SRow
 	{
-		int					m_ListStart;	/// Where does the Row starts
-		std::vector<float>	m_ListOfX;		/// List of X values for each character.
+		// Where the Row starts
+		int m_ListStart;
+
+		// List of X values for each character.
+		std::vector<float> m_ListOfX;
 	};
 
 	/**
@@ -186,8 +190,23 @@ protected:
 	/// If the cursor should be drawn or not.
 	bool m_CursorVisState;
 
-	/// If enabled, it is only allowed to select and copy text.
+	// Settings
+	i32 m_BufferPosition;
+	float m_BufferZone;
+	CStrW m_Caption;
+	i32 m_CellID;
+	CStrW m_Font;
+	CStrW m_MaskChar;
+	bool m_Mask;
+	i32 m_MaxLength;
+	bool m_MultiLine;
 	bool m_Readonly;
+	bool m_ScrollBar;
+	CStr m_ScrollBarStyle;
+	CGUISpriteInstance m_Sprite;
+	CGUISpriteInstance m_SpriteSelectArea;
+	CGUIColor m_TextColor;
+	CGUIColor m_TextColorSelected;
 };
 
 #endif // INCLUDED_CINPUT

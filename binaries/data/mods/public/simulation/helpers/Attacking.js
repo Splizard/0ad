@@ -5,38 +5,44 @@ function Attacking() {}
 
 /**
  * Builds a RelaxRNG schema of possible attack effects.
- * Currently harcoded to "Damage", "Capture" and "StatusEffects".
+ * See globalscripts/AttackEffects.js for possible elements.
  * Attacks may also have a "Bonuses" element.
  *
  * @return {string}	- RelaxNG schema string
  */
+const DamageSchema = "" +
+	"<oneOrMore>" +
+		"<element a:help='One or more elements describing damage types'>" +
+			"<anyName>" +
+				// Armour requires Foundation to not be a damage type.
+				"<except><name>Foundation</name></except>" +
+			"</anyName>" +
+			"<ref name='nonNegativeDecimal' />" +
+		"</element>" +
+	"</oneOrMore>";
+
 Attacking.prototype.BuildAttackEffectsSchema = function()
 {
 	return "" +
 	"<oneOrMore>" +
 		"<choice>" +
 			"<element name='Damage'>" +
-				"<oneOrMore>" +
-					"<element a:help='One or more elements describing damage types'>" +
-						"<anyName>" +
-							// Armour requires Foundation to not be a damage type.
-							"<except><name>Foundation</name></except>" +
-						"</anyName>" +
-						"<ref name='nonNegativeDecimal' />" +
-					"</element>" +
-				"</oneOrMore>" +
+				DamageSchema +
 			"</element>" +
 			"<element name='Capture' a:help='Capture points value'>" +
 				"<ref name='nonNegativeDecimal'/>" +
 			"</element>" +
-			"<element name='StatusEffects' a:help='Effects like poisoning or burning a unit.'>" +
+			"<element name='GiveStatus' a:help='Effects like poisoning or burning a unit.'>" +
 				"<oneOrMore>" +
 					"<element>" +
 						"<anyName/>" +
 						"<interleave>" +
+								"<optional>" +
+									"<element name='Icon' a:help='Icon for the status effect'><text/></element>" +
+								"</optional>" +
 								"<element name='Duration' a:help='The duration of the status while the effect occurs.'><ref name='nonNegativeDecimal'/></element>" +
 								"<element name='Interval' a:help='Interval between the occurances of the effect.'><ref name='nonNegativeDecimal'/></element>" +
-								"<element name='Damage' a:help='Damage caused by the effect.'><ref name='nonNegativeDecimal'/></element>" +
+								"<element name='Damage' a:help='Damage caused by the effect.'>" + DamageSchema + "</element>" +
 						"</interleave>" +
 					"</element>" +
 				"</oneOrMore>" +
@@ -79,8 +85,8 @@ Attacking.prototype.GetAttackEffectsData = function(valueModifRoot, template, en
 	if (template.Capture)
 		ret.Capture = ApplyValueModificationsToEntity(valueModifRoot + "/Capture", +(template.Capture || 0), entity);
 
-	if (template.StatusEffects)
-		ret.StatusEffects = template.StatusEffects;
+	if (template.GiveStatus)
+		ret.GiveStatus = template.GiveStatus;
 
 	if (template.Bonuses)
 		ret.Bonuses = template.Bonuses;
@@ -182,12 +188,12 @@ Attacking.prototype.GetPlayersToDamage = function(attackerOwner, friendlyFire)
  * @param {number}   data.radius - The radius of the splash damage.
  * @param {string}   data.shape - The shape of the radius.
  * @param {Vector3D} [data.direction] - The unit vector defining the direction. Needed for linear splash damage.
- * @param {number[]} data.playersToDamage - The array of player id's to damage.
+ * @param {boolean}  data.friendlyFire - A flag indicating if allied entities also ought to be damaged.
  */
 Attacking.prototype.CauseDamageOverArea = function(data)
 {
-	// Get nearby entities and define variables
-	let nearEnts = this.EntitiesNearPoint(data.origin, data.radius, data.playersToDamage);
+	let nearEnts = this.EntitiesNearPoint(data.origin, data.radius,
+		this.GetPlayersToDamage(data.attackerOwner, data.friendlyFire));
 	let damageMultiplier = 1;
 
 	// Cycle through all the nearby entities and damage it appropriately based on its distance from the origin.
@@ -228,13 +234,13 @@ Attacking.prototype.CauseDamageOverArea = function(data)
 
 Attacking.prototype.HandleAttackEffects = function(attackType, attackData, target, attacker, attackerOwner, bonusMultiplier = 1)
 {
+	bonusMultiplier *= !attackData.Bonuses ? 1 : GetAttackBonus(attacker, target, attackType, attackData.Bonuses);
+
 	let targetState = {};
 	for (let effectType of g_EffectTypes)
 	{
 		if (!attackData[effectType])
 			continue;
-
-		bonusMultiplier *= !attackData.Bonuses ? 1 : GetAttackBonus(attacker, target, attackType, attackData.Bonuses);
 
 		let receiver = g_EffectReceiver[effectType];
 		let cmpReceiver = Engine.QueryInterface(target, global[receiver.IID]);
@@ -275,7 +281,16 @@ Attacking.prototype.EntitiesNearPoint = function(origin, radius, players)
 	if (!origin || !radius || !players)
 		return [];
 
-	return Engine.QueryInterface(SYSTEM_ENTITY, IID_RangeManager).ExecuteQueryAroundPos(origin, 0, radius, players, IID_Resistance);
+	let cmpRangeManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_RangeManager);
+
+	// Return all entities, except for Gaia: IID_Health is required to avoid returning trees and such.
+	let gaiaEntities = [];
+	let gaiaIndex = players.indexOf(0);
+	if (gaiaIndex !== -1)
+		// splice() modifies players in-place and returns [0]
+		gaiaEntities = gaiaEntities.concat(cmpRangeManager.ExecuteQueryAroundPos(origin, 0, radius, players.splice(gaiaIndex, 1), IID_Health));
+
+	return cmpRangeManager.ExecuteQueryAroundPos(origin, 0, radius, players, 0).concat(gaiaEntities);
 };
 
 /**
